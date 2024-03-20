@@ -1,0 +1,33 @@
+---
+title: Convertir cadena a titulo en java
+---
+# Metodo para convertir una cadena de texto a formato de titulo
+
+## Ejemplo: sufro con el proyecto de arnaldo  → Sufro Con El Proyecto De Arnaldo
+
+## Codigo:
+
+```java
+ public static String convertToTitleCaseIteratingChars(String text) {
+    if (text == null || text.isEmpty()) {
+        return text;
+    }
+
+    StringBuilder converted = new StringBuilder();
+
+    boolean convertNext = true;
+    for (char ch : text.toCharArray()) {
+        if (Character.isSpaceChar(ch)) {
+            convertNext = true;
+        } else if (convertNext) {
+            ch = Character.toTitleCase(ch);
+            convertNext = false;
+        } else {
+            ch = Character.toLowerCase(ch);
+        }
+        converted.append(ch);
+    }
+
+    return converted.toString();
+}
+```
