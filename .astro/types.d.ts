@@ -177,6 +177,13 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".mdoc"] };
+"trigonometria.mdoc": {
+	id: "trigonometria.mdoc";
+  slug: "trigonometria";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".mdoc"] };
 };
 
 	};
