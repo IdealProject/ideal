@@ -1,24 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-
-const posts = await getCollection('posts');
 ---
 
 <Layout title="Bienvenido a Ideal">
  <main>
-  <!-- <ul>
-      {
-        posts.map(post => (
-          <li>
-            <a href={`/posts/${post.slug}`} class="underline text-blue-600 font-medium" >{post.data.title}</a>
-          </li>
-        ))
-      }
-    </ul>
-	 -->
 	<div class="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
-	
     <div class="px-4 md:px-6 lg:px-6 xl:px-0 py-4 md:py-6 lg:py-2">
       <header>
         <div
@@ -34,13 +20,12 @@ const posts = await getCollection('posts');
               Notas de clases, exámenes y recursos gratuitos. Impulsado por la
               comunidad de alumnos de la FIUNI.
             </p>
-            <div class="mt-8">
-              <a
-				href="/acerca-de"
-                class="underline text-sm font-semibold flex items-center w-fit text-black hover:text-gray-700"
-              >
+            <div class="mt-8 flex flex-col gap-y-2">
+              <a href="/acerca-de" class="underline text-sm font-semibold flex items-center w-fit text-black hover:text-gray-700">
                 Aprende más sobre nuestra misión.
-				<span></span>
+              </a>
+              <a href="/posts" class="text-xl underline font-semibold w-fit  text-blue-600 hover:text-blue-900 bg-blue-100 p-5 rounded-md">
+                Explora notas y exámenes
               </a>
             </div>
           </div>
@@ -249,6 +234,3 @@ const posts = await getCollection('posts');
     </div>
   </main>
 </Layout>
-<!-- 
-
- -->
