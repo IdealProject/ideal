@@ -3,6 +3,7 @@
   "version": "0.0.19",
   "license": "MIT",
   "dependencies": {
+    "@astrojs/cloudflare": "^9.1.0",
     "@astrojs/markdoc": "^0.8.0",
     "@astrojs/react": "^3.0.7",
     "@astrojs/tailwind": "^5.1.0",
