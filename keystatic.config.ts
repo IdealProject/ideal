@@ -4,6 +4,12 @@ export default config({
   storage: {
     kind: 'github',
     repo: 'IdealProject/ideal'
+  }, 
+  ui: {
+    brand: {
+      name: 'Ideal Admin',
+
+    }
   },
   collections: {
     posts: collection({
@@ -23,8 +29,20 @@ export default config({
             publicPath: '../../assets/images/posts/',
           },
         }),
+        authors: fields.array(fields.relationship({
+          label: 'Authors',
+          collection: 'authors',
+          validation: {
+            isRequired: true
+          },
+        }),
+          {
+            label: 'Authors',
+            itemLabel: (item) => item.value || "Please select a author"
+          })
       },
-    }), authors: collection({
+    }),
+    authors: collection({
       label: 'Authors',
       slugField: 'name',
       path: 'src/content/authors/*',
