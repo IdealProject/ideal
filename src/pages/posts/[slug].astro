@@ -17,6 +17,10 @@ export async function getStaticPaths() {
 ---
 
 <Layout title={post.data.title}>
-  <h1>{post.data.title}</h1>
+  <main class="mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between ">
+    <header>
+      <h1 class="font-bold text-4xl">{post.data.title}</h1>
+    </header>
   <Content />
+  </main>
 </Layout>
