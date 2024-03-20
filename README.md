@@ -1,17 +1,17 @@
-# Keystatic in Astro
+# Ideal, tu plataforma de aprendizaje libre
 
-This template shows how you can use Keystatic in an Astro site.
+![Screenshot de la landing page de  ideal](./public/readme/ideal-shot.png)
 
-To setup:
+Configurar para iniciar con el desarrollo
 
 ```bash
-npm install
+pnpm install
 ```
 
-To run:
+Para iniciar en local
 
-```
-npm run dev
+```bash
+pnpm run dev
 ```
 
 Admin UI: [http://127.0.0.1:4321/keystatic](http://127.0.0.1:4321/keystatic)
