@@ -4,10 +4,10 @@ export default config({
   storage: {
     kind: 'github',
     repo: 'IdealProject/ideal'
-  }, 
+  },
   ui: {
     brand: {
-      name: 'Ideal Admin',
+      name: 'Ideal Admin UI',
 
     }
   },
