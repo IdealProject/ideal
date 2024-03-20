@@ -5,6 +5,7 @@
 Configurar para iniciar con el desarrollo
 
 ```bash
+npm install -g pnpm
 pnpm install
 ```
 

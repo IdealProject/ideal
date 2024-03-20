@@ -142,9 +142,30 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".mdoc"] };
+"buenas.mdoc": {
+	id: "buenas.mdoc";
+  slug: "buenas";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".mdoc"] };
+"convertir-cadena-a-titulo-en-java.mdoc": {
+	id: "convertir-cadena-a-titulo-en-java.mdoc";
+  slug: "convertir-cadena-a-titulo-en-java";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".mdoc"] };
 "first-post.mdoc": {
 	id: "first-post.mdoc";
   slug: "first-post";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".mdoc"] };
+"introduccion-a-la-geometria-analitica.mdoc": {
+	id: "introduccion-a-la-geometria-analitica.mdoc";
+  slug: "introduccion-a-la-geometria-analitica";
   body: string;
   collection: "posts";
   data: InferEntrySchema<"posts">
