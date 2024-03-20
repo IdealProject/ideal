@@ -5,9 +5,10 @@ export default config({
     kind: 'github',
     repo: 'IdealProject/ideal'
   },
+  //Puedo cambiar la ui del admin mode con ui:{}
   ui: {
     brand: {
-      name: 'Ideal Admin UI',
+      name: 'Ideal Admin',
 
     }
   },
