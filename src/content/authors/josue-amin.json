@@ -1,0 +1,12 @@
+{
+  "name": "Josue Amin",
+  "showcase": [
+    {
+      "discriminant": "link",
+      "value": {
+        "label": "My portfolio",
+        "url": "josu.dev"
+      }
+    }
+  ]
+}

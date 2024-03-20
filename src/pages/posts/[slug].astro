@@ -1,26 +1,37 @@
 ---
-import { getCollection, getEntry } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
+import { getCollection, getEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
 
 const { slug } = Astro.params;
-if (!slug) throw new Error('Slug not found');
-const post = await getEntry('posts', slug);
+if (!slug) throw new Error("Slug not found");
+const post = await getEntry("posts", slug);
 
-if (!post) throw new Error('No post found for this slug');
+if (!post) throw new Error("No post found for this slug");
 const { Content } = await post.render();
+
+const auth = await getCollection("authors");
+const autha = JSON.stringify(auth)
+const posta = JSON.stringify(post)
+// const authP = auth.filter((e) => post.data.authors.include(e.id))
+
 
 // Generate static pages
 export async function getStaticPaths() {
-  const posts = await getCollection('posts');
-  return posts.map(post => ({ params: { slug: post.slug } }));
+  const posts = await getCollection("posts");
+  return posts.map((post) => ({ params: { slug: post.slug } }));
 }
 ---
 
 <Layout title={post.data.title}>
-  <main class="mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between ">
+  <main class="mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between">
     <header>
       <h1 class="font-bold text-4xl">{post.data.title}</h1>
     </header>
-  <Content />
+    <Content />
+    <h2>Escrito por:</h2>
+    <ul>
+      <!-- {auth.map((e) => <li>{e.data.name}</li>)} -->
+    </ul>
+    <p>{posta}</p>
   </main>
 </Layout>

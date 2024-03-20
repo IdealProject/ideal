@@ -5,6 +5,13 @@ export default config({
     kind: 'github',
     repo: 'IdealProject/ideal'
   },
+  //Puedo cambiar la ui del admin mode con ui:{}
+  ui: {
+    brand: {
+      name: 'Ideal Admin',
+
+    }
+  },
   collections: {
     posts: collection({
       label: 'Posts',
@@ -23,8 +30,20 @@ export default config({
             publicPath: '../../assets/images/posts/',
           },
         }),
+        authors: fields.array(fields.relationship({
+          label: 'Authors',
+          collection: 'authors',
+          validation: {
+            isRequired: true
+          },
+        }),
+          {
+            label: 'Authors',
+            itemLabel: (item) => item.value || "Please select a author"
+          })
       },
-    }), authors: collection({
+    }),
+    authors: collection({
       label: 'Authors',
       slugField: 'name',
       path: 'src/content/authors/*',

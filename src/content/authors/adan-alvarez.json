@@ -1,0 +1,12 @@
+{
+  "name": "Adán Alvarez",
+  "showcase": [
+    {
+      "discriminant": "link",
+      "value": {
+        "label": "Mi github",
+        "url": "github.com"
+      }
+    }
+  ]
+}
