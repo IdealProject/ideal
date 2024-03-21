@@ -31,10 +31,18 @@ export default config({
             publicPath: '../../assets/images/posts/',
           },
         }),
-        author: fields.relationship({
-          label:'Autores',
-          collection:'authors'
-        })
+        authors: fields.array(
+          fields.relationship({
+            label:'Autores',
+            collection:'auhors',
+            validation:{
+              isRequired:true
+            }
+          }),{
+            label:'Autores',
+            itemLabel:(item)=>item.value || 'Por Favor ingrese un nombre valido',
+          }
+        )
       },
     }),
     authors: collection({
