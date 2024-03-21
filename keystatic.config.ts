@@ -1,5 +1,5 @@
 import { config, fields, collection, component } from "@keystatic/core";
-import Latex from "@components/Latex.astro";
+import { inline, block } from "@keystatic/core/content-components";
 
 export default config({
   storage: {
@@ -19,48 +19,18 @@ export default config({
       format: { contentField: "content" },
       schema: {
         title: fields.slug({ name: { label: "Title" } }),
-        content: fields.document({
-          label: "Content",
-          formatting: true,
-          dividers: true,
-          links: true,
-          images: {
-            directory: "src/assets/images/posts",
-            publicPath: "../../assets/images/posts/",
-          },
-          componentBlocks: {
-            latex: component({
-              label: "LaTex Formula",
-              schema: {
-                formula: fields.text({
-                  label: "LaTex Formula",
-                  description: "Enter your LaTex formula here",
-                  validation: {
-                    length: { min: 1 },
-                    isRequired: true,
-                  },
-                }),
-
-                display: fields.select({
-                  label: "LaTex Notation Display Mode",
-                  description:
-                    "The mode in which the LaTex formula will be displayed",
-                  options: [
-                    { label: "Inline", value: "inline" },
-                    { label: "Block", value: "block" },
-                  ],
-                  defaultValue: "inline",
-                }),
-              },
-              preview: () => null,
-            }),
-          },
-        }),
-        // content: fields.markdoc({
+        // content: fields.document({
         //   label: "Content",
-        //   components: {
-        //     latex: inline({
-        //       label: "Inline Latex",
+        //   formatting: true,
+        //   dividers: true,
+        //   links: true,
+        //   images: {
+        //     directory: "src/assets/images/posts",
+        //     publicPath: "../../assets/images/posts/",
+        //   },
+        //   componentBlocks: {
+        //     latex: component({
+        //       label: "LaTex Formula",
         //       schema: {
         //         formula: fields.text({
         //           label: "LaTex Formula",
@@ -70,10 +40,61 @@ export default config({
         //             isRequired: true,
         //           },
         //         }),
+
+        //         display: fields.select({
+        //           label: "LaTex Notation Display Mode",
+        //           description:
+        //             "The mode in which the LaTex formula will be displayed",
+        //           options: [
+        //             { label: "Inline", value: "inline" },
+        //             { label: "Block", value: "block" },
+        //           ],
+        //           defaultValue: "inline",
+        //         }),
         //       },
+        //       preview: () => null,
         //     }),
         //   },
         // }),
+        content: fields.markdoc({
+          label: "Content",
+          components: {
+            blockLatex: block({
+              label: "LaTex Block",
+              ContentView: ({ value }) => value.formula,
+              schema: {
+                formula: fields.text({
+                  label: "Formula",
+                  description: "Enter the LaTex notation formula",
+                  validation: {
+                    isRequired: true,
+                    length: {
+                      min: 1,
+                    },
+                  },
+                }),
+              },
+            }),
+            inlineLatex: inline({
+              label: "LaTex Inline",
+              schema: {
+                formula: fields.text({
+                  label: "Formula",
+                  description: "Enter the LaTex notation formula",
+                  validation: {
+                    isRequired: true,
+                    length: {
+                      min: 1,
+                    },
+                  },
+                }),
+              },
+              NodeView: ({ value }) => {
+                return value.formula;
+              },
+            }),
+          },
+        }),
         authors: fields.array(
           fields.relationship({
             label: "Authors",
