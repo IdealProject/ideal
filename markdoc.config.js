@@ -7,7 +7,7 @@ export default defineMarkdocConfig({
       attributes: {
         // Define attributes if needed
         formula: { type: String, required: true },
-        display: { type: String, default: inline },
+        display: { type: String, default: "inline" },
       },
     },
   },
