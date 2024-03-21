@@ -1,9 +1,11 @@
 ---
 title: Nuevo Latex
-authors: []
+authors:
+  - adan-alvarez
 ---
-Esto aparece en una linea pillan? {% inlineLatex formula="x = y^2" /%}
+Esto por ejemplo es el inicio de un párrafo de texto y acá voy a poner en linea una notción matemática {% inlineLatex formula="x = \\sqrt{a^2 + b^2}" /%}
 
-Pero en cambio esto es un bloque grande de formula
+Ahora sabiendo esto, podemos poner un bloque de Latex
 
-{% blockLatex formula="F = m \\cdot a" /%}
+{% blockLatex
+   formula="\\text{Newton's Second Law of Motion:} \\\\\n\\vec{F} = m \\vec{a}" /%}
