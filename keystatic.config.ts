@@ -31,22 +31,21 @@ export default config({
             publicPath: '../../assets/images/posts/',
           },
         }),
-        authors: fields.array(
-          fields.relationship({
-            label:'Autores',
-            collection:'auhors',
-            validation:{
-              isRequired:true
-            }
-          }),{
-            label:'Autores',
-            itemLabel:(item)=>item.value || 'Por Favor ingrese un nombre valido',
-          }
-        )
+        authors: fields.array(fields.relationship({
+          label: 'Authors',
+          collection: 'authors',
+          validation: {
+            isRequired: true
+          },
+        }),
+          {
+            label: 'Authors',
+            itemLabel: (item) => item.value || "Please select a author"
+          })
       },
     }),
     authors: collection({
-      label: 'Autores',
+      label: 'Authors',
       slugField: 'name',
       path: 'src/content/authors/*',
       format: { data: 'json' },
