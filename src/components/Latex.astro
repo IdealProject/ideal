@@ -1,11 +1,11 @@
 ---
 import katex from 'katex';
 
-const { formula = '', inline = false } = Astro.props;
-const html = katex.renderToString(formula, {throwOnError: false, displayMode: !inline});
+const { formula = '', display = 'block' } = Astro.props;
+const html = katex.renderToString(formula, {throwOnError: false, displayMode: display === 'block'});
 ---
 
-{inline ? (
+{display === 'inline' ? (
   <span class="">
     <span set:html={html} class="" />
   </span>

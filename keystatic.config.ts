@@ -30,7 +30,7 @@ export default config({
           },
           componentBlocks: {
             latex: component({
-              label: "LaTex Block",
+              label: "LaTex Formula",
               schema: {
                 formula: fields.text({
                   label: "LaTex Formula",
@@ -40,11 +40,16 @@ export default config({
                     isRequired: true,
                   },
                 }),
-                isInline: fields.checkbox({
-                  label: "Inline",
-                  defaultValue: false,
+
+                display: fields.select({
+                  label: "LaTex Notation Display Mode",
                   description:
-                    "Check this if you want to display the formula inline",
+                    "The mode in which the LaTex formula will be displayed",
+                  options: [
+                    { label: "Inline", value: "inline" },
+                    { label: "Block", value: "block" },
+                  ],
+                  defaultValue: "inline",
                 }),
               },
               preview: () => null,
