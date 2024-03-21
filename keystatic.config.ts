@@ -66,6 +66,7 @@ export default config({
                 formula: fields.text({
                   label: "Formula",
                   description: "Enter the LaTex notation formula",
+                  multiline: true,
                   validation: {
                     isRequired: true,
                     length: {
@@ -90,7 +91,7 @@ export default config({
                 }),
               },
               NodeView: ({ value }) => {
-                return value.formula;
+                return `Click Me to edit!!: ${value.formula}`;
               },
             }),
           },
