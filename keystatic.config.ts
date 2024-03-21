@@ -14,6 +14,7 @@ export default config({
   collections: {
     posts: collection({
       label: "Posts",
+      entryLayout:'content',
       slugField: "title",
       path: "src/content/posts/*",
       format: { contentField: "content" },

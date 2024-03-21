@@ -135,44 +135,9 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"posts": {
-"convertir-cadena-a-titulo-en-java.mdoc": {
-	id: "convertir-cadena-a-titulo-en-java.mdoc";
-  slug: "convertir-cadena-a-titulo-en-java";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".mdoc"] };
-"diosnel.mdoc": {
-	id: "diosnel.mdoc";
-  slug: "diosnel";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".mdoc"] };
-"introduccion-a-la-geometria-analitica.mdoc": {
-	id: "introduccion-a-la-geometria-analitica.mdoc";
-  slug: "introduccion-a-la-geometria-analitica";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".mdoc"] };
-"representacion-de-un-punto-en-el-plano-cartesiano.mdoc": {
-	id: "representacion-de-un-punto-en-el-plano-cartesiano.mdoc";
-  slug: "representacion-de-un-punto-en-el-plano-cartesiano";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".mdoc"] };
-"trigonometria.mdoc": {
-	id: "trigonometria.mdoc";
-  slug: "trigonometria";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".mdoc"] };
-"usando-latex.mdoc": {
-	id: "usando-latex.mdoc";
-  slug: "usando-latex";
+"latex2.mdoc": {
+	id: "latex2.mdoc";
+  slug: "latex2";
   body: string;
   collection: "posts";
   data: InferEntrySchema<"posts">
@@ -188,18 +153,13 @@ declare module 'astro:content' {
   collection: "authors";
   data: any
 };
+"camila-grahl": {
+	id: "camila-grahl";
+  collection: "authors";
+  data: any
+};
 "christopher-fabian-mendoza-lopez": {
 	id: "christopher-fabian-mendoza-lopez";
-  collection: "authors";
-  data: any
-};
-"josue-amin": {
-	id: "josue-amin";
-  collection: "authors";
-  data: any
-};
-"maria-piton": {
-	id: "maria-piton";
   collection: "authors";
   data: any
 };
