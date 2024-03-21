@@ -2,12 +2,16 @@ import { defineMarkdocConfig, component } from "@astrojs/markdoc/config";
 
 export default defineMarkdocConfig({
   tags: {
-    latex: {
-      render: component("@components/Latex.astro"), // Replace '@components/Latex.astro' with the actual path to your LaTeX component
+    blockLatex: {
+      render: component("@components/BlockLatex.astro"),
       attributes: {
-        // Define attributes if needed
         formula: { type: String, required: true },
-        display: { type: String, default: "inline" },
+      },
+    },
+    inlineLatex: {
+      render: component("@components/InlineLatex.astro"),
+      attributes: {
+        formula: { type: String, required: true },
       },
     },
   },
