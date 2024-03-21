@@ -5,9 +5,9 @@ const { formula = '' } = Astro.props;
 const html = katex.renderToString(formula, {throwOnError: false});
 ---
 
-<div class="">
+<span class="">
 	<span set:html={html} class="" />
-</div>
+</span>
 
 <link
 	rel="stylesheet"
