@@ -6,7 +6,8 @@ export default defineMarkdocConfig({
       render: component("@components/Latex.astro"), // Replace '@components/Latex.astro' with the actual path to your LaTeX component
       attributes: {
         // Define attributes if needed
-        formula: { type: String, required: true }, // Example attribute definition
+        formula: { type: String, required: true },
+        inline: { type: Boolean, default: false },
       },
     },
   },

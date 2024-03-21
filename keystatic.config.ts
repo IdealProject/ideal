@@ -1,6 +1,5 @@
 import { config, fields, collection, component } from "@keystatic/core";
 import Latex from "@components/Latex.astro";
-import { inline } from "@keystatic/core/content-components";
 
 export default config({
   storage: {
@@ -20,18 +19,43 @@ export default config({
       format: { contentField: "content" },
       schema: {
         title: fields.slug({ name: { label: "Title" } }),
-        // content: fields.document({
+        content: fields.document({
+          label: "Content",
+          formatting: true,
+          dividers: true,
+          links: true,
+          images: {
+            directory: "src/assets/images/posts",
+            publicPath: "../../assets/images/posts/",
+          },
+          componentBlocks: {
+            latex: component({
+              label: "LaTex Block",
+              schema: {
+                formula: fields.text({
+                  label: "LaTex Formula",
+                  description: "Enter your LaTex formula here",
+                  validation: {
+                    length: { min: 1 },
+                    isRequired: true,
+                  },
+                }),
+                isInline: fields.checkbox({
+                  label: "Inline",
+                  defaultValue: false,
+                  description:
+                    "Check this if you want to display the formula inline",
+                }),
+              },
+              preview: () => null,
+            }),
+          },
+        }),
+        // content: fields.markdoc({
         //   label: "Content",
-        //   formatting: true,
-        //   dividers: true,
-        //   links: true,
-        //   images: {
-        //     directory: "src/assets/images/posts",
-        //     publicPath: "../../assets/images/posts/",
-        //   },
-        //   componentBlocks: {
-        //     latex: component({
-        //       label: "LaTex Block",
+        //   components: {
+        //     latex: inline({
+        //       label: "Inline Latex",
         //       schema: {
         //         formula: fields.text({
         //           label: "LaTex Formula",
@@ -42,28 +66,9 @@ export default config({
         //           },
         //         }),
         //       },
-        //       preview: () => null,
         //     }),
         //   },
         // }),
-        content: fields.markdoc({
-          label: "Content",
-          components: {
-            latex: inline({
-              label: "Inline Latex",
-              schema: {
-                formula: fields.text({
-                  label: "LaTex Formula",
-                  description: "Enter your LaTex formula here",
-                  validation: {
-                    length: { min: 1 },
-                    isRequired: true,
-                  },
-                }),
-              },
-            }),
-          },
-        }),
         authors: fields.array(
           fields.relationship({
             label: "Authors",
