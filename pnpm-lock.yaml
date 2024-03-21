@@ -31,17 +31,14 @@ dependencies:
     version: 18.2.22
   astro:
     specifier: ^4.0.3
-<<<<<<< HEAD
     version: 4.5.8
   katex:
     specifier: ^0.16.9
     version: 0.16.9
-=======
     version: 4.5.6
   pnpm:
     specifier: ^8.15.5
     version: 8.15.5
->>>>>>> 3b22ce6423da8ac43689b0a9fd41928b592c14fe
   react:
     specifier: ^18.2.0
     version: 18.2.0
