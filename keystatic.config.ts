@@ -1,3 +1,4 @@
+import { Label } from '@amcharts/amcharts5';
 import { config, fields, collection } from '@keystatic/core';
 
 export default config({
@@ -30,21 +31,14 @@ export default config({
             publicPath: '../../assets/images/posts/',
           },
         }),
-        authors: fields.array(fields.relationship({
-          label: 'Authors',
-          collection: 'authors',
-          validation: {
-            isRequired: true
-          },
-        }),
-          {
-            label: 'Authors',
-            itemLabel: (item) => item.value || "Please select a author"
-          })
+        author: fields.relationship({
+          label:'Autores',
+          collection:'authors'
+        })
       },
     }),
     authors: collection({
-      label: 'Authors',
+      label: 'Autores',
       slugField: 'name',
       path: 'src/content/authors/*',
       format: { data: 'json' },

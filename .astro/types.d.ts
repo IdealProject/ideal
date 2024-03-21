@@ -135,20 +135,6 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"posts": {
-"2nd-post.mdoc": {
-	id: "2nd-post.mdoc";
-  slug: "2nd-post";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".mdoc"] };
-"buenas.mdoc": {
-	id: "buenas.mdoc";
-  slug: "buenas";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".mdoc"] };
 "convertir-cadena-a-titulo-en-java.mdoc": {
 	id: "convertir-cadena-a-titulo-en-java.mdoc";
   slug: "convertir-cadena-a-titulo-en-java";
@@ -156,9 +142,9 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".mdoc"] };
-"first-post.mdoc": {
-	id: "first-post.mdoc";
-  slug: "first-post";
+"diosnel.mdoc": {
+	id: "diosnel.mdoc";
+  slug: "diosnel";
   body: string;
   collection: "posts";
   data: InferEntrySchema<"posts">
@@ -184,14 +170,36 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".mdoc"] };
+"usando-latex.mdoc": {
+	id: "usando-latex.mdoc";
+  slug: "usando-latex";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".mdoc"] };
 };
 
 	};
 
 	type DataEntryMap = {
 		"authors": {
+"adan-alvarez": {
+	id: "adan-alvarez";
+  collection: "authors";
+  data: any
+};
 "christopher-fabian-mendoza-lopez": {
 	id: "christopher-fabian-mendoza-lopez";
+  collection: "authors";
+  data: any
+};
+"josue-amin": {
+	id: "josue-amin";
+  collection: "authors";
+  data: any
+};
+"maria-piton": {
+	id: "maria-piton";
   collection: "authors";
   data: any
 };
