@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import { config, fields, collection, component } from "@keystatic/core";
 import Latex from "@components/Latex.astro";
+=======
+import { Label } from '@amcharts/amcharts5';
+import { config, fields, collection } from '@keystatic/core';
+>>>>>>> 292a4b6e0988ce6b6fc8d2e9316f3671c22e7219
 
 export default config({
   storage: {
