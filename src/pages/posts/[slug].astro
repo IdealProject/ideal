@@ -8,16 +8,11 @@ const post = await getEntry("posts", slug);
 
 if (!post) throw new Error("No post found for this slug");
 const { Content } = await post.render();
-<<<<<<< HEAD
-//Rescatamos los autores del post
-const auth = JSON.parse(post.data.authors);
-=======
 
 // const auth = await getCollection("authors");
 // const autha = JSON.stringify(auth)
 const posta = JSON.stringify(post);
 // const authP = auth.filter((e) => post.data.authors.include(e.id))
->>>>>>> parent of 11bc32e (feat: mostrar autores en el post)
 
 // Generate static pages
 export async function getStaticPaths() {
@@ -33,15 +28,9 @@ export async function getStaticPaths() {
     </header>
     <Content />
     <h2>Escrito por:</h2>
-<<<<<<< HEAD
-    <p>
-      {JSON.stringify(post.data)}
-    </p>
-=======
     <ul>
       <!-- {auth.map((e) => <li>{e.data.name}</li>)}   -->
     </ul>
     <p>{posta}</p>
->>>>>>> parent of 11bc32e (feat: mostrar autores en el post)
   </main>
 </Layout>
