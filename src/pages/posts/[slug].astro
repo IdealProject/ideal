@@ -10,19 +10,12 @@ if (!post) throw new Error("No post found for this slug");
 const { Content } = await post.render();
 //Get all the authors
 const allAuthors = await getCollection("authors");
-const postAuthors = post["data"]["authors"];
-
-<<<<<<< HEAD
 
 // const autha = JSON.stringify(auth)
-const posta = JSON.stringify(post);
-// const authP = auth.filter((e) => post.data.authors.include(e.id))
-
-=======
-const postAuthorsInfo = allAuthors.filter((author) =>
-  postAuthors.includes(author["id"]),
+const postAuthorsInfo = allAuthors.filter((e) =>
+  post.data.authors.include(e.id),
 );
->>>>>>> 89fb096ea42a223a705bd97ba67069669a991529
+
 // Generate static pages
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
