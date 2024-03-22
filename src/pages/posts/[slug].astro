@@ -10,9 +10,9 @@ if (!post) throw new Error("No post found for this slug");
 const { Content } = await post.render();
 //Get all the authors
 const allAuthors = await getCollection("authors");
-
-const autha = JSON.stringify(allAuthors);
-// const postAuthorsInfo = allAuthors.filter((e) =>post.data.authors
+const authorOfPost = await allAuthors.filter((e) =>
+  post.data.authors.include(e.id),
+);
 
 // Generate static pages
 export async function getStaticPaths() {
@@ -28,6 +28,6 @@ export async function getStaticPaths() {
     </header>
     <Content />
     <h2>Escrito por:</h2>
-    <p>{autha}</p>
+    <p>{authorOfPost}</p>
   </main>
 </deb>
