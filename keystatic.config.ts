@@ -1,6 +1,7 @@
 import { config, fields, collection, component } from "@keystatic/core";
 import { inline, block } from "@keystatic/core/content-components";
 
+
 export default config({
   storage: {
     kind: "github",
@@ -97,6 +98,17 @@ export default config({
         })
       }
     }),
+    semestre: collection({
+      label:'Semestres',
+      slugField:'name',
+      path:'src/content/semestre/*',
+      format:{
+        data:"json"
+      },
+      schema:{
+        name:fields.slug({name:{label:'Semestre'}})
+      }
+    })
   }
 });
 // content: fields.document({
