@@ -27,23 +27,21 @@ export async function getStaticPaths() {
 ---
 
 <Layout title={post.data.title}>
-  <deb <Layout title={post.data.title}>
-    <main class="mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between">
-      <header>
-        <h1 class="font-bold text-4xl">{post.data.title}</h1>
-      </header>
-      <Content />
-      <h2>Escrito por:</h2>
-      <ul>
-        {
-          AuthorsOfPosta.map((e) => (
-            <li>
-              <p> - {e.data.name}</p>
-              <img src={e.data.avatar} width="50px" height="60px" />
-            </li>
-          ))
-        }
-      </ul>
-    </main>
-  </deb>
+  <main class="mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between">
+    <header>
+      <h1 class="font-bold text-4xl">{post.data.title}</h1>
+    </header>
+    <Content />
+    <h2>Escrito por:</h2>
+    <ul>
+      {
+        AuthorsOfPosta.map((e) => (
+          <li>
+            <p> - {e.data.name}</p>
+            <img src={e.data.avatar} width="50px" height="60px" />
+          </li>
+        ))
+      }
+    </ul>
+  </main>
 </Layout>
