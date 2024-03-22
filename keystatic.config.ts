@@ -20,7 +20,6 @@ export default config({
       format: { contentField: "content" },
       schema: {
         title: fields.slug({ name: { label: "Title" } }),
-
         content: fields.markdoc({
           label: "Content",
           components: {
@@ -61,54 +60,11 @@ export default config({
             }),
           },
         }),
-        autores: fields.array(
-          fields.relationship({
-            label: 'Autores',
-            collection: 'authors',
-            validation: {
-              isRequired: true,
-            }
-          }),
-          {
-            label: 'Autores',
-            itemLabel: (item) => item.value || 'Ingrese un Autor valido'
-          }
-        ),
-      }
-    }),
-    authors: collection({
-      label: "Authors",
-      slugField: "name",
-      path: "src/content/authors/*",
-      format: { data: "json" },
-      schema: {
-        name: fields.slug({ name: { label: "Name" } }),
-        avatar: fields.image({
-          label: "Avatar",
-          directory: "public/images/avatars",
-          publicPath: "/images/avatars",
-        }),
-        showcase: fields.blocks(
-          {
-            link: {
-              label: "Link",
-              schema: fields.object({
-                label: fields.text({
-                  label: "Label",
-                  validation: { length: { min: 1 } },
-                }),
-                url: fields.url({ label: "URL" }),
-              }),
-              itemLabel: (item) => {
-                return item.fields.label.value;
-              },
-            },
-          },
-          { label: "Tus links" }
-        ),
+
+        // Aca se cierra el Schema
       },
-    }),
-  },
+    })
+  }
 });
 // content: fields.document({
 //   label: "Content",
