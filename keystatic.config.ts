@@ -20,6 +20,11 @@ export default config({
       format: { contentField: "content" },
       schema: {
         title: fields.slug({ name: { label: "Title" } }),
+        draft: fields.checkbox({
+          label:'Draft',
+          description:'Draft arent showing in the index',
+        }),
+        //latex component for display mathematician sintaxys
         content: fields.markdoc({
           label: "Content",
           components: {
