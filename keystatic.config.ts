@@ -84,7 +84,7 @@ export default config({
     authors: collection({
       label: 'Autores',
       slugField: 'name',
-      path: 'src/content/authors/*',
+      path: "src/content/authors/*",
       format: {
         data: 'json'
       },
