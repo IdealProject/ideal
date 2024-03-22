@@ -9,7 +9,7 @@ const post = await getEntry("posts", slug);
 if (!post) throw new Error("No post found for this slug");
 const { Content } = await post.render();
 
-//  const auth = await getCollection("");
+
 // const autha = JSON.stringify(auth)
 const posta = JSON.stringify(post);
 // const authP = auth.filter((e) => post.data.authors.include(e.id))

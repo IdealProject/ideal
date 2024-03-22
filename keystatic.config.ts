@@ -25,14 +25,13 @@ export default config({
           label: 'Draft',
           description: 'Draft arent showing in the index',
         }),
-        authors: fields.array(
-          fields.relationship({
-            label: 'Autores',
-            collection: 'authors',
-            validation: {
-              isRequired: true,
-            },
-          }), {
+        authors: fields.array(fields.relationship({
+          label: 'Autores',
+          collection: 'authors',
+          validation: {
+            isRequired: true,
+          },
+        }), {
           label: 'Autores',
           itemLabel: (item) => item.value || "Por Favor ingrese un autor...",
         }
@@ -85,7 +84,7 @@ export default config({
     authors: collection({
       label: 'Autores',
       slugField: 'name',
-      path: "src/content/authors/*",
+      path: 'src/content/authors/*',
       format: {
         data: 'json'
       },
@@ -95,18 +94,19 @@ export default config({
           label: 'Avatar',
           directory: 'public/images/avatars',
           publicPath: 'images/avatars',
-        })
+        }),
+        
       }
     }),
     semestre: collection({
-      label:'Semestres',
-      slugField:'name',
-      path:'src/content/semestre/*',
-      format:{
-        data:"json"
+      label: 'Semestres',
+      slugField: 'name',
+      path: 'src/content/semestre/*',
+      format: {
+        data: "json"
       },
-      schema:{
-        name:fields.slug({name:{label:'Semestre'}})
+      schema: {
+        name: fields.slug({ name: { label: 'Semestre' } })
       }
     })
   }
