@@ -8,12 +8,13 @@ const post = await getEntry("posts", slug);
 
 if (!post) throw new Error("No post found for this slug");
 const { Content } = await post.render();
+//Get all the authors
+const allAuthors = await getCollection("authors");
+const postAuthors = post["data"]["authors"];
 
-//  const auth = await getCollection("");
-// const autha = JSON.stringify(auth)
-const posta = JSON.stringify(post);
-// const authP = auth.filter((e) => post.data.authors.include(e.id))
-
+const postAuthorsInfo = allAuthors.filter((author) =>
+  postAuthors.includes(author["id"]),
+);
 // Generate static pages
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -21,13 +22,27 @@ export async function getStaticPaths() {
 }
 ---
 
-<Layout title={post.data.title}>
+<deb <Layout title={post.data.title}>
   <main class="mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between">
     <header>
       <h1 class="font-bold text-4xl">{post.data.title}</h1>
     </header>
     <Content />
     <h2>Escrito por:</h2>
-    <p>{posta}</p>
+    <ul>
+      {
+        postAuthorsInfo.map((author) => (
+          <li>
+            <p>{author.data.name}</p>
+            <img
+              src={author.data.avatar}
+              alt="author profile"
+              width="50px"
+              height="60px"
+            />
+          </li>
+        ))
+      }
+    </ul>
   </main>
-</Layout>
+</deb>
