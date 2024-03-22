@@ -142,6 +142,13 @@ declare module 'astro:content' {
   collection: "posts";
   data: any
 } & { render(): Render[".mdoc"] };
+"prubea.mdoc": {
+	id: "prubea.mdoc";
+  slug: "prubea";
+  body: string;
+  collection: "posts";
+  data: any
+} & { render(): Render[".mdoc"] };
 };
 
 	};
