@@ -135,12 +135,12 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"posts": {
-"latex2.mdoc": {
-	id: "latex2.mdoc";
-  slug: "latex2";
+"primer-post-con-draf-option.mdoc": {
+	id: "primer-post-con-draf-option.mdoc";
+  slug: "primer-post-con-draf-option";
   body: string;
   collection: "posts";
-  data: InferEntrySchema<"posts">
+  data: any
 } & { render(): Render[".mdoc"] };
 };
 
@@ -152,5 +152,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = typeof import("../src/content/config.js");
+	export type ContentConfig = never;
 }

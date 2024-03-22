@@ -21,9 +21,21 @@ export default config({
       schema: {
         title: fields.slug({ name: { label: "Title" } }),
         draft: fields.checkbox({
-          label:'Draft',
-          description:'Draft arent showing in the index',
+          label: 'Draft',
+          description: 'Draft arent showing in the index',
         }),
+        authors: fields.array(
+          fields.relationship({
+            label: 'Autores',
+            collection: 'authors',
+            validation: {
+              isRequired: true,
+            },
+          }), {
+          label: 'Autores',
+          itemLabel: (item) => item.value || "Por Favor ingrese un autor...",
+        }
+        ),
         //latex component for display mathematician sintaxys
         content: fields.markdoc({
           label: "Content",
@@ -68,7 +80,23 @@ export default config({
 
         // Aca se cierra el Schema
       },
-    })
+    }),
+    authors: collection({
+      label: 'Autores',
+      slugField: 'name',
+      path: 'src/content/authors/*',
+      format: {
+        data: 'json'
+      },
+      schema: {
+        name: fields.slug({ name: { label: 'Nombre' } }),
+        avatar: fields.image({
+          label: 'Avatar',
+          directory: 'public/images/avatars',
+          publicPath: 'images/avatars',
+        })
+      }
+    }),
   }
 });
 // content: fields.document({
