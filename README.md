@@ -15,6 +15,6 @@ Para iniciar en local
 pnpm run dev
 ```
 
-Admin UI: [http://127.0.0.1:4321/keystatic](http://127.0.0.1:4321/keystatic)
+Admin UI: [https:/ideal-7m3.pages.dev/keystatic](https:/ideal-7m3.pages.dev/keystatic)
 
-Homepage: [http://localhost:4321](http://localhost:4321)
+Homepage: [https:/ideal-7m3.pages.dev/](https:/ideal-7m3.pages.dev/)
