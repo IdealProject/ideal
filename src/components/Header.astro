@@ -1,9 +1,12 @@
+---
+import { Icon } from "astro-icon/components"
+---
 <nav class="bg-white border-b py-4 px-4 md:px-6 lg:px-2=6 xl:px-0 md:py-4 lg:py-4">
   <div
     class="max-w-7xl mx-auto flex justify-between items-center"
   >
     <div class="flex items-center">
-      <a href="/"><img src="/ideal.svg" alt="Ideal logo" class="h-4 w-auto"/></a>
+      <a href="/"><Icon name="ideal"/></a>
       <div class="hidden md:flex space-x-8 ml-10">
         <a class="text-gray-500 hover:text-gray-900" href="#">Comunidad</a
         ><a class="text-gray-500 hover:text-gray-900" href="#"
@@ -15,6 +18,8 @@
     </div>
     <a
       href="https://github.com/IdealProject/ideal"
+      target="_blank"
+      rel="noreferrer"
       class="flex items-center space-x-2 text-sm font-medium bg-black hover:bg-white py-2 px-4 text-white hover:text-black rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 hover:shadow-md"
     >
       <svg
