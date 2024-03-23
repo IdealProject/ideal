@@ -2,28 +2,20 @@
 import { getCollection, getEntry } from "astro:content";
 import BlogLayout from "@layouts/BlogLayout.astro";
 import TableOfContents from "@components/TableOfContents.astro";
-import Heading from "@components/Heading.astro";
 
 const { slug } = Astro.params;
 if (!slug) throw new Error("Slug not found");
 const post = await getEntry("posts", slug);
 
 if (!post) throw new Error("No post found for this slug");
-<<<<<<< HEAD
 const { Content, headings } = await post.render();
-=======
-const { Content } = await post.render();
-//Get all the authors
-const allAuthors = await getCollection("authors");
-const AuthorsOfPost = post.data.authors;
->>>>>>> 3628c57e6ca1756dc0c151f79462d51ee3cd0847
 
-const aOfP = JSON.stringify(AuthorsOfPost);
-const autha = JSON.stringify(allAuthors);
+// const aOfP = JSON.stringify(AuthorsOfPost);
+// const autha = JSON.stringify(allAuthors);
 
-const AuthorsOfPosta = allAuthors.filter((elemento) =>
-  aOfP.includes(elemento.id),
-);
+// const AuthorsOfPosta = allAuthors.filter((elemento) =>
+//   aOfP.includes(elemento.id),
+// );
 
 // Generate static pages
 export async function getStaticPaths() {
@@ -32,7 +24,6 @@ export async function getStaticPaths() {
 }
 ---
 
-<<<<<<< HEAD
 <BlogLayout title={post.data.title}>
   <main class="print mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between">
   <header class="px-4">
@@ -107,24 +98,3 @@ export async function getStaticPaths() {
 
 
 </style>
-=======
-<Layout title={post.data.title}>
-  <main class="mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between">
-    <header>
-      <h1 class="font-bold text-4xl">{post.data.title}</h1>
-    </header>
-    <Content />
-    <h2>Escrito por:</h2>
-    <ul>
-      {
-        AuthorsOfPosta.map((e) => (
-          <li>
-            <p> - {e.data.name}</p>
-            <img src={e.data.avatar} width="50px" height="60px" />
-          </li>
-        ))
-      }
-    </ul>
-  </main>
-</Layout>
->>>>>>> 3628c57e6ca1756dc0c151f79462d51ee3cd0847
