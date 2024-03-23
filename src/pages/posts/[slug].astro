@@ -1,13 +1,15 @@
 ---
 import { getCollection, getEntry } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
+import BlogLayout from "@layouts/BlogLayout.astro";
+import TableOfContents from "@components/TableOfContents.astro";
+import Heading from "@components/Heading.astro";
 
 const { slug } = Astro.params;
 if (!slug) throw new Error("Slug not found");
 const post = await getEntry("posts", slug);
 
 if (!post) throw new Error("No post found for this slug");
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 
 const auth = await getCollection("authors");
 const autha = JSON.stringify(auth)
@@ -22,16 +24,77 @@ export async function getStaticPaths() {
 }
 ---
 
-<Layout title={post.data.title}>
-  <main class="mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between">
-    <header>
-      <h1 class="font-bold text-4xl">{post.data.title}</h1>
-    </header>
-    <Content />
-    <h2>Escrito por:</h2>
-    <ul>
-      <!-- {auth.map((e) => <li>{e.data.name}</li>)} -->  
-    </ul>
-    <p>{posta}</p>
-  </main>
-</Layout>
+<BlogLayout title={post.data.title}>
+  <main class="print mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between">
+  <header class="px-4">
+    <h1 id="main-title" class="print">{ post.data.title }</h1>
+    <button class="text-white font-semibold bg-black py-2 px-3 rounded-md" onclick="window.print()">Descargar</button>
+  </header>
+  <article class="flex flex-col-reverse md:flex-row lg:flex-row gap-x-5 print p-4">
+    <!-- Content first, TableOfContents last on desktop -->
+    <Content class="list order-2 md:order-first lg:order-first" />
+    <TableOfContents class="list no-print order-1 md:order-last lg:order-last" headings={headings} />
+  </article>
+</main>
+
+</BlogLayout>
+
+
+<style is:global> 
+  body {
+    font-family: 'Satoshi', sans-serif;
+  }
+
+
+  #main-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: bold;
+    font-size: 2.8rem;
+    text-decoration: underline;
+    color: #31363F;
+  }
+
+  h1 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+  }
+  h3 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+  h4 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 500;
+    font-size: 1.25rem;
+  }
+  h5 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+  }
+  h6 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 100;
+    font-size: 0.875rem;
+  }
+
+  pre {
+    padding: 1rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+    border-radius: 0.3rem;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+
+</style>

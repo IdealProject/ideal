@@ -1,6 +1,12 @@
-import { defineMarkdocConfig, component } from "@astrojs/markdoc/config";
+import { defineMarkdocConfig, component, nodes } from "@astrojs/markdoc/config";
+import shiki from "@astrojs/markdoc/shiki";
 
 export default defineMarkdocConfig({
+  nodes: {
+    heading: {
+      ...nodes.heading,
+    },
+  },
   tags: {
     blockLatex: {
       render: component("@components/BlockLatex.astro"),
@@ -15,4 +21,11 @@ export default defineMarkdocConfig({
       },
     },
   },
+  extends: [
+    shiki({
+      langs: ["java", "python", "bash", "latex"],
+      wrap: true,
+      theme: "github-dark",
+    }),
+  ],
 });

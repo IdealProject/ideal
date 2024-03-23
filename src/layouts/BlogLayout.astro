@@ -1,0 +1,70 @@
+---
+import '../styles.css'
+
+export interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+import Header from '@components/Header.astro'
+import { ViewTransitions } from 'astro:transitions';
+---
+
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="La descripción de este Contenido">
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<ViewTransitions />
+	</head>
+	<body>
+		<Header id="app-header" class:list=`no-print` />
+		<slot />
+    <a class="rounded-xl ml-3 bg-black p-3 font-light text-sm text-white sticky bottom-5 place-self-end  mt-[calc(100vh+10rem)]" href="#">Ir Arriba↑</a>
+	</body>
+</html>
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+  }
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+
+    h1 {
+      font-size: 1.5em;
+    }
+     h2 {
+      font-size: 1.3em;
+     }
+    h3 {
+      font-size: 1.1em;
+    }
+
+    p {
+      font-size: 1em;
+    }
+
+    #app-header {
+      display: none !important;
+    }
+
+    .print {
+      display: block !important;
+    }
+
+    astro-dev-toolbar {
+      display: none !important;
+    }
+
+    article {
+      break-inside: avoid;
+    }
+  }
+</style>
