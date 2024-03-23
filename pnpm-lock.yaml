@@ -35,10 +35,6 @@ dependencies:
   katex:
     specifier: ^0.16.9
     version: 0.16.9
-    version: 4.5.6
-  pnpm:
-    specifier: ^8.15.5
-    version: 8.15.5
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -5660,13 +5656,6 @@ packages:
     dev: false
 
   /postcss-import@15.1.0(postcss@8.4.37):
-  /pnpm@8.15.5:
-    resolution: {integrity: sha512-sFGjLH5pWDO4SSbTspuMylclS1ifBknYmcbp0O22cLkex+KkNFm65zdZu1zmGcMmbxFr+THOItHvF1mn5Fqpbw==}
-    engines: {node: '>=16.14'}
-    hasBin: true
-    dev: false
-
-  /postcss-import@15.1.0(postcss@8.4.36):
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
