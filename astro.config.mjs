@@ -11,5 +11,5 @@ import icon from "astro-icon";
 export default defineConfig({
   integrations: [react(), markdoc(), keystatic(), tailwind(), icon()],
   output: "hybrid",
-  adapter: cloudflare({ mode: "directory" }),
+  adapter: cloudflare(),
 });
