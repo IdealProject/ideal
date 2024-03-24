@@ -10,6 +10,6 @@ import icon from "astro-icon";
 // https://astro.build/config
 export default defineConfig({
   integrations: [react(), markdoc(), keystatic(), tailwind(), icon()],
-  output: 'hybrid',
-  adapter: cloudflare()
+  output: "hybrid",
+  adapter: cloudflare({ mode: "directory" }),
 });
