@@ -81,7 +81,12 @@ export default config({
               },
 
               NodeView: ({ value }) => {
-                return <span>Click me to Edit {value.formula}</span>;
+                return (
+                  <span>
+                    Click me to Edit{" "}
+                    <InlineLatexKeystatic formula={value.formula} />
+                  </span>
+                );
               },
             }),
           },
