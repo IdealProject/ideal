@@ -14,7 +14,7 @@ Para comenzar, podemos entender a una intersección como un lugar en donde una o
 
 Se pueden intersectar todo tipo de figuras como: *rectas, circunferencias, parábolas, elipses, hipérbolas*y cualquier otro tipo de funciones, ya que este material está destinado a alumnos del CPA, utilizaremos las figuras anteriormente citadas para explicaciones y ejemplos. De todas formas, puedes aplicar estos conceptos para encontrar intersecciones con otros tipos de funciones.
 
-## ¿Cómo hacerlo?
+# ¿Cómo hacerlo?
 
 Recordando la definición anterior, "*podemos entender a una intersección como un lugar en donde una o más figuras comparten un punto*{% inlineLatex formula="\\left (x , y  \\right )" /%}  en común".
 
@@ -24,8 +24,50 @@ El punto {% inlineLatex formula="(0,7)" /%} pertenece a la recta {% inlineLatex 
 
 ---
 
-Ahora, teniendo las figuras, ***buscamos la intersección entre ellas resolviendo el sistema de ecuaciones formado con las ecuaciones de las figuras en cuestión***, ya que necesitamos encontrar un valor de {% inlineLatex formula="x" /%} e {% inlineLatex formula="y" /%} que puedan satisfacer a todas las ecuaciones a la vez.
+Ahora, teniendo las figuras, **buscamos la intersección entre ellas resolviendo el sistema de ecuaciones formado con las ecuaciones de las figuras en cuestión**, ya que necesitamos encontrar un valor de {% inlineLatex formula="x" /%} e {% inlineLatex formula="y" /%} que puedan satisfacer a todas las ecuaciones a la vez.
 
 ## Ejemplos y consejos
 
-En este apartado se mostrarán ejemplos y explicaciones sobre los mismos, iniciaremos con figuras básicas y posteriormente avanzaremos con figuras más difíciles
+En este apartado se mostrarán ejemplos y explicaciones sobre los mismos, iniciaremos con figuras básicas y posteriormente avanzaremos con figuras más difíciles.
+
+Cabe resaltar que se requieren conocimientos de la materia de ***álgebra***  especialmente en ***factorización*** y ***métodos de resolución de sistemas de ecuaciones,*** en los ejemplos serán citados los métodos más convenientes para resolver los sistemas de ecuaciones entre las determinadas figuras.
+
+### Intersección entre rectas
+
+En este caso, las rectas tienen solo un punto en común, ya que estas no son curvas, dos rectas nunca se intersectan si y solo si estas son *paralelas.*
+
+***Ejemplo: Sean las rectas***{% inlineLatex formula="3x - y + 8 = 0 ;3 x - 2y = -4" /%}***, Hallar la intersección entre ellas.***
+
+Tenemos el siguiente sistema de ecuaciones:
+
+{% blockLatex
+   formula="\\left\\{\\begin{matrix}  & 3x - y + 8 = 0 & \\\\   & 3x - 2y = -4 &  \\end{matrix}\\right." /%}
+
+Puedes resolver el sistema de ecuaciones como tu prefieras, lo más recomendable seria dejar las rectas en la forma {% inlineLatex formula="y = mx + b" /%}, y resolver el sistema de ecuaciones por el método de igualación. En este caso el resultado es {% inlineLatex formula="(-4. -4)" /%}.
+
+### Intersección entre una recta y una curva cualquiera
+
+Si se nos presenta la intersección entre una recta y una curva, sea una parábola, circunferencia, elipse o hipérbola. El método más conveniente a utilizar, sería el método de sustitución, aprovecharemos que tenemos una ecuación lineal (la recta), en una ecuación lineal, es mas fácil despejar cualquiera de las variables, entonces despejamos una de las variables en la recta y podemos realizar el método de sustitución, en todo caso, si tenemos funciones más sencillas, podemos utilizar otros métodos, por ejemplo.
+
+***Hallar la intersección entre***
+
+{% blockLatex
+   formula="\\left\\{\\begin{matrix}  &  y = 2x& \\\\   &  y = x^{2}&  \\end{matrix}\\right.\\\\Igualamos, y=y\\\\  x^{2} = 2x \\\\ x^{2} - 2x = 0\\\\ x(x-2)= 0\\\\ x=0 , x-2 = 0\\\\ x_{1} = 0, x_{2} = 2" /%}
+
+#### Pequeño truco para intersecciones entre rectas y circunferencias
+
+No siempre los ejercicios serán tan sencillos como el anterior, especialmente en un exámen, suele ser conveniente realizar el método de sustitución, como en el siguiente caso
+
+***Intersección entre :*** {% inlineLatex formula="2y = x - 5 ; (x - 5)^{2} + (y - 5)^{2} =25" /%}
+
+{% blockLatex
+   formula="\\left\\{\\begin{matrix}  & y = \\frac{x-5}{2}& \\\\   & (x - 5)^{2} + (y - 5)^{2} = &25  \\end{matrix}\\right." /%}
+
+Tenemos la recta despejada y la forma {% inlineLatex formula="(x - h)^{2} + (y - k)^{2} = r^{2} " /%}, muchos desarrollarian la ecuación de la circunferencia dejándola como:
+
+{% inlineLatex formula="x^{2} + y^{2} -10x - 10y +25 = 0" /%} y reemplazarían la {% inlineLatex formula="y" /%} por {% inlineLatex formula=" \\frac{x-5}{2}" /%} , quedando lo siguiente:
+
+{% inlineLatex
+   formula="x^{2} +  (\\frac{x-5}{2})^{2} -10x - 10(\\frac{x-5}{2}) +25 = 0" /%}
+
+Esto sería muy largo de resolver, a parte de que debes prestar atención a cada término, lo que da paso a posibles errores.
