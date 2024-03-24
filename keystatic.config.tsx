@@ -1,7 +1,8 @@
 import { config, fields, collection, component } from "@keystatic/core";
 import { inline, block } from "@keystatic/core/content-components";
-import InlineLatexKeystatic from "@components/InlineLatexKeystatic";
-import BlockLatexKeystatic from "@components/BlockLatexKeystatic";
+
+//import InlineLatexKeystatic from "@components/InlineLatexKeystatic";
+//import BlockLatexKeystatic from "@components/BlockLatexKeystatic";
 // import TexIcon from "@components/TexIcon";
 
 export default config({
@@ -46,9 +47,7 @@ export default config({
           components: {
             blockLatex: block({
               label: "LaTex Block",
-              ContentView: ({ value }) => (
-                <BlockLatexKeystatic formula={value.formula} />
-              ),
+              ContentView: ({ value }) => null,
               // icon: <TexIcon />,
               schema: {
                 formula: fields.text({
@@ -81,7 +80,7 @@ export default config({
               },
 
               NodeView: ({ value }) => {
-                return <InlineLatexKeystatic formula={value.formula} />;
+                return <span>Click me to Edit {value.formula}</span>;
               },
             }),
           },
