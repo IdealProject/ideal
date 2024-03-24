@@ -1,9 +1,9 @@
 import { config, fields, collection, component } from "@keystatic/core";
 import { inline, block } from "@keystatic/core/content-components";
 
-//import InlineLatexKeystatic from "@components/InlineLatexKeystatic";
-//import BlockLatexKeystatic from "@components/BlockLatexKeystatic";
-// import TexIcon from "@components/TexIcon";
+import InlineLatexKeystatic from "@components/InlineLatexKeystatic";
+import BlockLatexKeystatic from "@components/BlockLatexKeystatic";
+import TexIcon from "@components/TexIcon";
 
 export default config({
   storage: {
@@ -41,14 +41,13 @@ export default config({
             itemLabel: (item) => item.value || "Por Favor ingrese un autor...",
           }
         ),
-        //latex component for display mathematician sintaxys
         content: fields.markdoc({
           label: "Content",
           components: {
             blockLatex: block({
               label: "LaTex Block",
               ContentView: ({ value }) => null,
-              // icon: <TexIcon />,
+              icon: <TexIcon />,
               schema: {
                 formula: fields.text({
                   label: "Formula",
@@ -65,7 +64,7 @@ export default config({
             }),
             inlineLatex: inline({
               label: "LaTex Inline",
-              // icon: <TexIcon />,
+              icon: <TexIcon />,
               schema: {
                 formula: fields.text({
                   label: "Formula",

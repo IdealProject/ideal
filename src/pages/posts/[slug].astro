@@ -20,7 +20,7 @@ const { Content, headings } = await post.render();
 // Generate static pages
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
-  return posts.map((post) => ({ params: { slug: post.slug } }));
+  return posts.map((post: { slug: string }) => ({ params: { slug: post.slug } }));
 }
 ---
 

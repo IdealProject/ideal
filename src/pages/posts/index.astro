@@ -13,7 +13,7 @@ import Layout from '@layouts/Layout.astro'
           <section class="px-4">
              <ul>   
                 {
-                    posts.map(post => (
+                    posts.map((post: { slug: string, data: { title: string } }) => (
                         <li class="list-disc">
                             <a href={`/posts/${post.slug}`} class="underline text-xl text-blue-600 font-medium">{post.data.title}</a>    
                         </li>

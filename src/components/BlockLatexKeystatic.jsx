@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import katex from "katex";
 import "katex/dist/katex.min.css";
 
@@ -8,7 +8,7 @@ const BlockLatexKeystatic = ({ formula = "" }) => {
   useEffect(() => {
     const renderedHtml = katex.renderToString(formula, {
       throwOnError: false,
-      displayMode: true, // Changed to displayMode: true as per your Astro component
+      displayMode: true,
     });
     setHtml(renderedHtml);
   }, [formula]);
