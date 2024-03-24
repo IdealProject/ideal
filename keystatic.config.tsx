@@ -46,13 +46,15 @@ export default config({
           components: {
             blockLatex: block({
               label: "LaTex Block",
-              ContentView: ({ value }) => null,
+              ContentView: ({ value }) => (
+                <BlockLatexKeystatic formula={value.formula} />
+              ),
               icon: <TexIcon />,
               schema: {
                 formula: fields.text({
                   label: "Formula",
                   description: "Enter the LaTex notation formula",
-                  multiline: true,
+                  multiline: false,
                   validation: {
                     isRequired: true,
                     length: {
