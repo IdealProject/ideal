@@ -4,6 +4,8 @@ draft: true
 authors:
   - matias-mareco
 ---
+{% blockLatex /%}
+
 # Introducción
 
 ## ¿Qué es una intersección?
@@ -39,3 +41,8 @@ En este caso, las rectas tienen solo un punto en común, ya que estas no son cur
 ***Ejemplo: Sean las rectas***{% inlineLatex formula="3x - y + 8 = 0 ; x - 2y = 3" /%}***, Hallar la intersección entre ellas.***
 
 Tenemos el siguiente sistema de ecuaciones:
+
+{% blockLatex
+   formula="\\left\\{\\begin{matrix}  & 3x - y + 8 = 0 & \\\\   & x - 2y = 3 &  \\end{matrix}\\right." /%}
+
+Puedes resolver el sistema de ecuaciones como tu prefieras, lo más recomendable seria dejar las rectas en la forma {% inlineLatex formula="y = mx + b" /%}, y resolver el sistema de ecuaciones por el método de igualación
