@@ -2,7 +2,7 @@
 const { headings = [] } = Astro.props;
 ---
 
-<nav class="min-w-fit h-auto bg-gray-100 border rounded-md border-gray-200 border-solid">
+<nav class="text-sm min-w-fit h-auto bg-gray-100 border rounded-md border-gray-200 border-solid">
   <ul>
     {headings.map((heading: { depth: number, slug: string, text: string }) => (
       <li style={{marginLeft: `${heading.depth}em`}}>
