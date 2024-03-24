@@ -2,7 +2,7 @@ import { config, fields, collection, component } from "@keystatic/core";
 import { inline, block } from "@keystatic/core/content-components";
 import InlineLatexKeystatic from "@components/InlineLatexKeystatic";
 import BlockLatexKeystatic from "@components/BlockLatexKeystatic";
-import TexIcon from "@components/TexIcon";
+// import TexIcon from "@components/TexIcon";
 
 export default config({
   storage: {
@@ -49,7 +49,7 @@ export default config({
               ContentView: ({ value }) => (
                 <BlockLatexKeystatic formula={value.formula} />
               ),
-              icon: <TexIcon />,
+              // icon: <TexIcon />,
               schema: {
                 formula: fields.text({
                   label: "Formula",
@@ -66,7 +66,7 @@ export default config({
             }),
             inlineLatex: inline({
               label: "LaTex Inline",
-              icon: <TexIcon />,
+              // icon: <TexIcon />,
               schema: {
                 formula: fields.text({
                   label: "Formula",
