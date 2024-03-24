@@ -18,9 +18,7 @@ export default defineConfig({
     tailwind(),
     icon(),
     robotsTxt({
-      transform(content) {
-        return `${content}\nDisallow: ${site}/keystatic`;
-      },
+      policy: [{ userAgent: "*", allow: "/" }],
     }),
   ],
   output: "hybrid",
