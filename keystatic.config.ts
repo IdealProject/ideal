@@ -97,15 +97,43 @@ export default config({
         }),
       },
     }),
-    semestre: collection({
-      label: "Semestres",
-      slugField: "name",
-      path: "src/content/semestre/*",
+    books: collection({
+      label: "Books",
+      slugField: "bookName",
+      path: "src/content/books/*",
       format: {
         data: "json",
       },
+      entryLayout: "content",
       schema: {
-        name: fields.slug({ name: { label: "Semestre" } }),
+        bookName: fields.slug({ name: { label: "Book Name" } }),
+        bookAuthor: fields.text({
+          label: "Author",
+          validation: { isRequired: true },
+        }),
+        bookSubject: fields.array(fields.text({ label: "Subject" }), {
+          label: "Tag",
+          itemLabel: (props) => props.value,
+        }),
+        bookMajor: fields.select({
+          label: "Major",
+          description: "Select the major",
+          options: [
+            { label: "Informática", value: "infor" },
+            { label: "Electrónica", value: "electro" },
+            { label: "Civil", value: "civil" },
+            { label: "Industrial", value: "indu" },
+            { label: "CPA", value: "cpa" },
+          ],
+          defaultValue: "cpa",
+        }),
+        bookDownloadLinkId: fields.url({
+          label: "Google Drive Link",
+          description: "Enter the Google Drive public link",
+          validation: {
+            isRequired: true,
+          },
+        }),
       },
     }),
   },
