@@ -100,7 +100,7 @@ export default config({
           fields.url({ label: 'Links', validation: { isRequired: true } }),
           {
             label: 'Link',
-            itemLabel: props => props.value || ''
+            itemLabel: props => props.value || '',
           }
         )
       },
