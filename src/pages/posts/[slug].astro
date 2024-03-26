@@ -7,6 +7,10 @@ const { slug } = Astro.params;
 if (!slug) throw new Error("Slug not found");
 const post = await getEntry("posts", slug);
 
+//Authors Collection
+const authors = await getCollection("authors");
+// Filtramos solo los autores que pertenecen al post
+
 if (!post) throw new Error("No post found for this slug");
 const { Content, headings } = await post.render();
 export async function getStaticPaths() {
@@ -21,6 +25,7 @@ export async function getStaticPaths() {
   <main class="print mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between">
     <header class="px-4 flex gap-x-5 items-center">
       <h1 id="main-title" class="print">{post.data.title}</h1>
+      <!-- <a>{JSON.stringify(authors)}</a> -->
       <button
         class="text-white font-semibold bg-black py-2 px-3 rounded-md"
         onclick="window.print()">Descargar</button

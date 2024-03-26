@@ -81,6 +81,7 @@ export default config({
         }),
       },
     }),
+    // Colección que pertenece a los autores
     authors: collection({
       label: "Autores",
       slugField: "name",
@@ -95,6 +96,13 @@ export default config({
           directory: "public/images/avatars",
           publicPath: "images/avatars",
         }),
+        links: fields.array(
+          fields.url({ label: 'Links', validation: { isRequired: true } }),
+          {
+            label: 'Link',
+            itemLabel: props => props.value || ''
+          }
+        )
       },
     }),
     books: collection({
