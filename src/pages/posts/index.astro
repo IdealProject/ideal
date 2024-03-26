@@ -1,25 +1,32 @@
 ---
-import { getCollection } from 'astro:content';
-const posts = await getCollection('posts');
+import { getCollection } from "astro:content";
+const posts = await getCollection("posts");
 
-import Layout from '@layouts/Layout.astro'
+import Layout from "@layouts/Layout.astro";
 ---
 
 <Layout title="Contenido de Ideal">
-    <main class="mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between ">
-          <header>
-              <h1 class="text-4xl font-bold ">Contenido de Ideal</h1>
-          </header>
-          <section class="px-4">
-             <ul>   
+    <main class="mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between">
+        <header>
+            <h1 class="text-4xl font-bold">Contenido de Ideal</h1>
+        </header>
+        <section class="px-4">
+            <ul>
                 {
-                    posts.map((post: { slug: string, data: { title: string } }) => (
-                        <li class="list-disc">
-                            <a href={`/posts/${post.slug}`} class="underline text-xl text-blue-600 font-medium">{post.data.title}</a>    
-                        </li>
-                    ))
+                    posts.map(
+                        (post: { slug: string; data: { title: string } }) => (
+                            <li class="list-disc">
+                                <a
+                                    href={`/posts/${post.slug}`}
+                                    class="underline text-xl text-blue-600 font-medium"
+                                >
+                                    {post.data.title}
+                                </a>
+                            </li>
+                        ),
+                    )
                 }
-             </ul>
-          </section>
+            </ul>
+        </section>
     </main>
 </Layout>

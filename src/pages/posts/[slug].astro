@@ -11,65 +11,74 @@ if (!post) throw new Error("No post found for this slug");
 const { Content, headings } = await post.render();
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
-  return posts.map((post: { slug: string }) => ({ params: { slug: post.slug } }));
+  return posts.map((post: { slug: string }) => ({
+    params: { slug: post.slug },
+  }));
 }
 ---
 
 <BlogLayout title={post.data.title}>
   <main class="print mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between">
-  <header class="px-4 flex gap-x-5 items-center">
-    <h1 id="main-title" class="print">{ post.data.title }</h1>
-    <button class="text-white font-semibold bg-black py-2 px-3 rounded-md" onclick="window.print()">Descargar</button>
-  </header>
-  <article class="flex flex-col-reverse md:flex-row lg:flex-row gap-x-5 print p-4">
-    <Content class="list order-2 md:order-first lg:order-first" />
-    <TableOfContents class="list no-print order-1 md:order-last lg:order-last" headings={headings} />
-  </article>
-</main>
-
+    <header class="px-4 flex gap-x-5 items-center">
+      <h1 id="main-title" class="print">{post.data.title}</h1>
+      <button
+        class="text-white font-semibold bg-black py-2 px-3 rounded-md"
+        onclick="window.print()">Descargar</button
+      >
+    </header>
+    <article
+      class="flex flex-col-reverse md:flex-row lg:flex-row gap-x-5 print p-4"
+    >
+      <Content class="list order-2 md:order-first lg:order-first" />
+      <TableOfContents
+        class="list no-print order-1 md:order-last lg:order-last"
+        headings={headings}
+      />
+    </article>
+    <p>{JSON.stringify(post)}</p>
+  </main>
 </BlogLayout>
 
-
-<style is:global> 
+<style is:global>
   body {
-    font-family: 'Satoshi', sans-serif;
+    font-family: "Satoshi", sans-serif;
   }
 
   #main-title {
-    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: "Bricolage Grotesque", sans-serif;
     font-weight: bold;
     font-size: 2.8rem;
     text-decoration: underline;
-    color: #31363F;
+    color: #31363f;
   }
 
   h1 {
-    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: "Bricolage Grotesque", sans-serif;
     font-weight: bold;
     font-size: 2.5rem;
   }
   h2 {
-    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: "Bricolage Grotesque", sans-serif;
     font-weight: 900;
     font-size: 2rem;
   }
   h3 {
-    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: "Bricolage Grotesque", sans-serif;
     font-weight: 700;
     font-size: 1.5rem;
   }
   h4 {
-    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: "Bricolage Grotesque", sans-serif;
     font-weight: 500;
     font-size: 1.25rem;
   }
   h5 {
-    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: "Bricolage Grotesque", sans-serif;
     font-weight: 300;
     font-size: 1rem;
   }
   h6 {
-    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: "Bricolage Grotesque", sans-serif;
     font-weight: 100;
     font-size: 0.875rem;
   }
@@ -85,7 +94,6 @@ export async function getStaticPaths() {
     text-wrap: pretty;
   }
 
-
   @media print {
     .no-print {
       display: none !important;
@@ -94,9 +102,9 @@ export async function getStaticPaths() {
     h1 {
       font-size: 1.5em;
     }
-     h2 {
+    h2 {
       font-size: 1.3em;
-     }
+    }
     h3 {
       font-size: 1.1em;
     }
