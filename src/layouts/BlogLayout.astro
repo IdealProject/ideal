@@ -23,49 +23,52 @@ import { ViewTransitions } from "astro:transitions";
   </head>
   <body>
     <Header id="app-header" class:list=`no-print` />
-    <slot />
+    <div class="px-4">
+      <slot />
+    </div>
     <a
       class="print:hidden m-5 rounded-xl ml-3 bg-black p-3 font-light text-sm text-white sticky bottom-5 place-self-end mt-[calc(100vh+10rem)]"
       href="#">Ir Arriba↑</a
     >
-  </body><style is:global>
-    html {
-      scroll-behavior: smooth;
-    }
-    @media print {
-      .no-print {
-        display: none !important;
+    <style is:global>
+      html {
+        scroll-behavior: smooth;
       }
+      @media print {
+        .no-print {
+          display: none !important;
+        }
 
-      h1 {
-        font-size: 1.5em;
-      }
-      h2 {
-        font-size: 1.3em;
-      }
-      h3 {
-        font-size: 1.1em;
-      }
+        h1 {
+          font-size: 1.5em;
+        }
+        h2 {
+          font-size: 1.3em;
+        }
+        h3 {
+          font-size: 1.1em;
+        }
 
-      p {
-        font-size: 1em;
-      }
+        p {
+          font-size: 1em;
+        }
 
-      #app-header {
-        display: none !important;
-      }
+        #app-header {
+          display: none !important;
+        }
 
-      .print {
-        display: block !important;
-      }
+        .print {
+          display: block !important;
+        }
 
-      astro-dev-toolbar {
-        display: none !important;
-      }
+        astro-dev-toolbar {
+          display: none !important;
+        }
 
-      article {
-        break-inside: avoid;
+        article {
+          break-inside: avoid;
+        }
       }
-    }
-  </style>
+    </style>
+  </body>
 </html>

@@ -22,7 +22,9 @@ export async function getStaticPaths() {
 ---
 
 <BlogLayout title={post.data.title}>
-  <main class="print mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between">
+  <main
+    class="flex-col print mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between"
+  >
     <header class="flex gap-x-5 justify-between items-start content-start">
       <div class="flex flex-col">
         <h1 id="main-title" class="print">{post.data.title}</h1>
