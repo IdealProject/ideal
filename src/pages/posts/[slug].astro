@@ -31,7 +31,7 @@ export async function getStaticPaths() {
           {
             authorsOfPost.map((e) => (
               <p class="inline">
-                <a class="hover:underline text-gray-400" href={e.data.links}>
+                <a target="_blank" class="hover:underline text-gray-400" href={e.data.links}>
                   {e.data.name}
                 </a>
               </p>
