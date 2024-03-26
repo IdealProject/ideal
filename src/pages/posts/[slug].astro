@@ -10,7 +10,7 @@ const post = await getEntry("posts", slug);
 //Authors Collection
 const authors = await getCollection("authors");
 // Filtramos solo los autores que pertenecen al post
-
+const authorsOfPost = authors.filter((e) => post?.data.authors?.includes(e.id));
 if (!post) throw new Error("No post found for this slug");
 const { Content, headings } = await post.render();
 export async function getStaticPaths() {
@@ -23,16 +23,29 @@ export async function getStaticPaths() {
 
 <BlogLayout title={post.data.title}>
   <main class="print mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between">
-    <header class="px-4 flex gap-x-5 items-center">
-      <h1 id="main-title" class="print">{post.data.title}</h1>
-      <!-- <a>{JSON.stringify(authors)}</a> -->
+    <header class=" flex gap-x-5 justify-between items-start content-start">
+      <div class="flex flex-col">
+        <h1 id="main-title" class="print">{post.data.title}</h1>
+        <div>
+          <p class="text-gray-400 inline">Redactado por</p>
+          {
+            authorsOfPost.map((e) => (
+              <p class="inline">
+                <a class="hover:underline text-gray-400" href={e.data.links}>
+                  {e.data.name}
+                </a>
+              </p>
+            ))
+          }
+        </div>
+      </div>
       <button
         class="text-white font-semibold bg-black py-2 px-3 rounded-md"
         onclick="window.print()">Descargar</button
       >
     </header>
     <article
-      class="flex flex-col-reverse md:flex-row lg:flex-row gap-x-5 print p-4"
+      class="flex flex-col-reverse md:flex-row lg:flex-row gap-x-5 print:p-4"
     >
       <Content class="list order-2 md:order-first lg:order-first" />
       <TableOfContents
