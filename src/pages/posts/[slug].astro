@@ -23,11 +23,11 @@ export async function getStaticPaths() {
 
 <BlogLayout title={post.data.title}>
   <main
-    class="flex-col print mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between"
+    class="flex-col print mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between print:break-inside-avoid print:relative print:pt-14"
   >
-    <header class="flex gap-x-5 justify-between items-start content-start">
+    <header class="flex gap-x-5 justify-between items-start content-start print:absolute print:top-0 print:left-0">
       <div class="flex flex-col">
-        <h1 id="main-title" class="print">{post.data.title}</h1>
+        <h1 id="main-title">{post.data.title}</h1>
         <div>
           <p class="text-gray-400 inline">Redactado por</p>
           {
@@ -35,7 +35,8 @@ export async function getStaticPaths() {
               <p class="inline">
                 <a
                   target="_blank"
-                  class="hover:underline text-gray-400"
+                  rel="noopener noreferrer"                 
+                  class="hover:underline text-gray-400 cursor-pointer"
                   href={e.data.links}
                 >
                   {e.data.name}
@@ -46,16 +47,16 @@ export async function getStaticPaths() {
         </div>
       </div>
       <button
-        class="text-white font-semibold bg-black py-2 px-3 rounded-md"
+        class="text-white font-semibold bg-black py-2 px-3 rounded-md print:hidden"
         onclick="window.print()">Descargar</button
       >
     </header>
     <article
-      class="flex flex-col-reverse md:flex-row lg:flex-row gap-x-5 print:p-4"
+      class="flex flex-col-reverse md:flex-row lg:flex-row gap-x-5 print:flex-col"
     >
-      <Content class="list order-2 md:order-first lg:order-first" />
+      <Content class="list order-2 md:order-first lg:order-first print:order-last" />
       <TableOfContents
-        class="list no-print order-1 md:order-last lg:order-last"
+        class="list order-1 md:order-last lg:order-last"
         headings={headings}
       />
     </article>
@@ -127,6 +128,10 @@ export async function getStaticPaths() {
       display: none !important;
     }
 
+    #main-title {
+      font-size: 1.4rem;
+    }
+
     h1 {
       font-size: 1.5em;
     }
@@ -141,16 +146,8 @@ export async function getStaticPaths() {
       font-size: 1em;
     }
 
-    .print {
-      display: block !important;
-    }
-
     astro-dev-toolbar {
       display: none !important;
-    }
-
-    article {
-      break-inside: avoid;
     }
   }
 </style>
