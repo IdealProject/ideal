@@ -20,7 +20,7 @@ Recordando la definición anterior, "*podemos entender a una intersección como 
 
 Sea una figura cualquiera, por ejemplo, la recta {% inlineLatex formula="3x - y + 7 = 0" /%}, si reemplazamos los valores de las variables por un punto {% inlineLatex formula="\\left (x , y  \\right )" /%} y este punto satisface la igualdad, podemos afirmar que este punto pertenece a la figura, **por ejemplo**:
 
-El punto {% inlineLatex formula="(0,7)" /%} pertenece a la recta {% inlineLatex formula="3x - y + 7 = 0" /%}, ya que {% inlineLatex formula="3(0) -(7) + 7 = 0" /%}.
+El punto {% inlineLatex formula="(0,7)" /%} pertenece a la recta {% inlineLatex formula="3x - y + 7 = 0" /%}, porque {% inlineLatex formula="3(0) -(7) + 7 = 0" /%}.
 
 ---
 
@@ -56,7 +56,7 @@ Si se nos presenta la intersección entre una recta y una curva, sea una parábo
 {% blockLatex
    formula="\\left\\{\\begin{matrix}  &  y = 2x& \\\\   &  y = x^{2}&  \\end{matrix}\\right.\\\\Igualamos, y=y\\\\  x^{2} = 2x \\\\ x^{2} - 2x = 0\\\\ x(x-2)= 0\\\\ x=0 , x-2 = 0\\\\ x_{1} = 0, x_{2} = 2" /%}
 
-#### Pequeño truco para intersecciones entre rectas y circunferencias
+### Pequeño truco para intersecciones entre rectas y circunferencias
 
 No siempre los ejercicios serán tan sencillos como el anterior, especialmente en un exámen, suele ser conveniente realizar el método de sustitución, como en el siguiente caso
 
@@ -67,7 +67,7 @@ No siempre los ejercicios serán tan sencillos como el anterior, especialmente e
 
 Tenemos despejada la x de la recta(ya que si despejamos la y nos queda una division) y la forma {% inlineLatex formula="(x - h)^{2} + (y - k)^{2} = r^{2} " /%}, muchos desarrollarian la ecuación de la circunferencia dejándola como:
 
-{% inlineLatex formula="x^{2} + y^{2} -10x - 10y +25 = 0" /%} y despejarían la {% inlineLatex formula="y" /%} ,reemplazarían la {% inlineLatex formula="y" /%} por {% inlineLatex formula=" \\frac{x-5}{2}" /%} , quedando lo siguiente:
+{% inlineLatex formula="x^{2} + y^{2} -10x - 10y +25 = 0" /%} , despejarían la {% inlineLatex formula="y" /%} , luego reemplazarían la {% inlineLatex formula="y" /%} por  {% inlineLatex formula=" \\frac{x-5}{2}" /%} , quedando lo siguiente:
 
 {% inlineLatex
    formula="x^{2} +  (\\frac{x-5}{2})^{2} -10x - 10(\\frac{x-5}{2}) +25 = 0" /%}
@@ -99,3 +99,85 @@ Esto sería muy largo de resolver, a parte de que debes prestar atención a cada
 Esta ecuación es mucho más amigable de resolver que la otra ecuación. El punto es que, existe más de un camino para resolver problemas, y tú debes abrirte a buscar soluciones más rápidas, como por ejemplo el caso anterior, antes de desarrollar las ecuaciones y reemplazar, debes ver si no resulta más simple reemplazar directamente en la ecuación canónica de la circunferencia.
 
 ### Intersección entre curvas
+
+Las intersecciones entre curvas son un tema un poco más complicado, debido a que tenemos un sistema de ecuaciones con más términos cuadráticos( {% inlineLatex formula="x^{2}" /%} o {% inlineLatex formula="y^{2}" /%} ), en estos casos debemos siempre buscar aprovecharnos de las ecuaciones donde tengamos alguna de estas variables solamente de manera lineal( que sea lineal quiere decir que tengan exponente 1, osea, que no estan al cuadrado). Analizaremos primero estos casos y luego saltaremos a situaciones más complicadas.
+
+***Comenzaremos con un ejemplo sencillo:***
+
+{% blockLatex
+   formula="\\left\\{\\begin{matrix}  &2y= x^{2}  &  \\\\   & x^{2} + y^{2}  = 8 &  \\end{matrix}\\right." /%}
+
+De la primera ecuación, despejamos {% inlineLatex formula="y" /%} {% inlineLatex formula="y = \\frac{x^{2}}{2}" /%}
+
+Sustituimos {% inlineLatex formula="\\rightarrow x^{2} + (\\frac{x^{2}}{2})^{2} = 8" /%}
+
+Nos queda : {% inlineLatex formula="\\rightarrow x^{2} + \\frac{x^{4}}{4} = 8" /%}
+
+Si seguimos desarrollando algebraicamente, dejando sin divisiones e igualando a 0 nos queda:
+
+{% inlineLatex formula="x^{4} + 4x^{2} -32 = 0" /%}
+
+Para resolver esta ecuación podemos decir que : {% inlineLatex formula="{\\color{Blue} w} = x^{2}" /%}, de esta manera nos queda lo siguiente.
+
+{% inlineLatex
+   formula="{\\color{Blue} w^{2}} + 4{\\color{Blue} w} - 32 = 0" /%}
+
+De aqui tenemos que :
+
+{% inlineLatex
+   formula="{\\color{Blue} w_1} = 4 ; {\\color{Blue} w_2} = -8 " /%}
+
+Reemplazamos {% inlineLatex formula="{\\color{Blue} w}  " /%}por {% inlineLatex formula="x^{2}" /%}, nos queda:
+
+{% inlineLatex formula="x_1^{2} = 4 ; x_2^{2} =-8" /%}
+
+Rechazamos {% inlineLatex formula=" x_2^{2} =-8" /%} , ya que no existe nignun numero real que elevado al cuadrado nos de como resultado un numero negativo.
+
+Finalmente nos queda que {% inlineLatex formula="x^{2} = 4 " /%}
+
+Concluimos que : {% inlineLatex formula="x_1 = 2; x_2 = -2 " /%}
+
+Si seguimos desarrollando el ejercicio tendremos que las respuestas son: {% inlineLatex formula="(-2,2)(2,2)" /%}
+
+***Seguimos con un ejemplo un tanto mas complejo, tenemos las siguientes figuras:***
+
+{% blockLatex
+   formula="\\left\\{\\begin{matrix}  &(x-6)^{2} + (y-4)^{2}  & = 16 \\\\   & (x - 2) = 4(y-4)^{2}&  \\end{matrix}\\right." /%}
+
+Observamos que en la ecuación  {% inlineLatex formula="(x - 2) = 4(y-4)^{2}" /%} podemos despejar sin problemas la variable {% inlineLatex formula="x" /%}, ya que tiene exponente 1 y es la unica {% inlineLatex formula="x" /%} en toda la ecuación.
+
+Sabido esto, podemos proceder a resolver el sistema por el método de sustitución:
+
+{% blockLatex
+   formula="\\\\ (x-6)^{2}+(y-4)^{2}=16\\\\ ((4(y-4)^{2} +2)-6)^{2}+( y^{2}-4)^{2}=16\\\\ ((4(y-4)^{2} -4)^{2}+( y^{2}-4)^{2}=16\\\\" /%}
+
+Sacamos factor común 4:
+
+{% inlineLatex formula="(4)^{2}((y-4)^{2} -1)^{2}+( y^{2}-4)^{2}=16" /%}
+
+Vemos que se nos repite el término {% inlineLatex formula="(y-4)^{2}" /%}, entonces podemos decir que {% inlineLatex formula="(y-4)^{2} = {\\color{Red} \\alpha }" /%}
+
+De esta manera nos queda:
+
+{% inlineLatex
+   formula="16({\\color{Red} \\alpha }-1)^{2} + {\\color{Red} \\alpha } = 16" /%}
+
+Desarrollando esto algebraicamente nos queda al final:
+
+{% blockLatex
+   formula="\\\\ 16{\\color{Red} \\alpha ^{2}}-31{\\color{Red} \\alpha} = 0\\\\  {\\color{Red} \\alpha }(16{\\color{Red} \\alpha} - 31)= 0\\\\ {\\color{Red} \\alpha_1}= 0; {\\color{Red} \\alpha_2 } = \\frac{31}{16}\\\\" /%}
+
+Reemplazamos nuevamente {% inlineLatex formula="{\\color{Red} \\alpha } = (y -4)^{2}" /%}, con esto concluimos que:
+
+Para {% inlineLatex formula="(y-4)^{2}=0" /%}
+
+{% blockLatex formula="\\\\ (y -4)^{2}= 0\\\\ y_1 = 4 " /%}
+
+Para {% inlineLatex formula="(y-4)^{2}=\\frac{31}{16}\\\\" /%} , aplicamos raiz cuadrada en cada miembro, quedando asi:
+
+{% blockLatex
+   formula="\\\\ y-4=\\pm \\frac{\\sqrt{31}}{4}\\\\ y=4\\pm \\frac{\\sqrt{31}}{4}\\\\ y_1 = 4 +\\frac{\\sqrt{31}}{4}\\approx 5.392\\\\ y_2 = 4- \\frac{\\sqrt{31}}{4}\\approx 2.608" /%}
+
+Si seguimos desarrollando tendremos 3 intersecciones cuyos valores aproximados son:
+
+{% inlineLatex formula="P_1(2;4),P_2(9.75,5.39),P_3(9.75,2.60)" /%}
