@@ -5,10 +5,11 @@ const { formula = '' } = Astro.props;
 const html = katex.renderToString(formula, {throwOnError: false, displayMode: true});
 ---
 
-<div class="text-center">
+<div class="text-center overflow-scroll">
   <span set:html={html}/>
 </div>
 
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.css"
+  href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.css" 
+/>
