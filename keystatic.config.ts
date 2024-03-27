@@ -97,12 +97,12 @@ export default config({
           publicPath: "images/avatars",
         }),
         links: fields.array(
-          fields.url({ label: 'Links', validation: { isRequired: true } }),
+          fields.url({ label: "Links", validation: { isRequired: true } }),
           {
-            label: 'Link',
-            itemLabel: props => props.value || '',
+            label: "Link",
+            itemLabel: (props) => props.value || "",
           }
-        )
+        ),
       },
     }),
     books: collection({
@@ -128,7 +128,7 @@ export default config({
           description: "Select the major",
           options: [
             { label: "Informática", value: "infor" },
-            { label: "Electrónica", value: "electro" },
+            { label: "Electromecánica", value: "electro" },
             { label: "Civil", value: "civil" },
             { label: "Industrial", value: "indu" },
             { label: "CPA", value: "cpa" },
