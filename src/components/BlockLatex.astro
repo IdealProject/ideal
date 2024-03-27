@@ -5,9 +5,8 @@ const { formula = '' } = Astro.props;
 const html = katex.renderToString(formula, {throwOnError: false, displayMode: true});
 ---
 
-<div class="text-center overflow-scroll">
-  <span set:html={html}/>
-</div>
+  <span set:html={html} class="overflow-hidden"/>
+
 
 <link
   rel="stylesheet"
