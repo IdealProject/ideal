@@ -105,6 +105,8 @@ Esta ecuación es mucho más amigable de resolver que la otra ecuación. El punt
 
 Las intersecciones entre curvas son un tema un poco más complicado, debido a que tenemos un sistema de ecuaciones con más términos cuadráticos( {% inlineLatex formula="x^{2}" /%} o {% inlineLatex formula="y^{2}" /%} ), en estos casos debemos siempre buscar aprovecharnos de las ecuaciones donde tengamos alguna de estas variables solamente de manera lineal( que sea lineal quiere decir que tengan exponente 1, osea, que no estan al cuadrado). Analizaremos primero estos casos y luego saltaremos a situaciones más complicadas.
 
+#### Intersección entre circulos y parábolas
+
 ***Comenzaremos con un ejemplo sencillo:***
 
 {% blockLatex
@@ -190,3 +192,67 @@ Observamos que en la ecuación  {% inlineLatex formula="(x - 2) = 4(y-4)^{2}" /%
 ***Si seguimos desarrollando tendremos 3 intersecciones cuyos valores aproximados son***:
 
 {% inlineLatex formula="P_1(2;4),P_2(9.75,5.39),P_3(9.75,2.60)" /%}
+
+#### Intersección entre circunferencias
+
+Explicaremos los pasos para resolver esta clase de situaciones con el siguiente ejemplo, tenemos las siguientes circunferencias
+
+{% blockLatex
+   formula="\\left\\{\\begin{matrix}  & (x+3)^{2} +(y-2)^{2}& = 8\\\\   & x^{2} +y^{2}  =1&  \\end{matrix}\\right." /%}
+
+**Para esta clase de situación debemos expresar las circunferencias en forma de la ecuación general, es decir**:
+
+{% inlineLatex
+   formula="(x+3)^{2}\\ +(y-2)^{2} =8  \\rightarrow \\boxed{x^{2} +y^{2} +6x-4y+ 5 =0}" /%}
+
+**Nos queda el siguiente sistema:**
+
+{% inlineLatex
+   formula="\\left\\{\\begin{matrix}  & x^{2} +y^{2} +6x-4y+ 5 & = 0\\\\   & x^{2} +y^{2}  =1&  \\end{matrix}\\right." /%}
+
+Observamos que tenemos dos ecuaciones cuadráticas, que hacemos ahora?, restaremos las ecuaciones, aprovechando que las variables al cuadrado tienen el mismo coeficiente(el número que acompaña a la variable), entonces , restando las ecuaciones podemos eliminar los términos cuadráticos.
+
+{% blockLatex
+   formula="\\\\ x^{2} +y^{2} +6x-4y+ 5 = 0\\\\ \\underline{- (x^{2} +y^{2}  -1)=0 }\\\\ 6x -4y +6=0" /%}
+
+***Luego obtenemos:***
+
+{% blockLatex
+   formula="\\\\ \\frac{6x -4y +6}{2}=\\frac{0}{2}\\\\ \\boxed{3x-2y+3=0}" /%}
+
+***Observamos que nos resutla una ecuación lineal, osea, una recta, pero, ¿por qué?,¿qué representa esta recta?*** Pues ,es de nuestro saber que un sistema de ecuaciones nos entrega algo en común entre las ecuaciones que utilizamos, en este caso, ***esta recta representa la cuerda común de las dos circunferencias***, esta recta cruza sobre la intersección de las circunferencias, entonces basta con retroceder un poco en el documento y rememorar la parte de intersección entre una recta y una circunferencia. Podemos intersectar la recta con cualquiera de las dos circunferencias, obviamente elegiremos la que más nos convenga, en este caso {% inlineLatex formula="x^{2}+y^{2}=1" /%}
+
+***Procedemos a despejar una de las variables y reemplazar:***
+
+{% blockLatex
+   formula="\\\\ x =\\frac{2y-3}{3}\\\\ (\\frac{2y-3}{3})^{2}+y^{2}=1\\\\ \\frac{1}{9}(2y-3)^{2} + y^{2}=1\\\\ (2y-3)^{2} +9y^{2} =9\\\\ 4y^{2}-12y+9+9y^{2}=9\\\\ 13y^{2}-12y=0\\\\ y(13y-12)=0\\\\ \\boxed{y_1 = 0}  \\boxed{y_2=\\frac{12}{13}}" /%}
+
+*Obtenemos estos valores para*{% inlineLatex formula="y" /%}*, si seguimos desarrollando el ejercicio, reemplazando*{% inlineLatex formula="y_1" /%}*e*{% inlineLatex formula="y_2" /%}*en*{% inlineLatex formula="x =\\frac{2y-3}{3}" /%}*tenemos las siguientes respuestas:*{% inlineLatex formula="P_1(-1;0)P_2(-\\frac{5}{13};\\frac{12}{13})" /%}\**
+
+#### Intersecciones entre circulos e hipérbolas
+
+En estos casos tenemos el mismo proceso que el anterior, tomaremos de ejemplo las siguientes figuras
+
+*Nota: es importante graficar las figuras primero*
+
+{% blockLatex
+   formula="\\left\\{\\begin{matrix} (x+1)^{2} + y^{2} =16& \\\\   \\frac{x^{2}}{9} - \\frac{y^{2}}{4}= 1&   \\end{matrix}\\right." /%}
+
+***Vemos que tenemos solo***{% inlineLatex formula="y^{2}" /%}***, entonces podemos despejar una y reemplazarla en la otra ecuación***
+
+{% blockLatex
+   formula="\\\\ y^{2}=16-(x-4)^{2}\\\\ \\boxed{y^{2}= 8x-x^{2}}" /%}
+
+***Reemplazamos esto en la otra ecuación y nos resulta:***
+
+{% blockLatex
+   formula="\\frac{x^{2}}{9}-\\frac{8x-x^{2}}{4} = 1\\\\ 4x^{2}-9(8x-x^{2})=36\\\\ 4x^{2}-72x+9x^{2}=36\\\\ 13x^{2}-72x-36=0\\\\ \\boxed{x_1 = 6} \\boxed{x_2 = -\\frac{6}{13}}" /%}
+
+*Vemos que tenemos un resultado negativo, rechazaremos este resultado ya que si graficamos las figuras correctamente, veremos que no hay una intersección en algún valor negativo de*{% inlineLatex formula="x" /%}
+
+***Posteriormente reemplazamos este valor en***{% inlineLatex formula="y^{2}= 8x-x^{2}" /%}***:***
+
+{% blockLatex
+   formula="\\\\ y^{2}= 8x-x^{2}\\\\ y^{2}= 8(6)-6^{2}\\\\ y^{2}=12\\rightarrow y=\\sqrt{12}\\rightarrow y=\\pm 2\\sqrt{3}\\\\ \\boxed{y_1 = 2\\sqrt{3}}\\boxed{y_2 = -2\\sqrt{3}}" /%}
+
+***Queda como respuesta:*** {% inlineLatex formula="P_1(6;2\\sqrt{3})P_2(6;-2\\sqrt{3})" /%}
