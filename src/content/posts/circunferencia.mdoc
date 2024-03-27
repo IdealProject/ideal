@@ -21,18 +21,18 @@ Si recordamos, la fórmula de distancia entre dos puntos es la siguiente: {% inl
 {% blockLatex
    formula="\\text{Llamando al centro C con coordenadas (h ; k)}\\\\\\text{Llamando a un punto genérico P con coordenadas (x ; y)}\\\\\\text{Siendo } r \\text{ la distancia entre estos puntos:}\\\\\\sqrt{(x-h)^{2}+(y-k)^2}=r\\\\\\text{Elevando al cuadrado ambos miembros:}\\\\\\boxed{(x-h)^{2}+(y-k)^{2}=r^{2}}" /%}
 
-Si el centro se encuentra en el origen, es decir, coordenadas (0;0), la ecuación se reduce a la siguiente: {% inlineLatex formula="\\sqrt{x^{2}+y^{2}=r^{2}}" /%}
+Si el centro se encuentra en el origen, es decir, coordenadas (0;0), la ecuación se reduce a la siguiente: {% inlineLatex formula="\\sqrt{x^{2}+y^{2}}=r^{2}}" /%}
 
-De la ecuación de la circunferencia podemos deducir su radio, donde realizamos su raíz cuadrada y obtenemos ese dato; también podemos obtener su centro, basta solo con cambiar de signo a sus coordenadas y obtenemos otro dato.
+De la ecuación de la circunferencia podemos deducir su radio, donde hay que hacer raíz cuadrada; también podemos obtener su centro, basta solo con cambiar de signo a sus coordenadas.
 
 ## Ecuación general
 
 La ecuación ordinaria de la circunferencia puede descomponerse y así transformar de ecuación ordinaria a ecuación general, donde se encuentra igualado a 0 y su expresión descompuesta:
 
 {% blockLatex
-   formula="(x-h)^{2}+(y-k)^{2}=r^{2}\\\\\\text{Realizando cuadrado de un binomio y pasando el segundo miembro al primero:}\\\\x^{2}-2hx+h^{2}+y^{2}-2ky+k^{2}-r^{2}=0\\\\Reagrupando\\to x^{2}+y^{2}-2hx-2ky+h^{2}+y^{2}-r^{2}=0\\\\\\text{Realizando los siguientes cambios:}\\\\B=-2h\\hspace{2cm}C=-2k\\hspace{2cm}D=h^{2}=y^{2}-r^{2}\\\\Reemplazando\\to \\boxed{x^{2} +y^{2}+Bx+Cy+D=0}\\\\\\text{Comparando ecuaciones, podemos obtener los siguientes datos:}\\\\\\\\C\\Big(-\\frac{A}{2};-\\frac{B}{2}\\Big)\\hspace{2cm}r^{2}=\\Big(\\frac{A}{2}\\Big)^{2}+\\Big(\\frac{B}{2}\\Big)^{2}-D=h^{2}+k^{2}-D" /%}
+   formula="(x-h)^{2}+(y-k)^{2}=r^{2}\\\\\\text{Realizando cuadrado de un binomio y}\\\\\\text{pasando el segundo miembro al primero:}\\\\x^{2}-2hx+h^{2}+y^{2}-2ky+k^{2}-r^{2}=0\\\\Reagrupando\\to x^{2}+y^{2}-2hx-2ky+h^{2}+y^{2}-r^{2}=0\\\\\\text{Realizando los siguientes cambios:}\\\\B=-2h\\hspace{2cm}C=-2k\\hspace{2cm}D=h^{2}=y^{2}-r^{2}\\\\Reemplazando\\to \\boxed{x^{2} +y^{2}+Bx+Cy+D=0}\\\\\\text{Comparando ecuaciones, podemos obtener los siguientes datos:}\\\\\\\\C\\Big(-\\frac{A}{2};-\\frac{B}{2}\\Big)\\hspace{2cm}r^{2}=\\Big(\\frac{A}{2}\\Big)^{2}+\\Big(\\frac{B}{2}\\Big)^{2}-D=h^{2}+k^{2}-D" /%}
 
 Cabe destacar que {% inlineLatex formula="x^{2}" /%} y {% inlineLatex formula="y^{2}" /%} pueden tener coeficiente distinto de 1, sin embargo, estos deben ser el mismo, ya que así podemos dividir la ecuación por este coeficiente y obtener la ecuación general. Es decir:
 
 {% blockLatex
-   formula="Ax^{2}+Ay^{2}+Bx+Cy+D=0\\\\\\frac{Ax^{2}+Ay^{2}+Bx+Cy+D}{A}=\\frac{0}{A}\\\\\\boxed{x^{2}+y^{2}+\\frac{B}{A}x+\\frac{C}{A}y+\\frac{D}{A}=0}\\\\\\\\\\text{Donde }\\frac{B}{A},\\frac{C}{A} \\text{ y }\\frac{D}{A}\\text{ se convierten en nuevas constantes}" /%}
+   formula="Ax^{2}+Ay^{2}+Bx+Cy+D=0\\\\\\frac{Ax^{2}+Ay^{2}+Bx+Cy+D}{A}=\\frac{0}{A}\\\\\\\\\\boxed{x^{2}+y^{2}+\\frac{B}{A}x+\\frac{C}{A}y+\\frac{D}{A}=0}\\\\\\\\\\text{Donde }\\frac{B}{A},\\frac{C}{A} \\text{ y }\\frac{D}{A}\\text{ se convierten en nuevas constantes}" /%}
