@@ -5,7 +5,10 @@ const { formula = '' } = Astro.props;
 const html = katex.renderToString(formula, {throwOnError: false, displayMode: true});
 ---
 
-  <span set:html={html} class="overflow-hidden"/>
+<div 
+  class="overflow-x-auto text-xs border border-solid border-gray-300 px-2 rounded-md md:border-none lg:border-none xl:border-none my-2">
+  <span set:html={html}/>
+</div>
 
 
 <link
