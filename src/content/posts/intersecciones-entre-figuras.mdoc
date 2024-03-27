@@ -110,11 +110,15 @@ Las intersecciones entre curvas son un tema un poco más complicado, debido a qu
 {% blockLatex
    formula="\\left\\{\\begin{matrix}  &2y= x^{2}  &  \\\\   & x^{2} + y^{2}  = 8 &  \\end{matrix}\\right." /%}
 
-***De la primera ecuación, despejamos***{% inlineLatex formula="y" /%} {% inlineLatex formula="\\rightarrow y = \\frac{x^{2}}{2}" /%}
+***De la primera ecuación, despejamos***   {% inlineLatex formula="\\rightarrow y = \\frac{x^{2}}{2}" /%}
 
-Sustituimos {% inlineLatex formula=" x^{2} + (\\frac{x^{2}}{2})^{2} = 8" /%}
+***Sustituimos :***
 
-***Nos queda*** : {% inlineLatex formula=" x^{2} + \\frac{x^{4}}{4} = 8" /%}
+{% inlineLatex formula=" x^{2} + (\\frac{x^{2}}{2})^{2} = 8" /%}
+
+***Nos queda*** :
+
+{% inlineLatex formula=" x^{2} + \\frac{x^{4}}{4} = 8" /%}
 
 ***Si seguimos desarrollando algebraicamente***, dejando sin divisiones e igualando a 0 nos queda:
 
@@ -138,9 +142,11 @@ Rechazamos {% inlineLatex formula=" x_2^{2} =-8" /%} , ya que *no existe nignun 
 
 Finalmente nos queda que {% inlineLatex formula="x^{2} = 4 " /%}
 
-***Concluimos que :*** {% inlineLatex formula="\\\\\\boxed{x_{1} = 2 } \\\\\\boxed{x_{2} = -2}" /%}
+***Concluimos que :***
 
-Si seguimos desarrollando el ejercicio, tendremos que las respuestas son: {% inlineLatex formula="P_1(-2;2)P_2(2;2)" /%}
+{% inlineLatex formula="\\\\\\boxed{x_{1} = 2 } \\\\\\boxed{x_{2} = -2}" /%}
+
+Si seguimos desarrollando el ejercicio, tendremos que las respuestas son: {% inlineLatex formula="P_1(2;2)P_2(-2;2)" /%}
 
 ***Seguimos con un ejemplo un tanto mas complejo, tenemos las siguientes figuras:***
 
@@ -149,7 +155,7 @@ Si seguimos desarrollando el ejercicio, tendremos que las respuestas son: {% inl
 
 Observamos que en la ecuación  {% inlineLatex formula="(x - 2) = 4(y-4)^{2}" /%} podemos despejar sin problemas la variable {% inlineLatex formula="x" /%}, ya que tiene exponente 1 y es la unica {% inlineLatex formula="x" /%} en toda la ecuación.
 
-Sabiendo esto, podemos proceder a resolver el sistema por el *método de sustitución*:
+**Sabiendo esto, podemos proceder a resolver el sistema por el*****método de sustitución***\**:**
 
 {% inlineLatex
    formula="\\\\ (x-6)^{2}+(y-4)^{2}=16\\\\ ((4(y-4)^{2} +2)-6)^{2}+( y^{2}-4)^{2}=16\\\\ ((4(y-4)^{2} -4)^{2}+( y^{2}-4)^{2}=16\\\\" /%}
@@ -158,7 +164,7 @@ Sabiendo esto, podemos proceder a resolver el sistema por el *método de sustitu
 
 {% inlineLatex formula="(4)^{2}((y-4)^{2} -1)^{2}+( y^{2}-4)^{2}=16" /%}
 
-*Vemos que se nos repite el término*{% inlineLatex formula="(y-4)^{2}" /%}*, entonces podemos decir que*{% inlineLatex formula="(y-4)^{2} = {\\color{Red} \\alpha }" /%}
+***Vemos que se nos repite el término***{% inlineLatex formula="(y-4)^{2}" /%}***, entonces podemos decir que***{% inlineLatex formula="(y-4)^{2} = {\\color{Red} \\alpha }" /%}
 
 De esta manera nos queda:
 
@@ -170,11 +176,11 @@ De esta manera nos queda:
 {% inlineLatex
    formula="\\\\ 16{\\color{Red} \\alpha ^{2}}-31{\\color{Red} \\alpha} = 0\\\\  {\\color{Red} \\alpha }(16{\\color{Red} \\alpha} - 31)= 0\\\\ {\\color{Red} \\alpha_1}= 0; {\\color{Red} \\alpha_2 } = \\frac{31}{16}\\\\" /%}
 
-Reemplazamos nuevamente {% inlineLatex formula="{\\color{Red} \\alpha } = (y -4)^{2}" /%}, *con esto concluimos que:*
+**Reemplazamos nuevamente**{% inlineLatex formula="{\\color{Red} \\alpha } = (y -4)^{2}" /%}\**,*****con esto concluimos que:***
 
-***Para***  ; {% inlineLatex formula="\\\\rightarrow (y -4)^{2}= 0\\\\ \\\\\\boxed{y_{1} = 4 } " /%}
+***Para***  {% inlineLatex formula="(y -4)^{2}= 0\\\\ \\\\\\boxed{y_{1} = 4 } " /%}
 
-***Para*** *, aplicamos raiz cuadrada en cada miembro, quedando asi:*
+***Para***\****{% inlineLatex formula="(y-4)^{2} = \\frac{31}{16}" /%}***, aplicamos raiz cuadrada en cada miembro, quedando asi:***
 
 {% inlineLatex
    formula="\\\\ y-4=\\pm \\frac{\\sqrt{31}}{4}\\\\  y=4\\pm \\frac{\\sqrt{31}}{4}\\\\ \\\\\\boxed{y_1 = 4 +\\frac{\\sqrt{31}}{4}\\approx 5.392}\\\\ \\\\\\boxed{y_2 = 4- \\frac{\\sqrt{31}}{4}\\approx 2.608}" /%}
