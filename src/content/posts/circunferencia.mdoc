@@ -1,0 +1,38 @@
+---
+title: Circunferencia
+draft: false
+authors:
+  - heber-aranda
+---
+# Introducción
+
+Este tema suele ser uno de los más complejos, puesto que aquí aparecen muchos temas anteriores y problemas que requieren de mayor análisis e interpretación. Pero no hay nada de qué preocuparse, puesto que con la práctica todo es posible. ¡Ánimos!
+
+# ¿Qué es la circunferencia?
+
+La circunferencia es el **lugar geométrico** de un punto que se mueve en un plano de tal manera que **equidista** de manera constante a un **punto fijo**, llamado **centro;**la distancia entre cada uno de los puntos que conforman el lugar geométrico y el punto fijo se denomina **radio**. De manera informal, es el contorno o borde de un círculo, sin embargo, no se recomienda aprender este concepto, pues son cosas diferentes.
+
+# Ecuación
+
+## Ecuación ordinaria o explícita
+
+Si recordamos, la fórmula de distancia entre dos puntos es la siguiente: {% inlineLatex formula="\\sqrt{(x_{2}-x_{1})^{2}+(y_{2}-y_{1})^{2}}" /%}, donde {% inlineLatex formula="(x_{1};y_{1})" /%} y {% inlineLatex formula="(x_{2};y_{2})" /%} son los puntos a analizar. En este caso, los puntos a analizar son el centro y un punto cualquiera. Con estos datos, deduciremos la ecuación de la circunferencia:
+
+{% blockLatex
+   formula="\\text{Llamando al centro C con coordenadas (h ; k)}\\\\\\text{Llamando a un punto genérico P con coordenadas (x ; y)}\\\\\\text{Siendo } r \\text{ la distancia entre estos puntos:}\\\\\\sqrt{(x-h)^{2}+(y-k)^2}=r\\\\\\text{Elevando al cuadrado ambos miembros:}\\\\\\boxed{(x-h)^{2}+(y-k)^{2}=r^{2}}" /%}
+
+Si el centro se encuentra en el origen, es decir, coordenadas (0;0), la ecuación se reduce a la siguiente: {% inlineLatex formula="\\sqrt{x^{2}+y^{2}=r^{2}}" /%}
+
+De la ecuación de la circunferencia podemos deducir su radio, donde realizamos su raíz cuadrada y obtenemos ese dato; también podemos obtener su centro, basta solo con cambiar de signo a sus coordenadas y obtenemos otro dato.
+
+## Ecuación general
+
+La ecuación ordinaria de la circunferencia puede descomponerse y así transformar de ecuación ordinaria a ecuación general, donde se encuentra igualado a 0 y su expresión descompuesta:
+
+{% blockLatex
+   formula="(x-h)^{2}+(y-k)^{2}=r^{2}\\\\\\text{Realizando cuadrado de un binomio y pasando el segundo miembro al primero:}\\\\x^{2}-2hx+h^{2}+y^{2}-2ky+k^{2}-r^{2}=0\\\\Reagrupando\\to x^{2}+y^{2}-2hx-2ky+h^{2}+y^{2}-r^{2}=0\\\\\\text{Realizando los siguientes cambios:}\\\\B=-2h\\hspace{2cm}C=-2k\\hspace{2cm}D=h^{2}=y^{2}-r^{2}\\\\Reemplazando\\to \\boxed{x^{2} +y^{2}+Bx+Cy+D=0}\\\\\\text{Comparando ecuaciones, podemos obtener los siguientes datos:}\\\\C\\Big(-\\frac{A}{2};-\\frac{B}{2}\\Big)\\hspace{2cm}r^{2}=\\Big(\\frac{A}{2}\\Big)^{2}+\\Big(\\frac{B}{2}\\Big)^{2}-D=h^{2}+k^{2}-D" /%}
+
+Cabe destacar que {% inlineLatex formula="x^{2}" /%} y {% inlineLatex formula="y^{2}" /%} pueden tener coeficiente distinto de 1, sin embargo, estos deben ser el mismo, ya que así podemos dividir la ecuación por este coeficiente y obtener la ecuación general. Es decir:
+
+{% blockLatex
+   formula="Ax^{2}+Ay^{2}+Bx+Cy+D=0\\\\\\frac{Ax^{2}+Ay^{2}+Bx+Cy+D}{A}=\\frac{0}{A}\\\\\\boxed{x^{2}+y^{2}+\\frac{B}{A}x+\\frac{C}{A}y+\\frac{D}{A}=0}\\\\\\text{Donde }\\frac{B}{A},\\frac{C}{A} \\text{ y }\\frac{D}{A}\\text{ se convierten en nuevas constantes}" /%}
