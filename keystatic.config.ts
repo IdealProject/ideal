@@ -1,3 +1,4 @@
+import { Label } from "@amcharts/amcharts5";
 import { config, fields, collection, component } from "@keystatic/core";
 import { inline, block } from "@keystatic/core/content-components";
 const majorOptions = [
@@ -98,32 +99,86 @@ export default config({
                 defaultValue: 'Algebra'
               }
             ),
-            infor: fields.blocks(
-              {
-                semester: {
-                  label: 'Semester',
-                  schema: fields.select(
-                    {
-                      label: 'Semester',
-                      description: 'Enter the Semester of the post',
-                      options: semesterOptions,
-                      defaultValue: '1'
-                    }),
-                  itemLabel: (item) => item.schema.label || "Semester",
-                },
-                subject: {
-                  label: 'Subject',
-                  schema: fields.select(
-                    {
-                      label: 'Subject',
-                      description: 'Enter the Subject of the post',
-                      options: materiaInfor1er,
-                      defaultValue: 'F1'
-                    }),
-                  itemLabel: (item) => item.schema.label || "Materia",
-
+            infor: fields.conditional(
+              fields.select(
+                {
+                  label: "Semestre",
+                  description: "Select the semester",
+                  options: semesterOptions,
+                  defaultValue: "1",
                 }
-              }, { label: 'Details' }
+              ), {
+              1: fields.select({
+                label: "Subject",
+                description: "Enter the subject of the post",
+                options: materiaInfor1er,
+                defaultValue: 'F1'
+              }
+              ),
+              2: fields.select({
+                label: "Subject",
+                description: "Enter the subject of the post",
+                options: materiaInfor1er,
+                defaultValue: 'F1'
+              }
+              ),
+              3: fields.select({
+                label: "Subject",
+                description: "Enter the subject of the post",
+                options: materiaInfor1er,
+                defaultValue: 'F1'
+              }
+              ),
+              4: fields.select({
+                label: "Subject",
+                description: "Enter the subject of the post",
+                options: materiaInfor1er,
+                defaultValue: 'F1'
+              }
+              ),
+              5: fields.select({
+                label: "Subject",
+                description: "Enter the subject of the post",
+                options: materiaInfor1er,
+                defaultValue: 'F1'
+              }
+              ),
+              6: fields.select({
+                label: "Subject",
+                description: "Enter the subject of the post",
+                options: materiaInfor1er,
+                defaultValue: 'F1'
+              }
+              ),
+              7: fields.select({
+                label: "Subject",
+                description: "Enter the subject of the post",
+                options: materiaInfor1er,
+                defaultValue: 'F1'
+              }
+              ),
+              8: fields.select({
+                label: "Subject",
+                description: "Enter the subject of the post",
+                options: materiaInfor1er,
+                defaultValue: 'F1'
+              }
+              ),
+              9: fields.select({
+                label: "Subject",
+                description: "Enter the subject of the post",
+                options: materiaInfor1er,
+                defaultValue: 'F1'
+              }
+              ),
+              10: fields.select({
+                label: "Subject",
+                description: "Enter the subject of the post",
+                options: materiaInfor1er,
+                defaultValue: 'F1'
+              }
+              ),
+            }
             ),
             indu: fields.select({
               label: "Semester",
