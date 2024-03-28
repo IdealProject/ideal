@@ -1,5 +1,4 @@
-import { Label } from "@amcharts/amcharts5";
-import { config, fields, collection, component } from "@keystatic/core";
+import { config, fields, collection } from "@keystatic/core";
 import { inline, block } from "@keystatic/core/content-components";
 const majorOptions = [
   { label: "Informática", value: "infor" },
