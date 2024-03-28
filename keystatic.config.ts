@@ -7,7 +7,6 @@ const majorOptions = [
   { label: "Industrial", value: "indu" },
   { label: "CPA", value: "cpa" },
 ];
-
 const semesterOptions = [
   { label: "Primer Semestre", value: "1" },
   { label: "Segundo Semestre", value: "2" },
@@ -20,6 +19,29 @@ const semesterOptions = [
   { label: "Noveno Semestre", value: "9" },
   { label: "Décimo Semestre", value: "10" },
 ];
+const ingInforData = {
+  sem1: [
+    { label: 'Fisica 1', value: 'F1' },
+    { label: 'Arquitectura y Componentes', value: 'Arq1' },
+    { label: 'Introducción a la Programación 1', value: 'P1' },
+    { label: 'Comunicación Técnica 1', value: 'C1' },
+    { label: 'Análisis 1', value: 'A1' }],
+  sem2: [
+    { label: 'Fisica 2', value: 'F2' },
+    { label: 'Matemática Discreta', value: 'Dis' },
+    { label: 'Introducción a la Programación 2', value: 'P2' },
+    { label: 'Comunicación Técnica 2', value: 'C2' },
+    { label: 'Análisis 2', value: 'A2' }
+  ],
+  sem3: [],
+  sem4: [],
+  sem5: [],
+  sem6: [],
+  sem7: [],
+  sem8: [],
+  sem9: [],
+  sem10: [],
+};
 const materiaCPA = [
   { label: "Álgebra", value: "Algebra" },
   { label: "Aritmética", value: "Aritmetica" },
@@ -27,14 +49,6 @@ const materiaCPA = [
   { label: "Geometría Analítica", value: "Geometria" },
   { label: "Programación", value: "Programacion" },
   { label: "Trigonometría", value: "Trigonometria" }
-];
-const materiaInfor1er = [
-  { label: 'Fisica 1', value: 'F1' },
-  { label: 'Arquitectura y Componentes', value: 'Arq1' },
-  { label: 'Introducción a la Programación 1', value: 'P1' },
-  { label: 'Comunicación Técnica 1', value: 'C1' },
-  { label: 'Análisis 1', value: 'A1' },
-
 ];
 
 export default config({
@@ -110,70 +124,70 @@ export default config({
               1: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: materiaInfor1er,
+                options: ingInforData.sem1,
                 defaultValue: 'F1'
               }
               ),
               2: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: materiaInfor1er,
-                defaultValue: 'F1'
+                options: ingInforData.sem2,
+                defaultValue: 'F2'
               }
               ),
               3: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: materiaInfor1er,
+                options: ingInforData.sem1,
                 defaultValue: 'F1'
               }
               ),
               4: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: materiaInfor1er,
+                options: ingInforData.sem1,
                 defaultValue: 'F1'
               }
               ),
               5: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: materiaInfor1er,
+                options: ingInforData.sem1,
                 defaultValue: 'F1'
               }
               ),
               6: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: materiaInfor1er,
+                options: ingInforData.sem1,
                 defaultValue: 'F1'
               }
               ),
               7: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: materiaInfor1er,
+                options: ingInforData.sem1,
                 defaultValue: 'F1'
               }
               ),
               8: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: materiaInfor1er,
+                options: ingInforData.sem1,
                 defaultValue: 'F1'
               }
               ),
               9: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: materiaInfor1er,
+                options: ingInforData.sem1,
                 defaultValue: 'F1'
               }
               ),
               10: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: materiaInfor1er,
+                options: ingInforData.sem1,
                 defaultValue: 'F1'
               }
               ),
