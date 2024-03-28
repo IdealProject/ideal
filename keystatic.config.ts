@@ -1,7 +1,7 @@
 import { config, fields, collection } from "@keystatic/core";
 import { inline, block } from "@keystatic/core/content-components";
-import { majorOptions, semesterOptions, materiaCPA, materiaInfor1er, materiaInfor2do } from "./src/scripts/data";
-
+import { majorOptions, semesterOptions, materiaCPA, materiaInfor1er, materiaInfor2do } from "./src/utils/data";
+import { MajorSelection } from "src/utils/IngInforHandler";
 export default config({
   storage: {
     kind: "github",
@@ -48,13 +48,9 @@ export default config({
           }
         ),
         major: fields.conditional(
-          fields.select({
-            label: "Major",
-            description: "Select the major",
-            options: majorOptions,
-            defaultValue: "cpa",
-          }),
+          MajorSelection,
           {
+            //cpa field 
             cpa: fields.select(
               {
                 label: "Subject",
@@ -63,6 +59,7 @@ export default config({
                 defaultValue: 'Algebra'
               }
             ),
+            //Infor field
             infor: fields.conditional(
               fields.select(
                 {
@@ -144,6 +141,7 @@ export default config({
               ),
             }
             ),
+            //Inicia Indu field
             indu: fields.select({
               label: "Semester",
               description: "Select the semester",
