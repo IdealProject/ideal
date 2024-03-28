@@ -32,11 +32,12 @@ export default config({
           description: "Draft arent showing in the index",
         }),
         description: fields.text({
-          label: "Descipción",
+          label: "Descripción",
           description: "Ingresa la Descripción del Post",
           validation: {
             isRequired: true,
           },
+          multiline: true,
         }),
         authors: fields.array(
           fields.relationship({
