@@ -1,6 +1,12 @@
 import { config, fields, collection, component } from "@keystatic/core";
 import { inline, block } from "@keystatic/core/content-components";
-
+const majorOptions: [
+  { label: "Informática", value: "infor" },
+  { label: "Electromecánica", value: "electro" },
+  { label: "Civil", value: "civil" },
+  { label: "Industrial", value: "indu" },
+  { label: "CPA", value: "cpa" },
+];
 export default config({
   storage: {
     kind: "github",
@@ -13,13 +19,6 @@ export default config({
   },
 
   collections: {
-    const majorOptions: [
-      { label: "Informática", value: "infor" },
-      { label: "Electromecánica", value: "electro" },
-      { label: "Civil", value: "civil" },
-      { label: "Industrial", value: "indu" },
-      { label: "CPA", value: "cpa" },
-    ];
     posts: collection({
       label: "Posts",
       entryLayout: "content",
