@@ -39,5 +39,5 @@ export const materiaInfor2do = [
     { label: 'Matemática Discreta', value: 'Dis' },
     { label: 'Introducción a la Programación 2', value: 'P2' },
     { label: 'Comunicación Técnica 2', value: 'C2' },
-    { label: 'Análisis 2', value: 'A2' },
+    { label: 'Análisis Matemático 2', value: 'A2' },
 ];
