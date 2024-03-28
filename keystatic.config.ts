@@ -2,6 +2,13 @@ import { config, fields, collection, component } from "@keystatic/core";
 import { inline, block } from "@keystatic/core/content-components";
 
 export default config({
+  const MajorOption: [
+    { label: "Informática", value: "infor" },
+    { label: "Electromecánica", value: "electro" },
+    { label: "Civil", value: "civil" },
+    { label: "Industrial", value: "indu" },
+    { label: "CPA", value: "cpa" },
+  ],
   storage: {
     kind: "github",
     repo: "IdealProject/ideal",
@@ -11,6 +18,7 @@ export default config({
       name: "Ideal Admin",
     },
   },
+
   collections: {
     posts: collection({
       label: "Posts",
@@ -126,13 +134,7 @@ export default config({
         bookMajor: fields.select({
           label: "Major",
           description: "Select the major",
-          options: [
-            { label: "Informática", value: "infor" },
-            { label: "Electromecánica", value: "electro" },
-            { label: "Civil", value: "civil" },
-            { label: "Industrial", value: "indu" },
-            { label: "CPA", value: "cpa" },
-          ],
+          options: MajorOption,
           defaultValue: "cpa",
         }),
         bookDownloadLinkId: fields.url({
@@ -143,6 +145,7 @@ export default config({
           },
         }),
       },
+
     }),
   },
 });
