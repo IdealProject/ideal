@@ -7,6 +7,19 @@ const majorOptions = [
   { label: "Industrial", value: "indu" },
   { label: "CPA", value: "cpa" },
 ];
+
+const semesterOptions = [
+  { label: "Primer Semestre", value: "1" },
+  { label: "Segundo Semestre", value: "2" },
+  { label: "Tercer Semestre", value: "3" },
+  { label: "Cuarto Semestre", value: "4" },
+  { label: "Quinto Semestre", value: "5" },
+  { label: "Sexto Semestre", value: "6" },
+  { label: "Séptimo Semestre", value: "7" },
+  { label: "Octavo Semestre", value: "8" },
+  { label: "Noveno Semestre", value: "9" },
+  { label: "Décimo Semestre", value: "10" },
+];
 export default config({
   storage: {
     kind: "github",
@@ -52,12 +65,43 @@ export default config({
             itemLabel: (item) => item.value || "Por Favor ingrese un autor...",
           }
         ),
-        major: fields.select({
-          label: "Major",
-          description: "Select the major",
-          options: majorOptions,
-          defaultValue: "cpa",
-        }),
+        major: fields.conditional(
+          fields.select({
+            label: "Major",
+            description: "Select the major",
+            options: majorOptions,
+            defaultValue: "cpa",
+          }),
+          {
+            cpa: fields.empty(),
+            infor: fields.select(
+              {
+                label: "Semester",
+                description: "Select the semester",
+                options: semesterOptions,
+                defaultValue: "1",
+              }
+            ),
+            indu: fields.select({
+              label: "Semester",
+              description: "Select the semester",
+              options: semesterOptions,
+              defaultValue: "1",
+            }),
+            civil: fields.select({
+              label: "Semester",
+              description: "Select the semester",
+              options: semesterOptions,
+              defaultValue: "1",
+            }),
+            electro: fields.select({
+              label: "Semester",
+              description: "Select the semester",
+              options: semesterOptions,
+              defaultValue: "1",
+            }),
+          }
+        ),
         content: fields.markdoc({
           label: "Content",
           components: {
