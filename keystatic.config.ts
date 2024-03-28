@@ -1,44 +1,6 @@
 import { config, fields, collection } from "@keystatic/core";
 import { inline, block } from "@keystatic/core/content-components";
-const majorOptions = [
-  { label: "Informática", value: "infor" },
-  { label: "Electromecánica", value: "electro" },
-  { label: "Civil", value: "civil" },
-  { label: "Industrial", value: "indu" },
-  { label: "CPA", value: "cpa" },
-];
-const semesterOptions = [
-  { label: "Primer Semestre", value: "1" },
-  { label: "Segundo Semestre", value: "2" },
-  { label: "Tercer Semestre", value: "3" },
-  { label: "Cuarto Semestre", value: "4" },
-  { label: "Quinto Semestre", value: "5" },
-  { label: "Sexto Semestre", value: "6" },
-  { label: "Séptimo Semestre", value: "7" },
-  { label: "Octavo Semestre", value: "8" },
-  { label: "Noveno Semestre", value: "9" },
-  { label: "Décimo Semestre", value: "10" },
-];
-const ingInforData = {
-  sem1: [{ label: 'Fisica 1', value: 'F1' }, { label: 'Arquitectura y Componentes', value: 'Arq1' }, { label: 'Introducción a la Programación 1', value: 'P1' }, { label: 'Comunicación Técnica 1', value: 'C1' }, { label: 'Análisis 1', value: 'A1' }],
-  sem2: [{ label: 'Fisica 2', value: 'F2' }, { label: 'Matemática Discreta', value: 'Dis' }, { label: 'Introducción a la Programación 2', value: 'P2' }, { label: 'Comunicación Técnica 2', value: 'C2' }, { label: 'Análisis 2', value: 'A2' }],
-  sem3: [],
-  sem4: [],
-  sem5: [],
-  sem6: [],
-  sem7: [],
-  sem8: [],
-  sem9: [],
-  sem10: [],
-};
-const materiaCPA = [
-  { label: "Álgebra", value: "Algebra" },
-  { label: "Aritmética", value: "Aritmetica" },
-  { label: "Física", value: "Fisica" },
-  { label: "Geometría Analítica", value: "Geometria" },
-  { label: "Programación", value: "Programacion" },
-  { label: "Trigonometría", value: "Trigonometria" }
-];
+import { majorOptions, semesterOptions, materiaCPA, materiaInfor1er, materiaInfor2do } from "./src/scripts/data";
 
 export default config({
   storage: {
@@ -62,7 +24,7 @@ export default config({
         title: fields.slug({ name: { label: "Title" } }),
         draft: fields.checkbox({
           label: "Draft",
-          description: "Draft arent showing in the index of the post",
+          description: "Draft arent showing in the index",
         }),
         description: fields.text({
           label: "Descripción",
@@ -113,70 +75,70 @@ export default config({
               1: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: ingInforData.sem1,
+                options: materiaInfor1er,
                 defaultValue: 'F1'
               }
               ),
               2: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: ingInforData.sem2,
+                options: materiaInfor2do,
                 defaultValue: 'F2'
               }
               ),
               3: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: ingInforData.sem1,
+                options: materiaInfor1er,
                 defaultValue: 'F1'
               }
               ),
               4: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: ingInforData.sem1,
+                options: materiaInfor1er,
                 defaultValue: 'F1'
               }
               ),
               5: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: ingInforData.sem1,
+                options: materiaInfor1er,
                 defaultValue: 'F1'
               }
               ),
               6: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: ingInforData.sem1,
+                options: materiaInfor1er,
                 defaultValue: 'F1'
               }
               ),
               7: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: ingInforData.sem1,
+                options: materiaInfor1er,
                 defaultValue: 'F1'
               }
               ),
               8: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: ingInforData.sem1,
+                options: materiaInfor1er,
                 defaultValue: 'F1'
               }
               ),
               9: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: ingInforData.sem1,
+                options: materiaInfor1er,
                 defaultValue: 'F1'
               }
               ),
               10: fields.select({
                 label: "Subject",
                 description: "Enter the subject of the post",
-                options: ingInforData.sem1,
+                options: materiaInfor1er,
                 defaultValue: 'F1'
               }
               ),
