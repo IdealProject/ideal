@@ -108,17 +108,20 @@ export default config({
                       description: 'Enter the Semester of the post',
                       options: semesterOptions,
                       defaultValue: '1'
-                    })
+                    }),
+                  itemLabel: (item) => item.schema.label || "Semester",
                 },
                 subject: {
                   label: 'Subject',
                   schema: fields.select(
                     {
-                      label: 'Semester',
-                      description: 'Enter the Semester of the post',
+                      label: 'Subject',
+                      description: 'Enter the Subject of the post',
                       options: materiaInfor1er,
                       defaultValue: 'F1'
-                    })
+                    }),
+                  itemLabel: (item) => item.schema.label || "Materia",
+
                 }
               }, { label: 'Details' }
             ),
