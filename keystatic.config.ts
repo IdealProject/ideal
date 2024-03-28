@@ -1,6 +1,6 @@
 import { config, fields, collection, component } from "@keystatic/core";
 import { inline, block } from "@keystatic/core/content-components";
-const majorOptions: [
+const majorOptions = [
   { label: "Informática", value: "infor" },
   { label: "Electromecánica", value: "electro" },
   { label: "Civil", value: "civil" },
