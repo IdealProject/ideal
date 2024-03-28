@@ -20,6 +20,23 @@ const semesterOptions = [
   { label: "Noveno Semestre", value: "9" },
   { label: "Décimo Semestre", value: "10" },
 ];
+const materiaCPA = [
+  { label: "Álgebra", value: "Algebra" },
+  { label: "Aritmética", value: "Aritmetica" },
+  { label: "Física", value: "Fisica" },
+  { label: "Geometría Analítica", value: "Geometria" },
+  { label: "Programación", value: "Programacion" },
+  { label: "Trigonometría", value: "Trigonometria" }
+];
+const materiaInfor1er = [
+  { label: 'Fisica 1', value: 'F1' },
+  { label: 'Arquitectura y Componentes', value: 'Arq1' },
+  { label: 'Introducción a la Programación 1', value: 'P1' },
+  { label: 'Comunicación Técnica 1', value: 'C1' },
+  { label: 'Análisis 1', value: 'A1' },
+
+];
+
 export default config({
   storage: {
     kind: "github",
@@ -73,14 +90,37 @@ export default config({
             defaultValue: "cpa",
           }),
           {
-            cpa: fields.empty(),
-            infor: fields.select(
+            cpa: fields.select(
               {
-                label: "Semester",
-                description: "Select the semester",
-                options: semesterOptions,
-                defaultValue: "1",
+                label: "Subject",
+                description: "Enter the subject of the post",
+                options: materiaCPA,
+                defaultValue: 'Algebra'
               }
+            ),
+            infor: fields.blocks(
+              {
+                semester: {
+                  label: 'Semester',
+                  schema: fields.select(
+                    {
+                      label: 'Semester',
+                      description: 'Enter the Semester of the post',
+                      options: semesterOptions,
+                      defaultValue: '1'
+                    })
+                },
+                subject: {
+                  label: 'Subject',
+                  schema: fields.select(
+                    {
+                      label: 'Semester',
+                      description: 'Enter the Semester of the post',
+                      options: materiaInfor1er,
+                      defaultValue: 'F1'
+                    })
+                }
+              }, { label: 'Details' }
             ),
             indu: fields.select({
               label: "Semester",
