@@ -2,13 +2,6 @@ import { config, fields, collection, component } from "@keystatic/core";
 import { inline, block } from "@keystatic/core/content-components";
 
 export default config({
-  const MajorOption: [
-    { label: "Informática", value: "infor" },
-    { label: "Electromecánica", value: "electro" },
-    { label: "Civil", value: "civil" },
-    { label: "Industrial", value: "indu" },
-    { label: "CPA", value: "cpa" },
-  ],
   storage: {
     kind: "github",
     repo: "IdealProject/ideal",
@@ -20,6 +13,13 @@ export default config({
   },
 
   collections: {
+    const majorOptions: [
+      { label: "Informática", value: "infor" },
+      { label: "Electromecánica", value: "electro" },
+      { label: "Civil", value: "civil" },
+      { label: "Industrial", value: "indu" },
+      { label: "CPA", value: "cpa" },
+    ];
     posts: collection({
       label: "Posts",
       entryLayout: "content",
@@ -45,6 +45,12 @@ export default config({
             itemLabel: (item) => item.value || "Por Favor ingrese un autor...",
           }
         ),
+        major: fields.select({
+          label: "Major",
+          description: "Select the major",
+          options: majorOptions,
+          defaultValue: "cpa",
+        }),
         content: fields.markdoc({
           label: "Content",
           components: {
@@ -134,7 +140,7 @@ export default config({
         bookMajor: fields.select({
           label: "Major",
           description: "Select the major",
-          options: MajorOption,
+          options: majorOptions,
           defaultValue: "cpa",
         }),
         bookDownloadLinkId: fields.url({
