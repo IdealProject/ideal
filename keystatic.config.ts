@@ -31,6 +31,13 @@ export default config({
           label: "Draft",
           description: "Draft arent showing in the index",
         }),
+        description: fields.text({
+          label: "Descipción",
+          description: "Ingresa la Descripción del Post",
+          validation: {
+            isRequired: true,
+          },
+        }),
         authors: fields.array(
           fields.relationship({
             label: "Autores",
