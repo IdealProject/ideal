@@ -124,7 +124,21 @@ export async function getStaticPaths() {
     margin: 5px 0 5px;
   }
 
+  table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
 
+    th, td {
+        text-align: center;
+        border: 1px solid #ccc;
+        padding: 8px;
+      }
+    
+    tr {
+      font-weight: bold;
+    }
   @media print {
     .no-print {
       display: none !important;
