@@ -1,0 +1,111 @@
+---
+import Layout from '@layouts/Layout.astro'
+---
+
+<Layout title='Cursillo Provatorio de Admisión - CPA - Ideal'>
+    <div class="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"><div class="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_500px_at_50%_200px,#C9EBFF,transparent)]"></div></div>
+
+    <div class="container max-w-7xl">
+      <div class="algebra border border-solid subject-element">
+        <label for="algebra"><a href="/cpa/algebra" class="text-3xl font-bold text-black">Algebra</a></label>
+      </div>
+      <div class="trigo border border-solid subject-element">
+        <label for="trigonometria">
+            <a href="/cpa/trigonometria" class="text-3xl font-bold text-black">Trigonometría</a>
+        </label>
+      </div>
+      <div class="fisica border border-solid subject-element">
+        <label for="fisica">
+            <a href="/cpa/fisica" class="text-3xl font-bold text-black">Física</a>
+        </label>
+      </div>
+      <div class="geometria border border-solid subject-element">
+        <label for="geometria">
+            <a href="/cpa/geometria" class="text-3xl font-bold text-[#0A1829]">Geometría</a>
+        </label>
+      </div>
+      <div class="programacion border border-solid subject-element">
+        <label for="programacion">
+            <a href="/cpa/programacion" class="text-3xl font-bold text-black">Programación</a>
+        </label>
+      </div>
+      <div class="airtmetica border border-solid subject-element">
+        <label for="aritmetica">
+            <a href="/cpa/aritmetica" class="text-3xl font-bold text-black">Aritmética</a>
+        </label>
+      </div>
+    </div>
+</Layout>   
+
+<style is:global>
+    .container {  
+        display: grid;
+        grid-template-columns: 1fr 1fr 0.8fr 1.2fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-auto-columns: 1fr;
+        grid-auto-rows: 1fr;
+        gap: 0.5em 0.5em;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "algebra algebra trigo trigo"
+            "fisica airtmetica airtmetica airtmetica"
+            "fisica geometria geometria programacion"
+            "fisica geometria geometria programacion";
+        margin: auto;
+    }
+
+    .algebra { 
+        grid-area: algebra;
+background-color: #fefeff;
+opacity: 1;
+/* background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #fefeff 21px ), repeating-linear-gradient( #bfc2ff55, #bfc2ff ); */
+    }
+
+    .trigo { grid-area: trigo; background-color: #FFF7FC;
+opacity: 1;
+/* background-image: radial-gradient(#FF71CD 1.05px, #FFF7FC 1.05px); */
+background-size: 21px 21px; }
+
+    .fisica { grid-area: fisica; background-color: #FFF7FC;
+opacity: 1;
+/* background-image:  linear-gradient(#FDAF7B 2.1px, transparent 2.1px), linear-gradient(to right, #FDAF7B 2.1px, #FFF7FC 2.1px); */
+background-size: 42px 42px;}
+
+    .geometria { grid-area: geometria; 
+    background-color: #FFF7FC;
+opacity: 1;
+/* background-image: linear-gradient(-45deg, #FFF7FC, #FFF7FC 50%, #90D26D 50%, #90D26D); */
+background-size: 21px 21px;}
+
+    .programacion { grid-area: programacion; background-color: #a76cff;
+/* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='126' height='84' viewBox='0 0 126 84'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%235a39ff' fill-opacity='0.4'%3E%3Cpath d='M126 83v1H0v-2h40V42H0v-2h40V0h2v40h40V0h2v40h40V0h2v83zm-2-1V42H84v40h40zM82 42H42v40h40V42zm-50-6a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm96 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm-42 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm30-12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM20 54a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm12 24a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM8 54a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm24 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM8 78a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm12 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm54 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM50 54a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm24 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM50 78a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm54-12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm12 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM92 54a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm24 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM92 78a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm24-42a4 4 0 1 1 0-8 4 4 0 0 1 0 8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); */
+}
+
+    .airtmetica { grid-area: airtmetica; background-color: #FFF7FC;
+opacity: 1;
+/* background-image: radial-gradient( ellipse farthest-corner at 14px 14px , #ffc8d3, #ffc8d3 50%, #FFF7FC 50%); */
+background-size: 14px 14px;}
+
+    .subject-element {
+        border-radius: 0.5em;
+        padding: 1em;
+        margin: 0.5em;
+        border-color: slategrey;
+        background-color: white;
+        font-family: 'Bricolage Grotesque', sans-serif;
+        transition: ease-in-out 0.3s;
+    }
+
+    .subject-element:hover {
+        transform: scale(1.01);
+        transition: ease-in-out 0.3s;
+        a {
+            text-decoration: underline;
+        }
+        
+    }
+
+    html, body .container {
+        height: 100%;
+    }
+</style>
