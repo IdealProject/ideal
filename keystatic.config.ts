@@ -137,9 +137,9 @@ export default config({
       schema: {
         bookName: fields.slug({ name: { label: "Book Name" } }),
         bookAuthor: fields.array(
-          fields.text({ label: 'Tag' }),
+          fields.text({ label: 'Autores' }),
           {
-            label: 'Tag',
+            label: 'Autor',
             itemLabel: props => props.value
           }
         ),
