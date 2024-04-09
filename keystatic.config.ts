@@ -10,6 +10,7 @@ import { civilDataHanlder } from "src/utils/civilDataHandler";
 import { electroDataHanlder } from "src/utils/electroDataHandler";
 //Imported for the Books collection
 import { majorOptions } from "src/utils/data/dataMajor";
+import { tagSelection } from "src/utils/tagSelection";
 
 export default config({
   storage: {
@@ -56,21 +57,7 @@ export default config({
             itemLabel: (item) => item.value || "Por Favor ingrese un autor...",
           }
         ),
-        major: fields.conditional(
-          MajorSelection, //Component Field from MajorSelectionHandler
-          {
-            //cpa field 
-            cpa: cpaDataHandler,
-            //Infor field
-            infor: inforDataHanlder,
-            // Indu field
-            indu: induDataHanlder,
-            // Civil field
-            civil: civilDataHanlder,
-            // Electro field
-            electro: electroDataHanlder,
-          }
-        ),
+        major: tagSelection,
         content: fields.markdoc({
           label: "Content",
           components: {
@@ -149,20 +136,14 @@ export default config({
       entryLayout: "content",
       schema: {
         bookName: fields.slug({ name: { label: "Book Name" } }),
-        bookAuthor: fields.text({
-          label: "Author",
-          validation: { isRequired: true },
-        }),
-        bookSubject: fields.array(fields.text({ label: "Subject" }), {
-          label: "Tag",
-          itemLabel: (props) => props.value,
-        }),
-        bookMajor: fields.select({
-          label: "Major",
-          description: "Select the major",
-          options: majorOptions,
-          defaultValue: "cpa",
-        }),
+        bookAuthor: fields.array(
+          fields.text({ label: 'Tag' }),
+          {
+            label: 'Tag',
+            itemLabel: props => props.value
+          }
+        ),
+        bookMajor: tagSelection,
         bookDownloadLinkId: fields.url({
           label: "Google Drive Link",
           description: "Enter the Google Drive public link",
