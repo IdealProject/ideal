@@ -58,11 +58,39 @@ Lo básico seria la reutilización de código cosa que siempre es buena mantenie
 
 ### Implementación de la Herencia
 
-```Java
+```java
 public class subClase extends superClase{
+// Creamos el Constructor de la subClase utilizando el Super Constructor para llamar al constructor de la superClase
+public subClase(int varSuper, int varSub){
+super(varSuper);
+this.varSub = varSub;
+}
+private int varSub;
 }
 ```
+
+Recibimos en nuestro constructor nuevo todos los parametros que utilzaremos, los parametros que pertenecen a la clase padre se los pasamos al superConstructor y los que son exclusivos de la subClase los incializamos como de costumbre.
+
+### Sobreposición de metodos
+
+Se da cuando una subclase tiene un metodo con el mismo nombre y caracteristicas (incluyendo lo que retorna de otra manera el compilador generara un )que otro de la superClase, en ese caso cuando utlicemos una instancia de la subClase se estara usando el metodo superpuesto de la subclase siguiendo con la lógica de darle prioridad a lo local sobre lo externo.
+
+En caso de necesitar al metodo que fue sobrepuesto podemos utilizar
+
+```java
+super.metodoQueFueSobrepuesto();
+```
+
+### Modificador final
+
+Si consideramos que nuestro metodo de la SuperClase no debe ser sobrepuesto bajo ninguna circunstancia podemos establecer final en el encabezado del metodo.
+
+En caso de no desear que la SuperClase obtenga SubClases podemos establecer el modificador final en la declaración de la clase.
 
 ### Ejemplo en el mundo real
 
 Imagina una persona, pueden caminar, respirar, Hablar como funciones básicas, a partir de esta clase podrias crear la clase Cliente, que hereda de la clase persona, Hablar ,caminar y respirar pero le estariamos agregando cosas como pagar entre otras cosas. siendo la clase **cliente una subClase** de la **superClase Persona**.
+
+## Utilizar Herencia con Agregación y Composición
+
+Recuerda que nos alternativas para resolver el mismo problema, si no que son formas diferentes de hacer cosas diferentes, existen casos en los que podemos hacer uso de cada uno de sus ventajas uniendolas en programas complejos como se hace en la vida real.
