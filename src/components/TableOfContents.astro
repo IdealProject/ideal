@@ -21,18 +21,6 @@ const { headings = [] } = Astro.props;
           ),
         )
       }
-      {
-        headings.map(
-          (heading: { depth: number; slug: string; text: string }) => (
-            <li style={{ marginLeft: `${heading.depth}em` }}>
-              <a
-                class="underline text-gray-600"
-                href={`#${heading.slug}`}
-              >{`${heading.text}`}</a>
-            </li>
-          ),
-        )
-      }
     </ul>
   </nav>
 </nav>
