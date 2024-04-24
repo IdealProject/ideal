@@ -3,24 +3,36 @@ const { headings = [] } = Astro.props;
 ---
 
 <nav
-  class="text-sm min-w-fit h-fit p-2 fixed right-0 bg-gray-100 border rounded-md border-gray-200 border-solid print:hidden"
+  class="text-sm min-w-fit h-fit p-2 sticky top-5 bg-gray-100 border rounded-md border-gray-200 border-solid print:hidden"
 >
-<nav class="text-sm min-w-[25%] px-2 py-2 h-fit overflow-hidden bg-gray-100 border rounded-md border-gray-200 border-solid print:hidden">
-  <ul>
-    {
-      headings.map((heading: { depth: number; slug: string; text: string }) => (
-        <li style={{ marginLeft: `${heading.depth}em` }}>
-          <a
-            class="underline text-gray-600"
-            href={`#${heading.slug}`}
-          >{`${heading.depth} ${heading.text}`}</a>
-        </li>
-      ))
-    }
-    {headings.map((heading: { depth: number, slug: string, text: string }) => (
-      <li style={{marginLeft: `${heading.depth}em`}}>
-        <a class="underline text-gray-600" href={`#${heading.slug}`}>{`${heading.text}`}</a>
-      </li>
-    ))}
-  </ul>
+  <nav
+    class="text-sm min-w-[20%] px-2 py-2 h-fit overflow-hidden bg-gray-100 border rounded-md border-gray-200 border-solid print:hidden"
+  >
+    <ul>
+      {
+        headings.map(
+          (heading: { depth: number; slug: string; text: string }) => (
+            <li style={{ marginLeft: `${heading.depth}em` }}>
+              <a
+                class="underline text-gray-600"
+                href={`#${heading.slug}`}
+              >{`${heading.depth} ${heading.text}`}</a>
+            </li>
+          ),
+        )
+      }
+      {
+        headings.map(
+          (heading: { depth: number; slug: string; text: string }) => (
+            <li style={{ marginLeft: `${heading.depth}em` }}>
+              <a
+                class="underline text-gray-600"
+                href={`#${heading.slug}`}
+              >{`${heading.text}`}</a>
+            </li>
+          ),
+        )
+      }
+    </ul>
+  </nav>
 </nav>
