@@ -6,6 +6,7 @@ description: >-
   a Objetos (POO, OOP), sobre la herencia y el polimorfismo
 authors:
   - adan-alvarez
+  - chat-gpt
 major:
   discriminant: infor
   value:
@@ -130,7 +131,7 @@ Este fragmento de código explora la asignación de objetos entre clases en una 
    Student s = (Student) p; // Casting de una referencia Persona a Student
    ```
 
-1. **Polimorfismo con el operador**\**`instanceof`\****:**
+1. **Polimorfismo con el operador**\**`instanceof`****\****:**
 
    - El operador `instanceof` se utiliza para verificar si un objeto es una instancia de una clase o subclase específica.
 
@@ -203,16 +204,12 @@ El modificador **`protected`** es útil cuando se quiere proporcionar acceso a c
 
 ## Tres dimensiones con Java
 
-1. **Clase**\**`Employee3`****y****`Salaried3`\****:** Se muestra un ejemplo de herencia y polimorfismo en el contexto de las clases `Employee3` y `Salaried3`. La clase abstracta `Employee3` define un método abstracto `getPay()`, mientras que la clase `Salaried3` extiende `Employee3` e implementa el método `getPay()` para calcular el salario de un empleado asalariado, incluyendo la deducción del impuesto.
+1. **Clase**\**`Employee3`****y****`Salaried3`****\****:** Se muestra un ejemplo de herencia y polimorfismo en el contexto de las clases `Employee3` y `Salaried3`. La clase abstracta `Employee3` define un método abstracto `getPay()`, mientras que la clase `Salaried3` extiende `Employee3` e implementa el método `getPay()` para calcular el salario de un empleado asalariado, incluyendo la deducción del impuesto.
 1. **API de Java para gráficos 3D:** Se menciona que el API de Java proporciona clases para dibujar y colorear formas bidimensionales, así como métodos para representar formas tridimensionales sencillas, como un cilindro. Se menciona específicamente los métodos `draw3DRect` y `fill3DRect` de la clase `Graphics2D` para representar un rectángulo sombreado que parece estar en un plano tridimensional.
 1. **Representación de un cilindro sólido:** Se describe cómo se puede representar un cilindro sólido en Java considerando cálculos de geometría y trigonometría. Se muestra un ejemplo de código que define una clase `Cylinder` que extiende `JPanel` para dibujar un cilindro tridimensional y se explica cómo se calculan los ángulos de elevación y azimut para representar el cilindro desde diferentes perspectivas.
 1. **Uso de interfaces en el API de Java:** Se menciona que algunas clases y métodos del API de Java utilizan interfaces como parámetros, lo que permite una mayor flexibilidad y polimorfismo en el código. Por ejemplo, se menciona que los parámetros de entrada para métodos como `append` y `fill` son del tipo `Shape`, una interfaz que puede ser implementada por diferentes tipos de formas.
 
-En resumen, el texto muestra cómo se puede aplicar la herencia, el polimorfismo y el uso del API de Java para crear representaciones gráficas tridimensionales, en este caso, un cilindro sólido. También destaca la importancia del uso de interfaces para lograr flexibilidad y extensibilidad en el código.
-
 # En resumen
-
-**Resumen:**
 
 1. La clase `Object` es la clase ancestro de todas las demás clases en Java.
 1. Para personalizar el comportamiento de los métodos `equals` y `toString`, es necesario sobrescribirlos en las clases hijas.
