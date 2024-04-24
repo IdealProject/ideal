@@ -1,0 +1,104 @@
+---
+title: resumen-Cap-13 Int Java
+draft: false
+description: 'Resumen realizado para evaluación. '
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '2'
+    value: P2
+---
+# Resumen Cap 13
+
+###### Libro: Introducción a la programación con JAVA (John S. Dean, Raymon H. Dean)
+
+# Herencia y polimorfismo
+
+Para poder explicar el polimorfismo el cual es la piedra angular de la herencia necesitas revisar algunos conceptos.
+
+## La clase Objeto y promoción automática de tipos
+
+Esta clase es la ancestro de todas las clases en Java.
+
+Si tu clase no extiende de otra, por defecto el compilador la hara extender de la clase Objeto.
+
+Esta clase no tiene demasiados metodos pero tiene dos muy importantes
+
+```java
+toString();
+equals();
+```
+
+En caso de una asignación o de pasar un argumento que implique diferentes tipos de referencia (osea clases) normalmente la JVM asigna automáticamente a la referencia objetivo la referencia fuente. Si esta se encuentra por encima en el orden de Herencias se realiza una asginación a la clase Objeto ya que esta es la de mayor jerarquia en el orden de herencia.
+
+(Recordemos que las SuperClases (más generales) se encuentran "encima" en la jerarquia de Herencia, entonces si nosotros pasamos una subClase esta tendra que pasar una promoción a Objeto si es necesario para ser utilzada en un lugar donde se esperaba la SuperClase)
+
+## equals();
+
+Este metodo devuelve true o false cuando compara dos objetos
+
+```java
+objectA.equals(ObjectB)
+```
+
+Como hereda de la clase objeto va a la definición mas básica del metodo "es igual?" solo obtenemos True si
+
+1. objectA es simplemento otro nombre para ObjectB (Ambos hacen referencia al mismo objeto)
+
+### Declarar tu propio equals();
+
+Si necesitamos que según nuestro criteria al compararse dos objetos también se retorne true podemos sobreescribir el metodo equals en el caso de que por ejemplo, sean dos objetos diferentes pero con los mismos argumentos.
+
+Una vez usted sobreescibre este metodo. el metodo nuevo sera el que siempre tenga prioridad a la hora de utilizarse.
+
+## toString();
+
+Esto esta implementado en la clase Objeto por ende todas las clases lo poseen
+
+Normalmente devuelve una concatenación del nombre completo del objeto y la clase a la que pertenece más un signo @ y un secuencia de digitos con letras (Código Hash)
+
+Si pertenece a un paquete la clase
+
+```java
+java.lang.Object@601BB1
+```
+
+Si no pertenece a un paquete devuelve solo el nombre de la clase
+
+```java
+Car@1BA34F2
+```
+
+### Declara tu propio toString();
+
+Normalmente obtener el tipo de resultados anteriormente citado no es lo que uno desea, por eso podemos sobreescribir este metodo, Clases como `Date` sobreescriben sus toString() para obtener algo mas coherente, en este caso devuelve devuelve los valores del mes, día, año y segundos de un objeto Date como una cadena simplemente concatenada
+
+### Llamadas implicitas
+
+Siempre que utilicemos `System.out.println`o`System.out.print`para mostrar un objeto la JVM hace una llamada implicita al metodo `toString();` de la clase a la cual pertenece objeto.
+
+## Polimorfismo y vinculación dinámica
+
+### Polimorfismo
+
+Si vamos al significado de la palabra obtenemos *"poseer muchas formas"*, en Java esto se traduce en que diferentes tipos de objetos responden en forma distinta a la llamada de un mismo método.
+
+En pocas palabras es lo que estuvimos haciendo recientemente, reescribir metodos para cada tipo de objeto, en teoría es el mismo metodo pero la jvm decidira que "versión" de este utilizara según el objeto, de modo que el `toString();` es polimorfico.
+
+Imagina el caso en que tu tienes un objeto de tipo Objeto y a este le asignas un objeto de tipo Dog, una vez que llames a su metodo `toString();`la JVM decide utilizar el perteneciente a Dog.
+
+```java
+Object objeto;
+objeto = new Dog();
+System.out.println(Objeto.toString());
+```
+
+### Dinámica Vinculante
+
+Este concepto esta muy conectado con el polimorfismo, el proceso por el cual la JVM decide utilizar el `toString()` de la clase Dog y no el de Object es por el proceso de *"Dinámica Vinculante"* por el cual determina su tipo de objeto real y lo vincula con el metodo adecuado.
+
+#### ¿Por que dinámica?
+
+En java este proceso se desarrolla justo antes de ejecutarse el metodo, por eso algunos lo llaman Vinculación tardía, existen lenguajes de programación en donde este proceso se realiza en tiempo de compilación y no de ejecución, a eso se le llama Vinculación estática.
