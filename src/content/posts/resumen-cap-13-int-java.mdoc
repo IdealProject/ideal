@@ -95,6 +95,33 @@ objeto = new Dog();
 System.out.println(Objeto.toString());
 ```
 
+## Clase Abstracta
+
+En este caso todo funciona porque toString es un metodo que pertenece a la superClase Objeto pero si quisieramos usar otro metodo que no pertenece a la clase Objeto no funcionaria, si queremos usar para otros metodos lo mejor seria declarar una superClase en donde exista el metodo que querramos sobreescribir para cada subclase y asi si funcionaria el polimorfismo
+
+El real uso del Polimorfismo se da en casos donde por ejemplo tenemos arrays de clases que todas heredan de la misma clase pero cada uno tiene su propio metodo sobreescrito
+
+La forma mas elegante de lograr eso seria utilizando clases Abstractas que no tienen suficiente información para definir un metodo, solo especifica su interfaz para que luego en las clases que hereden de el la utilicemos.
+
+Esto se debe expresar de forma explicita
+
+### Modificador abstracto
+
+El modificador abstracto posee un nombre adecuado. Algo es abstracto si es de naturaleza general, no detallada. Una declaración de un método abstracto es general por naturaleza. No proporciona los detalles del método. Simplemente notifica que el método existe y que es necesario precisarlo mediante definiciones del método “real” en todas las clases descendientes instanciables.
+
+Ejemplo:
+
+```java
+public abstract class Employee{
+
+public abstract double getPay();
+// Se necesita declarar el getPay()
+}
+
+```
+
+Recordemos que en estos casos seria un sin sentido utilizar los modificadores final y private porque el objetivo de las clases abstract es poder acceder a lo que esta declarando.
+
 ### Dinámica Vinculante
 
 Este concepto esta muy conectado con el polimorfismo, el proceso por el cual la JVM decide utilizar el `toString()` de la clase Dog y no el de Object es por el proceso de *"Dinámica Vinculante"* por el cual determina su tipo de objeto real y lo vincula con el metodo adecuado.
@@ -102,3 +129,17 @@ Este concepto esta muy conectado con el polimorfismo, el proceso por el cual la 
 #### ¿Por que dinámica?
 
 En java este proceso se desarrolla justo antes de ejecutarse el metodo, por eso algunos lo llaman Vinculación tardía, existen lenguajes de programación en donde este proceso se realiza en tiempo de compilación y no de ejecución, a eso se le llama Vinculación estática.
+
+### Instanceof();
+
+Si por algún motivo el usuario desease realizar de forma explicita el control de las clases puede hacerlo utilziando el metodo instanceof() que devolveria true si el objeto pertenece a la clase Dog o a una clase que hereda de la clase Dog
+
+## Interfaces
+
+Ayuda a cumplir con el objetivo de polimorfismo, una clase puede implementar tantas interfaces como necesite es parecido a la clase Abstracta pero tiene sus diferencias una clase abstracta podria implementar metodos pero la interfaz solo declara los metodos sin nada de implementaciones nunca.
+
+Pensemos en las Interfaces como un contrato de diseño con la nueva clase porque establece metodos que deberan ser implementados, estandariza la comunicación entre clases diferentes.
+
+Otra ventaja que nos da utilizar las interfaces es acceder a constantes universales nombradas que almacena la interfaz.
+
+Gracias a las interfaces podemos acceder a metodos que normalmente no podriamos por medio de herencia convencional
