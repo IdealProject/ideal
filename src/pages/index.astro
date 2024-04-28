@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Image from "astro/components/Image.astro";
 ---
 
 <Layout title="Bienvenido a Ideal">
@@ -39,7 +40,8 @@ import Layout from "../layouts/Layout.astro";
             </div>
           </div>
           <div class="mt-8 lg:mt-0 lg:w-1/2 flex justify-center">
-            <img
+            <!-- for better performance use Astro's Image component #Christopher-->
+            <Image
               class="sm:mt-8"
               src="/ReadingDoodle.svg"
               alt="Estudiante leyendo"
