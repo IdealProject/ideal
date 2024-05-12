@@ -6,11 +6,12 @@ import { getCollection, getEntry } from "astro:content";
 // Get all the post
 const posts = await getCollection("posts");
 // We filter only post for the CPA
-// const postsCPA = posts.filter((e) => e.data.major.discriminant == "cpa");
+const postsCPA = posts.filter((e) => e.data.major.discriminant == "cpa");
+//
 ---
 
 <Layout title="Cursillo Provatorio de Admisión - CPA - Ideal">
-    <p>Hola: {JSON.stringify(posts[8].data.major.discriminant)}</p>
+    <!-- <p>hola {JSON.stringify(postsCPA)}</p> -->
     <div
         class="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"
     >

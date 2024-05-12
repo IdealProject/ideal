@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+
+// Get all the post
+const postsO = await getCollection("posts");
+// We filter only post for the CPA
+const posts = postsO.filter((e) => e.data.major.value == "Trigonometria");
+//
+const postCheck = posts.filter((e) => e.data.draft == false);
+
+---
+
+<Layout title="Contenido de Ideal">
+    <main class="mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between">
+        <header>
+            <h1 class="text-4xl font-bold">Contenido de Ideal</h1>
+        </header>
+        <section class="px-4">
+            <ul>
+                {
+                    postCheck.map(
+                        (post: { slug: string; data: { title: string } }) => (
+                            <li class="list-disc">
+                                <a
+                                    href={`/posts/${post.slug}`}
+                                    class="underline text-xl text-blue-600 font-medium"
+                                >
+                                    {post.data.title}
+                                </a>
+                            </li>
+                        ),
+                    )
+                }
+            </ul>
+        </section>
+    </main>
+</Layout>
