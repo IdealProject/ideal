@@ -1,6 +1,6 @@
 ---
-title: Principios SOLID y Patrones de Diseño
-draft: false
+title: 'Principios SOLID '
+draft: true
 description: >-
   Un resumen sobre los 5 Principios SOLID y Patrones de diseño, Orientados a
   Java
@@ -12,7 +12,7 @@ major:
     discriminant: '2'
     value: P2
 ---
-# Principios SOLID y Patrones de Diseño
+# Principios SOLID
 
 ***Breves definiciones:***
 
@@ -33,8 +33,7 @@ major:
 El principío de responsabilidad única establece que cada clase o método debe preocuparse por cumplir con una tarea y no con varias a la vez, esto puesto que quizá necesitemos reutilizar estas funciones en otros lugares, también facilita la corrección de errores y acortar el cuerpo de ciertos métodos
 
 > Planteamiento del problema: imagine que tiene una clase llamada `OrderProcessor`que maneja múltiples responsabilidades, como validar pedidos, calcular totales y enviar notificaciones por correo electrónico. Esto viola el SRP, lo que hace que la clase sea difícil de mantener y modificar.
-> 
-> ```java
+
 ```
 
 public class OrderProcessor {
@@ -70,66 +69,75 @@ private void sendEmailNotification(Order order) {
 }
 }
 
-````
-> 
+```
+
 > Para cumplir con el SRP, debemos dividir la clase `OrderProcessor` en clases separadas, cada una responsable de una única tarea.
 > 
 > ```java
+```
+
+```
+
+```
+
+```
+
 public class OrderValidator {
-    public boolean isValid(Order order) {
-        // Validar el pedido
-        // ...
-        return true; // Placeholder para demostración
-    }
+public boolean isValid(Order order) {
+// Validar el pedido
+// ...
+return true; // Placeholder para demostración
+}
 }
 
 public class OrderCalculator {
-    public BigDecimal calculateTotal(Order order) {
-        // Calcular el total
-        // ...
-        return BigDecimal.ZERO; // Placeholder para demostración
-    }
+public BigDecimal calculateTotal(Order order) {
+// Calcular el total
+// ...
+return BigDecimal.ZERO; // Placeholder para demostración
+}
 }
 
 public class OrderRepository {
-    public void save(Order order) {
-        // Guardar el pedido en la base de datos
-        // ...
-    }
+public void save(Order order) {
+// Guardar el pedido en la base de datos
+// ...
+}
 }
 
 public class EmailNotifier {
-    public void sendNotification(Order order) {
-        // Enviar una notificación por correo electrónico
-        // ...
-    }
+public void sendNotification(Order order) {
+// Enviar una notificación por correo electrónico
+// ...
+}
 }
 
 public class OrderProcessor {
-    private final OrderValidator validator;
-    private final OrderCalculator calculator;
-    private final OrderRepository repository;
-    private final EmailNotifier notifier;
+private final OrderValidator validator;
+private final OrderCalculator calculator;
+private final OrderRepository repository;
+private final EmailNotifier notifier;
 
-    public OrderProcessor(OrderValidator validator, OrderCalculator calculator,
-                          OrderRepository repository, EmailNotifier notifier) {
-        this.validator = validator;
-        this.calculator = calculator;
-        this.repository = repository;
-        this.notifier = notifier;
-    }
-
-    public void processOrder(Order order) {
-        if (!validator.isValid(order)) {
-            throw new InvalidOperationException("Orden no válida.");
-        }
-
-        BigDecimal total = calculator.calculateTotal(order);
-        repository.save(order);
-        notifier.sendNotification(order);
-    }
+public OrderProcessor(OrderValidator validator, OrderCalculator calculator,
+OrderRepository repository, EmailNotifier notifier) {
+this.validator = validator;
+this.calculator = calculator;
+this.repository = repository;
+this.notifier = notifier;
 }
-````
+
+public void processOrder(Order order) {
+if (!validator.isValid(order)) {
+throw new InvalidOperationException("Orden no válida.");
+}
+
+BigDecimal total = calculator.calculateTotal(order);
+repository.save(order);
+notifier.sendNotification(order);
+}
+}
+
+```
 
 > Al separar las preocupaciones en clases distintas, cada una con una única responsabilidad, logramos un diseño modular y más fácil de mantener. La `OrderProcessor`clase ahora se centra únicamente en orquestar el flujo de trabajo de procesamiento de pedidos, delegando tareas específicas a las clases apropiadas. Este enfoque permite probar, modificar y reutilizar componentes individuales más fácilmente.
 > 
@@ -142,6 +150,10 @@ Este principio establece que debemos usar abstracción para evitar código poco 
 > Planteamiento del problema: Considere un escenario en el que tiene una `ShapeCalculator`clase que calcula el área de diferentes formas. Más adelante, deberá agregar compatibilidad con nuevas formas sin modificar el código existente.
 > 
 > ```java
+```
+
+````
+
 ```
 
 public class ShapeCalculator {
@@ -158,63 +170,71 @@ throw new IllegalArgumentException("Tipo de forma no admitido.");
 }
 }
 
-````
-> 
+```
+
 > Para cumplir con el OCP, debemos definir una abstracción para las formas y extenderla para cada forma específica, permitiendo `ShapeCalculator`trabajar con la abstracción en lugar de con implementaciones concretas.
 > 
 > ```java
+
+```
+
+```
+
+```
+
 public interface IShape {
-    double calculateArea();
+double calculateArea();
 }
 
 public class Rectangle implements IShape {
-    private double width;
-    private double height;
+private double width;
+private double height;
 
-    public double getWidth() {
-        return width;
-    }
+public double getWidth() {
+return width;
+}
 
-    public void setWidth(double width) {
-        this.width = width;
-    }
+public void setWidth(double width) {
+this.width = width;
+}
 
-    public double getHeight() {
-        return height;
-    }
+public double getHeight() {
+return height;
+}
 
-    public void setHeight(double height) {
-        this.height = height;
-    }
+public void setHeight(double height) {
+this.height = height;
+}
 
-    @Override
-    public double calculateArea() {
-        return width * height;
-    }
+@Override
+public double calculateArea() {
+return width * height;
+}
 }
 
 public class Circle implements IShape {
-    private double radius;
+private double radius;
 
-    public double getRadius() {
-        return radius;
-    }
+public double getRadius() {
+return radius;
+}
 
-    public void setRadius(double radius) {
-        this.radius = radius;
-    }
+public void setRadius(double radius) {
+this.radius = radius;
+}
 
-    @Override
-    public double calculateArea() {
-        return Math.PI * radius * radius;
-    }
+@Override
+public double calculateArea() {
+return Math.PI * radius * radius;
+}
 }
 
 public class ShapeCalculator {
-    public double calculateArea(IShape shape) {
-        return shape.calculateArea();
-    }
+public double calculateArea(IShape shape) {
+return shape.calculateArea();
 }
+}
+
 ````
 
 > Al presentar la interfaz `IShape` e implementarla para cada clase de forma, podemos agregar fácilmente soporte para nuevas formas sin modificar la `ShapeCalculator`clase. Esto se adhiere al OCP, ya que `ShapeCalculator`está abierto a extensiones (que admite nuevas formas) pero cerrado a modificaciones.
@@ -232,6 +252,10 @@ Este principio fue propuesto por Barbara Liskov en 1987, de ahi el nombre, este 
 > ```java
 ```
 
+````
+
+```
+
 public class Bird {
 public void fly() {
 System.out.println("The bird is flying.");
@@ -245,27 +269,34 @@ throw new UnsupportedOperationException("Penguins cannot fly.");
 }
 }
 
-````
-> 
+```
+
 > Para cumplir con el LSP, debemos diseñar nuestras abstracciones correctamente, asegurándonos de que las clases derivadas puedan sustituir sus clases base sin alterar la corrección del programa.
 > 
 > ```java
+
+```
+
+```
+
+```
+
 public abstract class Bird {
-    public abstract void move();
+public abstract void move();
 }
 
 public class FlyingBird extends Bird {
-    @Override
-    public void move() {
-        System.out.println("The bird is flying.");
-    }
+@Override
+public void move() {
+System.out.println("The bird is flying.");
+}
 }
 
 public class Penguin extends Bird {
-    @Override
-    public void move() {
-        System.out.println("The penguin is swimming.");
-    }
+@Override
+public void move() {
+System.out.println("The penguin is swimming.");
+}
 }
 
 ````
@@ -281,6 +312,10 @@ Este principio establece que podemos dividir una interfaz grande en interfaces m
 > Planteamiento del problema: suponga que tiene una interfaz llamada `IEmployee`con métodos para diversas tareas de los empleados, como `CalculateSalary()`, `GenerateReports()`y `FileExpenseReports()`. Sin embargo, no todos los tipos de empleados requieren todos estos métodos, lo que los obliga a proporcionar implementaciones vacías.
 > 
 > ```java
+```
+
+````
+
 ```
 
 public interface IEmployee {
@@ -329,52 +364,60 @@ public void fileExpenseReports() {
 }
 }
 
-````
-> 
+```
+
 > Para seguir al ISP, debemos dividir la interfaz en interfaces más pequeñas y con funciones específicas, asegurando que los clientes no se vean obligados a depender de métodos que no utilizan.
 > 
 > ```java
+
+```
+
+```
+
+```
+
 public interface IEmployeeSalary {
-    BigDecimal calculateSalary();
+BigDecimal calculateSalary();
 }
 
 public interface IReportGenerator {
-    void generateReports();
+void generateReports();
 }
 
 public interface IExpenseReporter {
-    void fileExpenseReports();
+void fileExpenseReports();
 }
 
 public class Manager implements IEmployeeSalary, IReportGenerator, IExpenseReporter {
-    @Override
-    public BigDecimal calculateSalary() {
-        // Calculate manager's salary
-        // ...
-        return BigDecimal.ZERO; // Placeholder for demonstration
-    }
+@Override
+public BigDecimal calculateSalary() {
+// Calculate manager's salary
+// ...
+return BigDecimal.ZERO; // Placeholder for demonstration
+}
 
-    @Override
-    public void generateReports() {
-        // Generate reports
-        // ...
-    }
+@Override
+public void generateReports() {
+// Generate reports
+// ...
+}
 
-    @Override
-    public void fileExpenseReports() {
-        // File expense reports
-        // ...
-    }
+@Override
+public void fileExpenseReports() {
+// File expense reports
+// ...
+}
 }
 
 public class Developer implements IEmployeeSalary {
-    @Override
-    public BigDecimal calculateSalary() {
-        // Calculate developer's salary
-        // ...
-        return BigDecimal.ZERO; // Placeholder for demonstration
-    }
+@Override
+public BigDecimal calculateSalary() {
+// Calculate developer's salary
+// ...
+return BigDecimal.ZERO; // Placeholder for demonstration
 }
+}
+
 ````
 
 > (Thombare, 2024)
@@ -388,6 +431,10 @@ Este principio establece que usemos abstracciones en las clases bases de nuestro
 > Planteamiento del problema: considere un escenario en el que tiene una `ProductService`clase que depende directamente de una `SQLProductRepository`clase para el acceso a datos. Este estrecho acoplamiento dificulta el intercambio de la implementación del repositorio o la prueba de la clase de servicio de forma aislada.
 > 
 > ```java
+```
+
+````
+
 ```
 
 import java.util.List;
@@ -412,40 +459,48 @@ return repository.getAllProducts();
 }
 }
 
-````
-> 
+```
+
 > Para cumplir con el DIP, debemos depender de abstracciones (interfaces) en lugar de implementaciones concretas, y las dependencias deben inyectarse desde el exterior.
 > 
 > ```java
+
+```
+
+```
+
+```
+
 public interface IProductRepository
 {
-    List<Product> GetAllProducts();
+List<Product> GetAllProducts();
 }
 
 public class SQLProductRepository : IProductRepository
 {
-    public List<Product> GetAllProducts()
-    {
-        // Retrieve products from SQL database
-        // ...
-    }
+public List<Product> GetAllProducts()
+{
+// Retrieve products from SQL database
+// ...
+}
 }
 
 public class ProductService
 {
-    private IProductRepository _repository;
+private IProductRepository _repository;
 
-    public ProductService(IProductRepository repository)
-    {
-        _repository = repository;
-    }
-
-    public List<Product> GetProducts()
-    {
-        return _repository.GetAllProducts();
-    }
+public ProductService(IProductRepository repository)
+{
+_repository = repository;
 }
-````
+
+public List<Product> GetProducts()
+{
+return _repository.GetAllProducts();
+}
+}
+
+```
 
 > Al depender de la `IProductRepository`interfaz en lugar de una implementación concreta, invertimos la dependencia, haciendo que la `ProductService`clase sea más flexible y comprobable. La implementación específica del repositorio se puede inyectar en la clase de servicio, lo que permite una sustitución más sencilla y facilita el acoplamiento flexible.
 > 
@@ -458,3 +513,10 @@ Con el primer código esto no era posible, pero al crear la interfaz `IProductRe
 ## Referencias
 
 - Thombare, D. (2024). **SOLID Principles: The Foundation of Clean, Maintainable and Scalable C# Code**. Recuperado de: [https://medium.com/@dayanandthombare/%EF%B8%8Fsolid-principles-the-foundation-of-clean-maintainable-and-scalable-c-code-e48dd89bf5c1](https://medium.com/@dayanandthombare/%EF%B8%8Fsolid-principles-the-foundation-of-clean-maintainable-and-scalable-c-code-e48dd89bf5c1)
+
+```
+
+```
+
+```
+````
