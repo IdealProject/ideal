@@ -1,5 +1,5 @@
 ---
-title: Principios SOLID y Patrones de Diseño
+title: Principios SOLID y
 draft: false
 description: Un resumen sobre los 5 Principios SOLID, Orientados a Java
 authors:
@@ -22,13 +22,17 @@ major:
 1. ***I***\*: Interface Segregation Principle (Principio de Segregación de Interfaces)*
 1. ***D***\*: Dependency Inversion Principle (Principio de Inversión de Dependencias)*
 
-## 1)**Principio de Responsabilidad Única (SRP)**
+\***Patrones de Diseño:****Los patrones de diseño son soluciones ideadas y testeadas por miles de programadores de todo el mundo, estos patrones estan ideados para solucionar problemas comunes en nuestro código, evitando por ejemplo grandes cadenas de if, código innecesario, etc.*
+
+## Principios SOLID
+
+### 1)**Principio de Responsabilidad Única (SRP)**
 
 El principío de responsabilidad única establece que cada clase o método debe preocuparse por cumplir con una tarea y no con varias a la vez, esto puesto que quizá necesitemos reutilizar estas funciones en otros lugares, también facilita la corrección de errores y acortar el cuerpo de ciertos métodos
 
 > Planteamiento del problema: imagine que tiene una clase llamada `OrderProcessor`que maneja múltiples responsabilidades, como validar pedidos, calcular totales y enviar notificaciones por correo electrónico. Esto viola el SRP, lo que hace que la clase sea difícil de mantener y modificar.
 
-```
+```java
 
 public class OrderProcessor {
 public void processOrder(Order order) {
@@ -65,19 +69,10 @@ private void sendEmailNotification(Order order) {
 
 ```
 
-> Para cumplir con el SRP, debemos dividir la clase `OrderProcessor` en clases separadas, cada una responsable de una única tarea.
+> Para cumplir con el SRP, debemos dividir la clase `OrderProcessor` en clases
 > 
 > ```java
-```
-
-```
-
-```
-
-```
-
-```
-
+separadas, cada una responsable de una única tarea.
 ```
 
 public class OrderValidator {
@@ -137,17 +132,25 @@ notifier.sendNotification(order);
 
 ```
 
+```
+
 > Al separar las preocupaciones en clases distintas, cada una con una única responsabilidad, logramos un diseño modular y más fácil de mantener. La `OrderProcessor`clase ahora se centra únicamente en orquestar el flujo de trabajo de procesamiento de pedidos, delegando tareas específicas a las clases apropiadas. Este enfoque permite probar, modificar y reutilizar componentes individuales más fácilmente.
 > 
 > (Thombare, 2024)
 
-## 2)**Principio abierto-cerrado (OCP)**
+### 2)**Principio abierto-cerrado (OCP)**
 
 Este principio establece que debemos usar abstracción para evitar código poco sustentable y confuso, a su vez ganar comodidad al momento de actualizar y agregar soporte para nuevas cosas, como en el siguiente ejemplo citado:
 
 > Planteamiento del problema: Considere un escenario en el que tiene una `ShapeCalculator`clase que calcula el área de diferentes formas. Más adelante, deberá agregar compatibilidad con nuevas formas sin modificar el código existente.
 > 
 > ```java
+```
+
+````
+
+```
+
 ```
 
 ```
@@ -175,6 +178,13 @@ throw new IllegalArgumentException("Tipo de forma no admitido.");
 > Para cumplir con el OCP, debemos definir una abstracción para las formas y extenderla para cada forma específica, permitiendo `ShapeCalculator`trabajar con la abstracción en lugar de con implementaciones concretas.
 > 
 > ```java
+
+```
+
+```
+
+```
+
 ```
 
 ```
@@ -236,7 +246,7 @@ return shape.calculateArea();
 }
 }
 
-```
+````
 
 > Al presentar la interfaz `IShape` e implementarla para cada clase de forma, podemos agregar fácilmente soporte para nuevas formas sin modificar la `ShapeCalculator`clase. Esto se adhiere al OCP, ya que `ShapeCalculator`está abierto a extensiones (que admite nuevas formas) pero cerrado a modificaciones.
 > 
@@ -251,6 +261,14 @@ Este principio fue propuesto por Barbara Liskov en 1987, de ahi el nombre, este 
 > Planteamiento del problema: digamos que tiene una `Bird`clase base con un `Fly()`método y deriva una `Penguin`clase a partir de ella. Sin embargo, los pingüinos no pueden volar, lo que viola el LSP.
 > 
 > ```java
+```
+
+````
+
+```
+
+```
+
 ```
 
 ```
@@ -274,13 +292,19 @@ throw new UnsupportedOperationException("Penguins cannot fly.");
 }
 }
 
-````
+```
 
 > Para cumplir con el LSP, debemos diseñar nuestras abstracciones correctamente, asegurándonos de que las clases derivadas puedan sustituir sus clases base sin alterar la corrección del programa.
 > 
 > ```java
 
-````
+```
+
+```
+
+```
+
+```
 
 ```
 
@@ -306,7 +330,7 @@ System.out.println("The penguin is swimming.");
 }
 }
 
-```
+````
 
 > (Thombare, 2024)
 
@@ -319,6 +343,14 @@ Este principio establece que podemos dividir una interfaz grande en interfaces m
 > Planteamiento del problema: suponga que tiene una interfaz llamada `IEmployee`con métodos para diversas tareas de los empleados, como `CalculateSalary()`, `GenerateReports()`y `FileExpenseReports()`. Sin embargo, no todos los tipos de empleados requieren todos estos métodos, lo que los obliga a proporcionar implementaciones vacías.
 > 
 > ```java
+```
+
+````
+
+```
+
+```
+
 ```
 
 ```
@@ -375,13 +407,19 @@ public void fileExpenseReports() {
 }
 }
 
-````
+```
 
 > Para seguir al ISP, debemos dividir la interfaz en interfaces más pequeñas y con funciones específicas, asegurando que los clientes no se vean obligados a depender de métodos que no utilizan.
 > 
 > ```java
 
-````
+```
+
+```
+
+```
+
+```
 
 ```
 
@@ -431,19 +469,25 @@ return BigDecimal.ZERO; // Placeholder for demonstration
 }
 }
 
-```
+````
 
 > (Thombare, 2024)
 
 Como vemos en el ejemplo anterior, las clases `Developer` y `Manager` implementan solo las interfaces que necesitan, en este caso la interfaz anterior se dividio en ***Interfaces funcionales***, llamamos interfaces funcionales a aquellas que tienen un solo método, de todas maneras estas interfaces resultantes de dividir una más grande pueden tener algunos métodos más, aqui es donde radica la importancia de este principío, evitamos asi dependencias innecesarias e implementaciones vacias, pues esto hace que el código sea menos engorroso y más elegante.
 
-## 5)**Principio de inversión de dependencia (DIP)**
+### 5)**Principio de inversión de dependencia (DIP)**
 
 Este principio establece que usemos abstracciones en las clases bases de nuestro programa y que aprovechemos esto para dar múltiples implementaciones, de esta manera no generaremos estrechas dependencias entre clases, lo cual hará que las clases sean más flexibles, Permite cambiar fácilmente las implementaciones concretas sin modificar el código de alto nivel(nuestras clases base), facilita las pruebas unitarias al permitir la sustitución de implementaciones por versiones simuladas o mock.
 
 > Planteamiento del problema: considere un escenario en el que tiene una `ProductService`clase que depende directamente de una `SQLProductRepository`clase para el acceso a datos. Este estrecho acoplamiento dificulta el intercambio de la implementación del repositorio o la prueba de la clase de servicio de forma aislada.
 > 
 > ```java
+```
+
+````
+
+```
+
 ```
 
 ```
@@ -481,8 +525,13 @@ return repository.getAllProducts();
 > Para cumplir con el DIP, debemos depender de abstracciones (interfaces) en lugar de implementaciones concretas, y las dependencias deben inyectarse desde el exterior.
 > 
 > ```java
+```
 
 ````
+
+```
+
+```
 
 ```
 
@@ -540,3 +589,12 @@ Con el primer código esto no era posible, pero al crear la interfaz `IProductRe
 ```
 
 ```
+
+```
+
+```
+
+```
+
+```
+````
