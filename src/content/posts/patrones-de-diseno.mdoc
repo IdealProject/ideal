@@ -1,0 +1,103 @@
+---
+title: Patrones de Diseño
+draft: false
+description: Un resumen acerca de algunos patrones de diseño y su funcionamiento
+authors:
+  - matias-mareco
+major:
+  discriminant: infor
+  value:
+    discriminant: '2'
+    value: P2
+---
+# Patrones de Diseño
+
+**Patrones de Diseño:** *Los patrones de diseño son soluciones ideadas y testeadas por miles de programadores de todo el mundo, estos patrones estan ideados para solucionar problemas comunes en nuestro código, evitando por ejemplo grandes cadenas de if, código innecesario, etc.*
+
+## Clasificación:
+
+### 1)Patrones de creación
+
+Estos estan diseñados para proporcionar mecanismos para crear objetos, los cuales ofrecen código mas flexible y reutilizable, a continuación citaremos un ejemplo de patron de creación y una breve descripción de su funcionamiento.
+
+\**Factory:**En este patrón creamos una clase la cual se encarga de "generar" objetos, de ahi su nombre "Factory", esta clase puede contener almacenadas instancias de un grupo de objetos que implementen una interfaz por ejemplo, estos objetos se comportan todos de manera diferente para algún método X.
+
+En esta clase Factory la cual podemos llamar segun que tipo de objeto fabrica, por ejemplo `DogFactory` o `EnemyFactory` creamos un método llamado obtener seguido del nombre del objeto con el cual trabaja la fábrica, por medio de un argumento como una palabra clave, podemos retornar la instancia, usualmente estas fábricas tienen un `public static final HashMap<V,R>`, en este mapa se almacenan las instancias a devolver, por medio del método obtener o generar, se pasa la clave como argumento y se devuelve la instancia correspondiente, a continuación un breve ejemplo
+
+Estamos desarrollando un videojuego y tenemos varios tipos de enemigo, nosotros podemos generar enemigos en diferentes zonas del juegodependiendo del nivel del jugador y la zona, si pensamos rápidamente como hacer esto probablemente se nos ocurra cometer el siguiente desastre
+
+```java
+public void generarEnemigos(){
+      Enemigo enemigo;
+      if(jugador.getNivel()>=1 && jugaodor.getNivel<5){
+         if(jugador.getZona == Zonas.BOSQUE){
+            enemigo = new Lobo();
+         }else if( jugador.getZona == Zonas.COLINA){
+            enemigo = new Enano();
+         }
+      }else if (jugador.getNivel() >=5 && jugador.getNivel() <= 10){
+          //Crear enemigos mas fuertes, como por ejemplo un dragón
+        }
+        //Asi sucesivamente con todas las zonas y niveles del juego
+        //Esto seria desastroso cuando queramos actualizar el juego y agregar un enemigo nuevo
+     return enemigo;
+}
+```
+
+Esto lo solucionariamos creando una `EnemyFactory` pues aqui podemos crear un mapa con los enemigos y clasificarlos por nivel y zona en la que habitan y simplemente crear un método `generateEnemy` que solamente reciba el objeto del jugador y generando los enemigos en base a eso, pues para esto podemos ayudarnos tambien de expresiones Lambda y Streams, los cuales son tratados en otro material.
+
+```java
+//Creamos el hashmap y le asignamos los valores directamente abriendo {{}}
+public static final HashMap<EnemyType, Enemy> enemigos = new HashMap(){{
+   put(EnemyType.OGRO, new Shrek());
+   put(EnemyType.MONSTRUO, new Pombero());
+   //Y asi con todos los enemigos spawneables de nuestro juego
+}};
+// Luego definimos el metodo para generarlos aleatoriamente
+public Enemy generarEnemigo(Jugador jugador){
+     //Primero filtramos todos los enemigos que puedan aparecer segun nivel y zona del jugador
+     //Imaginemos que tenemos un método que devuelva una lista de los enemigos
+     List<Enemy> enemigos = listaEnemigos();
+     //Filtramos los enemigos segun su nivel y la zona en la que habitan
+     enemigos = enemigos.stream().filter(enemigo -> enemigo.getNivel()<= jugador.getNivel() + 2 ).filter(enemigo -> enemigo.getZona().equals(jugador.getZona())).toList();
+    //Obtenemos la lista de enemigos, primero filtramos por nivel y obtenemos todos los enemigos que tengan máximo 2 niveles más que el jugador, aqui podriamos hacerlo depender de la dificultad del juego, por ejemplo un enumerado Difficult donde EASY = 1, NORMAL = 2 y asi sucesivamente, luego los filtramos por zona, es decir, si el jugador esta en el bosque, generar enemigos del bosque
+//Imaginamos que tenemos implementado un método en una clase externa el cual devuelve un elemento aleatorio de una lista 
+    return Util.obtenerElementoAleatorio(enemigos); 
+}
+```
+
+Listo, aqui tenemos nuestro algorimto mejorado, vemos que el código consta mas de lineas de comentarios que de código en si, aqui podemos ver el potencial de este patrón de diseño, pues podemos aplicar mucha más funcionalidad a este, todo gracias al polimorfismo :). Existe una versión más compleja de esta patrón, la ***AbstractFactory***, si deseas investigar sobre ella, al final del documento facilitaré el enlace a la página de la cual me basé para las clasificaciones, esta contiene muchos ejemplos y tipos de patrones más.
+
+**Entre otros patrones de creación estan:**
+
+- Builder
+- AbstractFactory
+- Prototype
+
+### 2)Patrones estructurales
+
+Estos patrones explican como ensamblar objetos y clases en estructuras más grandes, manteniendo a la par la flexibilidad y eficiencia de estas estructuras, a continuación citaremos algunas clases de patrones estructurales.
+
+- \**Adapter o Envoltura:**es un patrón que permite que objetos puedan colaborar con interfaces incompatibles, este patrón actua como puente entre 2 clases,Supongamos que tienes una clase `MediaPlayer` que puede reproducir archivos MP3, y quieres que también reproduzca archivos MP4 y VLC. Para ello, necesitas un adaptador.
+
+- \**Bridge(Puente):**Este patrón consiste en separar una clase grande o un conjunto de ellas en clases más pequeñas estrechamente relacionadas, haciendo que estas puedan desarrollarse independientemente de las otras, separando en 2 jerarquias separadas(implementación, abstracción).
+
+  Por ejemplo, imaginamos que tenemos 2 clases, `Circulo` y `Triangulo`, y que tenemos colores `Rojo` y `Azul`, que pasa si queremos combinar estas clases? Se podrian crear clases como CirculoRojo, CirculoAzul y así sucesivamente, pues esto aumentaria exponencialmente el número de clases. La solución a esto es crear un **Puente**, con puente nos referimos a una relación de composición, en vez de crear clases como CirculoRojo, podriamos crear nuestras figuras y colores separadamente y suponiendo que `Circulo` y `Triangulo` heredan de `Figura` podemos establecer una relación de composicion entre `Figura` y `Color`, creando asi un **Puente** entre ellas.
+
+- \**Proxy:**Quiza este nombre te resulte conocido, pues **Proxy** en realidad es un patrón de diseño estructural, este controla el acceso al objeto original, lo que permite realizar algo antes o despues de que la solicitud llegue al objeto, un ejemplo de **Proxy** en la vida real seria por ejemplo una tarjeta de crédito, estas son un intermediario entre la persona y su dinero guardado en un banco, obviamente para acceder a él se necesita un pin y ciertos protocolos de seguridad, las transacciones se realizan más cómodamente ya que no es necesario llevar un fajo de billetes gigante encima tuyo cada que quieras pagar algo o recibir una paga.
+
+  En síntesis este patrón consiste en crear una clase intermediara entre el usuario y otra, para no acceder directamente a la clase original, digamos que sería como una pared, donde se puede controlar, validar o invalidar información y retornar lo que se necesite
+
+### 3)Patrones de comportamiento
+
+Estos patrones se encargan de asignar las responsabilidades entre los objetos y de la comunicación efectiva entre ellos, a continuación veremos algunos de estos patrones.
+
+- \**Cadena de responsabilidad:**permite a los objetos procesar las solicitudes, sin acoplar demasiado al remitente de la solicitud con su receptor. Este patrón se utiliza cuando se desea que varias clases tengan la oportunidad de manejar una solicitud sin que el remitente de la solicitud necesite conocer qué objeto la manejará. Las solicitudes se envían por una cadena de manejadores y cada manejador decide si procesa la solicitud o la pasa al siguiente manejador en la cadena.
+
+  En sintesis trata sobre procesar una petición a lo largo de una serie de clases las cuales pueden rechazarla o derivarla a otra clase según sea la necesidad, antes de llegar a su destino
+
+- **Iterator:** un iterador es un patron de comportamiento el cual sirve como un "guia" a lo largo de cualquier colección, sea una lista lineal, matriz, árbol o cualquier estructura de datos más compleja, un iterador se usa para atravesar una colección de determinada manera, podemos tener **n** iteradores como para recorrer una colección de **n** maneras
+
+- \**Mediador:**Es un patrón el cual busca reducir las dependencias entre clases, actuando una clase como la "Clase mediadora", estos objetos distintos entre si interactuan entre ellos por medio de esta clase mediadora, analogamente podemos pensar en esta clase mediadora como un puesto de control de aviones, donde los aviones no están comunicados directamente entre sí, pero mediante el puesto de control, estan conscientes de las posiciones de los demás aviones, lo mismo sucede cuando un agente de tránsito se pone en un cruce a dirigir el tráfico, esto genera un orden y claridad notables a tener un tráfico desordenado y lleno de bocinazos, podemos pensar en esto como nuestro código.
+
+  Hablando en términos java, podriamos decir que si tenemos distintos objetos que indirectamente trabajan juntos, podemos redirigir llamadas entre ellos mediante este objeto mediador y asi organizar los eventos, en vez de generar dependencias innecesarias entre estos objetos lo cual va a dificultar la reutilización de estos
