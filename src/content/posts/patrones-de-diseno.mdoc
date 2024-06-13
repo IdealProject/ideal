@@ -51,6 +51,7 @@ Esto lo solucionariamos creando una `EnemyFactory` pues aqui podemos crear un ma
 public static final HashMap<EnemyType, Enemy> enemigos = new HashMap(){{
    put(EnemyType.OGRO, new Shrek());
    put(EnemyType.MONSTRUO, new Pombero());
+   put(EnemyType.DESCONOCIDO, new ExamenDeProgramacionII());
    //Y asi con todos los enemigos spawneables de nuestro juego
 }};
 // Luego definimos el metodo para generarlos aleatoriamente
@@ -58,7 +59,7 @@ public Enemy generarEnemigo(Jugador jugador){
      //Primero filtramos todos los enemigos que puedan aparecer segun nivel y zona del jugador
      //Imaginemos que tenemos un método que devuelva una lista de los enemigos
      List<Enemy> enemigos = listaEnemigos();
-     //Filtramos los enemigos segun su nivel y la zona en la que habitan
+     //Filtramos los enemigos segun su nivel y la zona en la que habitan comparando con el jugador
      enemigos = enemigos.stream().filter(enemigo -> enemigo.getNivel()<= jugador.getNivel() + 2 ).filter(enemigo -> enemigo.getZona().equals(jugador.getZona())).toList();
     //Obtenemos la lista de enemigos, primero filtramos por nivel y obtenemos todos los enemigos que tengan máximo 2 niveles más que el jugador, aqui podriamos hacerlo depender de la dificultad del juego, por ejemplo un enumerado Difficult donde EASY = 1, NORMAL = 2 y asi sucesivamente, luego los filtramos por zona, es decir, si el jugador esta en el bosque, generar enemigos del bosque
 //Imaginamos que tenemos implementado un método en una clase externa el cual devuelve un elemento aleatorio de una lista 
@@ -78,13 +79,13 @@ Listo, aqui tenemos nuestro algorimto mejorado, vemos que el código consta mas 
 
 Estos patrones explican como ensamblar objetos y clases en estructuras más grandes, manteniendo a la par la flexibilidad y eficiencia de estas estructuras, a continuación citaremos algunas clases de patrones estructurales.
 
-- \**Adapter o Envoltura:**es un patrón que permite que objetos puedan colaborar con interfaces incompatibles, este patrón actua como puente entre 2 clases,Supongamos que tienes una clase `MediaPlayer` que puede reproducir archivos MP3, y quieres que también reproduzca archivos MP4 y VLC. Para ello, necesitas un adaptador.
+- **Adapter o Envoltura:** es un patrón que permite que objetos puedan colaborar con interfaces incompatibles, este patrón actua como puente entre 2 clases,Supongamos que tienes una clase `MediaPlayer` que puede reproducir archivos MP3, y quieres que también reproduzca archivos MP4 y VLC. Para ello, necesitas un adaptador.
 
-- \**Bridge(Puente):**Este patrón consiste en separar una clase grande o un conjunto de ellas en clases más pequeñas estrechamente relacionadas, haciendo que estas puedan desarrollarse independientemente de las otras, separando en 2 jerarquias separadas(implementación, abstracción).
+- **Bridge(Puente)**: Este patrón consiste en separar una clase grande o un conjunto de ellas en clases más pequeñas estrechamente relacionadas, haciendo que estas puedan desarrollarse independientemente de las otras, separando en 2 jerarquias separadas(implementación, abstracción).
 
   Por ejemplo, imaginamos que tenemos 2 clases, `Circulo` y `Triangulo`, y que tenemos colores `Rojo` y `Azul`, que pasa si queremos combinar estas clases? Se podrian crear clases como CirculoRojo, CirculoAzul y así sucesivamente, pues esto aumentaria exponencialmente el número de clases. La solución a esto es crear un **Puente**, con puente nos referimos a una relación de composición, en vez de crear clases como CirculoRojo, podriamos crear nuestras figuras y colores separadamente y suponiendo que `Circulo` y `Triangulo` heredan de `Figura` podemos establecer una relación de composicion entre `Figura` y `Color`, creando asi un **Puente** entre ellas.
 
-- \**Proxy:**Quiza este nombre te resulte conocido, pues **Proxy** en realidad es un patrón de diseño estructural, este controla el acceso al objeto original, lo que permite realizar algo antes o despues de que la solicitud llegue al objeto, un ejemplo de **Proxy** en la vida real seria por ejemplo una tarjeta de crédito, estas son un intermediario entre la persona y su dinero guardado en un banco, obviamente para acceder a él se necesita un pin y ciertos protocolos de seguridad, las transacciones se realizan más cómodamente ya que no es necesario llevar un fajo de billetes gigante encima tuyo cada que quieras pagar algo o recibir una paga.
+- **Proxy:** Quiza este nombre te resulte conocido, pues **Proxy** en realidad es un patrón de diseño estructural, este controla el acceso al objeto original, lo que permite realizar algo antes o despues de que la solicitud llegue al objeto, un ejemplo de **Proxy** en la vida real seria por ejemplo una tarjeta de crédito, estas son un intermediario entre la persona y su dinero guardado en un banco, obviamente para acceder a él se necesita un pin y ciertos protocolos de seguridad, las transacciones se realizan más cómodamente ya que no es necesario llevar un fajo de billetes gigante encima tuyo cada que quieras pagar algo o recibir una paga.
 
   En síntesis este patrón consiste en crear una clase intermediara entre el usuario y otra, para no acceder directamente a la clase original, digamos que sería como una pared, donde se puede controlar, validar o invalidar información y retornar lo que se necesite
 
