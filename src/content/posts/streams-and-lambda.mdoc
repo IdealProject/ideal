@@ -70,7 +70,7 @@ Notamos en este caso como el código resulta sustancialmente acortado utilizando
 
 *Recordatorio →*
 
-\***Interfaz funcional =****interfaz que solo tiene un método por implementar*
+Interfaz funcional = *interfaz que solo tiene un método por implementar*
 
 Al inicio habíamos mencionado que se utiliza Lambda en conjunto con interfaces funcionales para instanciarlas
 
@@ -98,7 +98,7 @@ Saludo saludo = new Saludo() {
 saludo.decirHola();
 ```
 
-Wow, eso se ve genial, pero quizá sea algo molesto tener que definir esta instancia anónima con las llaves, el `@Override` y teniendo que reescribir `public void decirHola(){ //Cuerpo }`, pues las expresiones lambda sirven para definir el cuerpo de estos métodos! Esta es la relación entre Lambda y las interfaces funcionales, ya que esto funciona **solo con interfaces funcionales**
+Wow, eso se ve genial, pero quizá sea algo molesto tener que definir esta instancia anónima con las llaves, el `@Override` y teniendo que reescribir `public void decirHola(){ /*Cuerpo*/ }`, pues las expresiones lambda sirven para definir el cuerpo de estos métodos! Esta es la relación entre Lambda y las interfaces funcionales, ya que esto funciona **solo con interfaces funcionales**
 
 ```java
 //Ya tenemos nuestra intetfaz Saludo y ahora queremos intstanciarla, simplemente debemos hacer lo siguiente
@@ -112,5 +112,112 @@ void decirHola(String nombre);
 //Entonces debemos definirlo tambien en nuestra expresión lambda para poder darle uso a nombre
 
 Saludo saludo = (String nombre) -> System.out.println("¡Hola "+ nombre + " desde una expresión lambda!");
-saludo.decirHola("Ideal");
+saludo.decirHola("Ideal");//¡Hola Ideal desde una expresión lambda!
+```
+
+## Streams
+
+Stream una clase la cual representa es una secuencia de elementos, podemos partir de un ArrayList, un arreglo nativo, etc. Stream permite realizar operaciones funcionales sobre ellos, como filtrado, mapeo, reducción, y más, de una manera declarativa y fluida. Esto es muy útil, pues usando Stream ***no modificamos la fuente de datos original***\*,*hablando en términos de filtrado/ descarte, pues si decidimos hacer algo sobre las instancias o elementos del stream, los cambios se verán reflejados en los elementos/instancias originales de la colección de la cual partimos
+
+### Tipos de Operaciones en Streams
+
+- **Operaciones Intermedias:** Devuelven un nuevo stream y se pueden encadenar. Ejemplos incluyen `filter`, `map`, `sorted`.
+- **Operaciones Terminales:** Inician el procesamiento de la secuencia y devuelven un resultado o efecto colateral. Ejemplos incluyen `forEach`, `collect`, `reduce`.
+
+### Métodos útiles de Stream
+
+A continuación citaremos algunos métodos bastante útiles para trabajar con streams
+
+#### Métodos Intermedios
+
+1. **`filter(Predicate)`**: Filtra los elementos del stream basado en un predicado  y devuelve un nuevo stream que contiene solo los elementos que cumplen con el predicado.
+
+   \**Predicado:**Un predicado es cualquier expresión que resulta en true o false, desde las que utilizamos en los if, como en `if(a>b)` , tenemos que `(a>b)` es un predicado, tambien en , por ejemplo, `numeros.filter(n → n%2==0)`, estamos filtrando la lista de números para que queden los pares, tenemos que `n → n%2==0` es el predicado.
+
+1. **`map(Function)`**: Transforma cada elemento del stream usando la función proporcionada y devuelve un nuevo stream con los resultados de estas transformaciones.
+
+   **Este recibe un argumento Function**, este puede ser una expresion lambda, como por ejemplo en el ejemplo de más arriba, `personas.stream().map(Persona::getNombre).forEach(System.out::println);`, aqui usamos la expresión `Persona::getNombre`, lo que hace esto es que se devuelva un nuevo stream que estará conformado por los nombres de las personas,
+
+1. **`sorted()`**
+
+   - Ordena los elementos del stream según el orden natural de los elementos (si son comparables) y devuelve un nuevo stream con los elementos ordenados.
+
+1. **`distinct()`**
+
+   - Elimina los elementos duplicados del stream basándose en sus implementaciones de `equals` y `hashCode` y devuelve un nuevo stream sin duplicados.
+
+1. **`limit(long)`**
+
+   - Limita el número máximo de elementos en el stream a los primeros `n` elementos especificados y devuelve un nuevo stream con estos elementos.
+
+1. **`skip(long)`**
+
+   - Omite los primeros `n` elementos del stream y devuelve un nuevo stream que contiene los elementos restantes después de omitir los primeros `n` elementos.
+
+#### Métodos Terminales
+
+1. \**`forEach(Consumer)`\****:**Ejecuta una acción por cada elemento del stream utilizando el consumidor proporcionado. Es una operación terminal que no devuelve ningún valor.
+
+   **Consumer:** Consumer es una clase de java, pero en los ejemplos que usamos aqui no estamos instanciando nada, un Consumer se toma como una expresion que no devuelve nada, solo ejecuta algo , como por ejemplo `nombre -> System.out.println(nombre)`.
+
+1. **`collect(Collector)`**: Recolecta los elementos del stream utilizando un `Collector` especificado y devuelve el resultado recolectado, que puede ser una lista, un mapa u otra estructura de datos.
+
+1. **`anyMatch(Predicate)`**: Comprueba si al menos uno de los elementos del stream cumple con el predicado especificado y devuelve `true` si encuentra alguna coincidencia, o `false` si no hay ninguna.
+
+1. **`allMatch(Predicate)`**: Comprueba si todos los elementos del stream cumplen con el apredicado especificado y devuelve `true` si todos los elementos coinciden con la condición, o `false` si al menos uno no la cumple.
+
+1. **`noneMatch(Predicate)`**: Comprueba si ninguno de los elementos del stream cumple con el predicado especificado y devuelve `true` si ninguno de los elementos coincide con la condición, o `false` si al menos uno lo hace.
+
+#### Métodos de Creación y Conversión
+
+1. **`stream()`**: Convierte una colección (como una lista o un conjunto) en un stream para que se puedan aplicar operaciones de stream sobre sus elementos.
+1. **`of()`**: Crea un stream de elementos especificados como argumentos varargs.
+1. **`empty()`**: Crea un stream vacío sin elementos.
+
+### Ejemplos y aplicaciones de Stream
+
+Algoritmo donde usamos lambda y streams para contar cuantos numeros pares hay en una lista, el método count() devuelve la cantidad de elementos en un stream
+
+```java
+ List<Integer> numeros = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+        long cantidadPares = numeros.stream()
+                                   .filter(numero -> numero % 2 == 0)
+                                   .count();
+        System.out.println("Cantidad de números pares: " + cantidadPares);
+```
+
+Algoritmo donde imprimimos todos los elementos de una lista de nombres en mayúsculas
+
+```java
+List<String> nombres = Arrays.asList("Juan", "María", "Carlos", "Ana");
+
+        List<String> nombresMayusculas = nombres.stream()
+                                               .map(String::toUpperCase)
+                                               .collect(Collectors.toList());
+
+        System.out.println("Nombres en mayúsculas: " );
+        nombresMayusculas.forEach(System.out::println);
+```
+
+Algoritmo donde imprimimos las primeras 3 palabras en orden alfabetico
+
+```java
+ List<String> palabras = Arrays.asList("java", "programación", "stream", "colecciones");
+
+        palabras.stream()
+                .sorted()
+                .limit(3)
+                .forEach(System.out::println);
+```
+
+Algoritmo donde filtramos a las personas mayores de 18 años, luego las ordenamos según nombre, por útlimo obtenemos un stream con los nombres de las personas y posteriormente los imprimimos, en síntesis, este algoritmo imprime los nombres de todas las personas mayores de 18 años y ordenados alfabeticamente
+
+```java
+//Imaginamos que tenemos un lista de personas
+personas.stream()
+        .filter(persona -> persona.getEdad() > 18)
+        .sorted((p1, p2) -> p1.getNombre().compareTo(p2.getNombre()))
+        .map(Persona::getNombre)
+        .forEach(System.out::println);
 ```
