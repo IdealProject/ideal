@@ -1,0 +1,116 @@
+---
+title: Streams & Lambda
+draft: false
+description: >-
+  En este post se hablará de que es Stream y Lambda, en que los podemos usar y
+  como pueden facilitar tareas que anteriormente requerian varias lineas de
+  código
+authors:
+  - matias-mareco
+major:
+  discriminant: infor
+  value:
+    discriminant: '2'
+    value: P2
+---
+# Streams & Lambda
+
+## Lambda
+
+Lambda es una expresión anónima la cual puede ser utilizada para un sin fin de cosas, desde filtrar elementos de una lista, acortar código y hasta representar instancias de interfaces funcionales, a continuación explicaremos estos puntos
+
+### Sintaxis de Lambda
+
+Para escribir una expresión Lambda, existen dos formas de escribir una, nos centraremos primero en la que más utilizaremos.
+
+```java
+//Sintaxis Lambda
+//(Parametros) -> Expresión
+(a,b) -> a + b ;
+```
+
+En este ejemplo, esta función retorna la suma de los parámetros a y b, la flecha `→` tiene la función de separar los parámetros de la expresión, si el cuerpo de nuestra expresión es más complejo, usaremos la siguiente sintaxis.
+
+```java
+//Sintaxis para cuerpos de más de una linea
+(parameters) -> {
+    // multiples sentencias
+}
+//Ejemplo
+Operacion sumaConImpresion = (a, b) -> {
+       System.out.println("Sumando " + a + " y " + b);
+       return a + b;
+};
+```
+
+Esta sería la forma básica de estas expresiones, un poco más arriba habiamos mencionado que se pueden escribir de dos formas, pues cuando necesitamos hacer referencias a métodos de una clase, en vez de `→` usamos `::`, a continuación algunos ejemplos.
+
+```java
+//Escribiremos 2 expresiones que tienen la misma funcionalidad pero escritas de ambas formas, imagina que deseamos imprimir los nombres de una lista de personas la cual recorreremos con un foreach
+//Sintaxis con ->
+personas.forEach(persona -> System.out.println(persona.getNombre()));
+//Sintaxis con ::
+personas.forEach(System.out::println);//Esta sentencia en realidad imprime según el método toString de la clase, para imprimir el dato que nosotros querramos, debemos usar lo siguiente 
+personas.stream().map(Persona::getNombre).forEach(System.out::println);
+//En esta linea vemos palabras nuevas, no te preocupes, pues veremos Stream más adelante en este material, de todas maneras, demuestra la funcionalidad de ::
+
+//Otros ejemplos usando ::
+//Supongamos que hoy es el cumpleaños de todos y queremos aumentar las edades de cada uno
+personas.forEach(Persona::incEdad);
+//Notamos como en el ejemplo de arriba, no se inserta () al final del método, sino que solo es necesario pasar el nombre del método que queremos ejecutar, un detalle importante es que no podemos utilizar :: cuando el método espera uno o más argumentos
+
+//Cuando no necesitamos parámetros, simplemente escribimos ()
+ () -> System.out.println("¡Hola desde una expresión lambda!");
+
+```
+
+Notamos en este caso como el código resulta sustancialmente acortado utilizando `::` , como ya mencionamos, usamos `::` cuando necesitamos hacer referencias a métodos, pues este nos ahorra tener que definir un parámetro que no necesariamente necesitamos definir, pues en `personas.forEach(persona -> System.out.println(persona.getNombre()));` nosotros ya sabemos que el parámetro será un objeto Persona de la lista personas, esta forma de escribir las expresiones tambien funciona con métodos estáticos, métodos de instancia, constructores, por ejemplo `Persona::new`, pero no nos adentraremos en este último ejemplo debido a que se utiliza con clases las cuales no estudiamos en este semestre(2024).
+
+### Relación de Lambda con interfaces funcionales
+
+*Recordatorio →*
+
+\***Interfaz funcional =****interfaz que solo tiene un método por implementar*
+
+Al inicio habíamos mencionado que se utiliza Lambda en conjunto con interfaces funcionales para instanciarlas
+
+**¿Instanciar una interfaz?**
+
+Si bien, esto no se puede realizar de manera directa, podemos hacerlo creando una clase anónima que implemente sus métodos, por ejemplo.
+
+```java
+//Imaginemos que tenemos esta interfaz
+@FunctionalInterface
+interface Saludo {
+    void decirHola();
+}
+
+//Luego en alguna parte de nuestro programa podemos hacer lo siguie
+// Instanciar una interfaz mediante una clase anónima
+Saludo saludo = new Saludo() {
+    @Override
+    public void decirHola() {
+         System.out.println("¡Hola desde una clase anónima!");
+    }
+};
+
+// Usar la instancia
+saludo.decirHola();
+```
+
+Wow, eso se ve genial, pero quizá sea algo molesto tener que definir esta instancia anónima con las llaves, el `@Override` y teniendo que reescribir `public void decirHola(){ //Cuerpo }`, pues las expresiones lambda sirven para definir el cuerpo de estos métodos! Esta es la relación entre Lambda y las interfaces funcionales, ya que esto funciona **solo con interfaces funcionales**
+
+```java
+//Ya tenemos nuestra intetfaz Saludo y ahora queremos intstanciarla, simplemente debemos hacer lo siguiente
+// Instanciar una interfaz funcional mediante una expresión lambda
+Saludo saludo = () -> System.out.println("¡Hola desde una expresión lambda!");
+// Usar la instancia
+saludo.decirHola();
+//Asi de sencillo se puede crear una instancia anónima que implemente esta interfaz, si nuestro método espera argumentos, simplemente los definimos en los paréntesis, imaginemos que decirHola espera un nombre
+
+void decirHola(String nombre);
+//Entonces debemos definirlo tambien en nuestra expresión lambda para poder darle uso a nombre
+
+Saludo saludo = (String nombre) -> System.out.println("¡Hola "+ nombre + " desde una expresión lambda!");
+saludo.decirHola("Ideal");
+```
