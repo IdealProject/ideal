@@ -69,14 +69,7 @@ private void sendEmailNotification(Order order) {
 
 ```
 
-> Para cumplir con el SRP, debemos dividir la clase `OrderProcessor` en clases
-> 
-> ```java
-```
-
-````
-
-separadas, cada una responsable de una única tarea.
+Para cumplir con el SRP, debemos dividir la clase `OrderProcessor` en clases separadas, cada una responsable de una única tarea.
 
 ```java
 
@@ -135,9 +128,9 @@ notifier.sendNotification(order);
 }
 }
 
-````
+```
 
-````
+````java
 
 > Al separar las preocupaciones en clases distintas, cada una con una única responsabilidad, logramos un diseño modular y más fácil de mantener. La `OrderProcessor`clase ahora se centra únicamente en orquestar el flujo de trabajo de procesamiento de pedidos, delegando tareas específicas a las clases apropiadas. Este enfoque permite probar, modificar y reutilizar componentes individuales más fácilmente.
 > 
@@ -288,6 +281,10 @@ Este principio fue propuesto por Barbara Liskov en 1987, de ahi el nombre, este 
 
 ```
 
+```
+
+```
+
 public class Bird {
 public void fly() {
 System.out.println("The bird is flying.");
@@ -306,6 +303,8 @@ throw new UnsupportedOperationException("Penguins cannot fly.");
 > Para cumplir con el LSP, debemos diseñar nuestras abstracciones correctamente, asegurándonos de que las clases derivadas puedan sustituir sus clases base sin alterar la corrección del programa.
 > 
 > ```java
+
+````
 
 ````
 
@@ -427,8 +426,11 @@ public void fileExpenseReports() {
 > Para seguir al ISP, debemos dividir la interfaz en interfaces más pequeñas y con funciones específicas, asegurando que los clientes no se vean obligados a depender de métodos que no utilizan.
 > 
 > ```java
+```
 
-````
+```
+
+```
 
 ```
 
@@ -519,6 +521,8 @@ Este principio establece que usemos abstracciones en las clases bases de nuestro
 
 ```
 
+```
+
 import java.util.List;
 
 public class SQLProductRepository {
@@ -541,12 +545,12 @@ return repository.getAllProducts();
 }
 }
 
-```
+````
 
 > Para cumplir con el DIP, debemos depender de abstracciones (interfaces) en lugar de implementaciones concretas, y las dependencias deben inyectarse desde el exterior.
 > 
 > ```java
-```
+````
 
 ```
 
@@ -623,4 +627,7 @@ Con el primer código esto no era posible, pero al crear la interfaz `IProductRe
 
 ```
 
+```
+
+```
 ```
