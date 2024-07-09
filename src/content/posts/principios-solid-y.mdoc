@@ -1,0 +1,600 @@
+---
+title: Principios SOLID y
+draft: false
+description: Un resumen sobre los 5 Principios SOLID, Orientados a Java
+authors:
+  - matias-mareco
+major:
+  discriminant: infor
+  value:
+    discriminant: '2'
+    value: P2
+---
+# Principios SOLID y Patrones de Diseño
+
+***Breves definiciones:***
+
+\***Principios SOLID:****Son 5 principios establecidos para tener un código limpio, mantenible y escalable, el acrónimo SOLID viene de las iniciales de los 5 principios:*
+
+1. ***S***\*: Single Responsibility Principle (Principio de Responsabilidad Única)*
+1. ***O***\*: Open/Closed Principle (Principio de Abierto/Cerrado)*
+1. ***L***\*: Liskov Substitution Principle (Principio de Sustitución de Liskov)*
+1. ***I***\*: Interface Segregation Principle (Principio de Segregación de Interfaces)*
+1. ***D***\*: Dependency Inversion Principle (Principio de Inversión de Dependencias)*
+
+\***Patrones de Diseño:****Los patrones de diseño son soluciones ideadas y testeadas por miles de programadores de todo el mundo, estos patrones estan ideados para solucionar problemas comunes en nuestro código, evitando por ejemplo grandes cadenas de if, código innecesario, etc.*
+
+## Principios SOLID
+
+### 1)**Principio de Responsabilidad Única (SRP)**
+
+El principío de responsabilidad única establece que cada clase o método debe preocuparse por cumplir con una tarea y no con varias a la vez, esto puesto que quizá necesitemos reutilizar estas funciones en otros lugares, también facilita la corrección de errores y acortar el cuerpo de ciertos métodos
+
+> Planteamiento del problema: imagine que tiene una clase llamada `OrderProcessor`que maneja múltiples responsabilidades, como validar pedidos, calcular totales y enviar notificaciones por correo electrónico. Esto viola el SRP, lo que hace que la clase sea difícil de mantener y modificar.
+
+```java
+
+public class OrderProcessor {
+public void processOrder(Order order) {
+// Validar el pedido
+if (!order.isValid()) {
+throw new InvalidOperationException("Pedido no válido.");
+}
+
+// Calcular el total
+BigDecimal total = calculateTotal(order);
+
+// Guardar el pedido en la base de datos
+saveOrderToDatabase(order);
+
+// Enviar una notificación por correo electrónico
+sendEmailNotification(order);
+}
+
+// Otros métodos...
+
+private BigDecimal calculateTotal(Order order) {
+// Implementación para calcular el total del pedido
+return BigDecimal.ZERO; // Placeholder para demostración
+}
+
+private void saveOrderToDatabase(Order order) {
+// Implementación para guardar el pedido en la base de datos
+}
+
+private void sendEmailNotification(Order order) {
+// Implementación para enviar la notificación por correo electrónico
+}
+}
+
+```
+
+> Para cumplir con el SRP, debemos dividir la clase `OrderProcessor` en clases
+> 
+> ```java
+separadas, cada una responsable de una única tarea.
+```
+
+public class OrderValidator {
+public boolean isValid(Order order) {
+// Validar el pedido
+// ...
+return true; // Placeholder para demostración
+}
+}
+
+public class OrderCalculator {
+public BigDecimal calculateTotal(Order order) {
+// Calcular el total
+// ...
+return BigDecimal.ZERO; // Placeholder para demostración
+}
+}
+
+public class OrderRepository {
+public void save(Order order) {
+// Guardar el pedido en la base de datos
+// ...
+}
+}
+
+public class EmailNotifier {
+public void sendNotification(Order order) {
+// Enviar una notificación por correo electrónico
+// ...
+}
+}
+
+public class OrderProcessor {
+private final OrderValidator validator;
+private final OrderCalculator calculator;
+private final OrderRepository repository;
+private final EmailNotifier notifier;
+
+public OrderProcessor(OrderValidator validator, OrderCalculator calculator,
+OrderRepository repository, EmailNotifier notifier) {
+this.validator = validator;
+this.calculator = calculator;
+this.repository = repository;
+this.notifier = notifier;
+}
+
+public void processOrder(Order order) {
+if (!validator.isValid(order)) {
+throw new InvalidOperationException("Orden no válida.");
+}
+
+BigDecimal total = calculator.calculateTotal(order);
+repository.save(order);
+notifier.sendNotification(order);
+}
+}
+
+```
+
+```
+
+> Al separar las preocupaciones en clases distintas, cada una con una única responsabilidad, logramos un diseño modular y más fácil de mantener. La `OrderProcessor`clase ahora se centra únicamente en orquestar el flujo de trabajo de procesamiento de pedidos, delegando tareas específicas a las clases apropiadas. Este enfoque permite probar, modificar y reutilizar componentes individuales más fácilmente.
+> 
+> (Thombare, 2024)
+
+### 2)**Principio abierto-cerrado (OCP)**
+
+Este principio establece que debemos usar abstracción para evitar código poco sustentable y confuso, a su vez ganar comodidad al momento de actualizar y agregar soporte para nuevas cosas, como en el siguiente ejemplo citado:
+
+> Planteamiento del problema: Considere un escenario en el que tiene una `ShapeCalculator`clase que calcula el área de diferentes formas. Más adelante, deberá agregar compatibilidad con nuevas formas sin modificar el código existente.
+> 
+> ```java
+```
+
+````
+
+```
+
+```
+
+```
+
+```
+
+```
+
+public class ShapeCalculator {
+public double calculateArea(Object shape) {
+if (shape instanceof Rectangle) {
+Rectangle rectangle = (Rectangle) shape;
+return rectangle.getWidth() * rectangle.getHeight();
+} else if (shape instanceof Circle) {
+Circle circle = (Circle) shape;
+return Math.PI * circle.getRadius() * circle.getRadius();
+} else {
+throw new IllegalArgumentException("Tipo de forma no admitido.");
+}
+}
+}
+
+```
+
+> Para cumplir con el OCP, debemos definir una abstracción para las formas y extenderla para cada forma específica, permitiendo `ShapeCalculator`trabajar con la abstracción en lugar de con implementaciones concretas.
+> 
+> ```java
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+public interface IShape {
+double calculateArea();
+}
+
+public class Rectangle implements IShape {
+private double width;
+private double height;
+
+public double getWidth() {
+return width;
+}
+
+public void setWidth(double width) {
+this.width = width;
+}
+
+public double getHeight() {
+return height;
+}
+
+public void setHeight(double height) {
+this.height = height;
+}
+
+@Override
+public double calculateArea() {
+return width * height;
+}
+}
+
+public class Circle implements IShape {
+private double radius;
+
+public double getRadius() {
+return radius;
+}
+
+public void setRadius(double radius) {
+this.radius = radius;
+}
+
+@Override
+public double calculateArea() {
+return Math.PI * radius * radius;
+}
+}
+
+public class ShapeCalculator {
+public double calculateArea(IShape shape) {
+return shape.calculateArea();
+}
+}
+
+````
+
+> Al presentar la interfaz `IShape` e implementarla para cada clase de forma, podemos agregar fácilmente soporte para nuevas formas sin modificar la `ShapeCalculator`clase. Esto se adhiere al OCP, ya que `ShapeCalculator`está abierto a extensiones (que admite nuevas formas) pero cerrado a modificaciones.
+> 
+> (Thombare, 2024)
+
+En este caso observamos como el códifo se simplifica y se hace más entendible para el momento en el que queramos agregar más figuras, solo debemos crear una nueva clase e implementar el método calculateArea, de esta manera `ShapeCalculator` no se preocupa de comprobar cada tipo de figura y operar segun ella.
+
+## 3)**Principio de sustitución de Liskov (LSP)**
+
+Este principio fue propuesto por Barbara Liskov en 1987, de ahi el nombre, este principio establece que debemos diseñar nuestras clases padre e hija de modo a que las implementaciones de las clases derivadas no alteren el programa, ocasionen fallas, incoherencias lógicas, etc.
+
+> Planteamiento del problema: digamos que tiene una `Bird`clase base con un `Fly()`método y deriva una `Penguin`clase a partir de ella. Sin embargo, los pingüinos no pueden volar, lo que viola el LSP.
+> 
+> ```java
+```
+
+````
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+public class Bird {
+public void fly() {
+System.out.println("The bird is flying.");
+}
+}
+
+public class Penguin extends Bird {
+@Override
+public void fly() {
+throw new UnsupportedOperationException("Penguins cannot fly.");
+}
+}
+
+```
+
+> Para cumplir con el LSP, debemos diseñar nuestras abstracciones correctamente, asegurándonos de que las clases derivadas puedan sustituir sus clases base sin alterar la corrección del programa.
+> 
+> ```java
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+public abstract class Bird {
+public abstract void move();
+}
+
+public class FlyingBird extends Bird {
+@Override
+public void move() {
+System.out.println("The bird is flying.");
+}
+}
+
+public class Penguin extends Bird {
+@Override
+public void move() {
+System.out.println("The penguin is swimming.");
+}
+}
+
+````
+
+> (Thombare, 2024)
+
+Como vemos en el ejemplo citado, redefiniendo el nombre del método de fly a move, nuestra herencia cobra mayor sentido, pues como programadores, debemos tener en cuenta todos los casos, incluyendo los casos especiales/especificos, pues que un animal sea catalogado como "pájaro" no necesariamente implica que este pueda volar, si aplicamos este concepto a programas más complejos se notará la importancia de este principio.
+
+## 4) **Principio de segregación de interfaz (ISP)**
+
+Este principio establece que podemos dividir una interfaz grande en interfaces mas pequeñas, pues existen casos en los que quiza no necesitamos implementar todos los métodos de la interfaz, cosa que las mismas interfaces no nos permiten, por lo cual debemos dar implementaciones vacias, lo cual es código innecesario y confuso
+
+> Planteamiento del problema: suponga que tiene una interfaz llamada `IEmployee`con métodos para diversas tareas de los empleados, como `CalculateSalary()`, `GenerateReports()`y `FileExpenseReports()`. Sin embargo, no todos los tipos de empleados requieren todos estos métodos, lo que los obliga a proporcionar implementaciones vacías.
+> 
+> ```java
+```
+
+````
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+public interface IEmployee {
+BigDecimal calculateSalary();
+void generateReports();
+void fileExpenseReports();
+}
+
+public class Manager implements IEmployee {
+@Override
+public BigDecimal calculateSalary() {
+// Calculate manager's salary
+// ...
+return BigDecimal.ZERO; // Placeholder for demonstration
+}
+
+@Override
+public void generateReports() {
+// Generate reports
+// ...
+}
+
+@Override
+public void fileExpenseReports() {
+// File expense reports
+// ...
+}
+}
+
+public class Developer implements IEmployee {
+@Override
+public BigDecimal calculateSalary() {
+// Calculate developer's salary
+// ...
+return BigDecimal.ZERO; // Placeholder for demonstration
+}
+
+@Override
+public void generateReports() {
+// Not applicable for developers
+}
+
+@Override
+public void fileExpenseReports() {
+// Not applicable for developers
+}
+}
+
+```
+
+> Para seguir al ISP, debemos dividir la interfaz en interfaces más pequeñas y con funciones específicas, asegurando que los clientes no se vean obligados a depender de métodos que no utilizan.
+> 
+> ```java
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+public interface IEmployeeSalary {
+BigDecimal calculateSalary();
+}
+
+public interface IReportGenerator {
+void generateReports();
+}
+
+public interface IExpenseReporter {
+void fileExpenseReports();
+}
+
+public class Manager implements IEmployeeSalary, IReportGenerator, IExpenseReporter {
+@Override
+public BigDecimal calculateSalary() {
+// Calculate manager's salary
+// ...
+return BigDecimal.ZERO; // Placeholder for demonstration
+}
+
+@Override
+public void generateReports() {
+// Generate reports
+// ...
+}
+
+@Override
+public void fileExpenseReports() {
+// File expense reports
+// ...
+}
+}
+
+public class Developer implements IEmployeeSalary {
+@Override
+public BigDecimal calculateSalary() {
+// Calculate developer's salary
+// ...
+return BigDecimal.ZERO; // Placeholder for demonstration
+}
+}
+
+````
+
+> (Thombare, 2024)
+
+Como vemos en el ejemplo anterior, las clases `Developer` y `Manager` implementan solo las interfaces que necesitan, en este caso la interfaz anterior se dividio en ***Interfaces funcionales***, llamamos interfaces funcionales a aquellas que tienen un solo método, de todas maneras estas interfaces resultantes de dividir una más grande pueden tener algunos métodos más, aqui es donde radica la importancia de este principío, evitamos asi dependencias innecesarias e implementaciones vacias, pues esto hace que el código sea menos engorroso y más elegante.
+
+### 5)**Principio de inversión de dependencia (DIP)**
+
+Este principio establece que usemos abstracciones en las clases bases de nuestro programa y que aprovechemos esto para dar múltiples implementaciones, de esta manera no generaremos estrechas dependencias entre clases, lo cual hará que las clases sean más flexibles, Permite cambiar fácilmente las implementaciones concretas sin modificar el código de alto nivel(nuestras clases base), facilita las pruebas unitarias al permitir la sustitución de implementaciones por versiones simuladas o mock.
+
+> Planteamiento del problema: considere un escenario en el que tiene una `ProductService`clase que depende directamente de una `SQLProductRepository`clase para el acceso a datos. Este estrecho acoplamiento dificulta el intercambio de la implementación del repositorio o la prueba de la clase de servicio de forma aislada.
+> 
+> ```java
+```
+
+````
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+import java.util.List;
+
+public class SQLProductRepository {
+public List<Product> getAllProducts() {
+// Retrieve products from SQL database
+// ...
+return null; // Placeholder for demonstration
+}
+}
+
+public class ProductService {
+private SQLProductRepository repository;
+
+public ProductService() {
+repository = new SQLProductRepository();
+}
+
+public List<Product> getProducts() {
+return repository.getAllProducts();
+}
+}
+
+````
+
+> Para cumplir con el DIP, debemos depender de abstracciones (interfaces) en lugar de implementaciones concretas, y las dependencias deben inyectarse desde el exterior.
+> 
+> ```java
+```
+
+````
+
+```
+
+```
+
+```
+
+```
+
+```
+
+public interface IProductRepository
+{
+List<Product> GetAllProducts();
+}
+
+public class SQLProductRepository : IProductRepository
+{
+public List<Product> GetAllProducts()
+{
+// Retrieve products from SQL database
+// ...
+}
+}
+
+public class ProductService
+{
+private IProductRepository _repository;
+
+public ProductService(IProductRepository repository)
+{
+_repository = repository;
+}
+
+public List<Product> GetProducts()
+{
+return _repository.GetAllProducts();
+}
+}
+
+```
+
+> Al depender de la `IProductRepository`interfaz en lugar de una implementación concreta, invertimos la dependencia, haciendo que la `ProductService`clase sea más flexible y comprobable. La implementación específica del repositorio se puede inyectar en la clase de servicio, lo que permite una sustitución más sencilla y facilita el acoplamiento flexible.
+> 
+> (Thombare, 2024)
+
+Explicando el ejemplo anterior, observamos como nuestra clase `ProductService` dependia estrechamente de la clase `SQLProductRepository`, pues , que sucede si por motivos técnicos o de cualquier índole no quiero usar `SQLProductRepository` ?
+
+Con el primer código esto no era posible, pero al crear la interfaz `IProductRepository` puedo tener tantos tipos de repositorio como yo quiera y elegir el que más me convenga, pues ahora solo necesito agregar cualquier repositorio que implemente `IProductRepository` y este funcionará con `ProductService`, asi podré tener diferentes repositorios que trabajen de maneras diferentes pero que al final del día ofrezcan el mismo resultado en la clase `ProductService`, esto es muy importante ya que hacemos que nuestra clase `ProductService` sea mucho más flexible a la hora de definir el repositorio con el cual va a trabajar, facilitando asi aspectos como el testeo.
+
+## Referencias
+
+- Thombare, D. (2024). **SOLID Principles: The Foundation of Clean, Maintainable and Scalable C# Code**. Recuperado de: [https://medium.com/@dayanandthombare/%EF%B8%8Fsolid-principles-the-foundation-of-clean-maintainable-and-scalable-c-code-e48dd89bf5c1](https://medium.com/@dayanandthombare/%EF%B8%8Fsolid-principles-the-foundation-of-clean-maintainable-and-scalable-c-code-e48dd89bf5c1)
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+````
