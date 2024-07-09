@@ -16,13 +16,13 @@ major:
 
 \***Principios SOLID:****Son 5 principios establecidos para tener un código limpio, mantenible y escalable, el acrónimo SOLID viene de las iniciales de los 5 principios:*
 
-1. ***S***\*: Single Responsibility Principle (Principio de Responsabilidad Única)*
-1. ***O***\*: Open/Closed Principle (Principio de Abierto/Cerrado)*
-1. ***L***\*: Liskov Substitution Principle (Principio de Sustitución de Liskov)*
-1. ***I***\*: Interface Segregation Principle (Principio de Segregación de Interfaces)*
-1. ***D***\*: Dependency Inversion Principle (Principio de Inversión de Dependencias)*
+1. ***S***: Single Responsibility Principle (Principio de Responsabilidad Única)*
+1. ***O***: Open/Closed Principle (Principio de Abierto/Cerrado)*
+1. ***L***: Liskov Substitution Principle (Principio de Sustitución de Liskov)*
+1. ***I***: Interface Segregation Principle (Principio de Segregación de Interfaces)*
+1. ***D***: Dependency Inversion Principle (Principio de Inversión de Dependencias)*
 
-\***Patrones de Diseño:****Los patrones de diseño son soluciones ideadas y testeadas por miles de programadores de todo el mundo, estos patrones estan ideados para solucionar problemas comunes en nuestro código, evitando por ejemplo grandes cadenas de if, código innecesario, etc.*
+**Patrones de Diseño:** *Los patrones de diseño son soluciones ideadas y testeadas por miles de programadores de todo el mundo, estos patrones estan ideados para solucionar problemas comunes en nuestro código, evitando por ejemplo grandes cadenas de if, código innecesario, etc.*
 
 ## Principios SOLID
 
@@ -72,8 +72,13 @@ private void sendEmailNotification(Order order) {
 > Para cumplir con el SRP, debemos dividir la clase `OrderProcessor` en clases
 > 
 > ```java
-separadas, cada una responsable de una única tarea.
 ```
+
+````
+
+separadas, cada una responsable de una única tarea.
+
+```java
 
 public class OrderValidator {
 public boolean isValid(Order order) {
@@ -130,9 +135,9 @@ notifier.sendNotification(order);
 }
 }
 
-```
+````
 
-```
+````
 
 > Al separar las preocupaciones en clases distintas, cada una con una única responsabilidad, logramos un diseño modular y más fácil de mantener. La `OrderProcessor`clase ahora se centra únicamente en orquestar el flujo de trabajo de procesamiento de pedidos, delegando tareas específicas a las clases apropiadas. Este enfoque permite probar, modificar y reutilizar componentes individuales más fácilmente.
 > 
@@ -145,7 +150,7 @@ Este principio establece que debemos usar abstracción para evitar código poco 
 > Planteamiento del problema: Considere un escenario en el que tiene una `ShapeCalculator`clase que calcula el área de diferentes formas. Más adelante, deberá agregar compatibilidad con nuevas formas sin modificar el código existente.
 > 
 > ```java
-```
+````
 
 ````
 
@@ -263,7 +268,11 @@ Este principio fue propuesto por Barbara Liskov en 1987, de ahi el nombre, este 
 > ```java
 ```
 
-````
+```
+
+```
+
+```
 
 ```
 
@@ -292,11 +301,13 @@ throw new UnsupportedOperationException("Penguins cannot fly.");
 }
 }
 
-```
+````
 
 > Para cumplir con el LSP, debemos diseñar nuestras abstracciones correctamente, asegurándonos de que las clases derivadas puedan sustituir sus clases base sin alterar la corrección del programa.
 > 
 > ```java
+
+````
 
 ```
 
@@ -330,7 +341,7 @@ System.out.println("The penguin is swimming.");
 }
 }
 
-````
+```
 
 > (Thombare, 2024)
 
@@ -345,7 +356,11 @@ Este principio establece que podemos dividir una interfaz grande en interfaces m
 > ```java
 ```
 
-````
+```
+
+```
+
+```
 
 ```
 
@@ -407,11 +422,13 @@ public void fileExpenseReports() {
 }
 }
 
-```
+````
 
 > Para seguir al ISP, debemos dividir la interfaz en interfaces más pequeñas y con funciones específicas, asegurando que los clientes no se vean obligados a depender de métodos que no utilizan.
 > 
 > ```java
+
+````
 
 ```
 
@@ -469,7 +486,7 @@ return BigDecimal.ZERO; // Placeholder for demonstration
 }
 }
 
-````
+```
 
 > (Thombare, 2024)
 
@@ -484,7 +501,11 @@ Este principio establece que usemos abstracciones en las clases bases de nuestro
 > ```java
 ```
 
-````
+```
+
+```
+
+```
 
 ```
 
@@ -520,14 +541,16 @@ return repository.getAllProducts();
 }
 }
 
-````
+```
 
 > Para cumplir con el DIP, debemos depender de abstracciones (interfaces) en lugar de implementaciones concretas, y las dependencias deben inyectarse desde el exterior.
 > 
 > ```java
 ```
 
-````
+```
+
+```
 
 ```
 
@@ -597,4 +620,7 @@ Con el primer código esto no era posible, pero al crear la interfaz `IProductRe
 ```
 
 ```
-````
+
+```
+
+```
