@@ -1,13 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
 
-import { getCollection, getEntry } from "astro:content";
-
-// Get all the post
-const posts = await getCollection("posts");
-// We filter only post for the CPA
-const postsCPA = posts.filter((e) => e.data.major.discriminant == "cpa");
-//
 ---
 
 <Layout title="Cursillo Provatorio de Admisión - CPA - Ideal">
