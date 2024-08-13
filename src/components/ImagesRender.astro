@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 
-const { link = "" } = Astro.props;
+const { link = "", alt = "", width = "", height = "" } = Astro.props;
 ---
 
-<Image src={link} alt="Imagen" />
+<Image src={link} alt={alt} height={width} width={height} />

@@ -59,7 +59,24 @@ export default config({
                   label: "Link",
                   validation: {
                     isRequired: true,
-                    
+                  },
+                }),
+                alt: fields.text({
+                  label: "Alt",
+                  validation: {
+                    isRequired: true,
+                  },
+                }),
+                width: fields.text({
+                  label: "Width",
+                  validation: {
+                    isRequired: true,
+                  },
+                }),
+                height: fields.text({
+                  label: "Height",
+                  validation: {
+                    isRequired: true,
                   },
                 }),
               },
