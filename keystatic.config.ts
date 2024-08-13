@@ -61,13 +61,24 @@ export default config({
         content: fields.markdoc({
           label: "Content",
           components: {
+            imageLink: block({
+              label: "Image Link",
+              schema: {
+                link: fields.url({
+                  label: "Link",
+                  validation: {
+                    isRequired: true,
+                  },
+                }),
+              },
+            }),
             blockLatex: block({
               label: "LaTex Block",
               ContentView: ({ value }) => value.formula,
               schema: {
                 formula: fields.text({
                   label: "Formula",
-                  description: "Enter the LaTex notation formula",
+                  description: "Enter the LaTex notation formulas",
                   multiline: false,
                   validation: {
                     isRequired: true,
@@ -93,7 +104,6 @@ export default config({
                   },
                 }),
               },
-
               NodeView: ({ value }) => {
                 return "Edit" + value.formula;
               },
