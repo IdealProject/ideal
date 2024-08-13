@@ -1,15 +1,5 @@
 import { config, fields, collection } from "@keystatic/core";
 import { inline, block } from "@keystatic/core/content-components";
-//Major Selection Field
-import { MajorSelection } from "src/utils/majorSelectionHandler";
-//Handlers for every major
-import { cpaDataHandler } from "src/utils/cpaDataHandler";
-import { inforDataHanlder } from "src/utils/inforDataHandler";
-import { induDataHanlder } from "src/utils/induDataHandler";
-import { civilDataHanlder } from "src/utils/civilDataHandler";
-import { electroDataHanlder } from "src/utils/electroDataHandler";
-//Imported for the Books collection
-import { majorOptions } from "src/utils/data/dataMajor";
 import { tagSelection } from "src/utils/tagSelection";
 
 export default config({
@@ -61,6 +51,7 @@ export default config({
         content: fields.markdoc({
           label: "Content",
           components: {
+
             imageLink: block({
               label: "Image Link",
               schema: {
@@ -70,8 +61,27 @@ export default config({
                     isRequired: true,
                   },
                 }),
+                alt: fields.text({
+                  label: "Alt",
+                  validation: {
+                    isRequired: true,
+                  },
+                }),
+                width: fields.text({
+                  label: "Width",
+                  validation: {
+                    isRequired: true,
+                  },
+                }),
+                height: fields.text({
+                  label: "Height",
+                  validation: {
+                    isRequired: true,
+                  },
+                }),
               },
             }),
+
             blockLatex: block({
               label: "LaTex Block",
               ContentView: ({ value }) => value.formula,
