@@ -1,6 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Image from "astro/components/Image.astro";
+import { getCollection } from "astro:content";
+import { majorOptions } from "src/utils/data/dataMajor";
 ---
 
 <Layout title="Bienvenido a Ideal">
@@ -138,6 +140,8 @@ import Image from "astro/components/Image.astro";
               </div>
             </div>
           </div>
+          {majorOptions.map((e) => (<a href={`${e.value}`} class="mx-10" >{e.label}</a>))}
+
         </div>
       </main>
     </div>
