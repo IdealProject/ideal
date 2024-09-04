@@ -12,6 +12,9 @@ export default config({
       name: "Ideal Admin",
       
     },
+    navigation:{
+      writing:['posts','authors']
+    }
   },
 
   collections: {
