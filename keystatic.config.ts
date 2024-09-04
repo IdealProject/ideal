@@ -13,7 +13,7 @@ export default config({
     },
     navigation:{
       writing: ['posts','authors','---'],
-      majors: ['infor']
+      majors: ['infor','civil','indu','electro','cpa']
     }
 
   },
@@ -49,10 +49,11 @@ export default config({
           }),
           {
             label: "Autores",
-            itemLabel: (item) => item.value || "Por Favor ingrese un autor...",
+            itemLabel: (item: { value: any; }) => item.value || "Por Favor ingrese un autor...",
           }
         ),
-        major: tagSelection,
+        
+        // major: tagSelection,
         content: fields.markdoc({
           label: "Content",
           components: {
@@ -155,7 +156,7 @@ export default config({
           fields.text({ label: 'Autores' }),
           {
             label: 'Autor',
-            itemLabel: props => props.value
+            itemLabel: (props: { value: any; }) => props.value
           }
         ),
         bookMajor: tagSelection,
@@ -181,12 +182,11 @@ export default config({
           fields.text({label:'Materias'}),
           {
             label: 'Materia',
-            itemLabel: props => props.value
+            itemLabel: (props: { value: any; }) => props.value
           }
         ),
       },
     }), 
-
     civil: collection({
       label: "Ing. Civil",
       slugField: "name",
@@ -200,7 +200,7 @@ export default config({
           fields.text({label:'Materias'}),
           {
             label: 'Materia',
-            itemLabel: props => props.value
+            itemLabel: (props: { value: any; }) => props.value
           }
         ),
       },
@@ -218,7 +218,7 @@ export default config({
           fields.text({label:'Materias'}),
           {
             label: 'Materia',
-            itemLabel: props => props.value
+            itemLabel: (props: { value: any; }) => props.value
           }
         ),
       },
@@ -237,7 +237,7 @@ export default config({
           fields.text({label:'Materias'}),
           {
             label: 'Materia',
-            itemLabel: props => props.value
+            itemLabel: (props: { value: any; }) => props.value
           }
         ),
       },
@@ -256,7 +256,7 @@ export default config({
           fields.text({label:'Materias'}),
           {
             label: 'Materia',
-            itemLabel: props => props.value
+            itemLabel: (props: { value: any; }) => props.value
           }
         ),
       },
