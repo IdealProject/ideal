@@ -3,7 +3,6 @@ import { getCollection } from "astro:content";
 const posts = await getCollection("posts");
 const postCheck = posts.filter((e) => e.data.draft == false);
 import Layout from "@layouts/Layout.astro";
-import PageFind from "@components/PageFind.astro";
 ---
 
 <Layout title="Contenido de Ideal">
@@ -12,15 +11,7 @@ import PageFind from "@components/PageFind.astro";
             <h1 class="text-4xl font-bold">Contenido de Ideal</h1>
         </header>
         <section class="px-4">
-            <!-- <PageFind /> -->
-            <div id="search"></div>
-            <script>
-                window.addEventListener('DOMContentLoaded', (event) => {
-                    // @ts-ignore
-                    new PagefindUI({ element: "#search", showSubResults: true });
-                });
-            </script>
-            <ul>
+                       <ul>
                 {
                     postCheck.map(
                         (post: { slug: string; data: { title: string } }) => (

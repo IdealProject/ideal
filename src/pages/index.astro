@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Image from "astro/components/Image.astro";
+import Search from "astro-pagefind/components/Search";
 ---
 
 <Layout title="Bienvenido a Ideal">
@@ -39,6 +40,10 @@ import Image from "astro/components/Image.astro";
                 Explora notas y exámenes
               </a>
             </div>
+            <div class="relative">
+              <Search id="search" className="pagefind-ui mt-10 absolute" uiOptions={{ showImages: false }} /> 
+            </div>
+
           </div>
           <div class="mt-8 lg:mt-0 lg:w-1/2 flex justify-center">
             <!-- for better performance use Astro's Image component -->
@@ -50,97 +55,10 @@ import Image from "astro/components/Image.astro";
               height="400"
             />
           </div>
+          
         </div>
+        
       </header>
-      <main>
-        <div class="max-w-7xl mx-auto">
-          <div class="lg:flex lg:items-center lg:justify-between"></div>
-          <div
-            class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            <div
-              class="rounded-lg border text-card-foreground shadow-sm bg-white"
-              data-v0-t="card"
-            >
-              <div class="p-6">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="h-6 w-6 text-yellow-400"
-                >
-                  <path
-                    d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"
-                  ></path>
-                </svg>
-
-                <h2 class="mt-2 text-sm font-medium text-gray-900">Notas</h2>
-                <p class="mt-1 text-sm text-gray-500">
-                  Lee notas tomadas por otros alumnos que aportaron a ideal
-                </p>
-              </div>
-            </div>
-            <div
-              class="rounded-lg border text-card-foreground shadow-sm bg-white"
-              data-v0-t="card"
-            >
-              <div class="p-6">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="h-6 w-6 text-purple-400"
-                >
-                  <path
-                    d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"
-                  ></path>
-                </svg>
-                <h2 class="mt-2 text-sm font-medium text-gray-900">Libros</h2>
-                <p class="mt-1 text-sm text-gray-500">
-                  Encuentra fácilmente los libros más relevantes para ti
-                </p>
-              </div>
-            </div>
-            <div
-              class="rounded-lg border text-card-foreground shadow-sm bg-white"
-              data-v0-t="card"
-            >
-              <div class="p-6">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="h-6 w-6 text-red-400"
-                >
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                <h2 class="mt-2 text-sm font-medium text-gray-900">Exámenes</h2>
-                <p class="mt-1 text-sm text-gray-500">
-                  Estudia con exámenes de años pasados de tu materia
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
     </div>
   </main>
 </Layout>

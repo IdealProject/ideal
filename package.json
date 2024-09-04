@@ -14,6 +14,7 @@
     "@types/react-dom": "^18.0.11",
     "astro": "^4.0.3",
     "astro-icon": "^1.1.0",
+    "astro-pagefind": "^1.6.0",
     "astro-robots-txt": "^1.0.0",
     "katex": "^0.16.9",
     "react": "^18.2.0",
