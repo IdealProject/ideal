@@ -135,18 +135,14 @@ export default config({
       },
       schema: {
         name: fields.slug({ name: { label: "Nombre" } }),
-        avatar: fields.image({
-          label: "Avatar",
-          directory: "public/images/avatars",
-          publicPath: "images/avatars",
-        }),
-        links: fields.array(
-          fields.url({ label: "Links", validation: { isRequired: true } }),
-          {
-            label: "Link",
-            itemLabel: (props) => props.value || "",
-          }
-        ),
+        // links: fields.array(
+        //   fields.url({ label: "Links", validation: { isRequired: true } }),
+        //   {
+        //     label: "Link",
+        //     itemLabel: (props) => props.value || "",
+        //   }
+        // ),
+        link: fields.url({label:"Link",validation:{isRequired:true}}),
       },
     }),
     books: collection({
