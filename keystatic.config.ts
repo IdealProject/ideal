@@ -12,8 +12,10 @@ export default config({
       name: "Ideal Admin",
     },
     navigation:{
-      writing: ['posts','authors']
+      writing: ['posts','authors','---'],
+      majors: ['infor']
     }
+
   },
 
   collections: {
@@ -135,16 +137,10 @@ export default config({
       },
       schema: {
         name: fields.slug({ name: { label: "Nombre" } }),
-        // links: fields.array(
-        //   fields.url({ label: "Links", validation: { isRequired: true } }),
-        //   {
-        //     label: "Link",
-        //     itemLabel: (props) => props.value || "",
-        //   }
-        // ),
         link: fields.url({label:"Link",validation:{isRequired:true}}),
       },
     }),
+    // Colección que pertenece a los Libros
     books: collection({
       label: "Books",
       slugField: "bookName",
@@ -171,7 +167,99 @@ export default config({
           },
         }),
       },
-
     }),
+    infor: collection({
+      label: "Ing. Informática",
+      slugField: "name",
+      path: "src/content/infor/*",
+      format: {
+        data: "json",
+      },
+      schema: {
+        name: fields.slug({ name: { label: "Semestre" } }),
+        materias: fields.array(
+          fields.text({label:'Materias'}),
+          {
+            label: 'Materia',
+            itemLabel: props => props.value
+          }
+        ),
+      },
+    }), 
+
+    civil: collection({
+      label: "Ing. Civil",
+      slugField: "name",
+      path: "src/content/civil/*",
+      format: {
+        data: "json",
+      },
+      schema: {
+        name: fields.slug({ name: { label: "Semestre" } }),
+        materias: fields.array(
+          fields.text({label:'Materias'}),
+          {
+            label: 'Materia',
+            itemLabel: props => props.value
+          }
+        ),
+      },
+    }), 
+    indu: collection({
+      label: "Ing. Industrial",
+      slugField: "name",
+      path: "src/content/indu/*",
+      format: {
+        data: "json",
+      },
+      schema: {
+        name: fields.slug({ name: { label: "Semestre" } }),
+        materias: fields.array(
+          fields.text({label:'Materias'}),
+          {
+            label: 'Materia',
+            itemLabel: props => props.value
+          }
+        ),
+      },
+    }), 
+
+    electro: collection({
+      label: "Ing. Electromecanica",
+      slugField: "name",
+      path: "src/content/electro/*",
+      format: {
+        data: "json",
+      },
+      schema: {
+        name: fields.slug({ name: { label: "Semestre" } }),
+        materias: fields.array(
+          fields.text({label:'Materias'}),
+          {
+            label: 'Materia',
+            itemLabel: props => props.value
+          }
+        ),
+      },
+    }),
+    
+    cpa: collection({
+      label: "Cursillo Probatorio de A.",
+      slugField: "name",
+      path: "src/content/cpa/*",
+      format: {
+        data: "json",
+      },
+      schema: {
+        name: fields.slug({ name: { label: "Materias" } }),
+        materias: fields.array(
+          fields.text({label:'Materias'}),
+          {
+            label: 'Materia',
+            itemLabel: props => props.value
+          }
+        ),
+      },
+    }), 
   },
 });
