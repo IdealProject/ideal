@@ -1,4 +1,14 @@
 
+import { getCollection } from "astro:content";
+const datainfor = await getCollection("infor");
+
+export const datainfores = datainfor.map((e) => e.data.materias)
+
+
+
+
+
+
 export const materiaInfor1er = [
     { label: 'Fisica 1', value: 'F1' },
     { label: 'Arquitectura y Componentes', value: 'Arq1' },

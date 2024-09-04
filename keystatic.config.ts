@@ -53,7 +53,7 @@ export default config({
           }
         ),
         
-        // major: tagSelection,
+        major: tagSelection,
         content: fields.markdoc({
           label: "Content",
           components: {

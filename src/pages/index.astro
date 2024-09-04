@@ -1,6 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Image from "astro/components/Image.astro";
+import { getCollection } from "astro:content";
+const datainfor = await getCollection("infor");
+
 ---
 
 <Layout title="Bienvenido a Ideal">
@@ -49,6 +52,9 @@ import Image from "astro/components/Image.astro";
               height="400"
             />
           </div>
+        </div>
+        <div class="mx-56">
+          {datainfor.map(e => (e.data.materias)).map(e => <p>{e}</p>)}
         </div>
       </header>
       <main>

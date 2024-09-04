@@ -10,12 +10,6 @@ import { MajorSelection } from "./majorSelectionHandler";
 export const tagSelection = fields.conditional(
     MajorSelection, //Component Field from MajorSelectionHandler
     {
-
-
-
-
-
-
         //cpa field 
         cpa: cpaDataHandler,
         //Infor field
