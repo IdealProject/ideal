@@ -1,10 +1,11 @@
 import { fields } from "@keystatic/core"
-import { materiaCPA } from "./data/dataCpa"
+import { datacpaSemestres } from "./data/dataCpa"
+
 export const cpaDataHandler = fields.select(
     {
         label: "Subject",
         description: "Enter the subject of the post",
-        options: materiaCPA,
-        defaultValue: 'Algebra'
+        options: datacpaSemestres[0],
+        defaultValue: 'Al'
     }
 )

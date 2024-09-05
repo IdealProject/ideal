@@ -1,17 +1,8 @@
 
 import { getCollection } from "astro:content";
+import { dataSemestreProcess, dataSemestre } from "./dataHandler";
 const datainfor = await getCollection("infor");
 
-const datainfores = datainfor.map((e) => e.data.materias)
+export const dataInforSemestres = dataSemestreProcess(datainfor);
 
-const initials = (cadena:string) => {
-    const words = cadena.split(' ')
-    const initials = words.map(e => e.charAt(0))
-    return initials.join('')
-}
-
-export const dataSemestresMaterias = datainfores.map(e =>
-    e.map((i: string) => ({
-        label: i,
-        value: initials(i)
-    })))
+export const dataInforSemestresName = dataSemestre(datainfor);

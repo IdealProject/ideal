@@ -252,8 +252,10 @@ export default config({
       },
       schema: {
         name: fields.slug({ name: { label: "Materias" } }),
+
         materias: fields.array(
-          fields.text({label:'Materias'}),
+          
+          fields.text({label:'Materias',validation:{isRequired:true}}),
           {
             label: 'Materia',
             itemLabel: (props: { value: any; }) => props.value
