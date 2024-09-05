@@ -1,6 +1,11 @@
 {
   "name": "CPA",
   "materias": [
-    "Algebra"
+    "Algebra",
+    "Programación",
+    "Aritmética",
+    "Trigonometría",
+    "Física",
+    "Geométria Analítica"
   ]
 }
