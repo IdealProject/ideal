@@ -45,13 +45,12 @@ export default config({
           {
             label: "Autores",
             itemLabel: (item) => item.value || "Por Favor ingrese un autor...",
-          }
+          },
         ),
         major: tagSelection,
         content: fields.markdoc({
           label: "Content",
           components: {
-
             imageLink: block({
               label: "Image Link",
               schema: {
@@ -142,7 +141,7 @@ export default config({
           {
             label: "Link",
             itemLabel: (props) => props.value || "",
-          }
+          },
         ),
       },
     }),
@@ -156,13 +155,10 @@ export default config({
       entryLayout: "content",
       schema: {
         bookName: fields.slug({ name: { label: "Book Name" } }),
-        bookAuthor: fields.array(
-          fields.text({ label: 'Autores' }),
-          {
-            label: 'Autor',
-            itemLabel: props => props.value
-          }
-        ),
+        bookAuthor: fields.array(fields.text({ label: "Autores" }), {
+          label: "Autor",
+          itemLabel: (props) => props.value,
+        }),
         bookMajor: tagSelection,
         bookDownloadLinkId: fields.url({
           label: "Google Drive Link",
@@ -172,7 +168,6 @@ export default config({
           },
         }),
       },
-
     }),
   },
 });

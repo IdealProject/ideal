@@ -15,7 +15,7 @@ export default defineMarkdocConfig({
         alt: { type: String, required: true },
         width: { type: String, required: true },
         height: { type: String, required: true },
-      }
+      },
     },
     blockLatex: {
       render: component("@components/BlockLatex.astro"),

@@ -1,8 +1,8 @@
 ---
 interface Props {
-  checkActive?: boolean
-  href: string
-  class?: string
+  checkActive?: boolean;
+  href: string;
+  class?: string;
 }
 
 const {
@@ -10,11 +10,10 @@ const {
   class: className,
   checkActive = true,
   ...restOfProps
-} = Astro.props
+} = Astro.props;
 
-
-const currentPath = Astro.url.pathname
-const isActive = currentPath === href && checkActive
+const currentPath = Astro.url.pathname;
+const isActive = currentPath === href && checkActive;
 ---
 
 <a

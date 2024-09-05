@@ -1,68 +1,91 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Image from "astro/components/Image.astro";
-import Search from "astro-pagefind/components/Search";
 ---
 
 <Layout title="Bienvenido a Ideal">
   <main class="container mx-auto px-32 py-12 flex flex-col gap-y-20">
     <div class="flex flex-col md:flex-row items-center justify-between">
-        <div class="md:w-1/2 mb-8 md:mb-0">
-            <h1 class="text-5xl font-extrabold mb-4">Tu plataforma de aprendizaje ideal</h1>
-            <p class="text-xl text-gray-600 mb-6">
-                Notas de clases, exámenes y recursos gratuitos. Impulsado por la comunidad de alumnos de la FIUNI.
-            </p>
-            <a href="/learn-more" class="text-blue-600 hover:underline">
-                Aprende más sobre nuestra misión.
-            </a>
+      <div class="md:w-1/2 mb-8 md:mb-0">
+        <h1 class="text-5xl font-extrabold mb-4">
+          Tu plataforma de aprendizaje ideal
+        </h1>
+        <p class="text-xl text-gray-600 mb-6">
+          Notas de clases, exámenes y recursos gratuitos. Impulsado por la
+          comunidad de alumnos de la FIUNI.
+        </p>
+        <a href="/learn-more" class="text-blue-600 hover:underline">
+          Aprende más sobre nuestra misión.
+        </a>
+      </div>
+      <div class="md:w-1/2">
+        <div class="relative w-full h-96">
+          <Image
+            class="sm:mt-8"
+            src="/ReadingDoodle.svg"
+            alt="Estudiante leyendo"
+            width="400"
+            height="400"
+          />
         </div>
-        <div class="md:w-1/2">
-            <div class="relative w-full h-96">
-              <Image class="sm:mt-8" src="/ReadingDoodle.svg" alt="Estudiante leyendo" width="400" height="400" />
-            </div>
-        </div>
+      </div>
     </div>
 
     <section class="">
       <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <a href="/discipline/ingenieria-civil" class="flex items-center justify-between p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-300">
-              <span class="flex items-center">
-                  <span class="text-2xl mr-2">📐</span>
-                  <span class="font-semibold">Ingeniería Civil</span>
-              </span>
-              <span class="text-gray-500">→</span>
-          </a>
-          <a href="/discipline/ingenieria-electromecanica" class="flex items-center justify-between p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-300">
-              <span class="flex items-center">
-                  <span class="text-2xl mr-2">⚡</span>
-                  <span class="font-semibold">Ingeniería Electromecánica</span>
-              </span>
-              <span class="text-gray-500">→</span>
-          </a>
-          <a href="/discipline/ingenieria-informatica" class="flex items-center justify-between p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-300">
-              <span class="flex items-center">
-                  <span class="text-2xl mr-2">💻</span>
-                  <span class="font-semibold">Ingeniería Informática</span>
-              </span>
-              <span class="text-gray-500">→</span>
-          </a>
+        <a
+          href="/discipline/ingenieria-civil"
+          class="flex items-center justify-between p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-300"
+        >
+          <span class="flex items-center">
+            <span class="text-2xl mr-2">📐</span>
+            <span class="font-semibold">Ingeniería Civil</span>
+          </span>
+          <span class="text-gray-500">→</span>
+        </a>
+        <a
+          href="/discipline/ingenieria-electromecanica"
+          class="flex items-center justify-between p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-300"
+        >
+          <span class="flex items-center">
+            <span class="text-2xl mr-2">⚡</span>
+            <span class="font-semibold">Ingeniería Electromecánica</span>
+          </span>
+          <span class="text-gray-500">→</span>
+        </a>
+        <a
+          href="/discipline/ingenieria-informatica"
+          class="flex items-center justify-between p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-300"
+        >
+          <span class="flex items-center">
+            <span class="text-2xl mr-2">💻</span>
+            <span class="font-semibold">Ingeniería Informática</span>
+          </span>
+          <span class="text-gray-500">→</span>
+        </a>
       </div>
       <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 md:w-2/3 mx-auto">
-          <a href="/discipline/cpa" class="flex items-center justify-between p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-300">
-              <span class="flex items-center">
-                  <span class="text-2xl mr-2">📊</span>
-                  <span class="font-semibold">CPA</span>
-              </span>
-              <span class="text-gray-500">→</span>
-          </a>
-          <a href="/discipline/ingenieria-industrial" class="flex items-center justify-between p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-300">
-              <span class="flex items-center">
-                  <span class="text-2xl mr-2">🏭</span>
-                  <span class="font-semibold">Ingeniería Industrial</span>
-              </span>
-              <span class="text-gray-500">→</span>
-          </a>
+        <a
+          href="/discipline/cpa"
+          class="flex items-center justify-between p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-300"
+        >
+          <span class="flex items-center">
+            <span class="text-2xl mr-2">📊</span>
+            <span class="font-semibold">CPA</span>
+          </span>
+          <span class="text-gray-500">→</span>
+        </a>
+        <a
+          href="/discipline/ingenieria-industrial"
+          class="flex items-center justify-between p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-300"
+        >
+          <span class="flex items-center">
+            <span class="text-2xl mr-2">🏭</span>
+            <span class="font-semibold">Ingeniería Industrial</span>
+          </span>
+          <span class="text-gray-500">→</span>
+        </a>
       </div>
     </section>
-</main>
+  </main>
 </Layout>

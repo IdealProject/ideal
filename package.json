@@ -24,7 +24,9 @@
   },
   "devDependencies": {
     "@types/katex": "^0.16.7",
-    "pagefind": "^1.1.1"
+    "pagefind": "^1.1.1",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1"
   },
   "scripts": {
     "dev": "astro dev",

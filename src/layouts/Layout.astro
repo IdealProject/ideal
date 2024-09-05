@@ -1,32 +1,32 @@
 ---
-import '../styles.css'
+import "../styles.css";
 
 export interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
-import Header from '@components/Header.astro'
-import { ViewTransitions } from 'astro:transitions';
+import Header from "@components/Header.astro";
+import { ViewTransitions } from "astro:transitions";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description">
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="manifest" href="manifest.json">
-		<meta name="theme-color" content="#56aded" >
-		<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-		<script src="/pagefind/pagefind-ui.js" is:inline></script>
-		<title>{title}</title>
-		<ViewTransitions />
-	</head>
-	<body>
-		<Header/>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#56aded" />
+    <!-- <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> -->
+    <!-- <script src="/pagefind/pagefind-ui.js" is:inline></script> -->
+    <title>{title}</title>
+    <ViewTransitions />
+  </head>
+  <body>
+    <Header />
+    <slot />
+  </body>
 </html>

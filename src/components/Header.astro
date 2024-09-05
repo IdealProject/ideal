@@ -1,30 +1,38 @@
 ---
-import { Icon } from "astro-icon/components"
+import { Icon } from "astro-icon/components";
+import Search from "astro-pagefind/components/Search";
 ---
-<nav class="bg-white border-b py-4 px-4 md:px-6 lg:px-2 xl:px-0 md:py-4 lg:py-4 print:hidden">
-  <div
-    class="max-w-7xl mx-auto flex justify-between items-center"
-  >
+
+<nav
+  class="bg-white border-b py-4 px-4 md:px-6 lg:px-2 xl:px-0 md:py-4 lg:py-4 print:hidden"
+>
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
     <div class="flex items-center">
-      <a href="/" aria-label="Ir a la pagina de inicio"><Icon name="ideal"/></a>
+      <a href="/" aria-label="Ir a la pagina de inicio"><Icon name="ideal" /></a
+      >
       <div class="hidden md:flex space-x-8 ml-10">
-        <a class="text-gray-500 hover:text-gray-900" href="#">Comunidad</a
-        ><a class="text-gray-500 hover:text-gray-900" href="#"
-          >Acerca de Ideal</a
+        <a class="text-gray-500 hover:text-gray-900" href="#">Comunidad</a><a
+          class="text-gray-500 hover:text-gray-900"
+          href="#">Acerca de Ideal</a
         ><a class="text-gray-500 hover:text-gray-900" href="#"
           >Preguntas Frecuentes</a
         >
       </div>
     </div>
+    <Search
+      id="search"
+      className="pagefind-ui"
+      uiOptions={{ showImages: false }}
+    />
     <a
       href="https://github.com/IdealProject/ideal"
       target="_blank"
       rel="noreferrer"
       class="flex items-center space-x-2 text-sm font-medium bg-black hover:bg-white py-2 px-4 text-white hover:text-black rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 hover:shadow-md"
     >
-    <Icon name="github"/>
+      <Icon name="github" />
       <span>Contribuye</span>
-      <Icon name="right-arrow"/>
+      <Icon name="right-arrow" />
     </a>
   </div>
 </nav>

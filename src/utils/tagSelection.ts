@@ -7,17 +7,17 @@ import { inforDataHanlder } from "./inforDataHandler";
 import { MajorSelection } from "./majorSelectionHandler";
 
 export const tagSelection = fields.conditional(
-    MajorSelection, //Component Field from MajorSelectionHandler
-    {
-        //cpa field 
-        cpa: cpaDataHandler,
-        //Infor field
-        infor: inforDataHanlder,
-        // Indu field
-        indu: induDataHanlder,
-        // Civil field
-        civil: civilDataHanlder,
-        // Electro field
-        electro: electroDataHanlder,
-    }
-)
+  MajorSelection, //Component Field from MajorSelectionHandler
+  {
+    //cpa field
+    cpa: cpaDataHandler,
+    //Infor field
+    infor: inforDataHanlder,
+    // Indu field
+    indu: induDataHanlder,
+    // Civil field
+    civil: civilDataHanlder,
+    // Electro field
+    electro: electroDataHanlder,
+  },
+);

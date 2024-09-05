@@ -1,6 +1,4 @@
 {
   "name": "ChatGPT",
-  "links": [
-    "https://chat.openai.com/"
-  ]
+  "links": ["https://chat.openai.com/"]
 }
