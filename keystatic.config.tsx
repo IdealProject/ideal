@@ -12,10 +12,8 @@ export default config({
       name: "Ideal Admin",
     },
     navigation:{
-      writing: ['posts','authors','---'],
-      majors: ['infor','civil','indu','electro','cpa']
+      writing: ['posts','authors']  
     }
-
   },
 
   collections: {
@@ -49,15 +47,24 @@ export default config({
           }),
           {
             label: "Autores",
-            itemLabel: (item: { value: any; }) => item.value || "Por Favor ingrese un autor...",
+            itemLabel: (item) => item.value || "Por Favor ingrese un autor...",
           }
         ),
-        
         major: tagSelection,
         content: fields.markdoc({
           label: "Content",
           components: {
-
+            geogebraLink: block({
+              label: "Geogebra Link",
+              schema: {
+                link: fields.url({
+                  label: "Link",
+                  validation: {
+                    isRequired: true
+                  }
+                })
+              }
+            }),
             imageLink: block({
               label: "Image Link",
               schema: {
@@ -138,10 +145,20 @@ export default config({
       },
       schema: {
         name: fields.slug({ name: { label: "Nombre" } }),
-        link: fields.url({label:"Link",validation:{isRequired:true}}),
+        avatar: fields.image({
+          label: "Avatar",
+          directory: "public/images/avatars",
+          publicPath: "images/avatars",
+        }),
+        links: fields.array(
+          fields.url({ label: "Links", validation: { isRequired: true } }),
+          {
+            label: "Link",
+            itemLabel: (props) => props.value || "",
+          }
+        ),
       },
     }),
-    // Colección que pertenece a los Libros
     books: collection({
       label: "Books",
       slugField: "bookName",
@@ -156,7 +173,7 @@ export default config({
           fields.text({ label: 'Autores' }),
           {
             label: 'Autor',
-            itemLabel: (props: { value: any; }) => props.value
+            itemLabel: props => props.value
           }
         ),
         bookMajor: tagSelection,
@@ -168,98 +185,7 @@ export default config({
           },
         }),
       },
-    }),
-    infor: collection({
-      label: "Ing. Informática",
-      slugField: "name",
-      path: "src/content/infor/*",
-      format: {
-        data: "json",
-      },
-      schema: {
-        name: fields.slug({ name: { label: "Semestre" } }),
-        materias: fields.array(
-          fields.text({label:'Materia'}),
-          {
-            label: 'Materias',
-            itemLabel: (props: { value: any; }) => props.value,
-          }
-        ),
-      },
-    }), 
-    civil: collection({
-      label: "Ing. Civil",
-      slugField: "name",
-      path: "src/content/civil/*",
-      format: {
-        data: "json",
-      },
-      schema: {
-        name: fields.slug({ name: { label: "Semestre" } }),
-        materias: fields.array(
-          fields.text({label:'Materias'}),
-          {
-            label: 'Materia',
-            itemLabel: (props: { value: any; }) => props.value
-          }
-        ),
-      },
-    }), 
-    indu: collection({
-      label: "Ing. Industrial",
-      slugField: "name",
-      path: "src/content/indu/*",
-      format: {
-        data: "json",
-      },
-      schema: {
-        name: fields.slug({ name: { label: "Semestre" } }),
-        materias: fields.array(
-          fields.text({label:'Materias'}),
-          {
-            label: 'Materia',
-            itemLabel: (props: { value: any; }) => props.value
-          }
-        ),
-      },
-    }), 
 
-    electro: collection({
-      label: "Ing. Electromecanica",
-      slugField: "name",
-      path: "src/content/electro/*",
-      format: {
-        data: "json",
-      },
-      schema: {
-        name: fields.slug({ name: { label: "Semestre" } }),
-        materias: fields.array(
-          fields.text({label:'Materias'}),
-          {
-            label: 'Materia',
-            itemLabel: (props: { value: any; }) => props.value
-          }
-        ),
-      },
     }),
-    
-    cpa: collection({
-      label: "Cursillo Probatorio de A.",
-      slugField: "name",
-      path: "src/content/cpa/*",
-      format: {
-        data: "json",
-      },
-      schema: {
-        name: fields.slug({ name: { label: "Materias" } }),
-        materias: fields.array(
-          fields.text({label:'Materias'}),
-          {
-            label: 'Materia',
-            itemLabel: (props: { value: any; }) => props.value
-          }
-        ),
-      },
-    }), 
   },
 });

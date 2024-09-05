@@ -19,21 +19,21 @@ export const inforDataHanlder = fields.conditional(
         label: "Subject",
         description: "Enter the subject of the post",
         options: dataSemestresMaterias[0],
-        defaultValue: '0'
+        defaultValue: dataSemestresMaterias[0][0].value
     }
     ),
     2: fields.select({
         label: "Subject",
         description: "Enter the subject of the post",
         options: dataSemestresMaterias[1],
-        defaultValue: '0'
+        defaultValue: dataSemestresMaterias[1][0].value
     }
     ),
     3: fields.select({
         label: "Subject",
         description: "Enter the subject of the post",
-        options: dataSemestresMaterias[1],
-        defaultValue: '0'
+        options: dataSemestresMaterias[2],
+        defaultValue: dataSemestresMaterias[2][0].value
     }
     ),
     4: fields.select({
