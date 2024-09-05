@@ -11,7 +11,7 @@ const initials = (cadena:string) => {
 }
 
 export const dataSemestresMaterias = datainfores.map(e =>
-    e.map((i: string, index: number) => ({
+    e.map((i: string) => ({
         label: i,
-        value: index.toString()
+        value: initials(i)
     })))
