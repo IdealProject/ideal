@@ -5,60 +5,64 @@ import Search from "astro-pagefind/components/Search";
 ---
 
 <Layout title="Bienvenido a Ideal">
-  <main>
-    <div
-      class="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"
-    >
-
-    </div>
-    <div class="px-4 md:px-6 lg:px-6 xl:px-0 py-4 md:py-6 lg:py-2">
-      <header>
-        <div
-          class="max-w-7xl mx-auto lg:flex lg:items-center lg:justify-between"
-        >
-          <div class="lg:w-1/2">
-            <h1
-              class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl"
-            >
-              Tu plataforma de <br /> aprendizaje ideal
-            </h1>
-            <p class="mt-3 max-w-md text-lg text-gray-500 sm:text-xl">
-              Notas de clases, exámenes y recursos gratuitos. Impulsado por la
-              comunidad de alumnos de la FIUNI.
+  <main class="container mx-auto px-32 py-12 flex flex-col gap-y-20">
+    <div class="flex flex-col md:flex-row items-center justify-between">
+        <div class="md:w-1/2 mb-8 md:mb-0">
+            <h1 class="text-5xl font-extrabold mb-4">Tu plataforma de aprendizaje ideal</h1>
+            <p class="text-xl text-gray-600 mb-6">
+                Notas de clases, exámenes y recursos gratuitos. Impulsado por la comunidad de alumnos de la FIUNI.
             </p>
-            <div class="mt-8 flex flex-col gap-y-2">
-              <a
-                href="/acerca-de"
-                class="underline text-sm font-semibold flex items-center w-fit text-black hover:text-gray-700"
-              >
+            <a href="/learn-more" class="text-blue-600 hover:underline">
                 Aprende más sobre nuestra misión.
-              </a>
-              <a
-                href="/posts"
-                class="text-xl underline font-semibold w-fit text-blue-600 hover:text-blue-900 bg-white border border-solid border-blue-600 p-5 rounded-md"
-              >
-                Explora notas y exámenes
-              </a>
-            </div>
-            <div class="relative">
-              <Search id="search" className="pagefind-ui mt-10 absolute" uiOptions={{ showImages: false }} /> 
-            </div>
-
-          </div>
-          <div class="mt-8 lg:mt-0 lg:w-1/2 flex justify-center">
-            <!-- for better performance use Astro's Image component -->
-            <Image
-              class="sm:mt-8"
-              src="/ReadingDoodle.svg"
-              alt="Estudiante leyendo"
-              width="400"
-              height="400"
-            />
-          </div>
-          
+            </a>
         </div>
-        
-      </header>
+        <div class="md:w-1/2">
+            <div class="relative w-full h-96">
+              <Image class="sm:mt-8" src="/ReadingDoodle.svg" alt="Estudiante leyendo" width="400" height="400" />
+            </div>
+        </div>
     </div>
-  </main>
+
+    <section class="">
+      <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <a href="/discipline/ingenieria-civil" class="flex items-center justify-between p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-300">
+              <span class="flex items-center">
+                  <span class="text-2xl mr-2">📐</span>
+                  <span class="font-semibold">Ingeniería Civil</span>
+              </span>
+              <span class="text-gray-500">→</span>
+          </a>
+          <a href="/discipline/ingenieria-electromecanica" class="flex items-center justify-between p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-300">
+              <span class="flex items-center">
+                  <span class="text-2xl mr-2">⚡</span>
+                  <span class="font-semibold">Ingeniería Electromecánica</span>
+              </span>
+              <span class="text-gray-500">→</span>
+          </a>
+          <a href="/discipline/ingenieria-informatica" class="flex items-center justify-between p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-300">
+              <span class="flex items-center">
+                  <span class="text-2xl mr-2">💻</span>
+                  <span class="font-semibold">Ingeniería Informática</span>
+              </span>
+              <span class="text-gray-500">→</span>
+          </a>
+      </div>
+      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 md:w-2/3 mx-auto">
+          <a href="/discipline/cpa" class="flex items-center justify-between p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-300">
+              <span class="flex items-center">
+                  <span class="text-2xl mr-2">📊</span>
+                  <span class="font-semibold">CPA</span>
+              </span>
+              <span class="text-gray-500">→</span>
+          </a>
+          <a href="/discipline/ingenieria-industrial" class="flex items-center justify-between p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-300">
+              <span class="flex items-center">
+                  <span class="text-2xl mr-2">🏭</span>
+                  <span class="font-semibold">Ingeniería Industrial</span>
+              </span>
+              <span class="text-gray-500">→</span>
+          </a>
+      </div>
+    </section>
+</main>
 </Layout>
