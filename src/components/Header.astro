@@ -1,6 +1,8 @@
 ---
 import { Icon } from "astro-icon/components";
-import Search from "@components/Search.astro";
+import SearchBar from "./SearchBar.astro";
+import GithubButton from "./GithubButton.astro";
+import HeaderNavigationLink from "./HeaderNavigationLink.astro";
 ---
 
 <nav
@@ -11,29 +13,24 @@ import Search from "@components/Search.astro";
       <a href="/" aria-label="Ir a la pagina de inicio"><Icon name="ideal" /></a
       >
       <div class="hidden md:flex space-x-8 ml-10">
-        <a class="text-gray-500 hover:text-gray-900" href="#">Comunidad</a><a
-          class="text-gray-500 hover:text-gray-900"
-          href="#">Acerca de Ideal</a
-        ><a class="text-gray-500 hover:text-gray-900" href="#"
-          >Preguntas Frecuentes</a
-        >
+        <HeaderNavigationLink
+          ariaLabel="Ir a página de Preguntas Frecuentes"
+          name="Preguntas Frecuentes"
+          url="#"
+        />
+        <HeaderNavigationLink
+          ariaLabel="Ir a página de Comunidad"
+          name="Comunidad"
+          url="#"
+        />
+        <HeaderNavigationLink
+          ariaLabel="Ir a página de Acerca de Ideal"
+          name="Acerca de"
+          url="#"
+        />
       </div>
     </div>
-    <Search/>
-    <!-- <Search
-      id="search"
-      className="pagefind-ui"
-      uiOptions={{ showImages: false }}
-    /> -->
-    <a
-      href="https://github.com/IdealProject/ideal"
-      target="_blank"
-      rel="noreferrer"
-      class="flex items-center space-x-2 text-sm font-medium bg-black hover:bg-white py-2 px-4 text-white hover:text-black rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 hover:shadow-md"
-    >
-      <Icon name="github" />
-      <span>Contribuye</span>
-      <Icon name="right-arrow" />
-    </a>
+    <SearchBar />
+    <GithubButton />
   </div>
 </nav>

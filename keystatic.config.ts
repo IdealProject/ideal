@@ -11,6 +11,11 @@ export default config({
     brand: {
       name: "Ideal Admin",
     },
+    navigation:{
+      writing: ['posts','authors','---'],
+      majors: ['infor','civil','indu','electro','cpa']
+    }
+
   },
 
   collections: {
@@ -44,13 +49,15 @@ export default config({
           }),
           {
             label: "Autores",
-            itemLabel: (item) => item.value || "Por Favor ingrese un autor...",
-          },
+            itemLabel: (item: { value: any; }) => item.value || "Por Favor ingrese un autor...",
+          }
         ),
+        
         major: tagSelection,
         content: fields.markdoc({
           label: "Content",
           components: {
+
             imageLink: block({
               label: "Image Link",
               schema: {
@@ -131,43 +138,104 @@ export default config({
       },
       schema: {
         name: fields.slug({ name: { label: "Nombre" } }),
-        avatar: fields.image({
-          label: "Avatar",
-          directory: "public/images/avatars",
-          publicPath: "images/avatars",
-        }),
-        links: fields.array(
-          fields.url({ label: "Links", validation: { isRequired: true } }),
-          {
-            label: "Link",
-            itemLabel: (props) => props.value || "",
-          },
-        ),
+        link: fields.url({label:"Link",validation:{isRequired:true}}),
       },
     }),
-    books: collection({
-      label: "Books",
-      slugField: "bookName",
-      path: "src/content/books/*",
+    // Colección que pertenece a los Libros
+    
+    infor: collection({
+      label: "Ing. Informática",
+      slugField: "name",
+      path: "src/content/infor/*",
       format: {
         data: "json",
       },
-      entryLayout: "content",
       schema: {
-        bookName: fields.slug({ name: { label: "Book Name" } }),
-        bookAuthor: fields.array(fields.text({ label: "Autores" }), {
-          label: "Autor",
-          itemLabel: (props) => props.value,
-        }),
-        bookMajor: tagSelection,
-        bookDownloadLinkId: fields.url({
-          label: "Google Drive Link",
-          description: "Enter the Google Drive public link",
-          validation: {
-            isRequired: true,
-          },
-        }),
+        name: fields.slug({ name: { label: "Semestre" } }),
+        materias: fields.array(
+          fields.text({label:'Materia'}),
+          {
+            label: 'Materias',
+            itemLabel: (props: { value: any; }) => props.value,
+          }
+        ),
+      },
+    }), 
+    civil: collection({
+      label: "Ing. Civil",
+      slugField: "name",
+      path: "src/content/civil/*",
+      format: {
+        data: "json",
+      },
+      schema: {
+        name: fields.slug({ name: { label: "Semestre" } }),
+        materias: fields.array(
+          fields.text({label:'Materias'}),
+          {
+            label: 'Materia',
+            itemLabel: (props: { value: any; }) => props.value
+          }
+        ),
+      },
+    }), 
+    indu: collection({
+      label: "Ing. Industrial",
+      slugField: "name",
+      path: "src/content/indu/*",
+      format: {
+        data: "json",
+      },
+      schema: {
+        name: fields.slug({ name: { label: "Semestre" } }),
+        materias: fields.array(
+          fields.text({label:'Materias'}),
+          {
+            label: 'Materia',
+            itemLabel: (props: { value: any; }) => props.value
+          }
+        ),
+      },
+    }), 
+
+    electro: collection({
+      label: "Ing. Electromecanica",
+      slugField: "name",
+      path: "src/content/electro/*",
+      format: {
+        data: "json",
+      },
+      schema: {
+        name: fields.slug({ name: { label: "Semestre" } }),
+        materias: fields.array(
+          fields.text({label:'Materias'}),
+          {
+            label: 'Materia',
+            itemLabel: (props: { value: any; }) => props.value
+          }
+        ),
       },
     }),
+    
+    cpa: collection({
+      label: "Cursillo Probatorio de A.",
+      slugField: "name",
+      path: "src/content/cpa/*",
+      format: {
+        data: "json",
+      },
+      schema: {
+        name: fields.slug({ name: { label: "Materias" } }),
+
+        materias: fields.array(
+          
+          fields.text({label:'Materias',validation:{isRequired:true}}),
+          {
+            label: 'Materia',
+            itemLabel: (props: { value: any; }) => props.value
+          }
+        ),
+      },
+    }), 
   },
 });
