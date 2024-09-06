@@ -1,6 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
-import Search from "astro-pagefind/components/Search";
+import Search from "@components/Search.astro";
 ---
 
 <nav
@@ -19,11 +19,12 @@ import Search from "astro-pagefind/components/Search";
         >
       </div>
     </div>
-    <Search
+    <Search/>
+    <!-- <Search
       id="search"
       className="pagefind-ui"
       uiOptions={{ showImages: false }}
-    />
+    /> -->
     <a
       href="https://github.com/IdealProject/ideal"
       target="_blank"
