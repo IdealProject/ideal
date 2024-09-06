@@ -41,11 +41,11 @@ export const indexValues = (dataInforSemestres: Array<Array<String>>) => {
     }
     return result;
 }
-export const generateFieldsForSemesters = (dataMajor) => {
+export const generateFieldsForSemesters = (dataMajor:any) => {
     const semestersData = dataSemestreProcess(dataMajor);
 
     const semesterNames = dataSemestre(dataMajor);
-    const indicesDisponibles = semestersData.map((_, index) => index); // Genera índices de acuerdo a la cantidad de semestres disponibles
+    const indicesDisponibles = semestersData.map((_:any, index:any) => index); // Genera índices de acuerdo a la cantidad de semestres disponibles
 
     return fields.conditional(
         fields.select({
@@ -55,7 +55,7 @@ export const generateFieldsForSemesters = (dataMajor) => {
             defaultValue: semesterNames[0].value,
         }),
         Object.fromEntries(
-            indicesDisponibles.map((index) => [
+            indicesDisponibles.map((index:any) => [
                 (index + 1).toString(),  // Mantén el índice alineado con los semestres
                 fields.select({
                     label: "Subject",
