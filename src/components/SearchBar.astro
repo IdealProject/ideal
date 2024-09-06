@@ -3,10 +3,10 @@ import { Icon } from "astro-icon/components";
 import Search from "astro-pagefind/components/Search";
 ---
 
-<!-- SEARCH BAR -->
+<!-- Large Search Bar -->
 <div
   onselectstart="return false"
-  class="h-auto w-1/3 px-2 py-3 bg-zinc-200 flex items-center justify-center gap-x-3 rounded-lg cursor-text hover:bg-zinc-300 hover:transition-colors"
+  class="hidden lg:flex h-auto w-1/3 px-2 py-3 bg-zinc-200 items-center justify-center gap-x-3 rounded-lg cursor-text hover:bg-zinc-300 hover:transition-colors"
   id="search-bar"
 >
   <Icon name="magnifyng-glass" />
@@ -16,6 +16,14 @@ import Search from "astro-pagefind/components/Search";
     <span class="text-xs">+</span>
     <kbd class="text-[0.6rem] bg-zinc-300 p-1 rounded-md">K</kbd>
   </div>
+</div>
+
+<!-- Small Search Button (visible only on mobile) -->
+<div
+  class="lg:hidden rounded-full bg-zinc-200 p-4 cursor-pointer"
+  id="small-search-button"
+>
+  <Icon name="magnifyng-glass" />
 </div>
 
 <!-- MODAL -->
@@ -40,73 +48,78 @@ import Search from "astro-pagefind/components/Search";
   </div>
 </div>
 
-<script>document.addEventListener("astro:after-swap", () => {
-  initSearchModal();
-});
+<script>
+  document.addEventListener("astro:after-swap", () => {
+    initSearchModal();
+  });
 
-function initSearchModal() {
-  const searchBar = document.getElementById("search-bar");
-  const searchModal = document.getElementById("search-modal");
-  const closeModal = document.getElementById("close-modal");
+  function initSearchModal() {
+    const searchBar = document.getElementById("search-bar");
+    const smallSearchButton = document.getElementById("small-search-button");
+    const searchModal = document.getElementById("search-modal");
+    const closeModal = document.getElementById("close-modal");
 
-  function focusSearchInput() {
-    const searchInput = document.querySelector(
-      "#search .pagefind-ui__search-input"
-    ) as HTMLInputElement;
+    function focusSearchInput() {
+      const searchInput = document.querySelector(
+        "#search .pagefind-ui__search-input"
+      ) as HTMLInputElement;
 
-    if (searchInput) {
-      searchInput.focus();
-    } else {
-      console.error("Search input not found.");
+      if (searchInput) {
+        searchInput.focus();
+      } else {
+        console.error("Search input not found.");
+      }
     }
-  }
 
-  function clearSearchInput() {
-    const searchInput = document.querySelector(
-      "#search .pagefind-ui__search-input"
-    ) as HTMLInputElement;
-    if (searchInput) {
-      searchInput.value = "";
+    function clearSearchInput() {
+      const searchInput = document.querySelector(
+        "#search .pagefind-ui__search-input"
+      ) as HTMLInputElement;
+      if (searchInput) {
+        searchInput.value = "";
+      }
     }
-  }
 
-  if (searchBar) {
-    searchBar.addEventListener("click", () => {
+    function openModal() {
       if (searchModal) {
         searchModal.classList.remove("hidden");
-        setTimeout(focusSearchInput, 100); // Asegurarse de que el modal esté completamente visible antes de enfocar
+        setTimeout(focusSearchInput, 100); // Ensure the modal is fully visible before focusing
       }
-    });
-  }
+    }
 
-  if (closeModal) {
-    closeModal.addEventListener("click", () => {
-      if (searchModal) {
+    if (searchBar) {
+      searchBar.addEventListener("click", openModal);
+    }
+
+    if (smallSearchButton) {
+      smallSearchButton.addEventListener("click", openModal);
+    }
+
+    if (closeModal) {
+      closeModal.addEventListener("click", () => {
+        if (searchModal) {
+          searchModal.classList.add("hidden");
+          clearSearchInput();
+        }
+      });
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (
+        (event.ctrlKey || event.metaKey) &&
+        event.key === "k" &&
+        searchModal
+      ) {
+        event.preventDefault();
+        openModal();
+      } else if (event.key === "Escape" && searchModal) {
         searchModal.classList.add("hidden");
         clearSearchInput();
       }
     });
   }
 
-  document.addEventListener("keydown", (event) => {
-    if (
-      (event.ctrlKey || event.metaKey) &&
-      event.key === "k" &&
-      searchModal
-    ) {
-      event.preventDefault();
-      searchModal.classList.remove("hidden");
-      setTimeout(focusSearchInput, 100); // Asegurarse de que el modal esté visible antes de enfocar
-    } else if (event.key === "Escape" && searchModal) {
-      searchModal.classList.add("hidden");
-      clearSearchInput();
-    }
-  });
-}
-
-// Inicializar modal la primera vez
-initSearchModal();
-
+  initSearchModal();
 </script>
 
 <style>
