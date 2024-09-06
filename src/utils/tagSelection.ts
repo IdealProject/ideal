@@ -1,7 +1,10 @@
 import { fields } from "@keystatic/core";
 import { MajorSelection } from "./majorSelectionHandler";
-import { cpaDataHandler,civilDataHanlder,electroDataHanlder,induDataHanlder,inforDataHanlder } from "./majorsDataHandler";
-
+import { cpaDataHandler } from "./cpaHandler";
+import { inforDataHanlder } from "./inforHandler";
+import { induDataHanlder } from "./induHandler";
+import { civilDataHanlder } from "./civilHandler";
+import { electroDataHanlder } from "./electroHandler";
 export const tagSelection = fields.conditional(
     MajorSelection, //Component Field from MajorSelectionHandler
     {
