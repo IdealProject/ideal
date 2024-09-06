@@ -21,7 +21,7 @@ import Search from "astro-pagefind/components/Search";
 <!-- MODAL -->
 <div
   id="search-modal"
-  class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center"
+  class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50"
 >
   <div
     class="bg-white p-4 rounded-lg w-1/2 h-3/4 flex flex-col relative overflow-y-scroll gap-y-5"
@@ -40,60 +40,73 @@ import Search from "astro-pagefind/components/Search";
   </div>
 </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const searchBar = document.getElementById("search-bar");
-    const searchModal = document.getElementById("search-modal");
-    const closeModal = document.getElementById("close-modal");
+<script>document.addEventListener("astro:after-swap", () => {
+  initSearchModal();
+});
+
+function initSearchModal() {
+  const searchBar = document.getElementById("search-bar");
+  const searchModal = document.getElementById("search-modal");
+  const closeModal = document.getElementById("close-modal");
+
+  function focusSearchInput() {
     const searchInput = document.querySelector(
       "#search .pagefind-ui__search-input"
     ) as HTMLInputElement;
 
-    function focusSearchInput() {
-      if (searchInput) {
-        searchInput.focus();
-      }
+    if (searchInput) {
+      searchInput.focus();
+    } else {
+      console.error("Search input not found.");
     }
+  }
 
-    function clearSearchInput() {
-      if (searchInput) {
-        searchInput.value = "";
-      }
+  function clearSearchInput() {
+    const searchInput = document.querySelector(
+      "#search .pagefind-ui__search-input"
+    ) as HTMLInputElement;
+    if (searchInput) {
+      searchInput.value = "";
     }
+  }
 
-    if (searchBar) {
-      searchBar.addEventListener("click", () => {
-        if (searchModal) {
-          searchModal.classList.remove("hidden");
-          focusSearchInput();
-        }
-      });
-    }
-
-    if (closeModal) {
-      closeModal.addEventListener("click", () => {
-        if (searchModal) {
-          searchModal.classList.add("hidden");
-          clearSearchInput();
-        }
-      });
-    }
-
-    document.addEventListener("keydown", (event) => {
-      if (
-        (event.ctrlKey || event.metaKey) &&
-        event.key === "k" &&
-        searchModal
-      ) {
-        event.preventDefault();
+  if (searchBar) {
+    searchBar.addEventListener("click", () => {
+      if (searchModal) {
         searchModal.classList.remove("hidden");
-        focusSearchInput();
-      } else if (event.key === "Escape" && searchModal) {
+        setTimeout(focusSearchInput, 100); // Asegurarse de que el modal esté completamente visible antes de enfocar
+      }
+    });
+  }
+
+  if (closeModal) {
+    closeModal.addEventListener("click", () => {
+      if (searchModal) {
         searchModal.classList.add("hidden");
         clearSearchInput();
       }
     });
+  }
+
+  document.addEventListener("keydown", (event) => {
+    if (
+      (event.ctrlKey || event.metaKey) &&
+      event.key === "k" &&
+      searchModal
+    ) {
+      event.preventDefault();
+      searchModal.classList.remove("hidden");
+      setTimeout(focusSearchInput, 100); // Asegurarse de que el modal esté visible antes de enfocar
+    } else if (event.key === "Escape" && searchModal) {
+      searchModal.classList.add("hidden");
+      clearSearchInput();
+    }
   });
+}
+
+// Inicializar modal la primera vez
+initSearchModal();
+
 </script>
 
 <style>
