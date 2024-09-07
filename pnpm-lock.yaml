@@ -47,6 +47,9 @@ importers:
       astro-robots-txt:
         specifier: ^1.0.0
         version: 1.0.0
+      canvas-confetti:
+        specifier: ^1.9.3
+        version: 1.9.3
       katex:
         specifier: ^0.16.9
         version: 0.16.9
@@ -63,6 +66,9 @@ importers:
         specifier: ^5.5.4
         version: 5.5.4
     devDependencies:
+      '@types/canvas-confetti':
+        specifier: ^1.6.4
+        version: 1.6.4
       '@types/katex':
         specifier: ^0.16.7
         version: 0.16.7
@@ -1453,6 +1459,9 @@ packages:
   '@types/babel__traverse@7.20.5':
     resolution: {integrity: sha512-WXCyOcRtH37HAUkpXhUduaxdm82b4GSlyTqajXviN4EfiuPgNYR109xMCKvpl6zPIpua0DGlMEDCq+g8EdoheQ==}
 
+  '@types/canvas-confetti@1.6.4':
+    resolution: {integrity: sha512-fNyZ/Fdw/Y92X0vv7B+BD6ysHL4xVU5dJcgzgxLdGbn8O3PezZNIJpml44lKM0nsGur+o/6+NZbZeNTt00U1uA==}
+
   '@types/cheerio@0.22.35':
     resolution: {integrity: sha512-yD57BchKRvTV+JD53UZ6PD8KWY5g5rvvMLRnZR3EQBCZXiDT/HR+pKpMzFGlWNhFrXlo7VPZXtKvIEwZkAWOIA==}
 
@@ -1753,6 +1762,9 @@ packages:
 
   caniuse-lite@1.0.30001599:
     resolution: {integrity: sha512-LRAQHZ4yT1+f9LemSMeqdMpMxZcc4RMWdj4tiFe3G8tNkWK+E58g+/tzotb5cU6TbcVJLr4fySiAW7XmxQvZQA==}
+
+  canvas-confetti@1.9.3:
+    resolution: {integrity: sha512-rFfTURMvmVEX1gyXFgn5QMn81bYk70qa0HLzcIOSVEyl57n6o9ItHeBtUSWdvKAPY0xlvBHno4/v3QPrT83q9g==}
 
   capnp-ts@0.7.0:
     resolution: {integrity: sha512-XKxXAC3HVPv7r674zP0VC3RTXz+/JKhfyw94ljvF80yynK6VkTnqE3jMuN8b3dUVmmc43TjyxjW4KTsmB3c86g==}
@@ -5856,6 +5868,8 @@ snapshots:
     dependencies:
       '@babel/types': 7.24.0
 
+  '@types/canvas-confetti@1.6.4': {}
+
   '@types/cheerio@0.22.35':
     dependencies:
       '@types/node': 16.11.13
@@ -6300,6 +6314,8 @@ snapshots:
   camelcase@7.0.1: {}
 
   caniuse-lite@1.0.30001599: {}
+
+  canvas-confetti@1.9.3: {}
 
   capnp-ts@0.7.0:
     dependencies:

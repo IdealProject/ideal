@@ -16,6 +16,7 @@
     "astro-icon": "^1.1.0",
     "astro-pagefind": "^1.6.0",
     "astro-robots-txt": "^1.0.0",
+    "canvas-confetti": "^1.9.3",
     "katex": "^0.16.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -23,6 +24,7 @@
     "typescript": "^5.5.4"
   },
   "devDependencies": {
+    "@types/canvas-confetti": "^1.6.4",
     "@types/katex": "^0.16.7",
     "pagefind": "^1.1.1",
     "prettier": "^3.3.3",

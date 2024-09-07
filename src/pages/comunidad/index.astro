@@ -1,19 +1,55 @@
 ---
+// Importa el Layout y el componente Icon
 import Layout from "@layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import CommunityCards from "@components/CommunityCards.astro";
 ---
 
 <Layout title="Acerca de nosotros">
-  <main class="container mx-auto px-32 py-12 flex flex-col gap-y-20">
-    <h1>Comunidad</h1>
-  </main>
+  <div class="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+  <section class="">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+        <div id="confetti-button" class="cursor-pointer inline-flex items-center p-3 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full  hover:bg-gray-200 " role="alert">
+            <Icon name="party" class="w-5 h-5 mr-2" />  
+            <span class="text-sm font-medium text-gray-500">¡Lo has logrado!</span> 
+        </div>
+        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl ">Bienvenidos a la comunidad de Ideal</h1>
+        <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48">En Ideal creemos en el poder del trabajo en equipo y la colaboración para enriquecer la experiencia educativa y académica.</p>
+       <div>
+        <div class="container px-4 md:px-6 mt-12">
+          <div class="grid gap-6 lg:grid-cols-3">
+            <CommunityCards iconName="group" title="Comunidad Colaborativa" description="Únete a una comunidad activa de estudiantes que comparten conocimientos y recursos." />
+
+            <CommunityCards iconName="book" title="Recursos Académicos" description="Accede a una amplia biblioteca de materiales educativos, notas de clase y exámenes." />
+
+            <CommunityCards iconName="smile" title="Experiencia Personalizada" description="Disfruta de una plataforma intuitiva y fácil de usar, diseñada para mejorar tu aprendizaje." />
+          </div>
+        </div>
+
+        <div class="mt-10 flex items-center justify-center gap-x-2">
+          <h4 class="font-semibold text-gray-500">
+            Próximamente más novedades y eventos en la comunidad de Ideal.
+          </h4>
+        </div>
+    </div>
+
+
+</section>
 </Layout>
 
-<style>
-    h1 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: #1a202c;
-    }
-</style>
+<script>
+  import confetti from 'canvas-confetti';
 
+  // const pineapple = confetti.shapeFromText({ text: '🍍', scalar: 2 });
 
+  const confettiButton = document.getElementById('confetti-button');  
+
+  confettiButton?.addEventListener('click', () => {
+    confetti({
+      shapes: ['circle'],
+      particleCount: 100,
+      spread: 100,
+      origin: { y: 0.6 }
+    });
+  });
+</script>

@@ -1,0 +1,13 @@
+---
+const { question, answer } = Astro.props;
+
+import { Icon } from "astro-icon/components";
+---
+
+<div class="mb-10">
+  <h3 class="flex items-center gap-x-2 mb-4 text-lg font-medium text-gray-900">
+    <Icon name="question-mark" class="text-gray-500" />
+    {question}
+  </h3>
+  <p class="text-gray-600" set:html={answer}></p>
+</div>
