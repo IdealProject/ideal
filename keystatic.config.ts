@@ -13,7 +13,6 @@ export default config({
     },
     navigation:{
       writing: ['posts','authors','---'],
-      majors: ['infor','civil','indu','electro','cpa']
     }
 
   },
