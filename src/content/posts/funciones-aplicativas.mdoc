@@ -39,8 +39,13 @@ Aplicar una función sobre los elementos de una lista, para generar otra lista
 (map proc lst...+) -> list?
 ```
 
+Aca estamos aplicando una función (sqr) sobre una lista,No requiere caso base, ni reducción del problema.
+
+```racket
+(map sqr (list 1 2 3 4 16))
+```
+
 Se puede customizar este tipo de funciones, utilizando lambda,\
-No requiere caso base, ni reducción del problema
 
 ```racket
 (map (lambda (x)(* 2 x)) '(1 2 3))
