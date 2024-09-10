@@ -31,10 +31,10 @@ export default defineMarkdocConfig({
     },
   },
   extends: [
-    shiki({
-      langs: ["java", "python", "bash", "latex"],
-      wrap: true,
-      theme: "github-dark",
-    }),
+    // shiki({
+    //   langs: ["java", "python", "bash", "latex"],
+    //   wrap: true,
+    //   theme: "github-dark",
+    // }),
   ],
 });
