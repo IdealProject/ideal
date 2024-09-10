@@ -120,3 +120,44 @@ fold aplica un procedimiento a los elementos de una o más listas. foldl combina
 si se llama a foldl con n listas, entonces proc debe tomar n+1 argumentos. El argumento adicional son los valores de retorno comninados hasta ahora. el proceso se invoca inicialmente con el primer leemento de cada lista, y el argumento final es init.
 
 las listas de entrada se atraviesan de izquierda a derecha, y el resultado de toda la aplicación foldl es el resultado de la última aplicación de proc. si las listas están vacias, el resultado es init.
+
+tiene para utiilizar un acumulador o una variable que varia según la función que le damos, en este caso, nuesttro "acumulador" es una lista vacia que obtendra nuevas celdas gracias a cons, y obtendra una nueva celda por cada nuevo elemento de la lista que damos.
+
+```
+(foldl cons '( ) '(1 2 3 4))
+> '(4 3 2 1)
+```
+
+queda invertido ya que se guardan en la pila de izq a derecha y luego al sacarlo se sacan del ultimo al primero de la pila.
+
+### Variantes de Filter
+
+#### foldr
+
+foldr solo varía su orden de derecha a izquierda.
+
+```
+(foldr + 0 '(1 2 3 4))
+> 10
+```
+
+En Este caso el 0 es un "acumulador", se ira ejecutando e ira sumando, porque es la función que le dimos, con los elementos iterados de la lista que damos como parametro.
+
+## remove
+
+```racket
+(remove v list [proc] ) -> list?
+```
+
+Devuelve una lista que es como lst, omitiendo el primer elemento de lst que es igual a v usando el procedimiento de procedimiento de comparación
+
+```racket
+(remove 5 '(1 2 3 4 5 6 5) eq?)
+>'(1 2 3 4 6 5)
+; si pasamos remove* eliminara todas las ocurrencias de ese, solo funciona con dos listas
+(remove* '(4 3) '(1 2 3 4 5 4))
+> '(1 2 5)
+```
+
+En este caso, pasamos remove, lo que queremos eliminar, la lista de la cual queremos eliminar el elemento,  la condición de porque queremos eliminar.\
+\
