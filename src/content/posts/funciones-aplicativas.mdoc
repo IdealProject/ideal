@@ -29,6 +29,8 @@ Siguiendo con lo ya aprendido en Introducción a la programación 2, existen sim
 
 En Racket no hay ciclos for o while, por lo que se utilizan cirtas funciones predefinadas, propias de los lenguajes funcionales, para recorrer y procesar sencuencias (listas) de elementos.
 
+La lista original nunca es modificada.
+
 Algunos de estas funciones son:
 
 ## Map
@@ -45,10 +47,76 @@ Aca estamos aplicando una función (sqr) sobre una lista,No requiere caso base, 
 (map sqr (list 1 2 3 4 16))
 ```
 
-Se puede customizar este tipo de funciones, utilizando lambda,\
+Se puede customizar este tipo de funciones, dandole la función que necesitamos en ese momento, importante recalcar que para lograr eso hay que usar la palabra reservada "lambda", un ejemplo:
 
 ```racket
 (map (lambda (x)(* 2 x)) '(1 2 3))
 ;Resultado
 '(2 4 6)
 ```
+
+Ejemplo de usar map en una función mas realista
+
+#### lambda
+
+Palabra reservada, sirve para implementar una función en ese lugar para usar con map, es como decir:\
+"en el lenguaje no existe una función que cumpla con mis requerimientos, voy a darte un mecanismo que permita cumplir mis criterios"
+
+### Función que multiplica valores de dos listas
+
+```(racket)
+(define (mult-lista A B)
+     (map (lambda (x y) (* x y)) A B ))
+)
+```
+
+### Variantes de Map
+
+ambas toman como parámetros una función y una lista.
+
+#### andmap
+
+devuelve #t solo si todos los elementos de la lista satisfación la condición dada
+
+```
+(andmap string? '("una" "cadena"))
+```
+
+#### ormap
+
+devuelve #t  si alguno de los elementos de la lista satisfación la condición dada
+
+```racket
+(ormap (lambda (x) (and (real? x) (positive? x))) (lista "Solo complejos:" -1+1i 0+8i (sqrt -4) -9-5i))
+```
+
+Al igual que con las versión original de map, podemos implementar nuestras propias funciones con lambda de la misma manera.
+
+## filter
+
+> Predicado: Recordamos que un predicado es una función que devuelve true o false
+
+Sirve para filtrar elementos de una lista, según el criterio especificado por una función de validación.
+
+También podemos utilizar de la misma
+
+```
+(filter pred? lst)
+```
+
+```
+(filter string? (lista 1 2 3 "a" "b" 4))
+> '("a" "b")
+```
+
+## foldl
+
+```
+(foldl proc init lst...+) -> any/c
+```
+
+fold aplica un procedimiento a los elementos de una o más listas. foldl combina los valores de retorno de una manera arbitraria determinada por proc.
+
+si se llama a foldl con n listas, entonces proc debe tomar n+1 argumentos. El argumento adicional son los valores de retorno comninados hasta ahora. el proceso se invoca inicialmente con el primer leemento de cada lista, y el argumento final es init.
+
+las listas de entrada se atraviesan de izquierda a derecha, y el resultado de toda la aplicación foldl es el resultado de la última aplicación de proc. si las listas están vacias, el resultado es init.
