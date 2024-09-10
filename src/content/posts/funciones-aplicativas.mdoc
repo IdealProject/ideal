@@ -1,0 +1,49 @@
+---
+title: Funciones Aplicativas
+draft: false
+description: Notas Realizadas durante la clase del Ing. Aldo Medina el 10/9/24
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '3'
+    value: F1
+---
+# Paradigmas - Ing Aldo
+
+## Relación Lambda con Racket
+
+Analizamos una función "doblar" hecha en racket, notando las partes que cumplen como:
+
+- Abstracciones lambda
+- Aplicaciones Lambda
+- Terminos
+- Variables (Ligadas y Libres)
+
+## Funciones Lambda en Java que es?
+
+Una función que te permite aplicar una función a cada elemento de una lista. Buscamos delegar el trabajo a la herramienta, asegurándonos de que el elemento que le proveemos sea el correcto.
+
+Siguiendo con lo ya aprendido en Introducción a la programación 2, existen similiaridades con las funciones lambda en java y las funciones aplicativas de Racket.
+
+En Racket no hay ciclos for o while, por lo que se utilizan cirtas funciones predefinadas, propias de los lenguajes funcionales, para recorrer y procesar sencuencias (listas) de elementos.
+
+Algunos de estas funciones son:
+
+## Map
+
+Aplicar una función sobre los elementos de una lista, para generar otra lista
+
+```racket
+(map proc lst...+) -> list?
+```
+
+Se puede customizar este tipo de funciones, utilizando lambda,\
+No requiere caso base, ni reducción del problema
+
+```racket
+(map (lambda (x)(* 2 x)) '(1 2 3))
+;Resultado
+'(2 4 6)
+```
