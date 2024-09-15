@@ -17,6 +17,7 @@ import { ViewTransitions } from "astro:transitions";
     <meta name="description" content="La descripción de este Contenido" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link href="/prism.css" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.css"
@@ -25,7 +26,13 @@ import { ViewTransitions } from "astro:transitions";
     <title>{title}</title>
     <ViewTransitions />
   </head>
-  <body>
+  <body
+    data-prismjs-copy="Copiar"
+    data-prismjs-copy-error="Presiona Ctrl+C para copiar"
+    data-prismjs-copy-success="¡Copiado!"
+    data-prismjs-copy-timeout="5000"
+  >
+    <script src="/prism.js" is:inline></script>
     <Header id="app-header" class:list=`no-print` />
     <div class="px-4">
       <slot />
