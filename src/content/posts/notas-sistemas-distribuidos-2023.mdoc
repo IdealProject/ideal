@@ -1,0 +1,789 @@
+---
+title: Notas Sistemas Distribuidos(2023)
+draft: false
+description: Contiene mis notas de la asignatura de Sistemas Distribuidos
+authors: []
+major:
+  discriminant: infor
+  value:
+    discriminant: '7'
+    value: P1
+---
+Sistemas Distribuidos:
+
+Cada nodo puede correr una aplicación que utiliza el resto del sistema.
+
+Requisito: que todos los componentes estén dentro de una red, software y hardware.
+
+Comunican sus acciones por el paso de mensajes.(protocolo de la comunicación de cada componente).
+
+Características:
+
+-Concurrencia de componentes(quieren hacer uso de un recurso compartido los procesos).
+
+Proceso: Tarea o programa en ejecución
+
+Clientes: los clientes piden recursos, también puede ser servidor de otro.
+
+Servidores: proveen los recursos,a su vez puede ser un cliente.
+
+Recursos: Depende del contexto puede variar, en síntesis es otro componente del sistema.
+
+-Inexistencia de un reloj global: el factor tiempo no es parámetro para sincronizar procesos o componentes, lo solucionamos con comunicaciones por mensaje. Solo afecta en contexto, ej: el reinicio de los servidores según una hora local.
+
+-Fallos Independientes: Falla de componentes individualmente sin afectar a todo el sistema.
+
+Ejemplos SD
+
+Internet y sus protocolos.
+
+Intranet: Conexión local administrada para proteger los recursos de una organización.
+
+Computación Móvil: acceso no dependiendo de la ubicación.
+
+Ubicua: Dentro de un área se puede usar un componente.
+
+Porque compartir recursos: Ahorrar gastos, comparte recursos y distribuye las cargas.
+
+Servicio: es netamente software, colección de recursos relacionados, proveer de autogestión a los clientes.
+
+Servidor: Proceso que provee de recursos.
+
+Cliente: Proceso que realiza un pedido.
+
+El Navegador no es un servidor nunca.
+
+Invocación Remota: cuando se completa la tarea de pedido/respuesta, con éxito o fallida.
+
+WWW. sistema para publicar recursos y servicios a través de internet: siempre se ejecuta sobre una pila de protocolos.
+
+URL: mecanismo para los clientes pedir un recurso.
+
+Esquema: protocolo a usar
+
+Localización: ip/DNS
+
+\#Nombre del servicio/recurso:
+
+Parámetros: lo que sigue del path
+
+?Lo que se envía al servidor
+
+\#Navegar dentro de la web evitar hacer pedidos innecesarios, solo cuando ya cargó.
+
+Http-Características:
+
+chat
+
+-Control de acceso simple
+
+Common gateway Interface(CGI) : Aplicación que desarrollamos con la idea de compartir recursos.
+
+Código descargado: su función es descargarse en el cliente y realizar tareas para el servidor.
+
+Controlar que los datos estén correctos, que tengan el formato correcto.
+
+Applet: descargar porciones d e código en el cliente y ejecutarlo.
+
+Código Móvil:&nbsp; descarga en tu navegador&nbsp; y recolecta información para un servidor. Es un cliente porque al recabar información, si llega a abrir un puerto y escuchar las peticiones de mi servidor se convierte en servidor.
+
+Desafíos:
+
+1. Heterogeneidad: Diversidad, tener cosas en diferentes contextos
+
+-Debe correr sobre cualquier red.
+
+-Debe correr sobre cualquier hardware dentro de un estándar.
+
+-Debe correr en cualquier SO.
+
+-Debe soportar diferentes lenguajes.
+
+-Implementación de diferentes desarrolladores.
+
+-Respetar estándares.
+
+**-MIDDLEWARE:** se encarga de lidiar con la mayoría de problemas de heterogeneidad.
+
+2. Extensibilidad: determina el grado en que puede crecer mi sistema. Sin realizar cambios al proyecto inicial. Solo debe existir un código fuente, no debe depender del hardware que lo ejecuta.
+1. Seguridad:
+
+-Confidencialidad:protección contra individuos no autorizados.
+
+-Integridad:consistencia de datos.
+
+-Disponibilidad:Que la Información del usuario esté disponible la mayor parte del tiempo.&nbsp;
+
+Desafíos a Cubrir:&nbsp;
+
+1. Ataques de denegación de servicios: obstaculizar un servicio, acatar al servicio&nbsp; con un número suficiente de peticiones inútiles de manera a bloquear el acceso a usuarios autorizados.
+1. Seguridad de código Móvil: permitir o no a software de terceros.
+
+d)&nbsp; Escalabilidad: Poder agregar componentes para mantener el comportamiento y conservar la efectividad. Incrementando el número de recursos y el número de usuarios.
+
+Representan los siguientes desafíos:
+
+- Control de costes de los recursos
+- Control de pérdidas de prestaciones.
+- Prevención de desbordamiento de recursos Software.
+- Evitar cuello de botella de prestaciones, algoritmos descentralizados, cache y replicación.
+
+e) Tratamiento de fallos: plan de contingencia, los fallos en SD son parciales
+
+&nbsp;I)&nbsp; Detección de fallos:
+
+II) Enmascaramiento de fallos:ocultar fallos
+
+- Retransmisión de las fallas.
+- Escritura de logs
+
+III) Tolerancia de Fallos(login, paginas sin permiso)
+
+IV) Recuperación frente a fallos
+
+V)Redundancia
+
+VI)Disponibilidad: aumentar el tiempo online.
+
+f) Concurrencia: más de un proceso quiere acceder a un recurso compartido.
+
+- Hilos
+- Sincronizar semáforos
+
+g) Transparencia: ocultar al programador y al usuario la separación de componentes del SD
+
+- Transparencia de acceso: local y remoto de la misma forma.&nbsp; Necesitar recordar&nbsp; solo 1 url para acceder a todas las apps.
+- Transparencia de ubicación: no necesita saber dónde está su aplicación.
+- Transparencia de concurrencia: no debe notarse cuando hay una concurrencia.
+- Transparencia de replicación: Que haya o no haya no debe importar.
+- Transparencia frente a fallos.
+- Transparencia de movilidad: reubicación de servidores, solo URL.
+- Transparencia de prestaciones: configurable.
+- Transparencia al escalado: no debe notar cuando incrementa o decrementa un recurso de la arquitectura.
+
+\
+
+Clase 2
+
+Modelos de arquitectura
+
+Modelo Arquitectónico: define como(mecanismo) y donde interaccionan los componentes y cómo están vinculados.
+
+- Las dos vistas: uno debe saber la complejidad de todo y el otro debe ser transparente.
+- Simplifica y abstrae las funciones individuales y considera, la ubicación de los componentes y carga de trabajo. Proceso y Carga diferencia, un proceso implica datos, memorias, etc. Trabajo: lo que se necesita hacer.
+- Debe saber cómo se comunican entre sí.
+- Clasifica quién va a ser servidor, cliente e iguales. Igual significa que no importa a cual se le pida podrá resolver el problema.
+
+\
+
+Clasificación:
+
+- Cliente-Servidor:&nbsp;
+
+1. Partición de datos, o replicación en servidores cooperativos. Replicación si los pedidos se insertan en ambas DB. Replicación de instancias = procesos iguales.
+1. Uso de Caché para los datos en clientes y el proxy. Cache es memoria, se usa para almacenar datos que fueron recientemente utilizados o frecuentemente utilizados.
+1. Uso de código y agentes móviles.
+1. Requisitos de agregar o eliminar dispositivos móviles de forma conveniente.
+
+- Peer-to-peer:Cada proceso servidor de un cluster son replicas. Todos saben todo y todos pueden acceder a todo.
+- Modelos de Requisitos no funcionales.
+
+1. Modelo de interacción.&nbsp; Como manejar situaciones extremas.
+1. Modelo de fallos. Como resolver los fallos
+1. Modelo de seguridad. Cuando encriptar y demás.
+
+2.Capas de Software.
+
+1. Arquitectura de software: se refieren a la estructura del software como capas o módulos en un solo computador. Esta vista de procesos y servicios puede expresarse en términos de capas de servicios.
+1. Plataforma: El nivel de hardware y las capas más bajas de software.
+1. Middleware: Mejora porque alguien se encargo de optimizar las operaciones que funcionan luego de salir de mi aplicación. Soporta abstracciones de:
+
+- RPC Llamada a proceso remoto. Mecanismo que dispongo para que un proceso llame a otro proceso que se ejecuta remotamente. Login es parte de un proceso Auth
+- RMI Llamada a método remoto. Metodo es parte del programa, Luego del request recibe el objeto como proxy y es una réplica en el cliente, ahí se ejecuta remotamente. authProxy.login();
+- Compiladores. Aplica optimizaciones en la distribución de las tareas en paralelo.
+
+3. Arquitectura del Sistema: División de componentes del sistema, y la ubicación de los componentes de la computadora en la red. Debe conocerse en todo momento para saber a donde recurrir.
+1. Modelo Cliente-Servidor: Lo diferencian las acciones que realizan,solicita y responde.
+1. Servicios proporcionados por múltiples servidores, los servidores interactuan cuando es necesario.
+
+- Correo
+- DB
+- Balanceador de carga, soluciona la transparencia de acceso.
+- Replicacion de datos.
+
+3. Servidores Proxy y cache, Recibe un pedido y delega la tarea. El proxy no tiene capacidad de procesamiento.
+1. Proceso peer to peer: no es requisito que sean todas replicas.
+1. Cliente ligero: abstraerse del canal de comunicación. Ejemplo SQL server con Azure
+
+Interfaces y objetos: interfaz donde se define los métodos y no la implementación. Objeto de una instancia de una clase. Una clase que implementa una interfaz es un objeto.&nbsp; un objeto es un proceso. Como voy a estructurar mi código y como se va a comportar. Instanciar las interfaces para ocultar la lógica de negocio.
+
+Mejorar prestaciones
+
+- List lista = new ArrayList(); Optimización.
+- Transferir datos pequeños, paginación.
+- Rapidez de trabajo computacional
+- Balanceador de cargas
+- Uso de cache(localstorage)
+- Definir tiempo de expiración de cookies
+
+UDP: Abstracción de paso de mensajes. El proceso emisor puede transmitir un mensaje a uno receptor mediante datagramas, se debe especificar el destino utilizando un socket.
+
+Socket mecanismo utilizado para establecer una comunicación.
+
+TCP: proporciona una abstracción de un flujo stream de dos direcciones entre pares de procesos. Los streams son un bloque básico para la construcción de la comunicación productor/consumidor. No existe un destino, si no que se establece un canal de comunicación, los items de datos enviados son colocados en una cola de mensajes
+
+Canal de comunicación: es el lugar donde se escribe y donde se lee. Antes de realizar la acción de leer o escribir, se debe poner de acuerdo el formato del mensaje, string,int, object.
+
+El productor se bloquea porque está llena la cola de mensajes. Su estado depende del estado de la cola.
+
+El consumidor se bloquea cuando la cola está vacía.
+
+Características de la comunicación entre procesos.
+
+- Se basa en 2 operaciones, enviar y recibir mensajes.
+- Para que haya comunicación un proceso debe enviar y otro proceso debe recibir un mensaje. En TCP el destino está en la cola de mensajes.
+- La actividad de enviar y recibir mensajes entre procesos implica la sincronización de procesos.
+- Comunicación síncrona y asíncrona :&nbsp; a cada destino de mensaje se asocia una cola. Productor coloca mensaje en la cola remota. Los consumidores lo sacan de la cola local. Cada proceso tiene su cola. El productor se bloquea cuando la cola remota se llena, y el consumidor cuando la cola local está vacía.
+- Es síncrona cuando receptores y receptores se sincronizan en cada mensaje.En TCP es una sola sincronización cuando se establece el canal. UDP es síncrona por defecto
+- Es síncrona cuando envía y recibe son operaciones bloqueantes. A cada envio el proceso se bloquea, y recibe pasa lo mismo con el receptor. Si el mensaje se envia y nunca se recibe ambos quedan bloqueados. Lo solucionamos con tiempos de espera.
+- Es asíncrona cuando enviar no es bloqueante.Permite a un proceso productor pueda continuar realizando una acción sin tener que esperar un mensaje del consumidor
+- Transmisión de mensajes en paralelo con el emisor.
+- La operacion recibe puede ser bloqueante o no bloqueante. El buffer de recibe será llenado en segundo plano.
+- Destino de los mensajes: mensajes enviados por pares(Dirección, Puerto), un hardware proceso tiene varios puertos. Mismo IP pero diferentes puertos.
+
+1. puerto= destino del mensaje en la computadora.
+1. Un puerto tiene un receptor y puede tener muchos emisores.
+1. Los procesos servidores pueden tener muchos puertos por los que se puede recibir mensajes.. Una app puede tener mas de un puerto escuchando.
+1. Cualquier proceso que conozca el puerto puede enviar mensajes.
+1. Transparencia de ubicación. No cambiar la dirección/puerto donde se ejecuta el servicio. si se altera el servicio no estara disponible
+1. Los puertos tiene la ventaja de proporcionar varios puntos de entrada.
+
+- Fiabilidad: que no haya perdidas en la comunicación.
+- Validez: Se garantiza que los mensajes se entregan sin que se pierda. Desarrollar la aplicación para que se garantice la fiabilidad mediante una confirmación.
+- Integridad: que llegue sin alteraciones. A un objeto serializado se le asigna un id, para que cuando se reconstruya el objeto tenga la misma firma. Si no ha sido corrompido.&nbsp;
+- Ordenación: en algunas aplicaciones la entrega de mensajes en orden de emisión. La entrega desordenada se considera fallo.
+
+Socket
+
+La comunicación entre proceso consiste en transmitir un mensaje con un emisor y un receptor. Se debe saber desde que direccion y de que puerto se emite un mensaje.
+
+Los proceso pueden usar el mismo socket para enviar y recibir mensajes.
+
+Los proceso&nbsp; pueden utilizar varios conectores para recibir mensajes
+
+Un proceso no se puede compartir puertos con otro.
+
+Socket UDP
+
+API java
+
+InetAddress: no necesita definir explicitamente la direccion de internet, puede recibir una excepcion UnknowHostException
+
+Aspectos a tener en cuenta sobre el datagram
+
+Tamanho del mensaje: El receptor especifica una cadena de byte donde se almacenara el mensaje recibido. mensajes hasta de 2a la 16 bytes. Si el mensaje es demasiado grande sera truncado en la llegada a destino.
+
+Bloqueo:
+
+- UDP utiliza envio no bloqueante y recibe bloqueantes.
+- Recibe bloquea hasta que reciba un mensaje.
+- Puede establecerse un tiempo de espera.
+- Recibe debe ejecutar otra tarea en paralelo si es que no quiere esperar.
+
+Tiempo de espera
+
+Recibe de cualquiera
+
+- No especifica de quien puede recibir los mensajes.
+- Acepta mensajes que se envian a su conector, depende de la app resolverlos.
+
+Fallos
+
+- Por omision desechar mensajes ocasionalmente, por error detectado en la suma de comprobación, no queda espacio en el buffer de origen o destino
+- Por Ordenacion: los mensaje se entregan distinto al orden que se envia
+
+Datagram: longitud, mensaje, direccion y numero d epuerto
+
+Cliente crea socket para poder comunicarse
+
+\
+
+Archivo property clave=valor o clave:valor
+
+Bloqueo de servidor: cuando la cola esta llena y cuando esta vacia.
+
+Interbloqueo, el servidor mando un mensaje que nunca llego que el cliente esta esperando.
+
+La cola define el estado de cliente y servidor
+
+TCP
+
+Proporciona una abstracción de un Flujo de Bytes, utiliza stream, previo a el envio de un mensaje se ponen de acuerdo a como realizar el proceso de comunicación y la cola de mensajes. Los mensajes no tienen una dirección de destino si no una cola donde va a ser colocada, tanto processo servidor como cliente tiene 2 colas,una local y una remota.
+
+Stream
+
+Tamaño de mensaje: la app elige la cantidad de datos que va a escribir/leer&nbsp; del stream. TCP decide cuanto dato transmitir como uno o mas paquetes IP, En el destino los datos se leen segun vayan pidiendo (Cliente)
+
+Mensajes Perdidos: TCP utiliza acuse de recibo de los mensajes. acuse es una confirmacion. El emisor almacena registro de los paquetes IP enviados, y el receptor acusa el recibo de los paquetes que lleguan.
+
+Control de flujo: TCP ajusta los procesos de L/E si el productor es mas rapido que el consumidor lo bloquea momentáneamente
+
+Duplicacion y ordenacion de mensajes: Cada paquete ip tiene una ondetofocacion,
+
+Destino de los mensajes: Los procesos emisor y receptor establecen una comunicacion antes de emvoar mensajes iLuego solo escriben en el stream,
+
+El cliente y servidor se conectan por un par de stream uno en cada direccion.
+
+Cuando algun proceso cierra el stream indica que no va a escribir mas&nbsp; en su stream de salida, Cualquier dato que se encuanetra en ecola sera enviado al otro extremo.
+
+Aspectos Importantes
+
+Ambos&nbsp; procesos deben estar de acuerdo en el tipo de datos a ser transmitidos.
+
+Bloqueo: los datos escritos en un stream se almacenan en un buffer de memoria en el conector de destino cuando un proceso intenta leer una entrada&nbsp;
+
+Hilo:datos servicios memoria que realiza una tarea en especifico Cuando creo un hilo debo asignar los recurso que necesita para cumplir su funcion. una vez el servidor crea un hilo se le asigna a un cliente.
+
+Modelo de fallos
+
+TCP usa checksum para aceptar o rechazar paquetes corruptos. y utiliza un numero de secuencia para detectar y eliminar paquetes duplicados.
+
+Para la propiedad de validez. Utiliza timeouts y retransmisión de paquetes perdido.
+
+Los procesos que utilizan la conexion no distinguen entre fallo de red y fallo de proceso que estan en el otro extremo. Escriben en su cola por lo que no necesita de mantener la red.
+
+API Java
+
+Server Socket
+
+Accept&nbsp;
+
+Connect
+
+Toma una peticion conect de la cola si la cola esta vacia se bloquea hasta que llegue peticion. el accept da acceso a streams para comunicarse con el cliente.
+
+.Socket&nbsp;
+
+GetInputStream
+
+GetOutputStream
+
+Utiliza el DNS y puerto para crear el conector.
+
+Serializacion de objetos java: transformar un objeto en una secuencia de bytes para ser transmitida por la red o almacenada en un dispositivo. Si un objeto esta compuesto por varios objetos se serializa todo. a excepción de propiedades u objetos que no deseo transmitir.
+
+Se logra ocultar al momento de serializar mediante Transient para omitir ser enviado.
+
+Deserializacion: consiste en restablecer el estado de un objeto o conjunto de objetos desde su estado lineal, este proceso no tiene conocimiento de los tipos de los objetos en forma lineal.
+
+Reflexion: Habilidad de preguntar por propiedades de la clase, sin conocerlas, permite crear clases a partir de nombres y crear constructores para una clase dada, con unos argumentos&nbsp; dados. Poder interpretar las secuencias de datos que recibo.
+
+A bajo nivel la seria y deserializacion aplican reflexion.
+
+Un bean es un objeto, inversor de control manipula o gestiona los beans. Bean, entity, Domain, PoJo, tienen el mismo significado.es la definicion de una clase que no tiene logica de negocio, solo getter y setter y atributos. Se utilizan para mapear la base de datos.
+
+Serializable señala que va a ser enviado o escrito en algun momento.
+
+DAO: Objeto de acceso a datos.
+
+Hay 2 formas de firmar, un Long suficientemente largo.
+
+Web 3 capas
+
+Controllers->Servicios->DAO->DB
+
+La DB responde con un recordSet, DAO responde con un Bean, el servicio responde con un DTO, y el controller responde con un DTO
+
+Toda la logica debe estar en services.
+
+‘Tendremos servicios que se especializan en un solo objeto, DAO lo mismo
+
+**RMI**
+
+\
+
+TCP y UDP tienen el concepto de mensaje como una estructura definida. En ambos casos el mensaje tiene una dirección.En ambos casos debe haber un receptor. y debe usar alguna medida para que no queden bloqueados,
+
+RMI
+
+Metodo: comportamiento de un objeto o función,
+
+Tendremos un mecanismo para llamar a un metodo desde otra parte.
+
+Proceso A &nbsp; &nbsp; &nbsp; &nbsp; Proceso B, en el proceso B tengo un objeto y el objeto tiene métodos
+
+RMI permite a un objeto en b, provee un mecanismo para poder invocar un objeto de otro metodo ubicado en otra parte, Es una forma de comunicar proceso A y proceso B utilizando el mismo mecanismo que un programa orientado a objetos. Un proxy mantiene el mismo mecanismo. AL invocar en a ejecuta el codigo que encapsula el metodoX
+
+Proxy: algo que recibe cosas y delega.,
+
+El objeto remoto tiene la direccion de donde se encuentra el objeto concreto.
+
+Todos los objetos que pueden recibir RMI deben ser objetos de un solo tipo, remoto es cuando se hereda de una interfaz.Un objeto&nbsp;
+
+Marcamos un bean con una clase que hereda de abstractBean, cualquier clase que hereda de esa clase tendra ID.
+
+Se pueden tener objetos locales y objetos, local no puede ser utilizado en el otro directamente. Pero puedo hacer uso de objetos locales se deben serializar y llamar en metodos de ObjetosRemotos.
+
+Por defecto es local se debe marcar como remoto.
+
+RMI: es un middleware de comunicacion orientado a objetos.&nbsp; proporciona una solucion para un lenguaje oo, permite portabilidad.Llevar de un entorno de ejecucion a otro.
+
+RMI no es multilenguaje pero si multiplataformam.
+
+Permite que un objeto corriendo en una JVM, invoque metodos corriendo en otra JVM
+
+Permite que una comunicacion se comunique con objetos que residen en programas que se ejecutan en maquinas remotas. Permite pasar objetos como argumentos cuando se invocan esos metodos,
+
+En lugar de crear un objeto el programador liga un objeto remoto con un representante local conocido co stub.
+
+Los mensajes dirigidos a un objeto remoto se envian al stub loca, como si fuera el objeto local.
+
+El stub acepta los mensajes que se le envian y a su vez los envia&nbsp; al objeto remoto.
+
+El resultado de la invocacion de metodos en el objeto remoto se envia de regreso al stub local.
+
+Servidor de Nombres Java RMI
+
+Para cada objeto se almacen; nombre-simbolico+referencia.
+
+Cuando alguien llama a un nombre-retorna la direccion en memoria del objeto remoto.
+
+Se puede acceder mediante la interfaz registry.
+
+rmiRegistry comando para levantar el servidor&nbsp;
+
+Primer paso levantar el servidor
+
+Segundo poner en ejecucion mi programa y se debe encargar de registrar los objetos remotos en el servidor
+
+Componentes de RMI
+
+Servidor: en el sentido de proceso, crea un objeto remoto, crea referencias accesibles a este objeto y espera que el cliente&nbsp; invoque.
+
+Una implementación RMI requiere que un objeto este marcado como remoto. La clase interprea estos metodos declarados en la interfaz y otros metodos.
+
+El proxy tiene la lista de metodos de objetos remotos.
+
+Heredando de rmi.remote, todos los metodos deben lanzar un tipo de excepcion, a la vez en algun momento debe implementar una interfaz remota
+
+Tanto cliente como servidor tienen que tener la declaración de la interfaz.
+
+Lo que se hace es crear una libreria que contenga los metodos remotos, distribuir la libreria entre cliente y servidor
+
+Como se implementa interfaz remota
+
+Deben heredar de rmi,remote
+
+Todos los metodos deben manejar remoteExcepcion
+
+Con la definicion d ela interfaz, el compilador genera proxies y esqueletos.
+
+Clase remota: debe implementar la interfaz remota
+
+Debe extender de java.rmi.server.UnicastRemoteObjetct
+
+Paso en la ejecución.
+
+1ro el Servidor crea el objeto remoto
+
+2d registra el objeto remoto
+
+3r confirmacion
+
+Una vez que ya tiene el objeto remoto
+
+Objetos como argumentos
+
+Si el objeto pasado como argumento implemencta una interfaz remoto se pasa una referencia. si el objeto remoto es compartido por las referencias previas y la nueva.
+
+Si el objeto pasado como argumento no implementa la interfaz remote
+
+se serializa y se pasa por valor
+
+se crea en la JVM destino totalmente independiente del original,
+
+Características de la comunicación,
+
+Las llamadas a metodos remotos hacen transparentes al programador el uso d elas primitivas basicas de comunicacion, el mecanismo es el mismo para locales y remotos.
+
+La estructura y el contenido de los mensajes es determinado por el compilador , es transparente al programador.
+
+El direccionamiento es directo al contexto donde recide el objeto remoto
+
+La comunicacion es sincrona, espera que el metodo termine su ejecucion para pedir otra accion. por defecto
+
+Comunicacion no persistente, el objeto remoto debe estar activo al momento de realizar la llamada, el objeto persiste y no la comunicacion, Ej Objeto remoto a y b&nbsp; objetora.llamar(a)
+
+Objetos distribuidos e invocacion remota
+
+Interfaz remota: debe estar disponible en el cliente y servidor
+
+compilar
+
+rmic&nbsp;
+
+registrar
+
+java app
+
+java cliente
+
+Un proyecto con solo las interfaces de ese un jar, xjar
+
+agregar al cliente y al servidor
+
+Bean: mapeo de una entidad con una tabla de la DB
+
+Si expongo un bean, expongo la estructura de mi DB, proveo informacion a posibles atacantes. Para evitar exponer datos sensibles se implementa un DTO: dato que va a ser transferido, va a salir de los servidores
+
+DTO: similar a un bean, no define de forma directa o enmascara&nbsp; las relaciones entre objetos.
+
+Cuando llega un pedido es un DTO, recibe un controller, le da al servicio, sigue siendo DTO, el servicio convierte a un bean, el dao ejecuta sql. el Dao retorna un bean, servicio convierte a DTO y controller retorna DTO
+
+URL mapping: si se llama un recurso se ejecuta x codigo.
+
+Servlet: se define a nivel de aplicación o contexto:
+
+Road Mapping
+
+Requisitos:
+
+Debe ser Cliente Servidor, estructuración de capas de software.
+
+Controllers services y Daos
+
+Servicios
+
+Daos/repository
+
+Beans
+
+WebContent a excepcion de web inf es publico, cualquier usuario puede acceder a esa informacion.
+
+SLF4J loguear en disco, niveles, OFF, fatal, error, warn info trace, all.
+
+Con los metodos http se define lo que hara.
+
+Propiedades de procesar un conjunto de datos. req, response.
+
+Descargar apache tomcat 8
+
+crear un proyecto dynamic web
+
+\
+\
+\
+
+Api terminado:
+
+Solucionar problemas
+
+- DB
+- Volumen de paquetes en la red
+
+Atacan performance
+
+\
+
+Resolvemos paginando los resultados.
+
+No mandar todos los objetos y sus dependencias.
+
+Enviar el id por si se requiere
+
+\
+
+Protegemos db con memoria y caché, usando un servidor cache
+
+Agregar un servidor caché, que es un hashmap
+
+\
+
+Meter en memoria los datos mas utilizados y mas frecuentes
+
+Politica de saber cuales son los datos que deben estar en memoria.
+
+\
+
+Redis, servidor de caché
+
+Leer, escribir y borrar
+
+Cuando se modifica una entidad se debe sacar de memoria, e ir de vuelta a la db por el request, y ahi si se escribe en memoria con los nuevos datos.
+
+Esta la manera de al momento de modificar se debe ingresar de vuelta.
+
+Al momento de eliminar, se saca de memoria.
+
+Anotaciones:
+
+@Cacheable&nbsp;
+
+@CacheEdit&nbsp;
+
+@CachePut&nbsp;
+
+\
+
+Se debe Cachear en el servicio. para ahorrar procesamiento y llamadas a db
+
+Por defecto toma como key el ID
+
+Investigar anotaciones de caché
+
+\
+
+Instalar redis&nbsp;
+
+Marcar como servicio de windows
+
+Instalar RedisInsight
+
+\
+\
+
+S6:clave_objeto
+
+Profiler
+
+Cliente ping
+
+En la aplicación
+
+Agregar dependencias de redis
+
+Configurar el puerto y host de redis
+
+TTL tiempo de vida
+
+Logginf.level=trace
+
+@Transaccional&nbsp;
+
+@Cacheable (value=”SD”, key=”api_contry_”+#id)
+
+login.file
+
+\
+\
+
+Transacciones&nbsp;
+
+Una transacción de DB es una unica unidad logica de trabajo que accede y posiblemente modica&nbsp; la base de datos
+
+Una transacción es un conjunto de operaciones la cual idealmente no debe poder dividirse
+
+encapsula un conjunto de operaciones a nivel de DB.
+
+Es atomico porque es indivisible, todo o nada.
+
+Todos los metodos publicos son transaccionales
+
+Spring maneja por defecto transacciones anidadas
+
+Configuraci’on de transacciones
+
+El alcance de la transacción es la profundidad del metodo.
+
+Como se configura el proxy de transacciones depende de cuantos proxy tiene el metodo
+
+Propagacion de la transacción,
+
+Cualquier aplicacion impica una serie de componentes que realizan una llamada da otros servicios y componentes.
+
+La propagación de la transaccion indica si algun componente servicio participara o no en una transacción y como se comportar’a el componente o servicio si tiene o no una transaccion creada.
+
+\
+
+Los metodos del servicio 1 crea una transaccion, en los demas reutilizan la transaccion 1.
+
+Si la transaccion aun no existe crea una transaccion.
+
+\
+
+Tipos de transacciones
+
+Required&nbsp;
+
+Supports
+
+Not_supported
+
+Requeris_NEw
+
+Never
+
+Mandatory
+
+\
+
+La transaccion por defecto es Required
+
+\
+
+Si el metodo que esta llamando tiene una transaccion, el metodo usa la transaccion existente.
+
+\
+
+Required.Usa una transaccion, y si no existe la crea
+
+\
+\
+
+Support: si se llama directamente no crea una transaccion, si existe una la utiliza
+
+\
+
+Not_Supported: si se llama directamente no crea una transaccion, si se llama desde otro servicio no utiliza la transaccion existente, se ejecuta sin transaccion. nunca se ejecuta en una transaccion
+
+\
+\
+
+Requires_New:&nbsp; si se llamada direcatamente crea una transaccion, si es llamada desde otro servicio si tiene una transacción no hara uso de una transaccion existente, creara su propia transaccion, si no tiene crea su transaccion, entonces siempre crea una transaccion.
+
+\
+
+Never: si es llamado directamente no se creara una transaccion, si se llama de otro servicio si tiene una transaccion se lanza una exception, si no tiene una transaccion se ejecuta sin transaccion, entonces, no necesita transaccion, y si existe falla
+
+\
+
+Mandatory: si se llama directamente lanza una exception,si se llama desde otro servicio, si tiene transaccion entonces usa su transaccion, si no tiene una transaccion falla.
+
+\
+
+Autenticar: corroborar quien dice ser el usuario
+
+Autorizar: una vez autenticado, corroborar que puede hacer el usuario.
+
+Gran autority conjunto de permisos que tiene el autor
+
+Objeto principal: es una relacion entre usuario y permiso, o roles
+
+\
+\
+
+Stateless
+
+JWT
+
+Objeto Principal
+
+Filtros spring security
+
+Csrf
+
+Cors
+
+&nbsp;
+
+Balanceador de carga, recibe y delega los pedidos
+
+Tomcat user.xml
+
+servers.xml&nbsp;
+
+\
+
+tag server:&nbsp; port
+
+\
