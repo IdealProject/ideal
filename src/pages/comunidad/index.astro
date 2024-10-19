@@ -56,31 +56,33 @@ import CommunityCards from "@components/CommunityCards.astro";
             />
           </div>
         </div>
-
+<!-- 
         <div class="mt-10 flex items-center justify-center gap-x-2">
           <h4 class="font-semibold text-gray-500">
             Próximamente más novedades y eventos en la comunidad de Ideal.
           </h4>
-        </div>
+        </div> -->
+
+        <section class="flex flex-col gap-y-10">
+          <h4 class="font-semibold text-2xl mt-10">
+            Eventos de la comunidad
+          </h4>
+          <div class="columns-[400px]">
+            <img class="rounded-md mb-5 hover:brightness-90 transition-all ease-in-out duration-300" src="/comunidad/expoinge-1.webp" alt="Stand de Ideal">
+            <img class="rounded-md mb-5 hover:brightness-90 transition-all ease-in-out duration-300" src="/comunidad/expoinge-2.webp" alt="estudiante de FIUNI usando Ideal">
+            <img class="rounded-md mb-5 hover:brightness-90 transition-all ease-in-out duration-300" src="/comunidad/expoinge-3.webp" alt="estudiante de FIUNI usando Ideal">
+            <img class="rounded-md mb-5 hover:brightness-90 transition-all ease-in-out duration-300" src="/comunidad/expoinge-4.webp" alt="estudiante de FIUNI usando Ideal">
+          </div>
+        </section>
       </div>
-<!-- 
-      <button
-        data-tally-open="31lVzL"
-        data-tally-layout="modal"
-        data-tally-width="500"
-        data-tally-emoji-text="👋"
-        data-tally-emoji-animation="wave"
-        data-tally-auto-close="500"
-        class="fixed bottom-4 right-4 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600"
-      >
-        Abrir Formulario
-      </button> -->
+
+      
+
     </div>
   </section>
 
   <script>
-    import * as confetti from "canvas-confetti";
-
+    import confetti from 'canvas-confetti';
 
     const confettiButton = document.getElementById("confetti-button");
 
