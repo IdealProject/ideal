@@ -1,0 +1,40 @@
+---
+title: Ventajas de las Bases de Datos y Funciones del DBA
+draft: false
+description: >-
+  Se describen las ventajas de las bases de datos y las funciones del DBA, como
+  seguridad, diseño y respaldo de información
+authors:
+  - cristian-franchini
+major:
+  discriminant: infor
+  value:
+    discriminant: '5'
+    value: Arq1
+---
+# Base de datos - 2024
+
+## Ventajas de utilizar una base de datos
+
+1. **Reducción de la redundancia**: La redundancia de datos genera desperdicio de almacenamiento, especialmente en servidores físicos. Al utilizar bases de datos, se minimiza este problema al evitar la duplicación innecesaria. Aunque ciertos datos redundantes pueden ser útiles (por ejemplo, el precio total de una compra), muchos pueden calcularse sobre la marcha para ahorrar espacio.
+1. **Evitar la inconsistencia de datos**: Los datos inconsistentes son aquellos que no cuadran o son conflictivos. Las bases de datos evitan la inconsistencia al aplicar restricciones que impiden, por ejemplo, eliminar un dato que es referenciado en otras partes del sistema.
+1. **Compartir información**: Las bases de datos permiten que múltiples usuarios accedan y compartan información de manera segura y eficiente.
+1. **Cumplimiento de normas**: Se pueden establecer restricciones para garantizar el cumplimiento de las políticas del negocio, como la autenticación mediante usuarios y contraseñas.
+1. **Seguridad y control**: Las bases de datos permiten implementar medidas de seguridad que controlan el acceso y manipulación de los datos. Se pueden registrar todas las modificaciones, asociando cada cambio a un usuario específico.
+1. **Integridad de los datos**: Un diseño adecuado basado en la normalización de datos asegura que se mantenga la coherencia y calidad de la información a lo largo del tiempo.
+
+## **Funciones de un Administrador de Base de Datos (DBA)**
+
+- Definir el modelo conceptual, físico e interno de la base de datos.
+- Establecer verificaciones de seguridad.
+- Definir procedimientos de respaldo y recuperación, especificando cómo, dónde y con qué frecuencia se realiza.
+- Supervisar el desempeño del sistema y optimizar el rendimiento.
+
+## **Características de un Sistema de Gestión de Bases de Datos (DBMS)**
+
+- Acepta definiciones de datos de usuario, permitiendo personalizar los tipos de datos.
+- Permite consultas tanto planeadas como no planeadas.
+- Implementa esquemas de seguridad para la protección de la información.
+- Facilita herramientas para respaldo y recuperación.
+- Administra la concurrencia y las transacciones, garantizando la integridad de las operaciones.
+- Incluye un diccionario de datos, esencial para gestionar grandes volúmenes de información en empresas medianas y grandes.
