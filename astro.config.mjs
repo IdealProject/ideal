@@ -11,7 +11,7 @@ import robotsTxt from "astro-robots-txt";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://ideal-7m3.sites.dev",
+  site: "https://ideal.fiuni.edu.py",
   build: {
     formats: ["file"],
   },

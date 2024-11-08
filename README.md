@@ -15,6 +15,6 @@ Para iniciar en local
 pnpm run dev
 ```
 
-Admin UI: [https:/ideal-7m3.pages.dev/keystatic](https:/ideal-7m3.pages.dev/keystatic)
+Admin UI: [https:/ideal-7m3.pages.dev/keystatic](https:/ideal.fiuni.edu.py/keystatic)
 
-Homepage: [https:/ideal-7m3.pages.dev/](https:/ideal-7m3.pages.dev/)
+Homepage: [https:/ideal-7m3.pages.dev/](https:/ideal.fiuni.edu.py/)
