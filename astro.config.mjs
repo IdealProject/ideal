@@ -7,7 +7,7 @@ import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
 import pagefind from "astro-pagefind";
 
-import robotsTxt from "astro-robots-txt";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,10 +21,8 @@ export default defineConfig({
     keystatic(),
     tailwind(),
     icon(),
-    robotsTxt({
-      policy: [{ userAgent: "*", allow: "/" }],
-    }),
     pagefind(),
+    sitemap(),
   ],
   output: "hybrid",
   adapter: cloudflare(),
