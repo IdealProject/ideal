@@ -213,9 +213,9 @@ Verifica el estado de cx, solo se utiliza con ese registro, si es diferente a 0,
 
 ```nasm
 mov al, '*'
-mov cx,60d
+mov cx,60d ;loop count
 disp_char:
 call putc
-loop disp_char
+loop disp_char ;display "*"
 jump disp_char ; cx = cx -1, if (cx != 0) 
 ```
