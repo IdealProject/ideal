@@ -16,12 +16,6 @@ Recordamos, siempre que trabajamos a bajo nivel es importante entender que todo 
 
 Tenemos diferentes mecanismos de conversión entre sistemas,podemos utilizar ciertas operaciones, como sumas o restas para obtener algunos caracteres.
 
-{% imageLink
-   link="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi03r_InxSmNvE6CAwh8_Rq1d03fRV6Vrnpa1DdP_c7alu1sjyLCpd0E38odGD81Xci3BaGN6cDSu64T1MzsdBp17iDp9DM-aYFmt07oF-2ARApYqiqmJxq6iORUWp6nT47QL6y5wi1lMk/s1600/codigo+ascii.jpg"
-   alt="Tabla de Caracteres "
-   width="180"
-   height="180" /%}
-
 Dependiendo de lo que quiera realizar, podemos utilizar que siempre hay n cantidad de caracteres entre un simbolo y otro, entones sumando o restando podemos obtener el caracter deseado, Ejemplo, de "a" hasta mayusculas debemos sumar 22.
 
 #### ¿Como podemos limitar que solo obtengamos números?
@@ -36,7 +30,7 @@ analizaremos las partes del código, incluyendo Directivas y luego la subrutina 
 
 ```nasm
 .model small
-.stack 100h
+.stack 100h ;tamaño de pila que va a tener
     CR equ 13d ; se declara una constante
     LF equ 10d
 .data
@@ -58,3 +52,85 @@ end start
 - "al" es el registro donde nuestra subprograma (1h) que nos permite obtener datos guarda lo ingresado por el usuario.
 - "dl" es el registro desde donde obtiene nuestro subprograma (2h) para mostrar un caracter.
 - int 21h Es una interrupción, para luego ejecutar un subprograma.
+
+## Los Programas
+
+Son programas, previamente escritos los cuales utilizamos para realizar ciertas operaciones dentro de nuestro programa assembler, como 1h, que nos permite obtener un dato ingresado por memoria, todos estos programas se ejecutan siempre dentro del procesador.
+
+## Subrutinas y pila.
+
+Podemos tener muchas subrutinas que se declaran dentro o fuera de la rutina principal, estas poseen un IP, Instruction Pointer, tiene la siguiente instrucción o subrutina a ser ejecutada, las subrutinas pueden tener incluidas un ret el cual les permite volver al punto donde fueron llamadas luego de realizar sus operaciones.
+
+La pila o stack, tiene un valor llamada SP, Stack Pointer, contiene el último dato ingresado a la pila, este es gestionado por las instrucciones, call (push) agrega un elemento a la stack , ret (pop) elimina el último elemento de la pila.
+
+```nasm
+putC:
+   mov ah,2h ;muestra por pantalla el caracter guardado en dl
+   int 21h ;una interrupción
+   ret ; volvemos al punto donde fue llamada
+
+```
+
+Debemos tener mucho cuidado utilizando la pila para almacenar valores ya que puede resultar en comportamientos inesperados junto con las subrutinas.
+
+Este ejemplo fue ideado con fines de demostrar posibles problemas que pueden ser creados por el mal uso de la pila, no refleja necesariamente el comportamiento real.
+
+```nasm
+comparar:
+mov ax,2 
+push ax 
+ret
+
+call comparar ;linea 1
+ret ;linea 2
+
+```
+
+En este caso estamos haciendo un push del valor 2, pero luego al hacer ret estamos eliminandolo de la pila, por ende se perdera nuestro valor que queriamos guardar.
+
+Para ret ese ultimo elemento que esta en SP, que seria 2, deberia ser una dirección siempre, en este caso el ret querra volver a la linea 2, donde ese ret tendra como valor de dirección en la pila el 1, haciendo otro pop, volviendo al call y asi iniciando un bucle.
+
+> Por cuestiones de practicidad el concepto de Pila no estara explicado en este articulo, se espera que el lector ya conozca este concepto de semestres anteriores.
+
+### Corrección del código
+
+```nasm
+comparar:
+mov ax,2 
+push ax 
+pop ax
+ret
+
+call comparar ;linea 1
+
+```
+
+## Guardando Registros
+
+Existe la desventaja, en caso de utilizar subprogramas que podrian modificar los registros y asi modificando lo que teniamos almacenado originalmente en el registro, por ende se recomienda mover de registros, copiando el dato obtenido, para asi en la siguiente utilización de suprogramas no correr riesgos.
+
+No importa que hace el subprograma, lo que importa es con que registro lo hacen, pero debo encargarme de evitar perdidades datos ya que los subprogramas comparten registros.
+
+### Nuevas subrutinas.
+
+Nos encargamos de no perder datos luego de realizar la subrutina.
+
+El orden es importante, por la forma en que se almacenan los datos dentro de la pila, lo que se ingresa primero va quedando al final.
+
+```nasm
+puts:
+;display a string terminated by S
+;dx contains address of string
+push ax ;save ax
+push bx
+push cx
+push dx
+mov dx,ax
+mov ah,9h ;call ms-dos to output string
+int 21h
+pop dx
+pop cx
+pop bx
+pop ax ;restore ax
+ret
+```
