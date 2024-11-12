@@ -1,0 +1,60 @@
+---
+title: 'Assembler #2'
+draft: false
+description: 2nda Clase de Assembler desarrollada,2024
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '3'
+    value: Pa
+---
+# Assembler
+
+Recordamos, siempre que trabajamos a bajo nivel es importante entender que todo lo que se almacena esta convertido a un sistema numerico, a cual sistema numerico,  depende de la arquitectura, o como le decimos que almacene a nivel de registro de memoria.
+
+Tenemos diferentes mecanismos de conversión entre sistemas,podemos utilizar ciertas operaciones, como sumas o restas para obtener algunos caracteres.
+
+{% imageLink
+   link="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi03r_InxSmNvE6CAwh8_Rq1d03fRV6Vrnpa1DdP_c7alu1sjyLCpd0E38odGD81Xci3BaGN6cDSu64T1MzsdBp17iDp9DM-aYFmt07oF-2ARApYqiqmJxq6iORUWp6nT47QL6y5wi1lMk/s1600/codigo+ascii.jpg"
+   alt="Tabla de Caracteres "
+   width="180"
+   height="180" /%}
+
+Dependiendo de lo que quiera realizar, podemos utilizar que siempre hay n cantidad de caracteres entre un simbolo y otro, entones sumando o restando podemos obtener el caracter deseado, Ejemplo, de "a" hasta mayusculas debemos sumar 22.
+
+#### ¿Como podemos limitar que solo obtengamos números?
+
+Estableciendo rangos validos según lo que se necesita, por ejemplo de 30 a 39 para solo recibir numeros.
+
+## Directivas
+
+Se ejecutan antes del programa
+
+analizaremos las partes del código, incluyendo Directivas y luego la subrutina principal.
+
+```nasm
+.model small
+.stack 100h
+    CR equ 13d ; se declara una constante
+    LF equ 10d
+.data
+    msg1 db 'Enter an uppercase letter: $' ; Cuando utilizamos, offset, el busca hasta obtener el simbolo de dolar,porque offset le decimos donde empieza la variable.
+.code
+;main
+;sección donde comienza el programa
+
+start: ;subrutina principal (porque es la única con end start)
+mov ax,@data ;aqui obtenemos todo lo que esta guardado en la sección de data
+
+;aqui va mas código 
+end start
+
+```
+
+## Registros e interacciones con el usuario
+
+- "al" es el registro donde nuestra subprograma (1h) que nos permite obtener datos guarda lo ingresado por el usuario.
+- "dl" es el registro desde donde obtiene nuestro subprograma (2h) para mostrar un caracter.
+- int 21h Es una interrupción, para luego ejecutar un subprograma.
