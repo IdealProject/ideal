@@ -82,8 +82,18 @@ sub ax, 6 ; resta 4 de ax
 
 Ensamblador tomara todo numero que ingresemos como Decimal a menos que haya una B (binario), H (hexadecimal) u O (octal) añadido a ellos.
 
-Teniendo eso en cuenta tal vez quisiera guardar en un registro el número hexadecimal "a" en un registro de esta manera\
+Teniendo eso en cuenta tal vez quisiera guardar en un registro el número hexadecimal "a" en un registro de esta manera
 
 ```nasm
 mov bx,ah
 ```
+
+Pero no sucederia lo que esperas, debido a que existe el registro ah, lo que se realiza para evitar este tipo de problemas es agregar el número 0.
+
+```nasm
+mov bx,0ah
+```
+
+En el caso de que quieras guardar numeros decimales también es una practica común agregarles una d al final, asi evitando ambigüedades.
+
+Si el valor ingresado no ocupa los 8bits de información disponible, los bits se completaran con el valor 0, para evitar alterar la información.
