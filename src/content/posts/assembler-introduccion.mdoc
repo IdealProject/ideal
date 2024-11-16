@@ -52,5 +52,38 @@ Otro detalle importante, ensamblador finalmente convierte todo en mayusculas por
 Una instrucción que nos permite copiar el contenido de un registro dentro de otro, como ya vimos anteriormente.
 
 ```nasm
+mov bx,2 ;mov destino, origen (o dato)
+mov cx,bx ;resultara en guardar el contenido de bx en cx
+```
 
+En Este caso utilizamos una constante **entera**, el número 2.
+
+# Comentarios
+
+Como en muchos lenguajes de programación, existen comentarios los cuales nos sirven para dejar notas o instrucciones para otros programadores o nosotros mismos, todo lo ingresado luego de la **;** sera ignorado por el compilador.
+
+# Aritmética
+
+Inicialmente utilizaremos las esenciales, add,inc,dec y sub, los cuales corresponden a la suma, incrementar en 1, decrementar en 1 y la resta.
+
+```nasm
+mov ax, 5 ; carga 5 dentro de ax
+add ax, 3 ; suma 3 al contenido de ax
+          ; ax ahora contiene 8
+inc ax ; suma 1 a ax
+       ; ax ahora contiene 9
+dec ax ; resta 1 de ax
+       ; ax ahora contiene 8
+sub ax, 6 ; resta 4 de ax
+          ; ax ahora contiene 2
+```
+
+# Ambigüedad
+
+Ensamblador tomara todo numero que ingresemos como Decimal a menos que haya una B (binario), H (hexadecimal) u O (octal) añadido a ellos.
+
+Teniendo eso en cuenta tal vez quisiera guardar en un registro el número hexadecimal "a" en un registro de esta manera\
+
+```nasm
+mov bx,ah
 ```
