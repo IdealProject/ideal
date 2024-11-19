@@ -1,0 +1,43 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import { majorOptions } from "src/utils/data/dataMajor";
+// Obtenemos valor que trae la ruta
+const { major } = Astro.params;
+if (!major) throw new Error("major not found");
+
+// Obtenemos exactamente el elemento que solicitó la ruta
+const majorData = majorOptions.filter(option => option.value === major);
+
+// devolvemos todas las url estaticas posibles
+export const getStaticPaths = (() => {
+    
+    return majorOptions.map(elemento => ({
+        params: {major:elemento.value}
+    }))
+}) ;
+// Valor del semestre actual
+let semester = 1;
+
+// obtenemos los posts 
+const posts = getCollection("posts");
+
+
+---
+
+<Layout title=`Ingeniería ${majorData[0].label}` >
+    <!-- container -->
+    <div class="flex py-4 px-4">
+        <!-- Selección de Semestres -->
+        <article class="w-1/4 bg-blue-500 p-4 flex flex-col">
+            <p>botones</p>
+        </article>
+        </article>
+        <!-- titulo y materias -->
+        <section class="w-3/4 bg-green-500 p-4">
+            <h1 class="text-5xl md:4xl xl:4xl font-extrabold mb-4">Ingeniería {majorData[0].label}</h1>
+            <p>Contenido principal</p>
+        </section>
+</Layout>
+
+
