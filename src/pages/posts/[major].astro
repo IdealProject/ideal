@@ -2,6 +2,8 @@
 import Layout from "@layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { majorOptions } from "src/utils/data/dataMajor";
+import SubjectSelect from "src/components/SubjectSelect"
+// traemos nuestro componente react
 // Obtenemos valor que trae la ruta
 const { major } = Astro.params;
 if (!major) throw new Error("major not found");
@@ -16,28 +18,17 @@ export const getStaticPaths = (() => {
         params: {major:elemento.value}
     }))
 }) ;
-// Valor del semestre actual
-let semester = 1;
+const posts = await getCollection("posts");
+const postNoDraft = posts.filter((e) => e.data.draft == false);
+const postMajor = postNoDraft.filter((e)=> e.data.major.discriminant == majorData[0].value);
 
 // obtenemos los posts 
-const posts = getCollection("posts");
-
 
 ---
 
 <Layout title=`Ingeniería ${majorData[0].label}` >
     <!-- container -->
-    <div class="flex py-4 px-4">
-        <!-- Selección de Semestres -->
-        <article class="w-1/4 bg-blue-500 p-4 flex flex-col">
-            <p>botones</p>
-        </article>
-        </article>
-        <!-- titulo y materias -->
-        <section class="w-3/4 bg-green-500 p-4">
-            <h1 class="text-5xl md:4xl xl:4xl font-extrabold mb-4">Ingeniería {majorData[0].label}</h1>
-            <p>Contenido principal</p>
-        </section>
+    <SubjectSelect majorData={majorData} postsCollection={postMajor} client:load />
 </Layout>
 
 
