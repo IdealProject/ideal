@@ -1,0 +1,77 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import FAQ from "@components/FAQ.astro";
+
+const questions = [
+    {
+        "question": "¿Qué es Ideal?",
+        "answer": "Ideal es una plataforma colaborativa diseñada para compartir materiales de estudio en la Facultad de Ingeniería de la Universidad Nacional de Itapúa. Permite a los estudiantes y a la comunidad académica publicar, organizar y colaborar en recursos educativos utilizando un sistema basado en Git."
+    },
+    {
+        "question": "¿Cómo me registro en Ideal?",
+        "answer": `No necesitas registro alguno para utilizar ideal. Sin embargo, si deseas subir materiales o colaborar en proyectos, deberás registrarte en <a rel="noopener noreferrer" target="_blank" class="underline text-blue-600" href="/keystatic">Keystatic </a> con tu cuenta de <a rel="noopener noreferrer" target="_blank" class="underline text-blue-600" href="https://github.com/">GitHub</a>.`
+    },
+    {
+        "question": "¿Qué tipo de materiales puedo compartir en Ideal?",
+        "answer": "Puedes compartir cualquier recurso educativo, como notas de clase, guías de estudio, proyectos, y otros materiales que consideres útiles para la comunidad académica."
+    },
+    {
+        "question": "¿Cómo puedo subir materiales a la plataforma?",
+        "answer": `Una vez que hayas iniciado sesión en <a rel="noopener noreferrer" target="_blank" class="underline text-blue-600" href="/keystatic">Keystatic </a>, puedes crear redactar un nuevo material utilizando el editor integrado. Puedes escribir en Markdown, LaTex, escribir bloques de código y más.`
+    },
+    {
+        "question": "¿Qué es el sistema de Git y cómo lo uso en Ideal?",
+        "answer": "Git es un sistema de control de versiones que permite gestionar y colaborar en proyectos de manera eficiente. En Ideal, utilizamos Git para organizar y versionar los materiales compartidos. Si no estás familiarizado con Git, no te preocupes, la plataforma te proporciona de una interfaz amigable para trabajar con Git sin necesidad de usar la línea de comandos."
+    },
+    {
+        "question": "¿Puedo colaborar con otros usuarios en un mismo post?",
+        "answer": "Sí, Ideal permite la colaboración combinada de varios usuarios en un mismo material. Puedes invitar a otros usuarios a colaborar en tus materiales y trabajar juntos."
+    },
+    {
+        "question": "¿Cómo puedo buscar materiales en Ideal?",
+        "answer": "Utiliza la barra de búsqueda en la parte superior de la página para encontrar materiales específicos. Puedes buscar por título, autor, materia, o palabras clave."
+    },
+    {
+        "question": "¿Hay algún costo asociado con el uso de Ideal?",
+        "answer": "No, el uso de Ideal es gratuito para todos los estudiantes y miembros de la comunidad académica de la Facultad de Ingeniería Universidad Nacional de Itapúa."
+    },
+    {
+        "question": "¿Qué hago si encuentro un problema con la plataforma?",
+        "answer": `Si encuentras algún problema o tienes preguntas, puedes abrir un issue en el <a rel="noopener noreferrer" target="_blank" class="underline text-blue-600"  href="https://github.com/IdealProject/ideal">repositorio de Ideal</a> en GitHub o abriendo una discusión en el repositorio.`
+    },
+    {
+        "question": "¿Ideal es compatible con dispositivos móviles?",
+        "answer": "Sí, Ideal está diseñada para ser accesible desde dispositivos móviles y de escritorio. Puedes acceder a la plataforma desde cualquier navegador moderno en tu dispositivo."
+    },
+   
+];
+
+const midpoint = Math.ceil(questions.length / 2);
+const firstHalf = questions.slice(0, midpoint);
+const secondHalf = questions.slice(midpoint);
+---
+
+<Layout title="Preguntas Frecuentes">
+  <section class="bg-white">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+      <h2 class="mb-8 text-4xl tracking-tight font-extrabold text-gray-900">
+        Preguntas Frecuentes
+      </h2>
+      <div
+        class="grid pt-8 text-left border-t border-gray-200 md:gap-16 dark:border-gray-700 md:grid-cols-2"
+      >
+        <div>
+          {firstHalf.map((q, index) => (
+            <FAQ key={index} question={q.question} answer={q.answer} />
+          ))}
+        </div>
+        <div>
+          {secondHalf.map((q, index) => (
+            <FAQ key={index} question={q.question} answer={q.answer} />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

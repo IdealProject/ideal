@@ -1,0 +1,162 @@
+---
+title: Funciones Aplicativas
+draft: false
+description: Notas Realizadas durante la clase del Ing. Aldo Medina el 10/9/24
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '3'
+    value: F1
+---
+# Paradigmas - Ing Aldo
+
+## Relación Lambda con Racket
+
+Analizamos una función "doblar" hecha en racket, notando las partes que cumplen como:
+
+- Abstracciones lambda
+- Aplicaciones Lambda
+- Terminos
+- Variables (Ligadas y Libres)
+
+## Funciones Lambda en Java que es?
+
+Una función que te permite aplicar una función a cada elemento de una lista. Buscamos delegar el trabajo a la herramienta, asegurándonos de que el elemento que le proveemos sea el correcto.
+
+Siguiendo con lo ya aprendido en Introducción a la programación 2, existen similiaridades con las funciones lambda en java y las funciones aplicativas de Racket.
+
+En Racket no hay ciclos for o while, por lo que se utilizan cirtas funciones predefinadas, propias de los lenguajes funcionales, para recorrer y procesar sencuencias (listas) de elementos.
+
+La lista original nunca es modificada.
+
+Algunos de estas funciones son:
+
+## Map
+
+Aplicar una función sobre los elementos de una lista, para generar otra lista
+
+```racket
+(map proc lst...+) -> list?
+```
+
+Aca estamos aplicando una función (sqr) sobre una lista,No requiere caso base, ni reducción del problema.
+
+```racket
+(map sqr (list 1 2 3 4 16))
+```
+
+Se puede customizar este tipo de funciones, dandole la función que necesitamos en ese momento, importante recalcar que para lograr eso hay que usar la palabra reservada "lambda", un ejemplo:
+
+```racket
+(map (lambda (x)(* 2 x)) '(1 2 3))
+;Resultado
+'(2 4 6)
+```
+
+Ejemplo de usar map en una función mas realista
+
+#### lambda
+
+Palabra reservada, sirve para implementar una función en ese lugar para usar con map, es como decir:\
+"en el lenguaje no existe una función que cumpla con mis requerimientos, voy a darte un mecanismo que permita cumplir mis criterios"
+
+### Función que multiplica valores de dos listas
+
+```(racket)
+(define (mult-lista A B)
+     (map (lambda (x y) (* x y)) A B ))
+)
+```
+
+### Variantes de Map
+
+ambas toman como parámetros una función y una lista.
+
+#### andmap
+
+devuelve #t solo si todos los elementos de la lista satisfación la condición dada
+
+```
+(andmap string? '("una" "cadena"))
+```
+
+#### ormap
+
+devuelve #t  si alguno de los elementos de la lista satisfación la condición dada
+
+```racket
+(ormap (lambda (x) (and (real? x) (positive? x))) (lista "Solo complejos:" -1+1i 0+8i (sqrt -4) -9-5i))
+```
+
+Al igual que con las versión original de map, podemos implementar nuestras propias funciones con lambda de la misma manera.
+
+## filter
+
+> Predicado: Recordamos que un predicado es una función que devuelve true o false
+
+Sirve para filtrar elementos de una lista, según el criterio especificado por una función de validación.
+
+También podemos utilizar de la misma
+
+```
+(filter pred? lst)
+```
+
+```
+(filter string? (lista 1 2 3 "a" "b" 4))
+> '("a" "b")
+```
+
+## foldl
+
+```
+(foldl proc init lst...+) -> any/c
+```
+
+fold aplica un procedimiento a los elementos de una o más listas. foldl combina los valores de retorno de una manera arbitraria determinada por proc.
+
+si se llama a foldl con n listas, entonces proc debe tomar n+1 argumentos. El argumento adicional son los valores de retorno comninados hasta ahora. el proceso se invoca inicialmente con el primer leemento de cada lista, y el argumento final es init.
+
+las listas de entrada se atraviesan de izquierda a derecha, y el resultado de toda la aplicación foldl es el resultado de la última aplicación de proc. si las listas están vacias, el resultado es init.
+
+tiene para utiilizar un acumulador o una variable que varia según la función que le damos, en este caso, nuesttro "acumulador" es una lista vacia que obtendra nuevas celdas gracias a cons, y obtendra una nueva celda por cada nuevo elemento de la lista que damos.
+
+```
+(foldl cons '( ) '(1 2 3 4))
+> '(4 3 2 1)
+```
+
+queda invertido ya que se guardan en la pila de izq a derecha y luego al sacarlo se sacan del ultimo al primero de la pila.
+
+### Variantes de Filter
+
+#### foldr
+
+foldr solo varía su orden de derecha a izquierda.
+
+```
+(foldr + 0 '(1 2 3 4))
+> 10
+```
+
+En Este caso el 0 es un "acumulador", se ira ejecutando e ira sumando, porque es la función que le dimos, con los elementos iterados de la lista que damos como parametro.
+
+## remove
+
+```racket
+(remove v list [proc] ) -> list?
+```
+
+Devuelve una lista que es como lst, omitiendo el primer elemento de lst que es igual a v usando el procedimiento de procedimiento de comparación
+
+```racket
+(remove 5 '(1 2 3 4 5 6 5) eq?)
+>'(1 2 3 4 6 5)
+; si pasamos remove* eliminara todas las ocurrencias de ese, solo funciona con dos listas
+(remove* '(4 3) '(1 2 3 4 5 4))
+> '(1 2 5)
+```
+
+En este caso, pasamos remove, lo que queremos eliminar, la lista de la cual queremos eliminar el elemento,  la condición de porque queremos eliminar.\

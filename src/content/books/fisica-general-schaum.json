@@ -1,8 +1,6 @@
 {
   "bookName": "Fisica General Schaum",
-  "bookAuthor": [
-    "Frederick J Bueche"
-  ],
+  "bookAuthor": ["Frederick J Bueche"],
   "bookMajor": {
     "discriminant": "infor",
     "value": {

@@ -1,6 +1,6 @@
 {
-  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
+    "module": "es2022",
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "baseUrl": ".",
@@ -8,6 +8,7 @@
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"]
     },
-    "removeComments": true
+    "removeComments": true,
+    "moduleResolution":"node",
   }
 }

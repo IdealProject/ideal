@@ -12,8 +12,9 @@ export default config({
       name: "Ideal Admin",
     },
     navigation:{
-      writing:['posts','authors']
+      writing: ['posts','authors','---'],
     }
+
   },
 
   collections: {
@@ -47,9 +48,10 @@ export default config({
           }),
           {
             label: "Autores",
-            itemLabel: (item) => item.value || "Por Favor ingrese un autor...",
+            itemLabel: (item: { value: any; }) => item.value || "Por Favor ingrese un autor...",
           }
         ),
+        
         major: tagSelection,
         content: fields.markdoc({
           label: "Content",
@@ -135,47 +137,8 @@ export default config({
       },
       schema: {
         name: fields.slug({ name: { label: "Nombre" } }),
-        avatar: fields.image({
-          label: "Avatar",
-          directory: "public/images/avatars",
-          publicPath: "images/avatars",
-        }),
-        links: fields.array(
-          fields.url({ label: "Links", validation: { isRequired: true } }),
-          {
-            label: "Link",
-            itemLabel: (props) => props.value || "",
-          }
-        ),
+        link: fields.url({label:"Link",validation:{isRequired:true}}),
       },
-    }),
-    books: collection({
-      label: "Books",
-      slugField: "bookName",
-      path: "src/content/books/*",
-      format: {
-        data: "json",
-      },
-      entryLayout: "content",
-      schema: {
-        bookName: fields.slug({ name: { label: "Book Name" } }),
-        bookAuthor: fields.array(
-          fields.text({ label: 'Autores' }),
-          {
-            label: 'Autor',
-            itemLabel: props => props.value
-          }
-        ),
-        bookMajor: tagSelection,
-        bookDownloadLinkId: fields.url({
-          label: "Google Drive Link",
-          description: "Enter the Google Drive public link",
-          validation: {
-            isRequired: true,
-          },
-        }),
-      },
-
     }),
   },
 });

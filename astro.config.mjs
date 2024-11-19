@@ -5,21 +5,24 @@ import keystatic from "@keystatic/astro";
 import cloudflare from "@astrojs/cloudflare";
 import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
+import pagefind from "astro-pagefind";
 
-import robotsTxt from "astro-robots-txt";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://ideal-7m3.sites.dev",
+  site: "https://ideal.fiuni.edu.py",
+  build: {
+    formats: ["file"],
+  },
   integrations: [
     react(),
     markdoc(),
     keystatic(),
     tailwind(),
     icon(),
-    robotsTxt({
-      policy: [{ userAgent: "*", allow: "/" }],
-    }),
+    pagefind(),
+    sitemap(),
   ],
   output: "hybrid",
   adapter: cloudflare(),

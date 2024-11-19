@@ -1,0 +1,74 @@
+---
+title: Paradigma Logico
+draft: false
+description: Clase de Paradigmas, durante unimpiadas 2024
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '3'
+    value: F1
+---
+# Paradigma Logico
+
+usamos Prolog como herramienta principal
+
+- Declarativo
+
+- Información por consultas
+
+- Ejecución: inferencias Lógicas (busqueda)
+
+  Todo es False hasta que se demuestre lo contrario, influye el orden de las clausulas
+
+- Las reglas describen relaciones entre objetos
+
+- Los hechos describiran propiedades de los objetos
+
+- Definir
+
+  - Hechos
+  - Consultas
+  - Variables
+  - Conjunciones
+  - Reglas
+
+Las consultas se realizan sobre las bases de conocimientos.
+
+Un Hecho debe comenzar en minusculas, deber tener entre parentesis las relaciones entre los objetos, y termina en un punto.
+
+Ejemplo donde mostramos como crear Hechos, con objetos usando asi base de conocimientos que pueden ser consultadas
+
+```prolog
+hombre(juan).
+hombre(luis).
+
+mujer(maria).
+mujer(ana).
+
+tienen_hijos(juan,maria).
+tienen_hijos(luis,carmen).
+
+hijo_de(juan, pedro).
+hijo_de(maria, pedro).
+hijo_de(juan, belen).
+hijo_de(maria, roque).
+
+es_padre(P):-
+    hombre(P),
+    hijo_de(P, _).
+```
+
+Las Relgas se utilizan en prlog para significar que un hecho depende de uno o mas hechos. como en el ejemplo de es_padre
+
+Hechos con conjunciones y variables para su definicion \
+Variables en Mayusculas
+
+cada afirmación debe terminar en .
+
+para hacer espacio se usa _\
+los comentarios hacemos con %\
+las conjunciones solo podemos usar AND que es una ,
+
+OR, NO podemos usar.

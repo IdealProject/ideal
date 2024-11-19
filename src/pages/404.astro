@@ -1,0 +1,18 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<Layout title="404: Not Found">
+  <div class="flex flex-col items-center mt-32 gap-y-5">
+    <div class="flex flex-col items-center gap-y-3">
+      <Icon name="ideal"class="text-gray-600"/>
+        <h1 class="text-6xl text-gray-600 font-mono bg-zinc-300 px-2 py-3 rounded-lg">404</h1>
+        <p class="text-5xl font-mono flex items-center gap-x-2 text-gray-600">Oh no! Página no encontrada <Icon name="magnifyng-glass" class="text-gray-600 text-5xl"/></p>
+        
+    </div>
+    <div class="flex items-center gap-x-2 text-white font-medium bg-zinc-700 px-5 py-2 rounded-full hover:bg-black transition-all">
+        <Icon name="reload" />
+       <a href="/">Volver al Inicio</a>
+    </div>
+  </div>

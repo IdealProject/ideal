@@ -44,7 +44,7 @@ export async function getStaticPaths() {
                   target="_blank"
                   rel="noopener noreferrer"
                   class="hover:underline text-gray-400 cursor-pointer"
-                  href={e.data.links}
+                  href={e.data.links ? e.data.links : "/"}
                 >
                   {e.data.name}
                 </a>
@@ -116,13 +116,6 @@ export async function getStaticPaths() {
     font-size: 0.875rem;
   }
 
-  pre {
-    padding: 1rem;
-    margin: 1rem 0;
-    overflow-x: auto;
-    border-radius: 0.3rem;
-  }
-
   p {
     text-wrap: pretty;
     display: inline;
@@ -139,15 +132,15 @@ export async function getStaticPaths() {
   }
 
   code {
-    font-family: monospace;
-    background-color: #efefef;
-    padding: 5px;
-    border-radius: 5px;
-    word-wrap: break-word;
-    word-break: break-all;
-    overflow-wrap: break-word;
-    color: #dd4a68;
-  }
+  font-family: monospace;
+  background-color: #efefef;
+  padding: 5px;
+  border-radius: 5px;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  color: #dd4a68;
+}
 
   th,
   td {
@@ -164,6 +157,15 @@ export async function getStaticPaths() {
   ol {
     list-style-type: decimal;
     list-style-position: inside;
+    margin-top: 1em;
+  }
+
+  ol li {
+    margin-bottom: 1rem;
+  }
+
+  ul li {
+    margin-bottom: 1rem;
   }
 
   tr {

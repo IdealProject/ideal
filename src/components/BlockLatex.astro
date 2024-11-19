@@ -1,13 +1,14 @@
 ---
-import katex from 'katex';
-
-const { formula = '' } = Astro.props;
-const html = katex.renderToString(formula, {throwOnError: false, displayMode: true});
+import katex from "katex";
+import 'katex/dist/katex.min.css';
+const { formula = "" } = Astro.props;
+const html = katex.renderToString(formula, {
+  throwOnError: false,
+  displayMode: true,
+  strict: false,
+});
 ---
 
-<div 
-  class="overflow-x-auto text-xs md:text-base lg:text-base xl:text-base border border-solid border-gray-300 px-2 rounded-md md:border-none lg:border-none xl:border-none my-2 print:border-none print:text-sm">
-  <span set:html={html}/>
+<div class="overflow-x-auto text-xs md:text-base lg:text-base xl:text-base border border-solid border-gray-300 px-2 rounded-md md:border-none lg:border-none xl:border-none my-2 print:border-none print:text-sm">
+  <span set:html={html} />
 </div>
-
-

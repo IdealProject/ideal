@@ -1,0 +1,99 @@
+---
+title: Assembler, Introducción
+draft: false
+description: >-
+  Resumen de materiales y apuntes que buscan introducir al lector a la
+  programación en lenguaje ensamblador. 
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '3'
+    value: Pa
+---
+# Registros
+
+Existen en total 14 registros
+Inicialmente utilizamos 4 (**ax,bx,cx,dx**) de 16bits c/u que a su vez se dividen en 2 registros de 8bits, su parte baja y alta (ah,al).
+
+## Asignación
+
+lo que en otros lenguajes hariamos tal que:
+
+```java
+x=42;
+y=24;
+z= x+y;
+```
+
+en Assembler lo hariamos con instrucciones para denotar los operadores.
+
+```nasm
+mov x, 42
+mov y, 24
+add z, x
+add z, y
+```
+
+Tenemos que tener en cuenta que ensamblador utiliza los códigos Ascii de los caracteres para almacenarlos, la letra A, al ser guardada en el registro bx, realmente solo estariamos usando su parte baja ya que el codigo no supera 8bits de información permitidos en la parte baja.
+
+```nasm
+mov bx,65d
+MOV BL,'A'
+```
+
+Resultaron en lo mismo, guardar el código hexadecimal del caracter A, en el registro bl.
+No es necesario aprendernos todos los códigos ASCII, esto lo hace automáticamente emu8086 si lo colocamos entre apostrofes.
+Otro detalle importante, ensamblador finalmente convierte todo en mayusculas por ende no es problema si utilizas minusculas o mayusculas, pero recuerda ser consistente en tu forma de escribir código.
+
+# MOV
+
+Una instrucción que nos permite copiar el contenido de un registro dentro de otro, como ya vimos anteriormente.
+
+```nasm
+mov bx,2 ;mov destino, origen (o dato)
+mov cx,bx ;resultara en guardar el contenido de bx en cx
+```
+
+En Este caso utilizamos una constante **entera**, el número 2.
+
+# Comentarios
+
+Como en muchos lenguajes de programación, existen comentarios los cuales nos sirven para dejar notas o instrucciones para otros programadores o nosotros mismos, todo lo ingresado luego de la **;** sera ignorado por el compilador.
+
+# Aritmética
+
+Inicialmente utilizaremos las esenciales, add,inc,dec y sub, los cuales corresponden a la suma, incrementar en 1, decrementar en 1 y la resta.
+
+```nasm
+mov ax, 5 ; carga 5 dentro de ax
+add ax, 3 ; suma 3 al contenido de ax
+          ; ax ahora contiene 8
+inc ax ; suma 1 a ax
+       ; ax ahora contiene 9
+dec ax ; resta 1 de ax
+       ; ax ahora contiene 8
+sub ax, 6 ; resta 4 de ax
+          ; ax ahora contiene 2
+```
+
+# Ambigüedad
+
+Ensamblador tomara todo numero que ingresemos como Decimal a menos que haya una B (binario), H (hexadecimal) u O (octal) añadido a ellos.
+
+Teniendo eso en cuenta tal vez quisiera guardar en un registro el número hexadecimal "a" en un registro de esta manera
+
+```nasm
+mov bx,ah
+```
+
+Pero no sucederia lo que esperas, debido a que existe el registro ah, lo que se realiza para evitar este tipo de problemas es agregar el número 0.
+
+```nasm
+mov bx,0ah
+```
+
+En el caso de que quieras guardar numeros decimales también es una practica común agregarles una d al final, asi evitando ambigüedades.
+
+Si el valor ingresado no ocupa los 8bits de información disponible, los bits se completaran con el valor 0, para evitar alterar la información.

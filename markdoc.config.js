@@ -1,5 +1,6 @@
 import { defineMarkdocConfig, component, nodes } from "@astrojs/markdoc/config";
 import shiki from "@astrojs/markdoc/shiki";
+import prism from "@astrojs/markdoc/prism";
 
 export default defineMarkdocConfig({
   nodes: {
@@ -15,7 +16,7 @@ export default defineMarkdocConfig({
         alt: { type: String, required: true },
         width: { type: String, required: true },
         height: { type: String, required: true },
-      }
+      },
     },
     blockLatex: {
       render: component("@components/BlockLatex.astro"),
@@ -31,10 +32,6 @@ export default defineMarkdocConfig({
     },
   },
   extends: [
-    shiki({
-      langs: ["java", "python", "bash", "latex"],
-      wrap: true,
-      theme: "github-dark",
-    }),
+    prism(),
   ],
 });
