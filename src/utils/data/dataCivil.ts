@@ -1,4 +1,4 @@
- const materiaCivil1er = [
+const materiaCivil1er = [
     { label: "Álgebra", value: "AL" },
     { label: "Análisis Matemático 1", value: "A1" },
     { label: "Física 1", value: "F1" },
@@ -7,7 +7,7 @@
     { label: "Química 1", value: "Q1" },
 ];
 
- const materiaCivil2do = [
+const materiaCivil2do = [
     { label: "Álgebra Lineal", value: "AN" },
     { label: "Análisis Matemático 2", value: "A2" },
     { label: "Física 2", value: "F2" },
@@ -16,7 +16,7 @@
     { label: "Química 2", value: "Q2" },
 ];
 
- const materiaCivil3ero = [
+const materiaCivil3ero = [
     { label: "Diseño Técnico I", value: "DT1" },
     { label: "Análisis Matemático III", value: "A3" },
     { label: "Física III", value: "F3" },
@@ -26,7 +26,7 @@
     { label: "Diseño Asistido por Computadora I", value: "DAC1" },
 ];
 
- const materiaCivil4to = [
+const materiaCivil4to = [
     { label: "Diseño Técnico II", value: "DT2" },
     { label: "Cálculo Numérico", value: "CN" },
     { label: "Mecánica Racional II", value: "MR2" },
@@ -36,7 +36,7 @@
     { label: "Construcciones", value: "CON" },
 ];
 
- const materiaCivil5to = [
+const materiaCivil5to = [
     { label: "Electrotecnia e Instalaciones Eléctricas", value: "EIE" },
     { label: "Geología Aplicada", value: "GA" },
     { label: "Hidráulica", value: "HID" },
@@ -45,7 +45,7 @@
     { label: "Topografía", value: "TOPO" },
 ];
 
- const materiaCivil6to = [
+const materiaCivil6to = [
     { label: "Cálculo de Estructuras", value: "CE" },
     { label: "Estructuras de Madera", value: "EM" },
     { label: "Geotecnia I", value: "G1" },
@@ -54,7 +54,7 @@
     { label: "Redacción Técnica y Científica", value: "RTC" },
 ];
 
- const materiaCivil7mo = [
+const materiaCivil7mo = [
     { label: "Estructuras Metálicas", value: "EMT" },
     { label: "Geotecnia II", value: "G2" },
     { label: "Hidrología y Gestión de Cuencas", value: "HGC" },
@@ -63,7 +63,7 @@
     { label: "Vías de Comunicación I", value: "VC1" },
 ];
 
- const materiaCivil8vo = [
+const materiaCivil8vo = [
     { label: "Cálculo Avanzado de Estructuras", value: "CAE" },
     { label: "Hormigón Armado II", value: "HA2" },
     { label: "Ingeniería Económica", value: "IE" },
@@ -72,7 +72,7 @@
     { label: "Vías de Comunicación II", value: "VC2" },
 ];
 
- const materiaCivil9no = [
+const materiaCivil9no = [
     { label: "Contabilidad y Administración de Empresas", value: "CAEM" },
     { label: "Hormigón Pretensado y Prefabricado", value: "HPP" },
     { label: "Ingeniería Fluvial y Puertos", value: "IFP" },
@@ -81,7 +81,7 @@
     { label: "Programación y Control de Obras", value: "PCO" },
 ];
 
- const materiaCivilDec = [
+const materiaCivilDec = [
     { label: "Legislación", value: "LEG" },
     { label: "Patología de las Construcciones", value: "PC" },
     { label: "Puentes", value: "PUE" },
@@ -89,15 +89,15 @@
     { label: "Tasaciones y Pericias", value: "TP" },
 ];
 
- export const materiasCivil = {
-    1:materiaCivil1er,
-    2:materiaCivil2do,
-    3:materiaCivil3ero,
-    4:materiaCivil4to,
-    5:materiaCivil5to,
-    6:materiaCivil6to,
-    7:materiaCivil7mo,
-    8:materiaCivil8vo,
-    9:materiaCivil9no,
-    10:materiaCivilDec
+export const materiasCivil = {
+    1: materiaCivil1er,
+    2: materiaCivil2do,
+    3: materiaCivil3ero,
+    4: materiaCivil4to,
+    5: materiaCivil5to,
+    6: materiaCivil6to,
+    7: materiaCivil7mo,
+    8: materiaCivil8vo,
+    9: materiaCivil9no,
+    10: materiaCivilDec
 }

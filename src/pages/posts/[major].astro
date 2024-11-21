@@ -1,9 +1,9 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import { getCollection } from "astro:content";
+// información de las majors
 import { majorOptions } from "src/utils/data/dataMajor";
+// componente de react
 import SubjectSelect from "src/components/SubjectSelect"
-// traemos nuestro componente react
 // Obtenemos valor que trae la ruta
 const { major } = Astro.params;
 if (!major) throw new Error("major not found");
@@ -13,22 +13,16 @@ const majorData = majorOptions.filter(option => option.value === major);
 
 // devolvemos todas las url estaticas posibles
 export const getStaticPaths = (() => {
-    
     return majorOptions.map(elemento => ({
         params: {major:elemento.value}
     }))
-}) ;
-const posts = await getCollection("posts");
-const postNoDraft = posts.filter((e) => e.data.draft == false);
-const postMajor = postNoDraft.filter((e)=> e.data.major.discriminant == majorData[0].value);
-
-// obtenemos los posts 
+});
 
 ---
 
 <Layout title=`Ingeniería ${majorData[0].label}` >
     <!-- container -->
-    <SubjectSelect majorData={majorData} postsCollection={postMajor} client:load />
+    <SubjectSelect  majorData={majorData} client:load />
 </Layout>
 
 
