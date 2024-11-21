@@ -8,6 +8,9 @@ import SubjectSelect from "src/components/SubjectSelect"
 const { major } = Astro.params;
 if (!major) throw new Error("major not found");
 
+
+
+
 // Obtenemos exactamente el elemento que solicitó la ruta
 const majorData = majorOptions.filter(option => option.value === major);
 
@@ -18,11 +21,15 @@ export const getStaticPaths = (() => {
     }))
 });
 
+
+
 ---
 
 <Layout title=`Ingeniería ${majorData[0].label}` >
     <!-- container -->
     <SubjectSelect  majorData={majorData} client:load />
+   
+
 </Layout>
 
 

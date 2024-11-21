@@ -1,0 +1,96 @@
+---
+//todas las materias
+
+import { materiasCivil } from "src/utils/data/dataCivil";
+import { materiasInfor } from "src/utils/data/dataInfor";
+import { materiasElectro } from "src/utils/data/dataElectro";
+import { materiasIndu } from "src/utils/data/dataIndu";
+import { materiaCPA } from "src/utils/data/dataCpa";
+
+// obtenemos data en el enrutamiento
+const { major, subject } = Astro.params;
+if (!subject || !major) throw new Error("subject not found");
+
+// lista de carreras
+import { majorOptions } from "src/utils/data/dataMajor";
+// Layout para pagina
+import Layout from "@layouts/Layout.astro";
+
+// obtenemos getCollection
+import { getCollection } from "astro:content";
+
+// obtenemos los posts
+const posts = await getCollection("posts");
+
+// filtramos solo los post de esta carrera
+const postNoDraft = posts.filter((e) => e.data.draft == false);
+const postMajor = postNoDraft.filter((e) => e.data.major.discriminant == major);
+
+// filtramos los de la materia
+// si es para el cpa es diferente
+let postMateria;
+if (major == "cpa") {
+    postMateria = postMajor.filter((e) => e.data.major.value == subject);
+} else {
+    postMateria = postMajor.filter((e) => e.data.major.value.value == subject);
+}
+
+// Devolvemos todas las rutas estaticas posibles
+export const getStaticPaths = () => {
+    const cpaMaterias = materiaCPA.map((e) => e.value);
+    const matCivil = Object.values(materiasCivil)
+        .flat()
+        .map((e) => e.value);
+    const matInfor = Object.values(materiasInfor)
+        .flat()
+        .map((e) => e.value);
+    const matElectro = Object.values(materiasElectro)
+        .flat()
+        .map((e) => e.value);
+    const matIndu = Object.values(materiasIndu)
+        .flat()
+        .map((e) => e.value);
+
+    const majorsList = majorOptions.map((e) => e.value);
+    const todasMaterias = [
+        ...cpaMaterias,
+        ...matCivil,
+        ...matElectro,
+        ...matInfor,
+        ...matIndu,
+    ];
+    const paths = [];
+    majorsList.forEach((major) => {
+        todasMaterias.forEach((subject) => {
+            paths.push({
+                params: { major, subject },
+            });
+        });
+    });
+    return paths;
+};
+---
+
+<Layout title=`Ingeniería`>
+    <h1 class="text-5xl md:4xl xl:4xl font-extrabold mb-4">
+        {major} - {subject}
+    </h1>
+    <section class="px-4">
+        <ul>
+            {
+                postMateria.map(
+                    (post: { slug: string; data: { title: string } }) => (
+                        <li class="list-disc">
+                            <a
+                                href={`/posts/${post.slug}`}
+                                class="underline text-xl text-blue-600 font-medium"
+                            >
+                                {post.data.title}
+                            </a>
+                        </li>
+                    ),
+                )
+            }
+        </ul>
+    </section>
+</Layout>
