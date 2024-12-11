@@ -29,7 +29,7 @@ En caso de tener mas de una carga afectando a otra carga de prueba, debemos real
 - {% inlineLatex formula="q = \\text{Coulomb}" /%}
 - {% inlineLatex formula="r = \\text{Metros}" /%}
 
-# Campo Électrico (*{% inlineLatex formula="E" /%}*)
+# Campo Électrico ({% inlineLatex formula="E" /%})
 
 Una carga crea un campo électrico en el espacio que la rodea, esto explica la interacción de contacto sobre las demas cargas, si una carga sufre de una fuerza es porque se encuentra dentro de un campo électrico
 
@@ -53,7 +53,7 @@ Para cargas negativas se representan con vectores entrantes a la carga, vicevers
 
 Si tenemos dos cargas opuestas siguiende con la Ley De Coulomb, los campos electricos se atraen, en el caso de cargas iguales se repelen.
 
-# Campo Magnetico (*{% inlineLatex formula="B" /%}*)
+# Campo Magnetico ({% inlineLatex formula="B" /%})
 
 El material magnetite tiene la capacidad de atraer materiales ferreos, los imanes comparten esto teniendo dos polos, los polos iguales se repelen y los opuestos se atraen.
 
@@ -68,11 +68,8 @@ Una carga {% inlineLatex formula="q" /%} que se mueve a cierta velocidad {% inli
 ## Unidades de medida
 
 - {% inlineLatex formula="F = \\text{Newton}" /%}
-
 - {% inlineLatex formula="\\vec{B} = \\text{Tesla}" /%}
-
 - También podemos expresarlo en el sistema Cegesimal de unidades.
-
 - {% inlineLatex formula="\\vec{B} = \\text{Gauss} = 10^{-4} T" /%}
 
 ## Fuentes de Campo Magnetico
@@ -98,3 +95,26 @@ La ecuación es la ley de Biot Savart, permite calcular el campo magnetico en un
 # Inducción Magnetica
 
 Se descubrió que si el flujo magnetico varia sobre una espira creara corriente, ademas una fuerza electromotriz, a este proceso se le llama inducción magnetica
+
+## Flujo Magnetico
+
+Es el numero de lineas de campo magnetico que atraviesan la superficie.
+
+## Fem Inducida, Ley de Faraday
+
+Los experimentos de Faraday demostraron que siempre que exista variación de flujo magnetico por cualquier variable, a traves del area de un circuito, se termina induciendo fem al mismo, obviamente sin necesidad de una fuente externa.
+
+La fem se inducida se genera por la variación de flujo magnetico en el tiempo.
+
+{% blockLatex formula="\\varepsilon  = - \\frac {d \\Phi_B}{dt}" /%}
+
+#### El flujo puede variar según
+
+- Cambiando la magnitud de {% inlineLatex formula="\\vec{B}" /%} en el tiempo.
+- El Área de la espira cambia con el tiempo.
+- El ángulo {% inlineLatex formula="\\theta" /%} entre {% inlineLatex formula="\\vec{B}" /%} y la normal de la espira varia con el tiempo.
+- Cualquier combinación de lo anterior.
+
+## Ley de Lenz
+
+La Fem y la corriente inducidas poseen una dirección y sentido, estas siempre se opondran a las variaciones que las producen, es por esto que tenemos un signo negativo en la formula de fem.
