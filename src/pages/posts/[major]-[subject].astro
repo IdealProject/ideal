@@ -69,28 +69,71 @@ export const getStaticPaths = () => {
     });
     return paths;
 };
+// teniendo el valor de la materia obtener el nombre de la materia
+// Obtenemos las materias segun la major
+let materiaMajor;
+let carrera;
+switch (major) {
+    case "civil":
+        materiaMajor = materiasCivil;
+        carrera = "Ing. Civil";
+        break;
+    case "infor":
+        materiaMajor = materiasInfor;
+        carrera = "Ing. Informática";
+        break;
+    case "electro":
+        materiaMajor = materiasElectro;
+        carrera = "Ing. Electromecánica";
+        break;
+    case "indu":
+        materiaMajor = materiasIndu;
+        carrera = "Ing. Industrial";
+        break;
+    case "cpa":
+        materiaMajor = materiaCPA;
+        carrera = "Cursillo Probatorio de Admisión";
+        break;
+    default:
+        throw new Error("Major not found");
+}
+
+// Buscamos la materia con el value que nos dieron en subject
+
+const subjectName =
+    carrera === "Cursillo Probatorio de Admisión"
+        ? materiaMajor.filter((e) => e.value == subject)[0].label
+        : Object.keys(materiaMajor)
+              .map((e) => materiaMajor[e])
+              .map((el) =>
+                  el.filter((al) => al.value == subject).map((x) => x.label),
+              )
+              .flatMap((nested) => nested)
+              .filter((value) => value)[0];
 ---
 
-<Layout title=`Ingeniería`>
-    <h1 class="text-5xl md:4xl xl:4xl font-extrabold mb-4">
-        {major} - {subject}
-    </h1>
-    <section class="px-4">
-        <ul>
-            {
-                postMateria.map(
-                    (post: { slug: string; data: { title: string } }) => (
-                        <li class="list-disc">
-                            <a
-                                href={`/posts/${post.slug}`}
-                                class="underline text-xl text-blue-600 font-medium"
-                            >
-                                {post.data.title}
-                            </a>
-                        </li>
-                    ),
-                )
-            }
-        </ul>
-    </section>
+<Layout title=`${subjectName}`
+    ><div class="px-60 py-20">
+        <h1 class="text-5xl md:4xl xl:4xl font-extrabold mb-4">
+            {carrera} - {subjectName}
+        </h1>
+        <section class="px-4">
+            <ul>
+                {
+                    postMateria.map(
+                        (post: { slug: string; data: { title: string } }) => (
+                            <li class="list-disc">
+                                <a
+                                    href={`/posts/${post.slug}`}
+                                    class="underline text-xl text-blue-600 font-medium"
+                                >
+                                    {post.data.title}
+                                </a>
+                            </li>
+                        ),
+                    )
+                }
+            </ul>
+        </section>
+    </div>
 </Layout>
