@@ -7,7 +7,7 @@ import { materiasElectro } from "src/utils/data/dataElectro";
 import { materiasIndu } from "src/utils/data/dataIndu";
 import { materiaCPA } from "src/utils/data/dataCpa";
 
-export const prerender = false;
+// export const prerender = false;
 // obtenemos data en el enrutamiento
 const { major, subject } = Astro.params;
 if (!subject || !major) throw new Error("subject not found");
@@ -36,8 +36,8 @@ if (major == "cpa") {
     postMateria = postMajor.filter((e) => e.data.major.value.value == subject);
 }
 
-// Devolvemos todas las rutas estaticas posibles
-export const getStaticPaths = () => {
+// Devolvemos todas las rutas estáticas posibles
+export async function getStaticPaths() {
     const cpaMaterias = materiaCPA.map((e) => e.value);
     const matCivil = Object.values(materiasCivil)
         .flat()
@@ -69,7 +69,7 @@ export const getStaticPaths = () => {
         });
     });
     return paths;
-};
+}
 // teniendo el valor de la materia obtener el nombre de la materia
 // Obtenemos las materias segun la major
 let materiaMajor;
