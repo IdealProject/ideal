@@ -7,7 +7,7 @@ import { materiasElectro } from "src/utils/data/dataElectro";
 import { materiasIndu } from "src/utils/data/dataIndu";
 import { materiaCPA } from "src/utils/data/dataCpa";
 
-// export const prerender = false;
+export const prerender = false;
 // obtenemos data en el enrutamiento
 const { major, subject } = Astro.params;
 if (!subject || !major) throw new Error("subject not found");
@@ -113,7 +113,7 @@ const subjectName =
               .filter((value) => value)[0];
 ---
 
-<Layout title=`Materias`
+<Layout title=`${subjectName}`
     ><div class="px-60 py-20">
         <h1 class="text-5xl md:4xl xl:4xl font-extrabold mb-4">
             {carrera} - {subjectName}
