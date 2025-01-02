@@ -2,7 +2,7 @@ import { fields } from "@keystatic/core";
 import { materiasIndu } from "./data/dataIndu";
 import { semesterOptions } from "./data/dataSemester";
 
-export const induDataHanlder = fields.conditional(
+export const induDataHandler = fields.conditional(
   fields.select({
     label: "Semestre",
     description: "Select the semester",

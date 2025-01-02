@@ -1,40 +1,3 @@
-const materiaCivil1er = [
-    { label: "Álgebra", value: "AL" },
-    { label: "Análisis Matemático 1", value: "A1" },
-    { label: "Física 1", value: "F1" },
-    { label: "Geometría", value: "GE" },
-    { label: "Inglés", value: "IN" },
-    { label: "Química 1", value: "Q1" },
-];
-
-const materiaCivil2do = [
-    { label: "Álgebra Lineal", value: "AN" },
-    { label: "Análisis Matemático 2", value: "A2" },
-    { label: "Física 2", value: "F2" },
-    { label: "Análisis Vectorial", value: "AV" },
-    { label: "Computación 1", value: "C1" },
-    { label: "Química 2", value: "Q2" },
-];
-
-const materiaCivil3ero = [
-    { label: "Diseño Técnico I", value: "DT1" },
-    { label: "Análisis Matemático III", value: "A3" },
-    { label: "Física III", value: "F3" },
-    { label: "Mecánica Racional I", value: "MR1" },
-    { label: "Probabilidades y Estadística", value: "PE" },
-    { label: "Computación II", value: "C2" },
-    { label: "Diseño Asistido por Computadora I", value: "DAC1" },
-];
-
-const materiaCivil4to = [
-    { label: "Diseño Técnico II", value: "DT2" },
-    { label: "Cálculo Numérico", value: "CN" },
-    { label: "Mecánica Racional II", value: "MR2" },
-    { label: "Mecánica de los Materiales I", value: "MM1" },
-    { label: "Tecnología de los Materiales", value: "TM" },
-    { label: "Diseño Asistido por Computadora II", value: "DAC2" },
-    { label: "Construcciones", value: "CON" },
-];
 
 const materiaCivil5to = [
     { label: "Electrotecnia e Instalaciones Eléctricas", value: "EIE" },
@@ -90,10 +53,6 @@ const materiaCivilDec = [
 ];
 
 export const materiasCivil = {
-    1: materiaCivil1er,
-    2: materiaCivil2do,
-    3: materiaCivil3ero,
-    4: materiaCivil4to,
     5: materiaCivil5to,
     6: materiaCivil6to,
     7: materiaCivil7mo,

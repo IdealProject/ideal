@@ -1,39 +1,16 @@
 import { fields } from "@keystatic/core";
 import { materiasCivil } from "./data/dataCivil";
-import { semesterOptions } from "./data/dataSemester";
+import { semesterOptionsCE } from "./data/dataSemester";
 
-export const civilDataHanlder = fields.conditional(
+export const civilDataHandler = fields.conditional(
   fields.select({
     label: "Semestre",
     description: "Select the semester",
-    options: semesterOptions,
-    defaultValue: "1",
+    options: semesterOptionsCE,
+    defaultValue: "5",
   }),
   {
-    1: fields.select({
-      label: "Subject",
-      description: "Enter the subject of the post",
-      options: materiasCivil[1],
-      defaultValue: "F1",
-    }),
-    2: fields.select({
-      label: "Subject",
-      description: "Enter the subject of the post",
-      options: materiasCivil[2],
-      defaultValue: "F2",
-    }),
-    3: fields.select({
-      label: "Subject",
-      description: "Enter the subject of the post",
-      options: materiasCivil[3],
-      defaultValue: "DT1",
-    }),
-    4: fields.select({
-      label: "Subject",
-      description: "Enter the subject of the post",
-      options: materiasCivil[4],
-      defaultValue: "DT2",
-    }),
+
     5: fields.select({
       label: "Subject",
       description: "Enter the subject of the post",

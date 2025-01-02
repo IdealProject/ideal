@@ -4,5 +4,5 @@ export const cpaDataHandler = fields.select({
   label: "Subject",
   description: "Enter the subject of the post",
   options: materiaCPA,
-  defaultValue: "Algebra",
+  defaultValue: "Ab",
 });
