@@ -1,4 +1,5 @@
 ---
+import type { GetStaticPaths } from "astro";
 //todas las materias
 
 import { materiasCivil } from "src/utils/data/dataCivil";
@@ -8,12 +9,11 @@ import { materiasIndu } from "src/utils/data/dataIndu";
 import { materiaCPA } from "src/utils/data/dataCpa";
 
 // export const prerender = false;
+
 // obtenemos data en el enrutamiento
 const { major, subject } = Astro.params;
 if (!subject || !major) throw new Error("subject not found");
 
-// lista de carreras
-import { majorOptions } from "src/utils/data/dataMajor";
 // Layout para pagina
 import Layout from "@layouts/Layout.astro";
 
@@ -36,40 +36,53 @@ if (major == "cpa") {
     postMateria = postMajor.filter((e) => e.data.major.value.value == subject);
 }
 
-// Devolvemos todas las rutas estáticas posibles
-export async function getStaticPaths() {
-    const cpaMaterias = materiaCPA.map((e) => e.value);
-    const matCivil = Object.values(materiasCivil)
-        .flat()
-        .map((e) => e.value);
-    const matInfor = Object.values(materiasInfor)
-        .flat()
-        .map((e) => e.value);
-    const matElectro = Object.values(materiasElectro)
-        .flat()
-        .map((e) => e.value);
-    const matIndu = Object.values(materiasIndu)
-        .flat()
-        .map((e) => e.value);
+// Devolvemos todas las rutas estaticas posibles
 
-    const majorsList = majorOptions.map((e) => e.value);
-    const todasMaterias = [
-        ...cpaMaterias,
-        ...matCivil,
-        ...matElectro,
-        ...matInfor,
-        ...matIndu,
+export const getStaticPaths = () => {
+    const paths = [
+        ...Object.keys(materiaCPA).map((clave) => ({
+            params: {
+                major: "cpa",
+                subject: materiaCPA[clave].value,
+            },
+        })),
+        ...Object.values(materiasCivil).flatMap((semesters) =>
+            semesters.map((subjects) => ({
+                params: {
+                    major: "civil",
+                    subject: subjects.value,
+                },
+            })),
+        ),
+        ...Object.values(materiasInfor).flatMap((semesters) =>
+            semesters.map((subjects) => ({
+                params: {
+                    major: "infor",
+                    subject: subjects.value,
+                },
+            })),
+        ),
+        ...Object.values(materiasElectro).flatMap((semesters) =>
+            semesters.map((subjects) => ({
+                params: {
+                    major: "electro",
+                    subject: subjects.value,
+                },
+            })),
+        ),
+        ...Object.values(materiasIndu).flatMap((semesters) =>
+            semesters.map((subjects) => ({
+                params: {
+                    major: "indu",
+                    subject: subjects.value,
+                },
+            })),
+        ),
     ];
-    const paths = [];
-    majorsList.forEach((major) => {
-        todasMaterias.forEach((subject) => {
-            paths.push({
-                params: { major, subject },
-            });
-        });
-    });
+
     return paths;
-}
+};
+
 // teniendo el valor de la materia obtener el nombre de la materia
 // Obtenemos las materias segun la major
 let materiaMajor;

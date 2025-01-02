@@ -38,10 +38,10 @@ const SubjectSelect = ({ majorData }) => {
                 <p className='p-4'>Contenido principal</p>
 
                 {majorData[0].value == 'cpa' ? // en el caso de ser el cpa 
-                    getMajores(majorData[0].value).map(e => <li><a href={`/posts/${majorData[0].value}-${e.value}`} >{e.label}</a></li>) // mostramos sus materias unicamente
+                    getMajores(majorData[0].value).map((e, index) => <li key={index}><a key={index} href={`/posts/${majorData[0].value}-${e.value}`} >{e.label}</a></li>) // mostramos sus materias unicamente
                     :
                     //  en el caso contrario mostramos el selector de semestres y materias para cada uno
-                    getMajores(majorData[0].value)[semester].map(e => <li><a href={`/posts/${majorData[0].value}-${e.value}`}>{e.label}</a></li>)}
+                    getMajores(majorData[0].value)[semester].map((e, index) => <li key={index}><a key={index} href={`/posts/${majorData[0].value}-${e.value}`}>{e.label}</a></li>)}
             </section>
         </div>
     );
