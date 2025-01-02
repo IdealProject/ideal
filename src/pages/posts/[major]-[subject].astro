@@ -1,0 +1,167 @@
+---
+import type { GetStaticPaths } from "astro";
+//todas las materias
+
+import { materiasCivil } from "src/utils/data/dataCivil";
+import { materiasInfor } from "src/utils/data/dataInfor";
+import { materiasElectro } from "src/utils/data/dataElectro";
+import { materiasIndu } from "src/utils/data/dataIndu";
+import { materiaCPA } from "src/utils/data/dataCpa";
+import { materiasCBI } from "src/utils/data/dataCBI";
+
+// export const prerender = false;
+
+// obtenemos data en el enrutamiento
+const { major, subject } = Astro.params;
+if (!subject || !major) throw new Error("subject not found");
+
+// Layout para pagina
+import Layout from "@layouts/Layout.astro";
+
+// obtenemos getCollection
+import { getCollection } from "astro:content";
+
+// obtenemos los posts
+const posts = await getCollection("posts");
+
+// filtramos solo los post de esta carrera
+const postNoDraft = posts.filter((e) => e.data.draft == false);
+const postMajor = postNoDraft.filter((e) => e.data.major.discriminant == major);
+
+// filtramos los de la materia
+// si es para el cpa es diferente
+let postMateria;
+if (major == "cpa") {
+    postMateria = postMajor.filter((e) => e.data.major.value == subject);
+} else {
+    postMateria = postMajor.filter((e) => e.data.major.value.value == subject);
+}
+
+// Devolvemos todas las rutas estaticas posibles
+
+export const getStaticPaths = () => {
+    const paths = [
+        ...Object.keys(materiaCPA).map((clave) => ({
+            params: {
+                major: "cpa",
+                subject: materiaCPA[clave].value,
+            },
+        })),
+        ...Object.values(materiasCivil).flatMap((semesters) =>
+            semesters.map((subjects) => ({
+                params: {
+                    major: "civil",
+                    subject: subjects.value,
+                },
+            })),
+        ),
+        ...Object.values(materiasInfor).flatMap((semesters) =>
+            semesters.map((subjects) => ({
+                params: {
+                    major: "infor",
+                    subject: subjects.value,
+                },
+            })),
+        ),
+        ...Object.values(materiasElectro).flatMap((semesters) =>
+            semesters.map((subjects) => ({
+                params: {
+                    major: "electro",
+                    subject: subjects.value,
+                },
+            })),
+        ),
+        ...Object.values(materiasIndu).flatMap((semesters) =>
+            semesters.map((subjects) => ({
+                params: {
+                    major: "indu",
+                    subject: subjects.value,
+                },
+            })),
+        ),
+        ...Object.values(materiasCBI).flatMap((semesters) =>
+            semesters.map((subjects) => ({
+                params: {
+                    major: "cbi",
+                    subject: subjects.value,
+                },
+            })),
+        ),
+        
+    ];
+
+    return paths;
+};
+
+// teniendo el valor de la materia obtener el nombre de la materia
+// Obtenemos las materias segun la major
+let materiaMajor;
+let carrera;
+switch (major) {
+    case "civil":
+        materiaMajor = materiasCivil;
+        carrera = "Ing. Civil";
+        break;
+    case "infor":
+        materiaMajor = materiasInfor;
+        carrera = "Ing. Informática";
+        break;
+    case "electro":
+        materiaMajor = materiasElectro;
+        carrera = "Ing. Electromecánica";
+        break;
+    case "indu":
+        materiaMajor = materiasIndu;
+        carrera = "Ing. Industrial";
+        break;
+    case "cpa":
+        materiaMajor = materiaCPA;
+        carrera = "Cursillo Probatorio de Admisión";
+        break;
+    case "cbi":
+        materiaMajor = materiasCBI;
+        carrera = "Curso Básico de Ingeniería";
+        break;
+    default:
+        throw new Error("Major not found");
+}
+
+// Buscamos la materia con el value que nos dieron en subject
+
+const subjectName =
+    carrera === "Cursillo Probatorio de Admisión"
+        ? materiaMajor.filter((e) => e.value == subject)[0].label
+        : Object.keys(materiaMajor)
+              .map((e) => materiaMajor[e])
+              .map((el) =>
+                  el.filter((al) => al.value == subject).map((x) => x.label),
+              )
+              .flatMap((nested) => nested)
+              .filter((value) => value)[0];
+---
+
+<Layout title=`${subjectName}`
+    ><div class="px-60 py-20">
+        <h1 class="text-5xl md:4xl xl:4xl font-extrabold mb-4">
+            {carrera} - {subjectName}
+        </h1>
+        <section class="px-4">
+            <ul>
+                {
+                    postMateria.map(
+                        (post: { slug: string; data: { title: string } }) => (
+                            <li class="list-disc">
+                                <a
+                                    href={`/posts/${post.slug}`}
+                                    class="underline text-xl text-blue-600 font-medium"
+                                >
+                                    {post.data.title}
+                                </a>
+                            </li>
+                        ),
+                    )
+                }
+            </ul>
+        </section>
+    </div>
+</Layout>
