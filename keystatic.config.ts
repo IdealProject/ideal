@@ -74,15 +74,9 @@ export default config({
                 }),
                 width: fields.text({
                   label: "Width",
-                  validation: {
-                    isRequired: true,
-                  },
                 }),
                 height: fields.text({
                   label: "Height",
-                  validation: {
-                    isRequired: true,
-                  },
                 }),
               },
             }),

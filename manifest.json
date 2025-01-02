@@ -30,9 +30,9 @@
   "dir": "auto",
   "lang": "es",
   "start_url": ".",
-  "scope": "https://ideal-7m3.pages.dev/",
-  "description": "Plataforma de aprendizage libre y gratuita potenciada por los alumnos de la Facultad de Ingeniería de la Universidad Nacional de Itapúa",
+  "scope": "https://ideal.fiuni.edu.py/",
+  "description": "Plataforma de aprendizaje libre y gratuita potenciada por los alumnos de la Facultad de Ingeniería de la Universidad Nacional de Itapúa",
   "name": "Ideal",
   "short_name": "ideal",
-  "id": "https://ideal-7m3.pages.dev//"
+  "id": "https://ideal.fiuni.edu.py//"
 }

@@ -1,0 +1,120 @@
+---
+title: Repaso Teoría Final
+draft: false
+description: >-
+  Repaso realizado sobre el campo eléctrico y el campo magnético con miras al
+  examen final.
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '3'
+    value: F3
+---
+# Fisica 3 - Repaso Final - Teoría
+
+# Ley de Coulomb
+
+Dos cargas interactuan con una fuerza que es aplicada por una linea que les une, esta fuerza es directamente proporcional al producto de estas cargas, e inversamente proporcial al cuadrado de la distancia que las separa, La Fuerza se vuelve repulsiva si son de mismo signo, mientras que si son de signos opuestos es atractiva.
+
+{% blockLatex
+   formula="\\vec{F} = \\frac{k \\cdot q_o \\cdot q_1 }{r^2} \\cdot \\overset {\\wedge} {r}" /%}
+
+En caso de tener mas de una carga afectando a otra carga de prueba, debemos realizar el calculo de fuerzas para cada una y luego sumamos vectorialmente.
+
+## Unidades de medida
+
+- {% inlineLatex formula="F = \\text{Newton}" /%}
+- {% inlineLatex formula="q = \\text{Coulomb}" /%}
+- {% inlineLatex formula="r = \\text{Metros}" /%}
+
+# Campo Électrico ({% inlineLatex formula="E" /%})
+
+Una carga crea un campo électrico en el espacio que la rodea, esto explica la interacción de contacto sobre las demas cargas, si una carga sufre de una fuerza es porque se encuentra dentro de un campo électrico
+
+Se define como la relación de la fuerza con la carga de prueba.
+
+{% blockLatex formula="\\vec{E} = \\frac{\\vec{F}}{q_o}" /%}
+
+De la misma manera que con las cargas, si una carga se encuentra bajo la influencia de varios campos magneticos podemos calcular el efecto individual para luego realizar la suma vectorial.
+
+## Unidades de medida
+
+- {% inlineLatex formula="F = \\text{Newton}" /%}
+- {% inlineLatex formula="q = \\text{Coulomb}" /%}
+- {% inlineLatex formula="E = \\frac{N}{C}" /%}
+
+## Representación de Campos Électricos.
+
+Se representa con una cantidad infinita de vectores asociadas a un punto en el espacio especifico, ademas de representar su dirección.
+
+Para cargas negativas se representan con vectores entrantes a la carga, viceversa para el caso de cargas positivas.
+
+Si tenemos dos cargas opuestas siguiende con la Ley De Coulomb, los campos electricos se atraen, en el caso de cargas iguales se repelen.
+
+# Campo Magnetico ({% inlineLatex formula="B" /%})
+
+El material magnetite tiene la capacidad de atraer materiales ferreos, los imanes comparten esto teniendo dos polos, los polos iguales se repelen y los opuestos se atraen.
+
+Todo esto se produce sin contacto gracias al campo magnetico propio de los imanes,podemos representarlo como lineas vectoriales salientes del polo norte y entrantes en el polo sur.
+
+## Fuerza Ejercida
+
+Una carga {% inlineLatex formula="q" /%} que se mueve a cierta velocidad {% inlineLatex formula="v" /%} en un campo magnetico experimenta fuerza. Esta sera perpendicular a la velocidad y al campo magnetico.
+
+{% blockLatex formula="\\vec{F} = q \\cdot \\vec{v} \\times \\vec{B}" /%}
+
+## Unidades de medida
+
+- {% inlineLatex formula="F = \\text{Newton}" /%}
+- {% inlineLatex formula="\\vec{B} = \\text{Tesla}" /%}
+- También podemos expresarlo en el sistema Cegesimal de unidades.
+- {% inlineLatex formula="\\vec{B} = \\text{Gauss} = 10^{-4} T" /%}
+
+## Fuentes de Campo Magnetico
+
+### Campo Magnetico creado por cargas puntuales en movimiento.
+
+Una carga puntual {% inlineLatex formula="q" /%} que se mueve a una velocidad {% inlineLatex formula="v" /%} produce un campo magnetico {% inlineLatex formula="B" /%}
+
+{% blockLatex
+   formula="\\vec{B} = \\frac{\\mu_0}{4 \\pi} \\cdot \\frac{q \\cdot \\vec{v} \\times \\overset{\\wedge} {r}}{r^2}" /%}
+
+Se considera la velocidad constante por ende el campo también lo sera.
+
+### Camopo Magnetico creado por corrientes, Ley de Biot Savart
+
+{% blockLatex
+   formula="d \\vec{B} = \\frac{\\mu_0}{4 \\pi} \\cdot \\frac{I \\cdot dl \\times \\overset {\\wedge}{r}}{r^2}" /%}
+
+La ecuación se basa en la ecuación del campo magnetico, considerando que la corriente es un flujo de cargas en movimiento a través de un material conductor. El conductor curvo se subdivide en elementos diferenciales de longitud {% inlineLatex formula="dl" /%} por donde pasa una corriente {% inlineLatex formula="I" /%} , cada elemento de corriente produce un campo magnético diferencial {% inlineLatex formula="dB" /%}
+
+La ecuación es la ley de Biot Savart, permite calcular el campo magnetico en un conductor generado por una corriente . El dB producido es directamente proporcional al elemento de corriente Idl, e inversamente proporcional al cuadrado de la distancia r medida entre el elemento de corriente y el punto de calculo, el versor r tiene sentido desde Idl hacia el punto de calculo.
+
+# Inducción Magnetica
+
+Se descubrió que si el flujo magnetico varia sobre una espira creara corriente, ademas una fuerza electromotriz, a este proceso se le llama inducción magnetica
+
+## Flujo Magnetico
+
+Es el numero de lineas de campo magnetico que atraviesan la superficie.
+
+## Fem Inducida, Ley de Faraday
+
+Los experimentos de Faraday demostraron que siempre que exista variación de flujo magnetico por cualquier variable, a traves del area de un circuito, se termina induciendo fem al mismo, obviamente sin necesidad de una fuente externa.
+
+La fem se inducida se genera por la variación de flujo magnetico en el tiempo.
+
+{% blockLatex formula="\\varepsilon  = - \\frac {d \\Phi_B}{dt}" /%}
+
+#### El flujo puede variar según
+
+- Cambiando la magnitud de {% inlineLatex formula="\\vec{B}" /%} en el tiempo.
+- El Área de la espira cambia con el tiempo.
+- El ángulo {% inlineLatex formula="\\theta" /%} entre {% inlineLatex formula="\\vec{B}" /%} y la normal de la espira varia con el tiempo.
+- Cualquier combinación de lo anterior.
+
+## Ley de Lenz
+
+La Fem y la corriente inducidas poseen una dirección y sentido, estas siempre se opondran a las variaciones que las producen, es por esto que tenemos un signo negativo en la formula de fem.

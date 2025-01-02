@@ -1,0 +1,145 @@
+---
+title: 'Assembler #3'
+draft: true
+description: Resumen de los materiales 2 y 3,2024
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '3'
+    value: Pa
+---
+# Assembler
+
+# Entrada y Salida
+
+En cada microprocesador tenemos las instrucciones para E/S dependiendo de los dispositivos disponibles.
+
+En nuestro caso 8086 nos provee de las instrucciones **in** y **out** que son complicadas de utilizar, por ende preferimos utilizar las intrucciones proveidas por el sistema operativo.
+
+En 8086 utilizamos un sistema de interrupciones de software para llamar a los sub-programas del sistema Operativo. Las cuales indican al procesador que detenga sus procesos actuales para ceder el control a un programa del SO.
+
+Existen interrupciones por software y también por hardware.
+
+Utilizamos un solo valor que es un número el cual indica que subprograma estamos invocando.
+
+Para E/S y algunas otras operaciones lo normal es utilizar **int 21h**, pero la interrupción necesita saber que programa del MS-DOS necesita utilizar, para eso se lo indicamos con el registro **ah**.
+
+## Salida de Caracteres
+
+Para mostrar un caracter necesitamos el subprograma **2h**.
+
+El caracter a ser mostrado se debera almacenar en el registro **dl.**
+
+```nasm
+mov dl,'c' ;guardamos el elemento que queremos mostrar
+mov ah,2h ; establecemos el numero que representa el subprograma
+int 21h ; llamamos la interrupción del sistema
+```
+
+## Entrada de Caracteres
+
+Leeremos solo un caracter por teclado
+
+Guardamos el número que invoca al subprograma **1h** en el registro **ah**, luego de llamar a la interrupción el subprograma utilizara el registro **al** para almacenar el caracter leído.
+
+```nasm
+mov ah,1h ; establecemos el numero que representa el subprograma
+int 21h ; llamamos la interrupción del sistema
+mov cl,al ;copiamos al registro cl, lo que se ingreso.
+```
+
+Podriamos ahora realizar un programa en el cual el usuario ingrese por teclado un caracter y se lo vuelva a mostrar
+
+```nasm
+mov ah,1h
+int 21h
+mov dl,al
+mov ah,2h
+int 21h
+```
+
+## Programas completos en Asm
+
+Recomendamos utilizar siempre la misma estructura para los programas y asi ahorrar tiempo.
+
+```nasm
+; Author: (aquí puedes poner tu nombre o el del autor)
+; Date: (puedes indicar la fecha de creación/modificación)
+
+.model small       ; Indica que se usará el modelo de memoria 'small', adecuado para programas pequeños.
+.stack 100h        ; Reserva 256 bytes (100h en hexadecimal) para la pila (stack).
+.code              ; Sección donde comienza el código ejecutable del programa.
+
+start:             ; Etiqueta que indica el inicio del programa.
+    ; Aquí puedes escribir tu código (reemplaza "<tu codigo va aqui>").
+
+    mov ax, 4c00h  ; Carga en AX el valor 4C00h. La interrupción 21h, función 4Ch, 
+                   ; se usa para finalizar un programa y devolver el control al sistema operativo.
+                   ; 00h en AL significa que el programa terminó con un código de salida 0 (sin errores).
+
+    int 21h        ; Llama a la interrupción 21h para ejecutar la función especificada en AX (4Ch en este caso).
+
+end start          ; Marca el fin del programa y define la etiqueta 'start' como el punto de inicio.
+```
+
+### Ejemplo De programa completo
+
+```nasm
+.model small
+.stack 100h
+.code
+start:
+   mov ah,1h
+   int 21h
+   mov dl,al
+   mov ah,2h
+   int 21h
+   mov ax, 4c00h ; retorna a ms-dos
+   int 21h
+end start
+```
+
+## String de Salida
+
+Aunque mostrar caracteres puede ser útil normalmente necesitaremos cadena de caracteres.
+
+Primeramente necesitaremos utilizar variables
+
+```nasm
+version1 db “abc” ; string constante
+version2 db ‘a’, ‘b’, ‘c’ ; caracteres constantes
+version3 db 97, 98, 99 ; codigos ASCII
+```
+
+Aqui las 3 versiones terminaran representando la misma cadena de caracteres "abc", también podemos unir estas formas de crear cadenas.
+
+```nasm
+message db “Hello world”, 13, 10, ‘$’
+```
+
+Aqui estamos mostrando el mensaje de "Hello World" seguido de un retorno de carro, un salto de linea y el signo de dolar como señal de que la cadena finaliza.\
+El caracter "$" es especialmente util ya que el subprograma 9h (para mostrar cadenas de caracteres ) espera que las cadenas de caracteres terminen con el.
+
+Aclaramos que **db** no es una instrucción, es una llamada **directiva,** (le dice al ensamblador que debe realizar algo) cuando se traduce, db indica que debe guardar un espacio de uno o mas bytes en una posición de memoria nombrada, osea en nuestra variable. \
+Para mostrar una cadena debemos almacenarlo en **dx.**
+
+```nasm
+.model small
+.stack 100h
+.data
+message db ‘Hola mundo‘, 13, 10, ‘$‘
+.code
+start:
+mov ax, @data
+mov ds, ax
+; copia direccion del mensaje a dx
+mov dx, offset message
+mov ah, 9h ; string de salida
+
+int 21h ; muestra string
+mov ax, 4c00h
+int 21h
+end start
+```

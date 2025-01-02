@@ -1,0 +1,80 @@
+---
+title: Paradigmas - Repaso 2024
+draft: false
+description: >-
+  Repaso realizado para explorar los puntos mas importantes desarrollados
+  durante el semestre, 2024
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '3'
+    value: Pa
+---
+# Paradigmas de la Programación
+
+## ¿Que es un Paradigma?
+
+Un paradigma es un conjunto de metodos para resolver algo.\
+Aquel que designa un esquema formal o modelo de tipo cientifico riguroso.
+
+Los Lenguajes no estan ligados a los paradigmas, existen soluciones multiparadigmas.
+
+## Traductores:
+
+Es el encargado de convertir lo que nosotros escribimos a un formato entendible por las maquinas.
+
+- **Compilador:** Toma todo el código escrito en un lenguaje de programación a un objeto para una arquitectura.
+- **Intérprete:** Línea por línea en tiempo real va siendo traducido y ejectuado.
+- **Ensamblador:**  Convierte el código ensamblador a código maquina.
+
+## Tipos de Lenguajes:
+
+- **Lenguaje Máquina (Binario):** Directamente entendido por las máquinas, no requiere traducción. Es extremadamente complejo de escribir para los humanos debido a su formato binario puro.
+- **Lenguaje de Bajo Nivel (Ensamblador):** Cercano al lenguaje máquina, pero más legible para los humanos gracias a códigos nemotécnicos que representan instrucciones básicas del procesador. Es específico para cada tipo de arquitectura de procesador.
+- **Lenguaje de Nivel Medio:** Ofrece un equilibrio entre el acceso directo al hardware, característico de los lenguajes de bajo nivel, y la simplicidad de los lenguajes de alto nivel. Ejemplos comunes son **C** y **C++**, que permiten manejar el hardware de manera eficiente y facilitan la programación.
+- **Lenguaje de Alto Nivel:** Diseñado para ser fácil de escribir y leer por los humanos. Es independiente del hardware y requiere traducción (compilación o interpretación) para ejecutarse en una máquina.
+
+## Tipados:
+
+- **Tipado Estático:** Comprobación de tipos durante la compilación, tipos no cambian durante ejecución, siendo esta mas eficiente.
+- **Tipado Dinámico:** Comprobación durante la ejecución, el tipo puedo cambiar durante la ejecución, más propenso a errores.
+- **Tipado Fuerte:** Es necesario el casting obligatoriamente.
+- **Tipado Débil:** No es necesario el casting explicito.
+
+## Tipos de Paradigmas:
+
+### Imperativo:
+
+Como resolver algo, explicitamente, dando una secuencia de comandos o instrucciones especificos. Java, Python, C++.
+
+El imperativo se puede aplicar de diferentes formas:
+
+#### Programación Estructurada:
+
+El flujo se define a travez de bucles anidados, subrutinas y condicionales, no utilizamos goto
+
+#### Programación Procedimental:
+
+Pocas expresiones repetidas, las aglutina en funciones y las llama cuando necesita.
+
+#### Programación modular:
+
+Dividir el programa en modulos o subprogramas para que sea mas facil de manejarlo, estos son independientes uno de otros.
+
+#### Programación OO:
+
+Representa objetos de la vida real con instancias de clases que los describen.
+
+### Declarativo:
+
+Es un enfoque de programación que describe qué se debe lograr y no cómo hacerlo. No existe orden de evaluación ni secuencia de asignación.
+
+#### Paradigma Lógico:
+
+Basado en Lógica formal, Base de Conocimientos de hechos y reglas. (Prolog)
+
+#### Paradigma Funcional:
+
+Basado en funciones matemáticas, ausencia de efectos secundarios. (Racket)
