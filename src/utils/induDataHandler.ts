@@ -1,8 +1,8 @@
 import { fields } from "@keystatic/core";
-import { materiaIndu1er, materiaIndu2do, materiaIndu3ero, materiaIndu4to, materiaIndu5to, materiaIndu6to, materiaIndu7mo, materiaIndu8vo, materiaIndu9no, materiaInduDec } from "./data/dataIndu";
+import { materiasIndu } from "./data/dataIndu";
 import { semesterOptions } from "./data/dataSemester";
 
-export const induDataHanlder = fields.conditional(
+export const induDataHandler = fields.conditional(
   fields.select({
     label: "Semestre",
     description: "Select the semester",
@@ -13,61 +13,61 @@ export const induDataHanlder = fields.conditional(
     1: fields.select({
       label: "Subject",
       description: "Enter the subject of the post",
-      options: materiaIndu1er,
+      options: materiasIndu[1],
       defaultValue: "F1",
     }),
     2: fields.select({
       label: "Subject",
       description: "Enter the subject of the post",
-      options: materiaIndu2do,
+      options: materiasIndu[2],
       defaultValue: "ALN",
     }),
     3: fields.select({
       label: "Subject",
       description: "Enter the subject of the post",
-      options: materiaIndu3ero,
+      options: materiasIndu[3],
       defaultValue: "AM2",
     }),
     4: fields.select({
       label: "Subject",
       description: "Enter the subject of the post",
-      options: materiaIndu4to,
+      options: materiasIndu[4],
       defaultValue: "AM3",
     }),
     5: fields.select({
       label: "Subject",
       description: "Enter the subject of the post",
-      options: materiaIndu5to,
+      options: materiasIndu[5],
       defaultValue: "MR2",
     }),
     6: fields.select({
       label: "Subject",
       description: "Enter the subject of the post",
-      options: materiaIndu6to,
+      options: materiasIndu[6],
       defaultValue: "GC",
     }),
     7: fields.select({
       label: "Subject",
       description: "Enter the subject of the post",
-      options: materiaIndu7mo,
+      options: materiasIndu[7],
       defaultValue: "IE",
     }),
     8: fields.select({
       label: "Subject",
       description: "Enter the subject of the post",
-      options: materiaIndu8vo,
+      options: materiasIndu[8],
       defaultValue: "PI1",
     }),
     9: fields.select({
       label: "Subject",
       description: "Enter the subject of the post",
-      options: materiaIndu9no,
+      options: materiasIndu[9],
       defaultValue: "CI",
     }),
     10: fields.select({
       label: "Subject",
       description: "Enter the subject of the post",
-      options: materiaInduDec,
+      options: materiasIndu[10],
       defaultValue: "IM",
     }),
   },

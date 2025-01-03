@@ -4,4 +4,5 @@ export const majorOptions = [
   { label: "Civil", value: "civil" },
   { label: "Industrial", value: "indu" },
   { label: "CPA", value: "cpa" },
+  { label: "CBI", value: "cbi" }
 ];

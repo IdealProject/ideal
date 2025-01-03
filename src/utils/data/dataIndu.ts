@@ -1,4 +1,4 @@
-export const materiaIndu1er = [
+ const materiaIndu1er = [
     { label: "Álgebra", value: "AL" },
     { label: "Geometría Analítica", value: "GA" },
     { label: "Física 1", value: "F1" },
@@ -7,7 +7,7 @@ export const materiaIndu1er = [
     { label: "Química 1", value: "Q1" },
 ];
 
-export const materiaIndu2do = [
+ const materiaIndu2do = [
     { label: "Álgebra Lineal", value: "ALN" },
     { label: "Análisis Matemático I", value: "AM1" },
     { label: "Física II", value: "F2" },
@@ -18,7 +18,7 @@ export const materiaIndu2do = [
 
 ];
 
-export const materiaIndu3ero = [
+ const materiaIndu3ero = [
     { label: "Análisis Matemático II", value: "AM2" },
     { label: "Análisis Vectorial", value: "AV" },
     { label: "Probabilidad y Estadística", value: "PE" },
@@ -27,7 +27,7 @@ export const materiaIndu3ero = [
     { label: "Tecnología de los Materiales", value: "TM" },
 ];
 
-export const materiaIndu4to = [
+ const materiaIndu4to = [
     { label: "Análisis Matemático III", value: "AM3" },
     { label: "Diseño Asistido por Computadora", value: "DAC" },
     { label: "Mecánica Racional I", value: "MR1" },
@@ -37,7 +37,7 @@ export const materiaIndu4to = [
     { label: "Electiva I", value: "E1" },
 ];
 
-export const materiaIndu5to = [
+ const materiaIndu5to = [
     { label: "Investigación de Operaciones I", value: "IO1" },
     { label: "Mecánica Racional II", value: "MR2" },
     { label: "Mecánica de Materiales", value: "MM" },
@@ -45,7 +45,7 @@ export const materiaIndu5to = [
     { label: "Mecánica de Fluidos", value: "MF" },
 ];
 
-export const materiaIndu6to = [
+ const materiaIndu6to = [
     { label: "Investigación de Operaciones II", value: "IO2" },
     { label: "Gestión de Calidad", value: "GC" },
     { label: "Electrotecnia", value: "ELT" },
@@ -54,7 +54,7 @@ export const materiaIndu6to = [
     { label: "Electiva II", value: "E2" },
 ];
 
-export const materiaIndu7mo = [
+ const materiaIndu7mo = [
     { label: "Instalaciones Eléctricas", value: "IE" },
     { label: "Operaciones Industriales", value: "OI" },
     { label: "Diseño de Instalaciones Industriales I", value: "DII1" },
@@ -63,7 +63,7 @@ export const materiaIndu7mo = [
     { label: "Electiva III", value: "E3" },
 ];
 
-export const materiaIndu8vo = [
+ const materiaIndu8vo = [
     { label: "Fundamento de Ingeniería Ambiental", value: "FIA" },
     { label: "Instrumentación y Automatización", value: "IA" },
     { label: "Diseño de Instalaciones Industriales II", value: "DII2" },
@@ -73,7 +73,7 @@ export const materiaIndu8vo = [
     { label: "Electiva V", value: "E5" },
 ];
 
-export const materiaIndu9no = [
+ const materiaIndu9no = [
     { label: "Procesos Industriales II", value: "PI2" },
     { label: "Mercadotecnia", value: "MKT" },
     { label: "Costos Industriales", value: "CI" },
@@ -83,7 +83,7 @@ export const materiaIndu9no = [
     { label: "Electiva VII", value: "E7" },
 ];
 
-export const materiaInduDec = [
+ const materiaInduDec = [
     { label: "Formulación y Evaluación de Proyectos", value: "FEP" },
     { label: "Ingeniería de Mantenimiento", value: "IM" },
     { label: "Administración de Recursos Humanos", value: "ARH" },
@@ -91,3 +91,16 @@ export const materiaInduDec = [
     { label: "Electiva VIII", value: "E8" },
     { label: "Electiva IX", value: "E9" },
 ];
+
+export const materiasIndu = {
+    1: materiaIndu1er,
+    2: materiaIndu2do,
+    3: materiaIndu3ero,
+    4: materiaIndu4to,
+    5: materiaIndu5to,
+    6: materiaIndu6to,
+    7: materiaIndu7mo,
+    8: materiaIndu8vo,
+    9: materiaIndu9no,
+    10: materiaInduDec
+}
