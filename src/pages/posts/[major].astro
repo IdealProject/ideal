@@ -1,0 +1,24 @@
+---
+import Layout from "@layouts/Layout.astro";
+// información de las majors
+import { majorOptions } from "src/utils/data/dataMajor";
+// componente de react
+import SubjectSelect from "src/components/SubjectSelect";
+// Obtenemos valor que trae la ruta
+const { major } = Astro.params;
+if (!major) throw new Error("major not found");
+
+// Obtenemos exactamente el elemento que solicitó la ruta
+const majorData = majorOptions.filter((option) => option.value === major);
+// devolvemos todas las url estaticas posibles
+export const getStaticPaths = () => {
+    return majorOptions.map((elemento) => ({
+        params: { major: elemento.value },
+    }));
+};
+---
+
+<Layout title=`Ingeniería ${majorData[0].label}`>
+    <!-- container -->
+    <SubjectSelect majorData={majorData} client:load />
+</Layout>

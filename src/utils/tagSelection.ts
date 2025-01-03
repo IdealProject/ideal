@@ -1,10 +1,11 @@
 import { fields } from "@keystatic/core";
-import { civilDataHanlder } from "./civilDataHandler";
+import { civilDataHandler } from "./civilDataHandler";
 import { cpaDataHandler } from "./cpaDataHandler";
-import { electroDataHanlder } from "./electroDataHandler";
-import { induDataHanlder } from "./induDataHandler";
-import { inforDataHanlder } from "./inforDataHandler";
+import { electroDataHandler } from "./electroDataHandler";
+import { induDataHandler } from "./induDataHandler";
+import { inforDataHandler } from "./inforDataHandler";
 import { MajorSelection } from "./majorSelectionHandler";
+import { cbiDataHandler } from "./CBIDataHandler";
 
 export const tagSelection = fields.conditional(
   MajorSelection, //Component Field from MajorSelectionHandler
@@ -12,12 +13,14 @@ export const tagSelection = fields.conditional(
     //cpa field
     cpa: cpaDataHandler,
     //Infor field
-    infor: inforDataHanlder,
+    infor: inforDataHandler,
     // Indu field
-    indu: induDataHanlder,
+    indu: induDataHandler,
     // Civil field
-    civil: civilDataHanlder,
+    civil: civilDataHandler,
     // Electro field
-    electro: electroDataHanlder,
+    electro: electroDataHandler,
+    // CBI field
+    cbi: cbiDataHandler
   },
 );
