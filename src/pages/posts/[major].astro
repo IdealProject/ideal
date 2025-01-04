@@ -3,7 +3,7 @@ import Layout from "@layouts/Layout.astro";
 // información de las majors
 import { majorOptions } from "src/utils/data/dataMajor";
 // componente de react
-import SubjectSelect from "src/components/SubjectSelect";
+import SubjectSelect from "@components/ReactComponents/SubjectSelect";
 // Obtenemos valor que trae la ruta
 const { major } = Astro.params;
 if (!major) throw new Error("major not found");
