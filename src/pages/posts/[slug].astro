@@ -13,7 +13,9 @@ const authors = await getCollection("authors");
 // Filtramos solo los autores que pertenecen al post
 const authorsOfPost = authors.filter((e) => post?.data.authors?.includes(e.id));
 if (!post) throw new Error("No post found for this slug");
+
 const { Content, headings } = await post.render();
+
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
   return posts.map((post: { slug: string }) => ({

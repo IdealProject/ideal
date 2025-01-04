@@ -1,4 +1,4 @@
-import { semesterOptions, semesterOptionsCBI, semesterOptionsCE } from '../utils/data/dataSemester';
+import { semesterOptions, semesterOptionsCBI, semesterOptionsCE } from '../../utils/data/dataSemester';
 
 const SemesterSelect = ({ setSemester, semester, major }) => {
   let cpaOpt = [{ label: "Primer Semestre", value: "1" }]

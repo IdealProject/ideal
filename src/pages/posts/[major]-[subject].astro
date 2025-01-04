@@ -1,5 +1,4 @@
 ---
-import type { GetStaticPaths } from "astro";
 //todas las materias
 
 import { materiasCivil } from "src/utils/data/dataCivil";
@@ -20,6 +19,7 @@ import Layout from "@layouts/Layout.astro";
 
 // obtenemos getCollection
 import { getCollection } from "astro:content";
+import Post from "@components/Post.astro";
 
 // obtenemos los posts
 const posts = await getCollection("posts");
@@ -87,7 +87,6 @@ export const getStaticPaths = () => {
                 },
             })),
         ),
-        
     ];
 
     return paths;
@@ -141,23 +140,16 @@ const subjectName =
 ---
 
 <Layout title=`${subjectName}`
-    ><div class="px-60 py-20">
-        <h1 class="text-5xl md:4xl xl:4xl font-extrabold mb-4">
+    ><div class="px-5 py-10 sm:mx-20 ">
+        <h2 class="mb-8 text-4xl tracking-tight font-extrabold text-gray-900">
             {carrera} - {subjectName}
-        </h1>
-        <section class="px-4">
-            <ul>
+          </h2>
+        <section >
+            <ul class="m-0">
                 {
                     postMateria.map(
                         (post: { slug: string; data: { title: string } }) => (
-                            <li class="list-disc">
-                                <a
-                                    href={`/posts/${post.slug}`}
-                                    class="underline text-xl text-blue-600 font-medium"
-                                >
-                                    {post.data.title}
-                                </a>
-                            </li>
+                            <Post name={post.data.title} authorCode={post.data.authors} href={`/posts/${post.slug}`} />
                         ),
                     )
                 }

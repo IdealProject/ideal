@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import SemesterSelect from './SemesterSelect';
-import { materiasCivil } from '../utils/data/dataCivil';
-import { materiasInfor } from '../utils/data/dataInfor';
-import { materiasElectro } from '../utils/data/dataElectro';
-import { materiasIndu } from '../utils/data/dataIndu';
-import { materiaCPA } from '../utils/data/dataCpa';
-import { materiasCBI } from '../utils/data/dataCBI';
+import { materiasCivil } from '../../utils/data/dataCivil';
+import { materiasInfor } from '../../utils/data/dataInfor';
+import { materiasElectro } from '../../utils/data/dataElectro';
+import { materiasIndu } from '../../utils/data/dataIndu';
+import { materiaCPA } from '../../utils/data/dataCpa';
+import { materiasCBI } from '../../utils/data/dataCBI';
 
 const SubjectSelect = ({ majorData }) => {
     const [semester, setSemester] = useState(1);
