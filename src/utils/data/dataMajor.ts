@@ -1,8 +1,8 @@
 export const majorOptions = [
-  { label: "Informática", value: "infor" },
-  { label: "Electromecánica", value: "electro" },
-  { label: "Civil", value: "civil" },
-  { label: "Industrial", value: "indu" },
-  { label: "CPA", value: "cpa" },
-  { label: "CBI", value: "cbi" }
+  { label: "Ing. Informática", value: "infor" },
+  { label: "Ing. Electromecánica", value: "electro" },
+  { label: "Ing. Civil", value: "civil" },
+  { label: "Ing. Industrial", value: "indu" },
+  { label: "Cursillo Probatorio de Admisión", value: "cpa" },
+  { label: "Curso Básico de Ingeniería", value: "cbi" }
 ];

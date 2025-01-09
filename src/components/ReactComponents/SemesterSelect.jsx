@@ -1,6 +1,6 @@
 import { semesterOptions, semesterOptionsCBI, semesterOptionsCE } from '../../utils/data/dataSemester';
 
-const SemesterSelect = ({ setSemester, semester, major }) => {
+const SemesterSelect = ({ setSemester, major }) => {
   let cpaOpt = [{ label: "Primer Semestre", value: "1" }]
   let semesterOpt;
 
@@ -23,9 +23,15 @@ const SemesterSelect = ({ setSemester, semester, major }) => {
   }
 
   return (
-    <div className='flex flex-col items-center border-pink-500 bg-slate-100 rounded-lg p-4 m-4'>
-      <p>Semestre actual: {semester}</p>
-      {semesterOpt.map((e, index) => <button key={index} className='hover:underline' onClick={ () => setSemester(e.value)}>{e.label}</button>)}
+    <div className='flex flex-col'>
+      <p className='text-gray-600'>Selector de Semestres</p>
+      <div className='flex flex-row items-center justify-between overflow-auto'>
+        {semesterOpt.map((e, index) =>
+          <div key={index+1} className='mx-1'>
+            <button className='bg-blue-200 hover:bg-blue-700 hover:text-white  rounded-full w-10 h-10 flex items-center justify-center ' key={index} onClick={() => setSemester(e.value)}>{e.value}</button>
+          </div>)}
+
+      </div>
     </div>
   );
 };

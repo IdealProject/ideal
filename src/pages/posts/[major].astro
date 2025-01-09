@@ -18,7 +18,7 @@ export const getStaticPaths = () => {
 };
 ---
 
-<Layout title=`Ingeniería ${majorData[0].label}`>
+<Layout title=`${majorData[0].label}`>
     <!-- container -->
     <SubjectSelect majorData={majorData} client:load />
 </Layout>
