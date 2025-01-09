@@ -67,6 +67,7 @@ const SubjectSelect = ({ majorData }) => {
                     <SemesterSelect
                         major={majorData[0].value}
                         setSemester={setSemester}
+                        semester={semester}
                     />
                 </div>
             </div>
