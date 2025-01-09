@@ -24,9 +24,8 @@ const SemesterSelect = ({ setSemester,semester, major }) => {
 
   return (
 
-    <div className='flex flex-col md:mb-4'>
-    
-      <p className='text-gray-600'>Selector de Semestres</p>
+    <div className='md:mb-4 mx-5 md:mx-5 lg:mx-0 xl:mx-0'>
+      <p className='text-gray-600 mb-4'>Selector de Semestres</p>
       <div className='flex flex-row items-center overflow-auto'>
         {semesterOpt.map((e, index) =>
           <div key={index + 1} className='mr-1 '>

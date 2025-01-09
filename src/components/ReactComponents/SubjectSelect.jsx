@@ -38,7 +38,7 @@ const SubjectSelect = ({ majorData }) => {
     };
 
     return (
-        <div className="flex flex-col justify-around m-5  lg:mx-56 lg:my-10 ">
+        <div className="m-5 lg:mx-56 lg:my-10 ">
 
             {/* titulo */}
             <h2 className="mb-8 text-4xl tracking-tight font-extrabold text-gray-900">
@@ -63,7 +63,7 @@ const SubjectSelect = ({ majorData }) => {
                     )}
                 </div>
                 {/* Selección de Semestres */}
-                <div >
+                <div className='fixed bottom-10 left-0 right-0 lg:static'>
                     <SemesterSelect
                         major={majorData[0].value}
                         setSemester={setSemester}
