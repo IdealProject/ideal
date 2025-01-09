@@ -38,16 +38,16 @@ const SubjectSelect = ({ majorData }) => {
     };
 
     return (
-        <div className="flex flex-col justify-around m-5 ">
+        <div className="flex flex-col justify-around m-5  lg:mx-56 lg:my-10 ">
 
-            {/* Título y materias */}
-            <section className="border-5px border-black rounded-lg   ">
-                {/* titulo */}
-                <h2 className="mb-8 text-4xl tracking-tight font-extrabold text-gray-900">
-                    {majorData[0].label}
-                </h2>
+            {/* titulo */}
+            <h2 className="mb-8 text-4xl tracking-tight font-extrabold text-gray-900">
+                {majorData[0].label}
+            </h2>
+            <div className='lg:flex lg:flex-col-reverse '>
+
                 {/* materias */}
-                <div className='grow'>
+                <div className='grow-0 lg:grid lg:grid-flow-col lg:gap-4 lg:grid-rows-2 lg'>
                     {majorData[0].value === 'cpa' ? (
                         getMajores(majorData[0].value).map((e, index) => (
                             <ul key={`ul - ${index}`}>
@@ -62,13 +62,13 @@ const SubjectSelect = ({ majorData }) => {
                         ))
                     )}
                 </div>
-            </section>
-            {/* Selección de Semestres */}
-            <div >
-                <SemesterSelect
-                    major={majorData[0].value}
-                    setSemester={setSemester}
-                />
+                {/* Selección de Semestres */}
+                <div >
+                    <SemesterSelect
+                        major={majorData[0].value}
+                        setSemester={setSemester}
+                    />
+                </div>
             </div>
         </div>
     );
