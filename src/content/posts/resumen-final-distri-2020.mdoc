@@ -1,0 +1,710 @@
+---
+title: Resumen para Final Distri 2020
+draft: false
+description: Resumen para examen final Distri del 2020
+authors:
+  - dvelazquez
+major:
+  discriminant: infor
+  value:
+    discriminant: '7'
+    value: Sw
+---
+## **Cap 1 - Sistemas Distribuidos**
+
+### **¿Qué son los sistemas distribuidos?**
+
+Es aquel sistema en el que los componentes hardware o software (cualquier dispositivo o computadora), localizados en computadores unidos mediante red, comunican y coordinan sus acciones sólo mediante **paso de mensajes**.
+
+**Caracteristicas**
+
+- Concurrencia: Se tiene concurrencia cuando más de 1 recurso/proceso está queriendo hacer uso de un recurso compartido. Ej. Impresora que todos quieren imprimir (hardware), Uso de memoria/variable (software).
+- Inexistencia de reloj global: la coordinación depende de una idea de noción global del tiempo, pero en sistemas distribuidos pueden existir problemas de sincronización de relojes y a consecuencia de eso se recurre al envío de mensajes a través de la red. Ej: cuando un sistema tiene sus componentes distribuidos en distintas zonas horarias, se dificulta la sincronización de sus relojes, una solución para esto sería que una computadora padre se encargue de enviar un mensaje de sincronización en una hora indicada a los nodos indicados.
+- Fallos independientes: al tener el sistema distribuido en varios componentes permite que cada componente falle independientemente y que el sistema siga disponible para los usuarios.
+
+### **Que es un recurso?**
+
+Es un rango de cosas que pueden ser compartidas de forma útil en un sistema distribuido. Por ej. Discos, impresoras, bases de datos, ficheros, una página web (archivo html).
+
+### **Ejemplo de SD?**
+
+1. Internet (protocolos)
+1. Intranet (firewall)
+1. Computación móvil y ubicua
+
+### **¿En qué se diferencian la computación móvil y la ubicua? ¿Qué es el código móvil?**
+
+**Computación móvil:** facilidad de transporte y capacidad de conectarse adecuadamente a redes en diferentes lugares también llamada computación cómoda. El usuario tiene acceso al recurso (dispositivo móvil).
+
+Se llama computación móvil a la realización de tareas de cómputo mientras el usuario está en movimiento o visitando distintos lugares.
+
+**Computación ubicua:** hacer uso del recurso compartido dentro de un área limitada (WAN protocolo de acceso inalámbrico). Ej: control remoto, recurso compartido por bluetooth.
+
+### **¿Por qué compartir recursos?**
+
+Para evitar tener el mismo recurso distribuido en varios sitios o componentes. Para compartir información, compartir trabajo y ahorrar dinero.
+
+### **Que es un servicio?**
+
+Gestiona una colección de recursos relacionados y presenta su funcionalidad a los usuarios y aplicaciones.
+
+### **Que es un servidor?**
+
+Es un proceso, un software que ejecuta otro software, un proceso inactivo, un proceso que recibe peticiones y envía respuestas. Ej: API, apache, tomcat, sql server, que son software que levantan aplicaciones y dejan disponibles a los usuarios
+
+### **Que es un cliente?**
+
+Es otro proceso, proceso activo, envía una petición al servidor. Ej: navegador, consola, una aplicación de un celular,&nbsp;
+
+El cliente puede convertirse en un servidor, al igual que un servidor se puede convertir en cliente de acuerdo a la acción que realizan.
+
+### **Invocación remota**
+
+Es cuando se completa una comunicación de ida y vuelta entre el cliente y el servidor. Un cliente solicita algún recurso y el servidor responde.
+
+### **Www**
+
+Sistema para publicar a recursos y servicios a través de internet
+
+### **Componentes tecnológicos de la web**
+
+Html: la página que solicita el cliente
+
+Url: la dirección de un recurso
+
+Arquitectura de sistemas: cliente - servidor
+
+### **URLs**
+
+Partes -> esquema: localización-específica-del-esquema
+
+Un esquema representa qué tipo de URL es, como ftp o http.
+
+URL http:&nbsp;
+
+http://midominio:puerto/recurso?argumentos
+
+El numeral # representa una sección del html (anclas)
+
+### **HTTP caracteristica**
+
+- Interacción petición-respuesta: cada pedido tiene una respuesta.
+- Tipos de contenidos: se puede enviar distintos tipos de contenidos (json, html, js, css).
+- Un recurso por solicitud: no se puede pedir múltiples recursos por una solicitud
+- Control de acceso simple (se puede restringir el acceso por servidor).
+
+### **CGI (common gateway interface)**
+
+Es un programa que se ejecuta en los servidores web, procesa argumentos y genera resultados. Puede generar una funcionalidad específica. Es una aplicación y no un servidor.
+
+### **Código descargado y código móvil**
+
+Descargado: es algo que se descarga en el cliente y realiza alguna actividad para el servidor. Ej: validaciones js.
+
+**Código móvil:** se descarga en el servidor y recolecta datos para otro servidor.
+
+### **Desafíos de SD**
+
+- **Heterogeneidad**: (redes, hardware, SO, lenguajes, diferentes desarrolladores) diversidad de cosas, diferentes tecnologías,&nbsp;
+  - Middleware: software que provee abstracción de programación, así como el enmascaramiento de la heterogeneidad subyacente a las redes, hardware, so y lenguajes de programación. Se implementan sobre los protocolos de internet, enmascarando los diversos tipos de redes, trata las diferencias de so y hardware
+  - El término **código móvil** se utiliza para referirse al código que puede ser transferido de un computador a otro y es ejecutado en el computador destino (malware). Ej: Google envía un programa que se descarga en nuestro servidor y recolecta datos e indexa las informaciones para que sean más rápidas encontrarlas&nbsp;
+- **Extensibilidad**: determina el grado en el cual se pueden agregar nuevos servicios de compartición de recursos. ¿Cómo se logra? Con interfaces de programación y sobreescribiendo métodos. En cuanto hardware, creciendo en cantidad de usuarios
+- **Seguridad**:
+  - Confidencialidad: protección contra el descubrimiento de individuos no autorizados.
+  - Integridad: protección contra alteración o corrupción de datos. (transacciones de BD)
+  - Disponibilidad: protección contra la interferencia con los procedimientos de acceso a los recursos. (la aplicación debe estar siempre altamente disponible).
+    - Desafíos a cubrir
+      - Ataques de DOS
+      - Seguridad de código móvil: aplicar ciertas técnicas de programación para evitar que el código sea ejecutado en tu aplicación. Ej: sistemas de seguridad para que un código móvil no sea ejecutado desde un mail
+- **Escalabilidad**: es escalable cuando conserva su efectividad cuando incrementa el número de recursos y el número de usuarios. La aplicación debe comportarse de la misma forma independientemente de la cantidad de recursos que voy agregando.
+  - Presentan los sgtes retos:
+    - Control de coste de los recursos
+    - Control de las pérdidas de prestaciones
+    - Prevención de desbordamiento de recursos software
+    - Evitar cuellos de botella (cache y replicación)
+- **Tratamiento de fallos** (hard/software): los fallos en un sistema distribuido son parciales, es decir, algunos componentes fallan mientras que otros siguen funcionando.
+
+Técnicas para tratar fallos
+
+- Detección de fallos: checksum para detectar datos corruptos
+- Enmascaramiento de fallos: ocultar fallos, el error que ocurrió no llegue al cliente/usuario.
+  - Retransmisión de fallos: atrapar el error y mostrarle una página amigable al usuario
+  - Escritura en discos: escribir el error en logs
+- Tolerancia de fallos: no siempre que falla se debe enmascarar (login fallido, página sin permisos)
+- Recuperación frente a fallos: reponerse luego de una caída del servidor, resguardo de integridad de datos (rollback).
+- Redundancia: tener varias instancias de la aplicación (varios servidores)
+- Disponibilidad
+- **Concurrencia**: un sistema distribuido debe permitir procesar múltiples peticiones de varios clientes. Cada recurso se encapsula en un objeto y las invocaciones se ejecutan en entornos concurrentes. (Hilos, semáforos).
+- **Transparencia**: ocultar al programador y al usuario la separación de componentes. La aplicación debe ser configurable y el usuario debe desconocer la infraestructura y la ubicación del servidor
+  - Transparencia de acceso: siempre se debe acceder de la misma forma (ip:puerto).
+  - Transparencia de ubicación: no es necesario que se sepa la ubicación física del sistema.
+  - Transparencia de concurrencia: varios procesos operan concurrentemente sobre recursos compartidos. Ej: bases de datos es un recurso compartido, pero un componente no necesita saber mucho para acceder a ella y realizar una acción.
+  - Transparencia de replicación: la misma aplicación encapsulada y se distribuye entre los servidores (configurable y listo para usar).
+  - Transparencia frente a fallos: independiente del estado de la arquitectura en un momento dado, siempre se deben poder completar las tareas asignadas (si cae un servidor X, otro servidor debe poder completar la tarea que quedó pendiente).
+  - Transparencia de movilidad: reubicación de recursos.
+  - Transparencia de prestaciones: reconfiguración del sistema, para mejorar sus cargas.
+  - Transparencia al escalado: expandir el tamaño sin cambiar la estructura del sistema o algoritmos de la aplicación.
+
+## **Cap 2 - Modelos de sistema**
+
+### **Modelo arquitectonico**
+
+### **Arquitectura utilizada en el sistema**
+
+El modelo arquitectónico de un sistema distribuido trata sobre la colocación de sus partes y las relaciones entre ellas. Define como interaccionan entre sí dentro de una red Ej. cliente-servidor, peer-to-peer.
+
+El modelo arquitectónico simplifica y abstrae las funciones de los componentes y luego considera:&nbsp;
+
+- La ubicación de los componentes en la red: busca definir patrones para la distribución de datos y carga de trabajo. Ejemplo de distribución de datos: un servidor debe saber dónde escribir y leer en otro servidor, como también saber donde puede buscar y escribir objetos. Ejemplo de distribución de cargas de trabajo: Si se tiene N servidores, la realización de tareas de cada servidor debe ser igual a la cantidad de tareas divido n
+- Interrelaciones entre componentes (papeles funcionales y patrones de comunicación).
+
+Clasifica los procesos entre: servidores, cliente e iguales
+
+Variantes de modelos arquitectonicos
+
+- Cliente - Servidor: varios tipos debido a
+  - Partición de datos o la replicación en servidores cooperativos: partición de datos, cuando los datos se guardan particionados en diferentes db. Ej: tenemos clientes, proveedores y productos, y dependiendo del tipo de dato se guardan en una u otra db. La replicación en servidores cooperativos es tener una copia fiel en otro servidor una instancia de los datos
+  - Uso de caché para los datos en clientes y servidores proxy: uso de caché, para reducción de tiempo en el acceso de los datos. Servidor proxy; delega los trabajos
+  - Uso de código y agentes móviles.
+  - Los requisitos para añadir o eliminar dispositivos móviles de forma conveniente.
+- Peer to peer: Ej: torrent
+- **Modelos fundamentales** (modelos de requisitos no funcionales).
+  - Modelo de interacción: cómo interactúan los procesos que componen los sistemas distribuidos.
+
+Factores que afectan a los procesos interactuantes de un sistema distribuido
+
+- Prestaciones de los canales de comunicación: latencia, ancho de banda y fluctuación
+
+- Relojes de computadoras y eventos de temporización
+
+- Dos variantes de modelo de interacción:
+
+  - Sistema de distribución asíncrono
+  - Sistema de distribución síncrono
+
+- Ordenamiento de eventos
+
+- **Modelo de fallos**: define las formas en que puede ocurrir el fallo para darnos una comprensión de los efectos de los fallos.
+
+  - Fallos por omisión: se refieren a casos en los que los procesos o los canales de comunicación no consiguen realizar las acciones que se supone que pueden hacer. Ej. el servidor no recibe/envía mensajes.
+    - Fallos por omisión de procesos: falla el proceso (se crashea)
+    - Fallos por omisión de comunicación: el canal de comunicación sufre un fallo y por lo tanto no puede transportar el mensaje
+  - Fallos arbitrarios: el peor fallo posible. En un proceso es aquel en el que se omiten pasos deseables para el procesamiento o se realizan pasos no intencionados de procesamiento.Ej. el contenido de un mensaje puede estar corrompido, o se pueden repartir mensajes no existentes.
+
+- Fallo de temporización: la respuesta de un servidor queda fuera del intervalo de tiempo especificado (se aplican en sistemas distribuidos síncronos).&nbsp;
+
+- Fiabilidad y comunicación uno a uno.
+
+  - Validez: cualquier mensaje en el búfer de mensajes salientes será hecho llegar eventualmente al búfer de mensajes entrantes;
+  - Integridad: El mensaje recibido es idéntico al enviado, y no se reparten mensajes por duplicado.
+
+- Enmascaramiento de fallos: oculta el error completamente o lo convierte en otro tipo de fallo más aceptable.
+
+- **Modelo de seguridad**: la seguridad en un SD puede lograrse asegurando los procesos y los canales empleados para sus interacciones y protegiendo los objetos que encapsulan contra el acceso no autorizado.
+
+  - Protección de objetos: derechos de acceso
+  - Asegurar procesos y sus interacciones:&nbsp;
+  - El enemigo:&nbsp;
+    - Amenazas a procesos: no saber la identidad. Ej: IP
+    - Amenazas a los canales de comunicación. Ej. modificar el contenido de un mensaje, o guardarlos y volver a enviar sin que se haya pedido previamente.
+  - Vencer amenazas de seguridad
+    - Criptografía y secretos compartidos
+    - Autenticación
+    - Canales seguros
+  - Otras posibilidades de amenaza de un enemigo
+    - DOS.
+    - Código movil.
+
+### **Capas de software (capa de servicio)**
+
+**Arquitectura de software (capas de servicios):** se refiere a la estructura del software como capas o módulos en un solo computador, o servicios ofrecidos y solicitados entre procesos localizados en el mismo o en diferentes computadores. Esta vista de procesos y servicios puede expresarse en términos de capas de servicios (ej: paquetes de java). Un servicio distribuido puede proveerse desde uno o más procesos servidor.
+
+Plataforma: el nivel del hardware y las capas más bajas de software
+
+Middleware (soluciona problema de heterogeneidad): mejora el nivel de las actividades de comunicación de los programas de aplicación. Soporta abstracción de:&nbsp;
+
+- Rpc (remote process call)
+- Rmi (remote method invocation): forma que tiene java de llamar a un objeto que está en otra máquina virtual
+- Compiladores
+
+**Arquitectura de sistemas:** división de componentes del sistema y la ubicación de los componentes en los computadores en la red.
+
+Su implicancia fundamental está en las **prestaciones** (que sea capaz de ampliar cantidad de usuarios y servidores sin tener que modificar el código), fiabilidad (que el sistema sea confiable) y seguridad del sistema resultante.
+
+Principales modelos arquitectónicos
+
+- Modelo cliente-servidor: dns, buscadores&nbsp;
+- Servicios proporcionados por múltiples servidores: los servicios pueden implementarse como distintos procesos de servidor en computadores separados. (correo, db, balanceador de carga, replicación de datos).
+- Servidores proxy y caché: servidor proxy recibe pedidos y delega las tareas. Caché es un almacén de objetos utilizados recientemente y se encuentra más próximo al objeto en sí.
+- Procesos de igual a igual: cada proceso ejecuta tareas similares para realizar actividades distribuidas o cómputos, no distinguen entre cliente&nbsp; y servidor.
+
+**Variaciones de cliente servidor:**&nbsp;
+
+- Código móvil: código que se descarga en el cliente y efectúa tareas para el servidor.
+- Agentes móviles: es un programa en ejecución que se traslada por la red de una computadora a otra, recolectando datos y eventualmente retornando resultados. Ej: robot de google
+- Clientes ligeros: es una interfaz que permite hacer conexiones a servidores remotos. Ej: cliente remoto de base de datos
+- Dispositivos móviles y conexiones espontáneas a la red: con las integración apropiada en nuestros SD los usuarios podrán llevar sus dispositivos móviles entre los entornos de red y se beneficiaran de los servicios locales y remotos según se mueven. Proporcionar un acceso simple a los servicios del sistema (conexiones espontáneas).
+
+**Interfaces y objetos**: en Java, en las interfaces se definen los métodos y estos son públicos para acceder por un objeto local o remoto.&nbsp;
+
+Un objeto local es un objeto que corre dentro de una máquina virtual y un objeto remoto es un objeto que puede ser accedido desde otra máquina virtual o desde un proceso remoto.
+
+**Requisitos de diseño para arquitecturas distribuidas**
+
+- Temas de prestación:
+  - Capacidad de respuesta
+    - Pocas capas de software (capas de recursos, servicios, DAO)
+    - Cantidad de datos a transferir pequeñas (datos paginados).
+  - Productividad: rapidez de trabajo computacional
+  - Balanceo de carga: distribuir tareas en servidores
+  - Calidad de servicio
+    - Fiabilidad y prestaciones: adaptación al modelo de fallos (si ocurre un fallo (cae un servidor) el cliente no se debe enterar y su tarea se debe poder terminar.
+    - adaptacion : que sea facilmente configurable.
+- Uso de caché y de replicación
+  - Navegadores (cache, localstorage)
+  - Tiempo de expiración (ej: cookie)
+
+## **Cap 4 - Comunicación entre procesos**
+
+### **RMI - Invocación de métodos remotos:**&nbsp;
+
+Permite que un objeto remoto invoque un método en otro objeto situado en un procedimiento remoto. Un objeto localizado en una máquina puede llamar al método de otro objeto localizado en otra máquina.
+
+En lugar de crear un objeto, el programador liga el objeto remoto con un representante local, conocido como “stub”.
+
+El stub es un tipo de objeto construido en base al objeto concreto.
+
+Para que otro objeto pueda invocar/acceder a una instancia de un objeto remoto, el objeto remoto debe ser registrado en una máquina virtual, registrando ese objeto en el registro de la máquina virtual (rmiregistry: asocia una ruta a un objeto).
+
+Una vez que el objeto remoto es creado en el servidor, este mantiene su estado y sus modificaciones hasta que el servidor deje de funcionar.
+
+### **RPC- Llamadas a procedimientos remotos:**
+
+Permite que un cliente (un proceso) ejecute un procedimiento en un servidor remoto (servicio). Ej: facebook.com/login, este se llama del navegador, el servicio se está ejecutando en un servidor remoto.
+
+Los mensajes se envían de acuerdo al protocolo en udp es datagram, tcp stream y en rmi se utiliza stub. Stub es una copia del objeto remoto con sus métodos públicos, que permite a un objeto local ejecutarlos.
+
+El canal de comunicación varía pero el medio de comunicación (mensajes) no.
+
+**UDP:** proporciona una abstracción del tipo de paso de mensajes. El emisor puede transmitir el mensaje al receptor, los paquetes independientes que contienen estos mensajes se llaman datagramas.
+
+**TCP:** proporciona una abstracción de flujo (stream) de 2 direcciones entre pares de procesos. Los ítems enviados por el productor al consumidor son colocados en una cola de mensajes, hasta que el consumidor está en disposición de recibir. El consumidor espera cuando no hay datos y el productor espera cuando se llena la cola.
+
+### **Características de la comunicación entre procesos**
+
+- El paso de mensajes se basa en 2 operaciones: enviar y recibir, dependiendo de la dirección del mensaje.
+- Para que un proceso se comunique con otro, envía un mensaje a un destino y en el destino otro proceso recibe.
+- Esta comunicación (enviar y recibir) implica la sincronización de procesos (por medio de las operaciones y utilización de mensajes).
+- Comunicacion sincrona y asincrona:&nbsp;
+  - Sincrona:&nbsp;
+    - Los procesos receptores y emisores se sincronizan en cada mensaje.
+    - **Envía y recibe, son operaciones bloqueantes**. A cada “envía” producido, el proceso emisor se bloquea hasta que recibe el acuse de recibo. Cuando se llama al “recibe”, el proceso se bloquea hasta que llega el mensaje.
+  - Asincrona:
+    - **Envía no es bloqueante**, el emisor puede continuar con otra tarea después de colocar el mensaje en la cola.
+    - Transmisión de mensajes en paralelo con el emisor (mientras se está enviando un mensaje, también se puede estar leyendo de la cola local).
+    - **La operación recibe puede tener variante bloqueante y no bloqueante** (el receptor continuo con su programa después de invocar recibe, el cual tiene un buffer que será llenado en segundo plano, el proceso debe ser informado cuando el buffer se llena, por medio de interrupciones o por encuesta)
+    - Ej. Una página web que hace otras llamadas para completar el contenido, pero esta va mostrando el contenido a medida que las llamadas realizadas devuelven sus resultados.
+- Destino de mensajes: direccion de internet y puerto
+  - Puerto: destino del mensaje en la computadora. Un puerto tiene un receptor y puede tener varios emisores. (Un solo proceso se está escuchando en un puerto X pero varios procesos pueden enviar mensajes al puerto X.
+  - Los procesos pueden tener muchos puertos por lo que se puede recibir mensajes, pero los puertos no pueden ser compartidos por distintos procesos/aplicaciones.
+  - Cualquier proceso que conozca el puerto puede enviar mensajes.
+  - Transparencia de ubicación: no cambiar la dirección/puerto donde se ejecuta un servicio.
+  - Los puertos tienen la ventaja de proporcionar varios puntos de entrada alternativa a los procesos receptores.
+- Fiabilidad&nbsp;
+- Validez
+- Integridad: mensajes sin corromperse ni duplicarse
+- Ordenación: algunas aplicaciones entregan los mensajes en orden de emisión.
+
+### **Socket**
+
+Es un medio de comunicación. Es el medio por el cual uno entra o sale de un proceso.
+
+- UDP Y TCP utilizan la abstracción socket para comunicación
+- La comunicaciòn entre procesos consiste en transmitir un mensaje entre un conector de un proceso y un conector de otro proceso receptor
+- Para los procesos receptores se debe asociar puerto local y dirección de internet
+- Los procesos pueden usar el mismo conector para enviar y recibir mensajes
+- El proceso puede utilizar varios puertos para recibir mensajes (se tienen 2 puertos)
+- Un proceso no puede compartir su puerto con otros procesos del mismo computador, a excepción de multidifusión IP
+- Múltiples procesos pueden enviar mensajes al mismo tiempo
+
+### **Socket UDP**
+
+&nbsp;API java
+
+- InetAddress: no necesita definir explícitamente direcciòn de internet&nbsp;
+- unknowHostException
+
+### **Comunicación de datagramas UDP**
+
+- Datagrama: se transmite desde un emisor a un receptor sin acuse de recibido ni reintentos
+- Si algo falla los mensajes no llegan a destino
+- Se transmite un datagrama entre procesos cuando lo envía y el otro recibe
+
+**Aspecto referente a la comunicación de datagramas**
+
+- Tamaño del mensaje: el receptor especifica una cadena de bytes de un tamaño concreto donde se almacenará el mensaje recibido, para regular el tamaño del mensaje recibidos,mensajes de hasta 216 bytes. Si el mensaje es demasiado grande será truncado en la llegada a destino"
+- Bloqueo:
+  - UDP utiliza operaciones de envío no bloqueantes y recibe bloqueantes.
+  - Recibe se bloquea hasta que reciba un mensaje.
+  - Puede establecerse un tiempo de espera (en el recibe), donde se define cuánto tiempo será bloqueado o recibe debe ejecutar otra tarea en paralelo si es que no quiere esperar (usa hilos) por un mensaje, en caso que no quiere esperar un mensaje para calcular algo.
+- Tiempo límite de espera:
+  - Método recibe con Bloqueo indefinido útil para servidores que esperan recibir peticiones del cliente.
+  - En algunos casos no es bueno esperar indefinidamente
+  - Uso en caso de impresiones (no espera por siempre)
+- Recibe de cualquiera:
+  - No especifica de quién puede recibir los mensajes,
+  - Acepta mensajes que se envían a su conector (si se quiere rechazar a alguien controlar dentro de la implementación)
+  - El mensaje recibido tiene la dirección y puerto del emisor
+
+**Modelo de fallos**
+
+- Fallos de omisión:
+  - Desechar mensajes ocasionalmente
+    - Por error detectado en la suma de comprobación
+    - No queda espacio en el buffer de origen o destino
+  - Ordenación: los mensajes se entregan en desorden con respecto al orden de emisión
+
+#### **API Java**
+
+- Datagrampacket&nbsp; Send -> IOException
+  - Receibe ->IO Exception
+  - setSoTimeout ->bloquea el método receive durante un tiempo y después lanza lnterruptedlOException
+  - Connect
+  - un&nbsp; mensaje recibido se coloca en un datagrampacket
+- Datagramsocket
+- SocketException
+- Paquete datagrama
+
+### **Comunicación de Streams TCP**
+
+- El API del protocolo TCP, proporciona la abstracción de un flujo de bytes (stream) en el que se pueden escribir y desde el que se puede leer datos.
+
+- La abstracción de steam oculta las siguientes características de la red
+
+  - **Tamaño del mensaje:** la app elige la cantidad de datos que quiere escribir/leer del stream. TCP decide cuántos datos transmitir como uno o más paquetes IP. En el destino los datos se leen según se vayan pidiendo. Cuando la cola en el receptor se llena el productor debe ser bloqueado.
+  - **Mensajes perdidos:** TCP utiliza acuse de recibo de los mensajes. El emisor almacena registro de los paquetes IP enviados y el receptor acusa el recibo de los paquetes que llegan
+  - **Control de flujo:** TCP ajusta los procesos de lectura escritura, si el productor es más rápido que el consumidor lo BLOQUEO por un momento
+  - **Duplicación y ordenación de los mensajes:** cada paquete IP tiene un identificador de paquete, esto permite aceptar o rechazar mensajes duplicados u ordenar los mensajes que lleguen desordenados.
+  - **Destino de los mensajes:** los procesos emisor y receptor establecen una comunicación antes de enviar mensajes, una vez establecida la comunicación únicamente leen y escriben en el stream, sin tener que preocuparse de las direcciones ni de los puertos de cada mensaje
+
+- El cliente y servidor se conectan por un par de stream, uno de cada dirección&nbsp;
+
+- Cuando algún proceso cierra el stream indica que no va a escribir más en su stream de salida, cualquier dato que se encuentra en la cola de salida será enviado al otro extremo del stream con un indicador que el stream ha sido roto
+
+**Aspecto importante relacionado a la comunicación de streams**
+
+- **Concordancia de ítems de datos:** ambos procesos deben estar de acuerdo en el tipo de datos a ser transmitidos
+- **Bloqueo:** los datos escritos en un stream se almacenan en un buffer en el conector de destino, cuando un proceso intenta leer de un canal de entrada se bloqueará hasta que exista datos disponibles
+- **Hilos:** cuando un servidor acepta una conexión crea un nuevo hilo con el que se comunicara el nuevo cliente
+
+**Modelo de fallos**&nbsp;
+
+- Tcp usa suma de comprobación para detectar y rechazar paquetes corruptos y utiliza un número de secuencia para detectar y eliminar paquetes duplicados
+- Para la propiedad de validez,&nbsp; Utiliza timeouts y retransmisión de los paquetes perdidos&nbsp;
+- Los procesos que utilizan la conexión no distinguen entre un fallo de red y un fallo en el proceso que está en el otro extremo
+- Los procesos no pueden saber si sus mensajes recientes han sido recibidos o no
+
+**API Java**
+
+- Server socket
+  - Accept
+  - Connect
+
+Toma una petición connect de la cola, si la cola está vacía se bloquea hasta que llegue una petición, el accept da acceso a streams para comunicarse con el cliente
+
+- Socket
+  - Getinputstrem
+  - Getoutputstrem
+
+Utiliza el DNS y puerto para crear el conector
+
+## **Serialización de objetos java**
+
+¿Para que se serializa? Para transmitirlos como un mensaje en la red o también para que pueda ser persistido.
+
+**Interfaz Serializable:** toda clase que implementa esta interfaz permitirá que sus instancias sean serializables.
+
+**Serialización:** es aplanar un objeto o conjunto relacionado de objetos para obtener una forma lineal adecuada para ser almacenada en disco o para ser transmitida en un mensaje
+
+**Deserialización:** consiste en restablecer el estado de un objeto o conjunto de objetos desde su estado lineal, este proceso no tiene conocimiento de los tipos, de los objetos en la forma lineal.
+
+Por lo tanto, debe incluirse en la forma lineal alguna información sobre la clase de cada objeto
+
+La información sobre la clase se compone del nombre de la clase y el número de versión. El número de versión refleja si se cambió o no.
+
+El proceso que deserializa puede comprobar que tiene la versión correcta de la clase.
+
+Para serializar un objeto, se escribe la información de su clase, seguida de los tipos y los nombres de los campos, si los campos pertenecen a una clase nueva, entonces también se escribe los mismos datos.
+
+La serialización y deserialización son llevadas a cabo de forma automática por el middleware.
+
+**Transient:** variables que no deben ser serializadas.
+
+**Reflexión:** habilidad de preguntar por las propiedades de una clase (nombre, tipo de campos, métodos).
+
+### **Estructura de proyecto ej**
+
+Beans - poyo - domain: definir una estructura de una entidad, solo tiene getters y setters. Una entidad que va ser almacenada en una base de datos.
+
+Servicio: trabaja con un solo tipo de bean, tiene la lógica de negocio, la manipulación de la información dentro de la aplicación
+
+**Componentes**
+
+- Api REST
+- Cliente Web
+  - Modularidad (extensibles)
+  - Volumen de datos
+  - Integridad de datos
+- Cache
+- Multiples servidores (escalar)
+- Balanceador de carga
+
+### **Hilos**
+
+Una tarea/proceso que se genera en tiempo de ejecución. Al hilo se le pasa toda la información del cliente
+
+## **Alta disponibilidad**
+
+Es un protocolo de diseño del sistema, que busca la manera en que nuestra aplicación siempre esté online.
+
+Disponibilidad: MTTF / (MTTF + MTTR)
+
+MTTF = mean time to failure (tiempo medio entre fallos)&nbsp;
+
+MTTR = mean time to recover (tiempo medio de recuperación)
+
+Se quiere: incrementar MTTF (mejor hardware) y decrementar MTTR (redundancia de hardware + software)
+
+### **Cluster**
+
+Conjunto de computadores conectados entre sí por medio de alguna red y se comportan como si fuese un solo computador.
+
+### **Balanceador de carga**
+
+Componente que se coloca frente a un conjunto de servidores que atienden los pedidos de una aplicación. El balanceador equilibra los pedidos que llegan a la aplicación distribuyendo entre cada nodo del cluster.
+
+**Distribución de pedidos**
+
+- En forma cíclica (utilizado en el proyecto: round robin)
+- Dependiendo del peso asignado a cada servidor (si un server es mas potente que otro)
+- Servidor con menos conexiones activas
+- Dependiendo del peso y conexiones activas
+- Asigna en base a algun dato (IP)
+
+### **Interbloqueo**
+
+Condiciones
+
+- Exclusión mútua&nbsp;
+- Posesión y espera: procesos con recursos asignados pueden solicitar nuevos recursos
+- No apropiación: recursos otorgados no pueden ser arrebatados a un proceso
+- Espera circular: debe existir cadena circular de dos o más procesos, cada uno esperando recurso poseído por el siguiente miembro de la cadena
+
+Políticas
+
+- Ignorar: el tratamiento del interbloqueo es responsabilidad del programador y/o de las acciones
+- Detectar y recuperar: dejar que suceda y luego recuperarse
+- Prevenir: evitar que estructuralmente sea posible el interbloqueo
+
+Tipos
+
+- Interbloqueo por acceso a recurso
+- Interbloqueo de comunicación
+
+### **Monitores**
+
+En la programación paralela, los **monitores** son objetos destinados a ser usados sin peligro por más de un hilo de ejecución. La característica que principalmente los define es que sus métodos son ejecutados con **exclusión mútua**. Lo que significa, que en cada momento en el tiempo, un hilo como máximo puede estar ejecutando cualquiera de sus métodos. Esta exclusión mútua simplifica el razonamiento de implementar monitores en lugar de código a ser ejecutado en paralelo.
+
+El problema de que dos hilos ejecuten un mismo procedimiento dentro del monitor es que se pueden dar **condiciones de carrera**(primero que llega usa), perjudicando el resultado de los cálculos.&nbsp;
+
+Para evitar esto&nbsp; y garantizar la integridad de los datos privados, el monitor hace cumplir la exclusión mútua implícitamente, de modo que sólo un procedimiento esté siendo ejecutado a la vez. Si un hilo está dentro del monitor, los demás se bloquean hasta que se libere el monitor
+
+**Variables de condición** para sincronizar:
+
+- cond_wait(c): suspende la ejecución del proceso que la llama con la condición c. El monitor se convierte en el dueño del lock y queda disponible para que otro proceso pueda entrar
+- cond_signal(c): reanuda la ejecución de algún proceso suspendido con cond_wait bajo la misma condición c. Si hay varios procesos con esas características elige uno. Si no hay ninguno, no hace nada
+
+**Componentes**
+
+- Inicialización: contiene el código a ser ejecutado cuando el monitor es creado
+- Datos privados: contiene los procedimientos privados, que sólo pueden ser usados desde dentro del monitor y no son visibles desde fuera
+- Métodos del monitor: son los procedimientos que pueden ser llamados desde fuera del monitor
+- Cola de entrada: contiene a los hilos que han llamado a algún método del monitor pero no han podido adquirir permiso para ejecutarlos aún
+
+### **Semáforos**
+
+Es un tipo de dato abstracto, tiene un ticket que determina cuántos procesos pueden acceder, una cola de procesos
+
+En los semáforos se pueden tener uno o más procesos en una sección crítica. Si el número de ticket es mayor a uno puede estar más procesos
+
+Métodos: down -> rojo(wait())		bloquea
+
+&nbsp; &nbsp; Up -> verde(notify)		desbloquea
+
+**Sincronización de procesos ticket = 0 = s**
+
+P1 					P2
+
+print(“hola”)				down(s)
+
+up(s)					print(“Adios”)
+
+**Bloqueo de recurso compartido:** mutex, s = 1
+
+saldo = 100
+
+s = 1\
+
+secar(monto)						depositar(monto)
+
+down(s)						down(s)
+
+aux = monto						aux = monto
+
+aux = saldo - aux					aux = saldo - aux
+
+saldo = aux						saldo = aux
+
+up(s)&nbsp; 							up(s)
+
+**Algoritmo de la barrera**: sincronizar n cantidad de procesos. Todos los procesos se bloquean hasta que llega el último y desbloquea a todos
+
+Mutex = 1
+
+proceso( )
+
+down(mutex)
+
+nproceso = nprocesos + 1
+
+if(nproceso < n){
+
+up(mutex)
+
+down(barrera)
+
+} else {
+
+for(i = 0; i < n; i++){
+
+up(barrrera)
+
+} nproceso = 0
+
+} up(mutex)
+
+## **Seguridad**
+
+### **Conceptos de seguridad**
+
+Para autenticarse el usuario necesita de un principal (objeto principal es un objeto que vive en el contexto del usuario), que típicamente es un login y unas credenciales, normalmente un password.
+
+**Contexto** (es como la sesión del usuario): conjunto de recursos reservado para el usuario (las credenciales), nadie más puede hacer uso de esos recursos mientras el usuario esté usando.
+
+Por cada pedido se hace una autenticación y autorización (api REST) pero del lado del cliente el proceso es de autenticación/autorización es única.
+
+**Proceso de autenticación:** preguntar si las credenciales son válidas (coincide usuario y contraseña) y autorización consiste en preguntar si el usuario autenticado tiene permiso para realizar la acción que él invoca.
+
+**Tipos de mecanismos de autenticación**
+
+- Usuario y contraseña&nbsp;
+- Certificados de seguridad
+- LDAP
+- Active directory (establece ciertos mecanismos de seguridad)
+
+### **Spring security**
+
+El encargado de gestionar la autenticación es el “authentication manager”
+
+### **Control de acceso**
+
+La autenticación demuestra que el usuario es quien dice ser. Por medio del control de acceso se determina si el mismo tiene acceso al recurso solicitado. El **access manager** es el encargado de tomar la decisión de permitir o no el acceso.
+
+Cada usuario tiene asociado una serie de roles (en spring authorities) que se asocian a los recursos para permitir o no el acceso.
+
+Access Control List (ACL) lista de control de acceso: que especifican qué operaciones (acceso/modificación/borrado) puede realizar cada usuario sobre cada recurso.
+
+**Configuración Spring**
+
+- Filtro: permitir que spring security intercepte las peticiones, el framework usa filtros de servlets declarados en el web.xml.
+- Opciones spring security:&nbsp;
+  - Http: auto-config: true activa por defecto basic authentication
+  - Interceptor: intercepta por recurso
+  - Authentication manager: contra que voy a verificar las credenciales (base de datos, archivo, memoria). En el proyecto se utilizó chequeo con base de datos (se hace una consulta cruda SQL para verificar las credenciales y los roles).
+
+**API - encriptación:** el mejor lugar para la encriptación de las credenciales es en el modelo.
+
+**Security Context**: archivo de configuración para la seguridad donde se setean los filtros/permisos para cada recurso (url: /rest/user/username/ permitAll() - /rest/semestre/carrera/ isAuthenticated()).
+
+Para agregar seguridad a un método se agrega:
+
+@Secured({ROLE_SUPERUSER, ROLE_STUDENT, ROLE_TEACHER})
+
+## **Transacciones**
+
+Los sistemas que tratan el problema de control de concurrencia permiten que sus usuarios asuman que cada una de sus aplicaciones se ejecuta automáticamente, como si no existieran otras aplicaciones ejecutándose concurrentemente. A esta abstracción de una ejecución atómica y confiable se conoce como una **transacción**.
+
+Unidad de cálculo consistente, confiable y atómica. Puede estar formada por operaciones simples o compuestas, pero pueden ejecutarse de manera atómica.
+
+Secuencia: abre transacción -> operaciones -> cierra transacción.
+
+### **Propiedades de una transacción (ACID)**
+
+- Atomicidad: una transacción se trata como una unidad de operación. Por lo tanto, todas las acciones se realizan o ninguna se lleva a cabo.&nbsp;
+- Consistencia: después de ejecutarse una transacción se debe dejar al sistema en estado correcto o debe abortarlo. Si la transacción no puede finalizarse se debe regresar al sistema a su estado original.
+- Aislamiento: una transacción en ejecución no puede revelar sus resultados a otras transacciones antes de finalizar.
+- Durabilidad: una vez que una transacción finaliza exitosamente, los resultados son permanentes/persistidos.
+
+**Transacciones distribuidas**
+
+- Transacciones planas: un cliente realiza peticiones a más de un servidor. Las peticiones son secuenciales
+- Transacciones anidadas: las transacciones del mismo nivel son concurrentes. Si están en servidores distintos pueden ejecutarse en paralelo.
+
+### **Transacciones con Spring**
+
+Tipos de transaction manager en Spring
+
+- JDBC: se utiliza DataSourceTransactionManager
+- Hibernate: se utiliza HibernateTransactionManager (utilizado en el sistema)
+- JPA: se utiliza JpaTransactionManager
+- JTA: se utiliza JtaTransactionManager
+
+**Configuración de transacciones con anotaciones**
+
+Configuración en el archivo applicationContext.xml para activar las anotaciones Java:&nbsp;
+
+<tx:annotation-driven />
+
+En las clases de java se utiliza la anotación: @Transactional
+
+Además se pueden indicar los atributos de una transacción en la misma anotación:
+
+@Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+
+**Atributos de una transacción en Spring**
+
+- **Propagación**: indica cómo se propagara una transacción entre distintos métodos transaccionales.
+
+  - Mandatory
+  - Nested
+  - Never
+  - Not_Supported
+  - Required
+  - Requires_New
+  - Supports
+
+- **Aislamiento**: define el nivel de aislamiento en la transacción actual respecto a otras transacciones activas y concurrentes.&nbsp;
+
+  - Default
+  - Read_Uncommitted
+  - Read_Committed
+  - Repeatable_Read
+  - Serializable
+
+- **Read Only**: indicar si un método transaccional únicamente realizará operaciones de consulta en la base de datos.
+
+- **Timeout**: si una transacción demora demasiado tiempo en ejecutarse, es necesario detenerla de alguna manera.
+
+- **Reglas Rollback**: por default, las transacciones realizan rollback si la excepción lanzada es de tipo runtime. Si son de tipo checked no se aplica rollback.
+
+Cuando se utiliza la anotación @Transactional sin ningún parámetro, el modo de propagación es REQUIRED, el flag de solo lectura es FALSE, el nivel de aislamiento es READ_COMMITTED, y la transacción no va realizar un rollback sobre una excepción no chequeada (o sea que no sea de java.lang.RuntimeException).
