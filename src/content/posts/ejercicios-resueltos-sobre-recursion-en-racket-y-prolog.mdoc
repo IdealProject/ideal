@@ -382,3 +382,228 @@ major:
 ```
 
 ## PROLOG:
+
+### Obtener los divisores de un numero N
+
+```
+divisores(N,L):-
+       N>0,
+       divisores_aux(N,1,L).
+divisores_aux(N,N,[N]).
+divisores_aux(N,D,R):-
+      Res is N mod D,
+      Res =:= 0,
+      D1 is D + 1 ,
+      divisores_aux(N,D1,R1),
+      R = [D|R1].
+divisores_aux(N,D,R):-
+      D1 is D + 1,
+      divisores_aux(N, D1, R)
+```
+
+### Promedio de una lista de números
+
+```
+romedio([],0).
+promedio(L,P):-
+     tamano(L,T),
+     promedio_aux(L,T,0,P).
+     
+promedio_aux([],T,S,S/T).
+promedio_aux([X|Q],T,S,P):-
+            S1 is S + X,
+            promedio_aux(Q,T,S1,P).
+```
+
+### Partir una lista en 2 partes, la primera parte de tamaño N
+
+```
+split(L,N,L1,L2):-
+      tamano(L,T),
+      N<T,
+      split_aux(L,N,L1,L2),!.
+split(L,_,L,[]).
+
+split_aux(L,0,[],L).
+split_aux([C|Q],N,L1,L2):-
+          N1 is N - 1,
+          split_aux(Q,N1,L1A,L2B),
+          L1 = [C | L1A],
+          L2 = L2B .
+```
+
+### Contar las ocurrencias de un elemento E en una lista
+
+```
+ocurrencias([],_,0).
+ocurrencias([E|Q],E,R):-
+           ocurrencias(Q,E,R1),
+           R is 1+ R1.
+ocurrencias([C|Q],E,R):-
+           C \= E,
+           ocurrencias(Q,E,R).
+```
+
+### Unir una lista de listas y dividir una lista para que sea una lista de listas
+
+```
+unir([],[]).
+unir([[A]|Q],R):-
+     unir(Q,R1),
+     R = [A|R1].
+%[[a],[b]]  --> [a,b]
+
+dividir([],[]).
+dividir([C|Q],R):-
+       dividir(Q,R1),
+       R = [[C]|R1].
+```
+
+### Recorrer una lista anidada y guardar los elementos pares
+
+```
+only_pares([], []).
+only_pares([C|Q], [C|R]) :-
+    integer(C),
+    C mod 2 =:= 0,
+    only_pares(Q, R).
+only_pares([C|Q], R) :-
+    is_list(C),
+    only_pares(C, R1),
+    only_pares(Q, R2),
+    append(R1, R2, R).
+only_pares([_|Q], R) :-
+    only_pares(Q, R).
+```
+
+### Comprobar si una lista es estrictamente creciente
+
+```
+creciente([]).
+creciente([C1,C2|Q]):-
+     C1 < C2,
+     creciente([C2|Q]).
+```
+
+### Obtener los N últimos elementos de una lista
+
+```
+n_ultimos(L,N,R):-
+     length(L,T),
+     D is T - N,
+     n_ultimos_aux(L,D,R).
+n_ultimos_aux(L,0,L).
+n_ultimos_aux([_|Q],D,R):-
+     D1 is D - 1,
+     n_ultimos_aux(Q,D1,R).
+```
+
+### Comprobar si una lista es sublista de otra dado un intervalo de indices I (inicial) y F (final)
+
+```
+sublista(_,0,-1,[]).
+sublista([C|Q],0,F,[C1|Q1]):-
+     C == C1,
+     F1 is F -1,
+     sublista(Q,0,F1,Q1).
+     
+sublista([_|Q],I,F,[C1|Q1]):-
+     I > 0,
+     I1 is I - 1,
+     F1 is F -1,
+     sublista(Q,I1,F1,[C1|Q1]).
+```
+
+### Inserción ordenada de un número a una lista de números ya ordenada
+
+```
+ins_ordenada([],E,[E]).
+ins_ordenada([C|Q],E,R):-
+    E<C,
+    R = [E,C|Q],
+    !.
+ins_ordenada([E|Q],E,R):-
+    R = [E , E|Q].
+ins_ordenada([C|Q],E,R):-
+    ins_ordenada(Q,E,R1),
+    R = [C|R1].
+```
+
+### Obtener el enésimo elemento de una lista
+
+```
+enesimo([C|_],1,C).
+enesimo([_|Q],N,R):-
+       N1 is N - 1,
+       enesimo(Q,N1,R).
+```
+
+### Intento de flatten
+
+```
+flat([], []).
+flat([C|Q], R) :-
+    is_list(C),
+    flat(C, R1),
+    flat(Q, R2),
+    append(R1, R2, R).
+flat([C|Q], [C|R]) :-
+    \+ is_list(C),
+    flat(Q, R).
+```
+
+### Verificar si una lista es subconjunto de otra
+
+```
+sub3(L1,[C|Q]):-
+     %Obtenemos la interseccion entre las dos listas( Los elementos en comun )
+     interseccion(L1,[C|Q], I),
+     tam(L1,A),tam(I,B),
+     %Si la interseccion tiene el mismo tamano que L1, entonces L1 es subconjunto de la otra lista
+     A =:= B.
+%Si el elemento de la cabeza existe en la lista L, la agregamos a la lista de elementos en comun y seguimos
+interseccion(L, [C|Q],R):-
+    existe(C,L),
+    interseccion(L,Q,R1),
+    R = [ C | R1].
+%De lo contrario, se ignora
+interseccion(L, [_|Q],R):-
+    interseccion(L,Q,R).
+%Si ya recorrimos toda la lista grande, terminar
+interseccion(_,[],[]).
+
+tam([_|Q],R):-
+    tam(Q,R1),
+    R is 1 + R1.
+tam([],0).
+
+```
+
+### EJERCICIO DE EXÁMEN FINAL
+
+Lee el siguiente código, explica como funciona y que realiza
+
+```
+y([],Y,[]):-!.
+y([Y],Y,[]):-!.
+
+y([Y|M],Y,S):-
+    y(M,Y,S),!.
+    
+y([R|M],Y,S):-
+     lista(R),
+     y(R,Y,T),
+     y(M,Y,P),
+     concatenar([T],P,S).
+y([R|M],Y,S):-
+     y(M,Y,T),
+     concatenar([R],T,S).
+     
+lista([]):-!.
+lista([Y|Z]):-
+      lista(Z).
+concatenar([],L,L).
+concatenar([X|M],L,[X|Z]):-
+      concatenar(M,L,Z).
+
+```
