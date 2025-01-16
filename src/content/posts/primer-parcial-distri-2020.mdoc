@@ -1,0 +1,103 @@
+---
+title: Primer Parcial Distri 2020
+draft: false
+description: Primer examen parcial Distri 2020
+authors:
+  - dvelazquez
+major:
+  discriminant: infor
+  value:
+    discriminant: '7'
+    value: Sw
+---
+# 1er Parcial Sistemas Distribuidos 2020
+
+3. Qué es un sistema distribuido y en qué se diferencia con un sistema convencional local ?
+   Es aquel en que los componentes localizados en computadoras, conectados en red, comunican y
+   coordinan sus acciones únicamente mediante el paso de mensajes.
+   Una colección de computadoras separadas físicamente y conectadas entre sí por una red de
+   comunicaciones distribuidas; cada máquina posee sus componentes de hardware y software que el
+   usuario percibe como un solo sistema (no necesita saber qué cosas están en qué máquinas).
+   Un sistema centralizado/local es cuando el proceso de cómputo es realizado en una localización
+   central, usando terminales conectados a una computadora central.
+1. En qué se diferencian la computación móvil y la ubicua? que es el código móvil?
+   Computación móvil: facilidad de transporte y capacidad de conectarse adecuadamente a redes en
+   diferentes lugares también llamada computación cómoda. El usuario tiene acceso al recurso (dispositivo
+   móvil)
+   Computación ubicua: hacer uso del recurso compartido dentro de un área limitada(WAN protocolo de
+   acceso inalámbrico)
+1. En qué se diferencia una implementación de servidor con protocolos TCP respecto a otra que es
+   UDP? qué aplicaciones prácticas tendría cada una de ellas?
+1. Cual es la diferencia entre computación distribuida y computación paralela?
+   Ø Sistema paralelo
+   ● divide un proceso en tareas que son ejecutadas al mismo tiempo
+   ● cuenta con memoria compartida a nivel de hardware
+   Ø Sistema distribuido
+   ● divide un proceso en tareas que son ejecutadas en diferentes ubicaciones utilizando diferentes
+   recursos.
+   ● No cuenta con memoria compartida a nivel de hardware
+   ● uso e implementación de múltiples componentes de hardware para compartir dichos recursos
+   entre los nodos que conforman el sistema.
+1. En qué consiste el marshalling o aplanamiento de los datos? Porque es importante dicha acción?
+   Consiste en convertir un objeto en una secuencia de bytes para guardarlo en un archivo o
+   enviarlo por la red y luego reconstruirlo con los valores que tenía al ser serializado para su posterior
+   utilización.
+1. En qué se diferencia un objeto que puede ser invocado remotamente de uno que solo puede ser
+   invocado localmente?
+   El remoto se accede a través de una interfaz y el local a través del objeto en sí.
+   ● Los clientes de los objetos remotos interactúan con las interfaces remotas y nunca con las clases
+   que implementan dichas interfaces.
+   ● Los argumentos de los métodos remotos, así como los valores de retorno, son pasados por copia
+   y no por referencia.
+   ● Los objetos remotos se pasan por referencia y no mediante la copia de la implantación del
+   objeto.
+   ● La semántica de algunos métodos definidos por la clase java.lang.Object, está especializada
+   para el caso de los objetos remotos.
+   ● Los clientes deben tener en cuenta excepciones adicionales referentes a la invocación remota de
+   los métodos.
+1. Cual es la diferencia entre RPC y RMI?
+   RMI: Permite que un objeto remoto invoque un método de otro objeto situado en un
+   procedimiento remoto.
+   RPC: Permite que un cliente ejecute un procedimiento en un servidor remoto.
+1. Cuando tenemos concurrencia en un sistema?
+   Cuando más de un proceso quiere acceder a un recurso compartido al mismo tiempo.
+1. En qué consiste la condición carrera cuando se presenta concurrencia?
+   La condición carrera es cuando varios procesos compiten para hacer uso del recurso compartido
+   y lo hace el que llega primero.
+1. Explique en qué consiste la exclusión mutua y la sección crítica.
+   Exclusión mutua (mejor): Consiste en que un solo proceso excluye temporalmente a todos los
+   demás para usar un recurso compartido de forma que garantice la integridad del sistema.
+   Exclusión mutua: la exclusión mutua distribuida es el mecanismo de coordinación entre varios
+   procesos concurrentes a la hora de acceder a recursos o secciones compartidas. La exclusión mutua se
+   utiliza para acceder a la región crítica (bloqueo), manipular los recursos compartidos y liberar el
+   recurso(despierta los procesos en espera).
+   Sección crítica: porción de código que permite el acceso a un recurso compartido por varios
+   procesos.
+1. Cual es el rol del middleware en un sistema distribuido ?
+   Capa de software que permite enmascarar la heterogeneidad.
+1. Explique en qué casos es recomendado utilizar monitores de sincronización y que caso semáforo.
+   Monitores: hacer que se cumpla un determinado orden de ejecución.
+   Semáforo: evitar inconsistencias de recursos.
+1. Proporcione un ejemplo de comunicacion sincrona bloqueante y comunicacion asincrona no
+   bloqueante.
+   Bloqueante(llamada respondida): cuando el sistema espera una interacción del cliente;
+   No bloqueante(chat): mientras el cliente realiza una acción el sistema puede estar continuando
+   con su tarea.
+1. Cite y describa las principales características de los sistemas distribuidos.
+   Concurrencia.- Esta característica de los sistemas distribuidos permite que los recursos disponibles en
+   la red puedan ser utilizados simultáneamente por los usuarios y/o agentes que interactúan en la red.
+   Carencia de reloj global.- Las coordinaciones para la transferencia de mensajes entre los diferentes
+   componentes para la realización de una tarea, no tienen una temporización general, está más bien
+   distribuida a los componentes.
+   Fallos independientes de los componentes.- Cada componente del sistema puede fallar
+   independientemente, con lo cual los demás pueden continuar ejecutando sus acciones. Esto permite el
+   logro de las tareas con mayor efectividad, pues el sistema en su conjunto continúa trabajando.
+1. Cite los estados por los cuales puede pasar un hilo.
+   nuevo, preparado, ejecución, bloqueado, terminado
+1. Cite 4 posibles tipos de fallos en un sistema distribuido.
+   Fallos por omisión: el servidor no recibe/envía mensajes.
+   Fallos arbitrarios: el peor fallo posible.
+   Fallo de temporización: la respuesta de un servidor queda fuera del intervalo de tiempo especificado.
+   Fallos de congelación: el servidor estaba trabajando y se detuvo.
+   Fiabilidad y comunicación uno a uno.
+   Enmascaramiento de fallos: los oculta o los hace más aceptables
