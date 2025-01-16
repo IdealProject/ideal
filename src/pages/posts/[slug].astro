@@ -3,6 +3,7 @@ import { getCollection, getEntry } from "astro:content";
 import BlogLayout from "@layouts/BlogLayout.astro";
 import TableOfContents from "@components/TableOfContents.astro";
 import { Icon } from "astro-icon/components";
+import TableOfContentsMobile from "@components/TableOfContentsMobile.astro";
 
 const { slug } = Astro.params;
 if (!slug) throw new Error("Slug not found");
@@ -26,10 +27,10 @@ export async function getStaticPaths() {
 
 <BlogLayout title={post.data.title}>
   <main
-    class="flex flex-col gap-x-4 2xl:flex-row print mt-5 mx-auto print:break-inside-avoid print:relative print:pt-14 print:mt-0"
+    class="flex flex-col xl:flex-row 2xl:flex-row gap-x-4  print mt-5 mx-auto print:break-inside-avoid print:relative print:pt-14 print:mt-0"
   >
     <div class="hidden 2xl:block 2xl:w-1/5"></div>
-    <section class="w-3/5">
+    <section class="2xl:w-3/5">
       <Icon
         name="ideal"
         class:list="hidden print:inline print:opacity-30 print:absolute print:top-0 print:right-0"
@@ -61,6 +62,7 @@ export async function getStaticPaths() {
           class="text-white font-semibold bg-black py-2 px-3 rounded-md print:hidden min-w-full md:min-w-fit lg:min-w-fit xl:min-w-fit"
           onclick="window.print()">Descargar</button
         >
+        <TableOfContentsMobile headings={headings} />
       </header>
       <article
         class="flex flex-col-reverse md:flex-row lg:flex-row gap-x-5 print:flex-col"
@@ -68,13 +70,9 @@ export async function getStaticPaths() {
         <Content
           class="flex-5 list order-2 md:order-first lg:order-first print:order-last"
         />
-      
       </article>
     </section>
-    <TableOfContents
-    class="flex-1 list order-1 md:order-last lg:order-last"
-    headings={headings}
-  />
+    <TableOfContents headings={headings} />
   </main>
 </BlogLayout>
 
@@ -84,7 +82,6 @@ export async function getStaticPaths() {
     font-size: 2rem;
     color: #31363f;
   }
-
 
   p {
     text-wrap: pretty;
@@ -102,15 +99,15 @@ export async function getStaticPaths() {
   }
 
   code {
-  font-family: monospace;
-  background-color: #efefef;
-  padding: 5px;
-  border-radius: 5px;
-  word-wrap: break-word;
-  word-break: break-all;
-  overflow-wrap: break-word;
-  color: #dd4a68;
-}
+    font-family: monospace;
+    background-color: #efefef;
+    padding: 5px;
+    border-radius: 5px;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    color: #dd4a68;
+  }
 
   th,
   td {
