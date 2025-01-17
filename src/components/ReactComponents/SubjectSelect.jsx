@@ -7,6 +7,7 @@ import { materiasIndu } from '../../utils/data/dataIndu';
 import { materiaCPA } from '../../utils/data/dataCpa';
 import { materiasCBI } from '../../utils/data/dataCBI';
 import ButtonSubject from './ButtonSubject';
+
 const SubjectSelect = ({ majorData }) => {
     const [semester, setSemester] = useState(1);
 
@@ -38,16 +39,16 @@ const SubjectSelect = ({ majorData }) => {
     };
 
     return (
-        <div className="m-5 lg:mx-56 lg:my-10 ">
+        <div className="m-5 xl:mx-52 2xl:mx-52 lg:my-10 flex flex-col gap-y-3">
 
             {/* titulo */}
-            <h2 className="mb-8 text-4xl tracking-tight font-extrabold text-gray-900">
+            <h2 className="text-4xl tracking-tight font-extrabold text-gray-900">
                 {majorData[0].label}
             </h2>
-            <div className='lg:flex lg:flex-col-reverse '>
+            <div className='lg:flex lg:flex-col-reverse'>
 
                 {/* materias */}
-                <div className='grow-0 lg:grid lg:grid-flow-col lg:gap-4 lg:grid-rows-2 lg'>
+                <div className='grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-3'>
                     {majorData[0].value === 'cpa' ? (
                         getMajores(majorData[0].value).map((e, index) => (
                             <ul key={`ul - ${index}`}>
