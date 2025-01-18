@@ -9,10 +9,10 @@ const ButtonSubject = ({ href, content }) => {
       href={href}
     >
       <div className="flex flex-row items-center overflow-hidden gap-x-2">
-        <div className="bg-red-500 size-6 rounded-md">.</div>
-        <p className="font-medium whitespace-nowrap text-ellipsis overflow-hidden">
+        <span className="bg-red-500 size-6 rounded-md"/>
+        <span className="font-medium whitespace-nowrap text-ellipsis overflow-hidden">
           {content}
-        </p>
+        </span>
       </div>
       <svg
         className="w-6 h-8"
