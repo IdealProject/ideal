@@ -39,10 +39,9 @@ const SubjectSelect = ({ majorData }) => {
     };
 
     return (
-        <div className="mx-5 xl:mx-52 2xl:mx-52 lg:my-10 flex flex-col gap-y-4">
-
+        <div className="mx-5 xl:mx-52 2xl:mx-52 lg:my-10 flex flex-col gap-y-4 mt-2">
             {/* titulo */}
-            <h2 className="text-4xl tracking-tight font-extrabold">
+            <h2 className="text-2xl tracking-tight font-bold">
                 {majorData[0].label}
             </h2>
             <div className='flex flex-col md:flex-col-reverse'>
