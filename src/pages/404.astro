@@ -1,18 +1,23 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
 ---
 
-<Layout title="404: Not Found">
-  <div class="flex flex-col items-center mt-32 gap-y-5">
-    <div class="flex flex-col items-center gap-y-3">
-      <Icon name="ideal"class="text-gray-600"/>
-        <h1 class="text-6xl text-gray-600 font-mono bg-zinc-300 px-2 py-3 rounded-lg">404</h1>
-        <p class="text-5xl font-mono flex items-center gap-x-2 text-gray-600">Oh no! Página no encontrada <Icon name="magnifyng-glass" class="text-gray-600 text-5xl"/></p>
-        
-    </div>
-    <div class="flex items-center gap-x-2 text-white font-medium bg-zinc-700 px-5 py-2 rounded-full hover:bg-black transition-all">
-        <Icon name="reload" />
-       <a href="/">Volver al Inicio</a>
-    </div>
-  </div>
+<Layout title="404: Página no encontrada, un perro se la comió">
+  <div class="flex flex-col items-center mt-32 gap-y-5 text-gray-700 font-mono">
+    <Image
+      src="/404-dog.webp"
+      alt="Error 404"
+      height={100}
+      width={400}
+      class="size-64 md:size-72 lg:size-72 xl:size-72 2xl:size-72"
+    />
+    <h1 class="text-5xl md:text-6xl lg:text-6xl xl:text-6xl 2xl:text-6xl bg-gray-200 leading-none p-2 rounded-md justify-center items-center">404</h1>
+    <span class="text-xl md:text-3xl lg:text-3xl xl:text-3xl 2xl:text-3xl leading-5 text-center"> Un perro se ha comido esta página </span>
+    <a href="/" class="p-4 bg-zinc-900 hover:scale-110 transition-transform duration-150 ease-in-out text-white rounded-full flex items-center gap-x-2">
+    <span>Volver</span>
+    <Icon name="reload" />
+    </a>
+  </div></Layout
+>
