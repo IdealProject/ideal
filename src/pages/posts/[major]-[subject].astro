@@ -140,12 +140,12 @@ const subjectName =
 ---
 
 <Layout title=`${subjectName}`
-    ><div class="px-5 py-10 sm:mx-20">
+    ><div class="px-5 py-10 sm:mx-56 sm:my-10">
         <h2 class="mb-8 text-4xl tracking-tight font-extrabold text-gray-900">
             {carrera} - {subjectName}
         </h2>
         <section>
-            <ul class="m-0">
+            <ul >
                 {
                     postMateria.map(
                         (post: { slug: string; data: { title: string } }) => (
