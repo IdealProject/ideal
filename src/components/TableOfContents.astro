@@ -3,24 +3,22 @@ const { headings = [] } = Astro.props;
 ---
 
 <nav
-  class="text-sm min-w-fit h-fit p-2 flex md:sticky top-5 bg-gray-100 border rounded-md border-gray-200 border-solid print:hidden"
+  id="toc"
+  class="hidden md:block lg:block xl:block 2xl:block
+  text-xs 2xl:w-1/4 2xl:h-screen overflow-y-scroll p-2 top-5 overflow-hidden
+  bg-gray-50 border rounded-md border-gray-200 border-solid
+  print:hidden"
 >
-  <nav
-    class="text-sm min-w-[20%] px-2 py-2 h-fit overflow-hidden bg-gray-100 border rounded-md border-gray-200 border-solid print:hidden"
-  >
-    <ul>
-      {
-        headings.map(
-          (heading: { depth: number; slug: string; text: string }) => (
-            <li style={{ marginLeft: `${heading.depth}em` }}>
-              <a
-                class="underline text-gray-600"
-                href={`#${heading.slug}`}
-              >{`${heading.text}`}</a>
-            </li>
-          ),
-        )
-      }
-    </ul>
-  </nav>
+  <ul>
+    {
+      headings.map((heading: { depth: number; slug: string; text: string }) => (
+        <li style={{ marginLeft: `${heading.depth}em` }}>
+          <a
+            class="hover:underline text-gray-600"
+            href={`#${heading.slug}`}
+          >{`${heading.text}`}</a>
+        </li>
+      ))
+    }
+  </ul>
 </nav>

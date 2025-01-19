@@ -19,7 +19,7 @@ import Layout from "@layouts/Layout.astro";
 
 // obtenemos getCollection
 import { getCollection } from "astro:content";
-import Post from "@components/Post.astro";
+import PostButton from "@components/PostButton.astro";
 
 // obtenemos los posts
 const posts = await getCollection("posts");
@@ -32,64 +32,64 @@ const postMajor = postNoDraft.filter((e) => e.data.major.discriminant == major);
 // si es para el cpa es diferente
 let postMateria;
 if (major == "cpa") {
-    postMateria = postMajor.filter((e) => e.data.major.value == subject);
+  postMateria = postMajor.filter((e) => e.data.major.value == subject);
 } else {
-    postMateria = postMajor.filter((e) => e.data.major.value.value == subject);
+  postMateria = postMajor.filter((e) => e.data.major.value.value == subject);
 }
 
 // Devolvemos todas las rutas estaticas posibles
 
 export const getStaticPaths = () => {
-    const paths = [
-        ...Object.keys(materiaCPA).map((clave) => ({
-            params: {
-                major: "cpa",
-                subject: materiaCPA[clave].value,
-            },
-        })),
-        ...Object.values(materiasCivil).flatMap((semesters) =>
-            semesters.map((subjects) => ({
-                params: {
-                    major: "civil",
-                    subject: subjects.value,
-                },
-            })),
-        ),
-        ...Object.values(materiasInfor).flatMap((semesters) =>
-            semesters.map((subjects) => ({
-                params: {
-                    major: "infor",
-                    subject: subjects.value,
-                },
-            })),
-        ),
-        ...Object.values(materiasElectro).flatMap((semesters) =>
-            semesters.map((subjects) => ({
-                params: {
-                    major: "electro",
-                    subject: subjects.value,
-                },
-            })),
-        ),
-        ...Object.values(materiasIndu).flatMap((semesters) =>
-            semesters.map((subjects) => ({
-                params: {
-                    major: "indu",
-                    subject: subjects.value,
-                },
-            })),
-        ),
-        ...Object.values(materiasCBI).flatMap((semesters) =>
-            semesters.map((subjects) => ({
-                params: {
-                    major: "cbi",
-                    subject: subjects.value,
-                },
-            })),
-        ),
-    ];
+  const paths = [
+    ...Object.keys(materiaCPA).map((clave) => ({
+      params: {
+        major: "cpa",
+        subject: materiaCPA[clave].value,
+      },
+    })),
+    ...Object.values(materiasCivil).flatMap((semesters) =>
+      semesters.map((subjects) => ({
+        params: {
+          major: "civil",
+          subject: subjects.value,
+        },
+      }))
+    ),
+    ...Object.values(materiasInfor).flatMap((semesters) =>
+      semesters.map((subjects) => ({
+        params: {
+          major: "infor",
+          subject: subjects.value,
+        },
+      }))
+    ),
+    ...Object.values(materiasElectro).flatMap((semesters) =>
+      semesters.map((subjects) => ({
+        params: {
+          major: "electro",
+          subject: subjects.value,
+        },
+      }))
+    ),
+    ...Object.values(materiasIndu).flatMap((semesters) =>
+      semesters.map((subjects) => ({
+        params: {
+          major: "indu",
+          subject: subjects.value,
+        },
+      }))
+    ),
+    ...Object.values(materiasCBI).flatMap((semesters) =>
+      semesters.map((subjects) => ({
+        params: {
+          major: "cbi",
+          subject: subjects.value,
+        },
+      }))
+    ),
+  ];
 
-    return paths;
+  return paths;
 };
 
 // teniendo el valor de la materia obtener el nombre de la materia
@@ -97,67 +97,71 @@ export const getStaticPaths = () => {
 let materiaMajor;
 let carrera;
 switch (major) {
-    case "civil":
-        materiaMajor = materiasCivil;
-        carrera = "Ing. Civil";
-        break;
-    case "infor":
-        materiaMajor = materiasInfor;
-        carrera = "Ing. Informática";
-        break;
-    case "electro":
-        materiaMajor = materiasElectro;
-        carrera = "Ing. Electromecánica";
-        break;
-    case "indu":
-        materiaMajor = materiasIndu;
-        carrera = "Ing. Industrial";
-        break;
-    case "cpa":
-        materiaMajor = materiaCPA;
-        carrera = "Cursillo Probatorio de Admisión";
-        break;
-    case "cbi":
-        materiaMajor = materiasCBI;
-        carrera = "Curso Básico de Ingeniería";
-        break;
-    default:
-        throw new Error("Major not found");
+  case "civil":
+    materiaMajor = materiasCivil;
+    carrera = "Ing. Civil";
+    break;
+  case "infor":
+    materiaMajor = materiasInfor;
+    carrera = "Ing. Informática";
+    break;
+  case "electro":
+    materiaMajor = materiasElectro;
+    carrera = "Ing. Electromecánica";
+    break;
+  case "indu":
+    materiaMajor = materiasIndu;
+    carrera = "Ing. Industrial";
+    break;
+  case "cpa":
+    materiaMajor = materiaCPA;
+    carrera = "Cursillo Probatorio de Admisión";
+    break;
+  case "cbi":
+    materiaMajor = materiasCBI;
+    carrera = "Curso Básico de Ingeniería";
+    break;
+  default:
+    throw new Error("Major not found");
 }
 
 // Buscamos la materia con el value que nos dieron en subject
 
 const subjectName =
-    carrera === "Cursillo Probatorio de Admisión"
-        ? materiaMajor.filter((e) => e.value == subject)[0].label
-        : Object.keys(materiaMajor)
-              .map((e) => materiaMajor[e])
-              .map((el) =>
-                  el.filter((al) => al.value == subject).map((x) => x.label),
-              )
-              .flatMap((nested) => nested)
-              .filter((value) => value)[0];
+  carrera === "Cursillo Probatorio de Admisión"
+    ? materiaMajor.filter((e) => e.value == subject)[0].label
+    : Object.keys(materiaMajor)
+        .map((e) => materiaMajor[e])
+        .map((el) => el.filter((al) => al.value == subject).map((x) => x.label))
+        .flatMap((nested) => nested)
+        .filter((value) => value)[0];
 ---
 
-<Layout title=`${subjectName}`
-    ><div class="px-5 py-10 sm:mx-56 sm:my-10">
-        <h2 class="mb-8 text-4xl tracking-tight font-extrabold text-gray-900">
-            {carrera} - {subjectName}
-        </h2>
-        <section>
-            <ul >
-                {
-                    postMateria.map(
-                        (post: { slug: string; data: { title: string } }) => (
-                            <Post
-                                name={post.data.title}
-                                authorCode={post.data.authors}
-                                href={`/posts/${post.slug}`}
-                            />
-                        ),
-                    )
-                }
-            </ul>
-        </section>
-    </div>
+<Layout title=`${subjectName}`>
+  <div class="mx-5 xl:mx-52 2xl:mx-52 lg:my-10 flex flex-col gap-y-4 mt-2">
+    <h2 class="text-2xl tracking-tight font-bold text-pretty">
+      {carrera} - {subjectName}
+    </h2>
+    <section>
+      <ul class="m-0 flex flex-col gap-y-3">
+        {
+          postMateria.map(
+            (post: {
+              slug: string;
+              data: {
+                authors: string;
+                title: string;
+              };
+            }) => (
+              <PostButton
+                postTitle={post.data.title}
+                authorCode={post.data.authors}
+                href={`/posts/${post.slug}`}
+              />
+            )
+          )
+        }
+      </ul>
+    </section>
+  </div>
 </Layout>

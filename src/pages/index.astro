@@ -43,13 +43,14 @@ const carrerasButtons = carreras.map((carrera) => ({
 
 <Layout title="Bienvenido a Ideal">
   <div class="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
-  <main class="container mx-auto px-4 md:px-10 xl:px-32 py-12 flex flex-col gap-y-20">
+  <main class="container mx-auto px-4 md:px-10 xl:px-32 py-12 flex flex-col gap-y-10 md:gap-y-20 xl:gap-y-20 2xl:gap-y-20">
+    
     <div class="flex flex-col md:flex-row items-center justify-between">
-      <div class="md:w-1/2 mb-8 md:mb-0">
+      <div class="md:w-1/2 md:mb-0">
         <h1 class="text-5xl md:4xl  xl:4xl font-extrabold mb-4">
           Tu plataforma de aprendizaje ideal
         </h1>
-        <p class="text-xl text-gray-600 mb-6">
+        <p class="text-xl text-gray-600">
           Notas de clases, exámenes y recursos gratuitos. Impulsado por la
           comunidad de alumnos de la FIUNI.
         </p>
@@ -57,21 +58,21 @@ const carrerasButtons = carreras.map((carrera) => ({
           Aprende más sobre nuestra misión.
         </a> -->
       </div>
-      <div class="md:w-1/2">
-        <div class="w-full h-96">
+      <div class="md:w-1/2 hidden md:flex xl:flex 2xl:flex">
+        <div class="w-full h-96 flex justify-center items-center">
           <Image
-            class="sm:mt-8"
-            src="/ReadingDoodle.svg"
-            alt="Estudiante leyendo"
-            width="400"
-            height="400"
+        class="sm:mt-8"
+        src="/ReadingDoodle.svg"
+        alt="Estudiante leyendo"
+        width="400"
+        height="400"
           />
         </div>
       </div>
     </div>
 
     <section class="">
-      <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="md:mt-16 xl:mt-16 2xl:mt-16 grid grid-cols-1 md:grid-cols-3 gap-4">
         {carrerasButtons.map((carrera) => (
           <CarrerasButtons {...carrera} />
         ))}

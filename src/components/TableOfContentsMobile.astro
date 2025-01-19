@@ -1,0 +1,91 @@
+---
+import { Icon } from "astro-icon/components";
+const { headings = [] } = Astro.props;
+---
+
+<button
+  id="toc-button"
+  class="lg:hidden text-black border-2 font-medium bg-white py-2 px-3 rounded-md print:hidden min-w-full cursor-pointer"
+>
+  En esta página
+</button>
+
+<!-- Table of Contents Modal -->
+<div
+  id="toc-modal"
+  class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50"
+>
+  <div
+    class="bg-white p-4 rounded-lg w-11/12 h-3/4 flex flex-col relative overflow-y-auto gap-y-5"
+  >
+    <header class="flex justify-between items-center">
+      <h2 class="text-xl font-semibold">En esta página</h2>
+      <button id="close-toc-modal" class="text-gray-500 hover:text-gray-900">
+        <Icon name="close" />
+      </button>
+    </header>
+    <ul>
+      {
+        headings.map((heading) => (
+          <li style={{ marginLeft: `${heading.depth}em` }}>
+            <a
+              class="hover:underline text-gray-600 py-1"
+              href={`#${heading.slug}`}
+            >{`${heading.text}`}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+<script>
+  document.addEventListener("astro:after-swap", () => {
+  initTocModal();
+});
+
+function initTocModal() {
+  const tocButton = document.getElementById("toc-button");
+  const tocModal = document.getElementById("toc-modal");
+  const closeTocModal = document.getElementById("close-toc-modal");
+  const tocLinks = tocModal.querySelectorAll("a");
+
+  function openTocModal() {
+    if (tocModal) {
+      tocModal.classList.remove("hidden");
+    }
+  }
+
+  function closeTocModalFunc() {
+    if (tocModal) {
+      tocModal.classList.add("hidden");
+    }
+  }
+
+  if (tocButton) {
+    tocButton.addEventListener("click", openTocModal);
+  }
+
+  if (closeTocModal) {
+    closeTocModal.addEventListener("click", closeTocModalFunc);
+  }
+
+  tocLinks.forEach((link) => {
+    link.addEventListener("click", closeTocModalFunc);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && tocModal) {
+      closeTocModalFunc();
+    }
+  });
+
+  tocModal.addEventListener("click", (event) => {
+    if (event.target === tocModal) {
+      closeTocModalFunc();
+    }
+  });
+}
+
+initTocModal();
+
+</script>

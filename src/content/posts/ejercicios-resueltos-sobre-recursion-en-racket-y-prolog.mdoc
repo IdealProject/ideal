@@ -1,0 +1,610 @@
+---
+title: '# Ejercicios Resueltos sobre recursion en Racket y Prolog'
+draft: false
+description: Variedad de ejercicios resueltos de examenes finales, deberes, etc.
+authors:
+  - matias-mareco
+major:
+  discriminant: infor
+  value:
+    discriminant: '3'
+    value: Pa
+---
+# Ejercicios Resueltos sobre recursión en Racket y Prolog
+
+## RACKET:
+
+### Saltear n-elementos de una lista
+
+```racket
+(define (elemento-saltado n L)
+  (cond[(null? L) null]
+       [else (elemento-saltado-aux n n L)]
+   )
+  )
+
+(define (elemento-saltado-aux n i L)
+  (cond [(null? L) null]
+        [(equal? n i) (cons (car L) (elemento-saltado-aux n 0 (cdr L))) ]
+        [else (elemento-saltado-aux n (+ 1 i) (cdr L))]
+   )
+  )
+```
+
+### Separar una lista en 2 partes, la primera de longitud n
+
+```racket
+(define (separar-lista L n)
+  (cond [(null? L) null]
+        [(number? n) (separar-lista-aux L n '() '() )]
+        [else null]
+  )
+ )
+
+(define(separar-lista-aux L n L1 L2)
+  (cond [(null? L) (cons L1 (cons L2 null)) ]
+        [(number? (car L))
+           (cond [(equal? (car L) n) (separar-lista-aux (cdr L) n (cons (car L) L1) (cons (car L) L2))]
+                 [(> (car L) n) (separar-lista-aux (cdr L) n L1 (cons (car L) L2))]
+                 [else (separar-lista-aux (cdr L) n (cons (car L) L1) L2 )]
+                 )
+         ]
+        [else (separar-lista-aux (cdr L) n L1 L2)]
+        )
+  )
+```
+
+### Otras formas alternativas de hacer la función de arriba(mas eficientes)
+
+```racket
+(define (partir L n )
+  (cond[(equal? n 0 ) L]
+       [else (partir_aux n L '() )]))
+
+(define (partir_aux n L L1)
+  (cond [(equal? n 0 ) (cons L1 (cons L null))]
+        [else (partir_aux (- n 1) (cdr L) (cons (car L) L1))]))
+
+;OTRA FORMA
+(define (partir2 L n )
+  (cons (n-primeros L n) (cons (n-cdr L n ) null))
+  )
+
+(define (n-primeros L n)
+  (cond[(equal? n 0 ) null]
+       [else (cons (car L) (n-primeros (cdr L) (- n 1 ) ))]))
+
+(define (n-cdr L n)
+  (cond[(equal? n 0 ) L]
+       [else (n-cdr (cdr L) (- n 1 ) )])) 
+```
+
+### Obtener todos los números de una lista que puede estar anidada
+
+```racket
+(define (separar-lista L n)
+  (cond [(null? L) null]
+        [(number? n) (separar-lista-aux L n '() '() )]
+        [else null]
+  )
+ )
+
+(define(separar-lista-aux L n L1 L2)
+  (cond [(null? L) (cons L1 (cons L2 null)) ]
+        [(number? (car L))
+           (cond [(equal? (car L) n) (separar-lista-aux (cdr L) n (cons (car L) L1) (cons (car L) L2))]
+                 [(> (car L) n) (separar-lista-aux (cdr L) n L1 (cons (car L) L2))]
+                 [else (separar-lista-aux (cdr L) n (cons (car L) L1) L2 )]
+                 )
+         ]
+        [else (separar-lista-aux (cdr L) n L1 L2)]
+        )
+  )
+```
+
+### Contar elementos similares a E en una lista plana con recursión de cola
+
+```racket
+(define (contar-similares E L)
+  (cond[(null? L) 0]
+       [else (contar-similares-aux E L 0)])
+  )
+(define (contar-similares-aux E L A)
+  (cond [(null? L) A]
+        [else (contar-similares-aux E (cdr L) (if(equal? E (car L)) (+ 1 A) A))]))
+```
+
+### Devolver una lista sin su ultimo elemento
+
+```racket
+(define (sin-ultimo L)
+  (cond [ (null? (cdr L) ) null]
+        [else (cons (car L) (sin-ultimo (cdr L)))]))
+```
+
+### filter o mi-reduce implementado recursivamente
+
+```racket
+(define (mi-reduce L f )
+  (cond[(null? L) null]
+       [(f (car L)) (cons (car L) (mi-reduce (cdr L) f))]
+       [else (mi-reduce (cdr L) f)]))
+```
+
+### Obtener enésimo elemento de una lista
+
+```racket
+(define(enesimo n L)
+        (cond [( > n (tamano L)) null]
+              [( equal? n 0) (car L)]
+              [else (enesimo ( - n 1 ) (cdr L))]))
+```
+
+### Dada una lista de índices ind-L, devuelve los elementos de otra lista L que estén en esos índices
+
+```racket
+(define (elems-list ind-L L )
+  (cond [(null? ind-L) null]
+        [else (cons (enesimo (car ind-L) L) (elems-list (cdr ind-L) L))]))
+```
+
+### Dada una lista de listas, reemplazar cada lista por su tamaño
+
+```racket
+(define (contar L)
+  (map (lambda(x)(foldl (lambda (x acc) (+ 1 acc)) 0 x)) L ))
+```
+
+### Sumatoria entre 2 números n y k - Aplicativo
+
+```racket
+;FORMA 1
+(define (sumatoria n k )
+  (cond [(> n k ) (sumatoria k n )]
+        [else (sumatoria-aux n k )]))
+
+(define (sumatoria-aux n k )
+  (foldl (lambda (x acc) (+ x acc)) 0  (conjunto n k )))
+
+(define (conjunto n k )
+  (build-list (+ 1 ( - k n ) ) (lambda (i) (+ i n ))))
+
+;FORMA 2
+(define (sumatory n k)
+  (foldl + 0 (range n (add1 k))))
+```
+
+### Sumatoria entre 2 números n y k - Recursivo
+
+```racket
+(define (sumatoria a b)
+  (cond
+    [(equal? a 0) b]
+    [(equal? b 0) a]
+    [(equal? a b) b]
+    [(< b a) (sumatoria b a)]
+    [else (+ a (sumatoria (add1 a) b))]
+    )
+  )
+```
+
+### Sumatoria de elementos de una lista anidada que puede tener elementos que no son números
+
+```racket
+(define (suma lista)
+  (foldl (lambda (x s)(if(pair? x)(+ s (suma x)) (if(number? x) (+ x s) s))) 0 lista)
+  )
+```
+
+### Buscar el numero mayor en una lista anidada
+
+```racket
+(define (max-bin-tree L)
+  (cond [(null? L ) 0]
+        [else (max-bin-tree-aux L 0 )]))
+(define (max-bin-tree-aux L m)
+  (cond[(null? L ) m]
+       [(not (pair? (car L)))
+        (if(> (car L) m) (max-bin-tree-aux (cdr L ) (car L))
+           (max-bin-tree-aux (cdr L ) m ))]
+       [else (maximus (max-bin-tree (car L))(max-bin-tree (cdr L)))]))
+
+(define (maximus a b )
+  (cond [(> a b) a ]
+        [else b ]))
+```
+
+### Torres de Hanoi
+
+```racket
+(define (hanoi n origen destino auxiliar)
+  (cond
+    [(= n 1) ; Caso base: mover un solo disco directamente
+     (printf "Mover disco de ~a a ~a\n" origen destino)]
+    [else
+     ; Paso 1: Mover (n-1) discos del origen al auxiliar
+     (hanoi (- n 1) origen auxiliar destino)
+     ; Paso 2: Mover el disco más grande directamente del origen al destino
+     (printf "Mover disco de ~a a ~a\n" origen destino)
+     ; Paso 3: Mover los (n-1) discos del auxiliar al destino
+     (hanoi (- n 1) auxiliar destino origen)]))
+```
+
+### Algoritmo de ordenamiento QuickSort   - Aplicativo
+
+```racket
+(define (qs-apl L)
+  
+  (define (get-p L prom)
+    (cond [(>= (car L) prom) (car L)]
+          [else (get-p (cdr L) prom)])
+    )
+  
+  (define (partir-qs L p )
+    (cons (fil (lambda (x) (< x p)) L) (cons (fil (lambda (x) (= x p)) L) (cons (fil (lambda (x) (> x p)) L) null)))
+    )
+  (define (nested-sort L)
+    (cond[ ( = 1 (tamano L)) L]
+         [else (nested-sort-aux L (get-p L (quotient (foldl + 0 L) (tamano L))))]
+      )
+    )
+  (define (nested-sort-aux L piv)
+    (map (lambda(x) (if(not (equal? (car x) piv)) (qs-apl x) x )) (fil (lambda(x)(not(null? x))) (partir-qs L piv)))
+    )
+
+  (flatten (nested-sort L)) ;Implementa tu propio flatten
+  )
+```
+
+### Algoritmo de ordenamiento QuickSort   - 100% Recursivo
+
+```racket
+(define (qs L)
+  
+  (define (get-p L prom)
+    (cond [(>= (car L) prom) (car L)]
+          [else (get-p (cdr L) prom)])
+    )
+  
+  (define (partir-qs L p )
+    (cons (fil (lambda (x) (< x p)) L) (cons (fil (lambda (x) (= x p)) L) (cons (fil (lambda (x) (> x p)) L) null)))
+    )
+  (define (get-prom L)
+          (cond[(null? L) 0]
+               [else (/ (sum L) (tamano L))])
+          )
+  (define (sum L)
+    (cond[(null? L) 0]
+         [else (+ (car L) (sum (cdr L)) ) ]))
+
+               
+  (define (nested-sort L)
+    (cond[(null? L) null]
+         [else (nested-sort-aux (fil (lambda (x) (not (null? x))) (partir-qs L (get-p L (get-prom L)) )) (get-p L (get-prom L)))]
+      )
+    )
+  (define (nested-sort-aux L piv)
+    (cond [(= 0 (tamano L) ) null]
+          [(= (caar L) piv) (cons (car L) (nested-sort-aux (cdr L) piv))]
+          [else (cons (qs (car L)) (nested-sort-aux (cdr L) piv) )]
+     )
+    )
+
+  (flatten (nested-sort L)) ;Implementa tu propio flatten
+  )
+```
+
+### Aplanar una lista anidada (flatten)
+
+```racket
+(define (aplana arbol)
+  (cond
+    [(empty? arbol) '()]                                                   ;Si la lista esta vacia, devolver una lista vacia 
+    [(not (pair? (car arbol))) (cons (car arbol) (aplana (cdr arbol)))]    ;Si no hay una lista entonces agregar el elemento y seguir
+    [else(aplana-aux (aplana (car arbol)) (cdr arbol))]))                  ;Si el elemento es una lista, entonces aplanarlo completamente y guardar la rama anterior
+
+(define (aplana-aux sublista lista-padre)
+  (cond
+    [(empty? sublista) (aplana lista-padre)]                               ;Cuando la rama se haya recorrido totalmente, seguir recorriendo la rama anterior
+    [else (cons (car sublista) (aplana-aux (cdr sublista) lista-padre))])) ;Agregar el primer elemento y seguir aplanando
+```
+
+### Dada una lista que puede tener sublista, para cada lista dividirla en sublistas donde estas sublistas contienen todos los elementos del mismo tipo , ej: números o símbolos, si encontramos una sublista, aplicar la función a esa sublista
+
+```racket
+(define (clasificar L)
+  (cons (fil (lambda(x)(number? x)) L) (cons (fil (lambda(x)(symbol? x)) L) (iterar_pares (fil (lambda(x)(pair? x)) L)) ))
+  );fil es una funcion que imita a filter, esta resuelta mas arriba en el documento
+
+(define (iterar_pares L)
+  (cond [(null? L) null]
+        [else (cons (clasificar (car L)) (iterar_pares (cdr L)))])
+  )
+```
+
+### Contar los multiplos de un numero n en una lista anidada
+
+```racket
+(define (contar-multiplos n L)
+
+  (define (contar-multiplos-tail n L A)
+    (cond[(null? L ) A]
+         [else (contar-multiplos-tail n (cdr L) (if(pair? (car L)) (+ A (contar-multiplos n (car L))) (if(= 0 (modulo n (car L)))(add1 A) A ) ))]
+         )
+    )
+  (contar-multiplos-tail n L 0)
+  )
+```
+
+### Contar todos los elementos pares de una lista anidada
+
+```racket
+(define (contar-pares L)
+  (foldl (lambda(x a) (if (pair? x)(+ a (contar-pares x)) (if(= 0 (modulo x 2)) (add1 a) a)) ) 0 L)
+  )
+```
+
+### Longitud total de una lista de listas
+
+```racket
+(define (long-ldl L)
+  (foldl (lambda(x a) (+ a (tamano x)) ) 0 L)
+  )
+```
+
+### Obtener el numero menor en una lista plana - Recursivo
+
+```racket
+(define (obtener-menor L)
+  (menor-aux L (car L))
+  )
+(define (menor-aux L m )
+  (cond[(null? L) m]
+       [(< (car L) m ) (menor-aux (cdr L) (car L))]
+       [else (menor-aux (cdr L) m)])
+  )
+```
+
+### Obtener el menor de una lista -Aplicativo
+
+```racket
+(define (menor-apl L)
+  (foldl (lambda (x a) (if (< x a ) x a )) (car L) L))
+```
+
+### Invertir el orden de una lista
+
+```racket
+(define (invertir L)
+  (define (inv L A)
+    (cond [(null? L ) A ]
+          [else (inv (cdr L) (cons (car L) A))]))
+  (inv L '()))
+```
+
+## PROLOG:
+
+### Obtener los divisores de un numero N
+
+```
+divisores(N,L):-
+       N>0,
+       divisores_aux(N,1,L).
+divisores_aux(N,N,[N]).
+divisores_aux(N,D,R):-
+      Res is N mod D,
+      Res =:= 0,
+      D1 is D + 1 ,
+      divisores_aux(N,D1,R1),
+      R = [D|R1].
+divisores_aux(N,D,R):-
+      D1 is D + 1,
+      divisores_aux(N, D1, R)
+```
+
+### Promedio de una lista de números
+
+```
+romedio([],0).
+promedio(L,P):-
+     tamano(L,T),
+     promedio_aux(L,T,0,P).
+     
+promedio_aux([],T,S,S/T).
+promedio_aux([X|Q],T,S,P):-
+            S1 is S + X,
+            promedio_aux(Q,T,S1,P).
+```
+
+### Partir una lista en 2 partes, la primera parte de tamaño N
+
+```
+split(L,N,L1,L2):-
+      tamano(L,T),
+      N<T,
+      split_aux(L,N,L1,L2),!.
+split(L,_,L,[]).
+
+split_aux(L,0,[],L).
+split_aux([C|Q],N,L1,L2):-
+          N1 is N - 1,
+          split_aux(Q,N1,L1A,L2B),
+          L1 = [C | L1A],
+          L2 = L2B .
+```
+
+### Contar las ocurrencias de un elemento E en una lista
+
+```
+ocurrencias([],_,0).
+ocurrencias([E|Q],E,R):-
+           ocurrencias(Q,E,R1),
+           R is 1+ R1.
+ocurrencias([C|Q],E,R):-
+           C \= E,
+           ocurrencias(Q,E,R).
+```
+
+### Unir una lista de listas y dividir una lista para que sea una lista de listas
+
+```
+unir([],[]).
+unir([[A]|Q],R):-
+     unir(Q,R1),
+     R = [A|R1].
+%[[a],[b]]  --> [a,b]
+
+dividir([],[]).
+dividir([C|Q],R):-
+       dividir(Q,R1),
+       R = [[C]|R1].
+```
+
+### Recorrer una lista anidada y guardar los elementos pares
+
+```
+only_pares([], []).
+only_pares([C|Q], [C|R]) :-
+    integer(C),
+    C mod 2 =:= 0,
+    only_pares(Q, R).
+only_pares([C|Q], R) :-
+    is_list(C),
+    only_pares(C, R1),
+    only_pares(Q, R2),
+    append(R1, R2, R).
+only_pares([_|Q], R) :-
+    only_pares(Q, R).
+```
+
+### Comprobar si una lista es estrictamente creciente
+
+```
+creciente([]).
+creciente([C1,C2|Q]):-
+     C1 < C2,
+     creciente([C2|Q]).
+```
+
+### Obtener los N últimos elementos de una lista
+
+```
+n_ultimos(L,N,R):-
+     length(L,T),
+     D is T - N,
+     n_ultimos_aux(L,D,R).
+n_ultimos_aux(L,0,L).
+n_ultimos_aux([_|Q],D,R):-
+     D1 is D - 1,
+     n_ultimos_aux(Q,D1,R).
+```
+
+### Comprobar si una lista es sublista de otra dado un intervalo de indices I (inicial) y F (final)
+
+```
+sublista(_,0,-1,[]).
+sublista([C|Q],0,F,[C1|Q1]):-
+     C == C1,
+     F1 is F -1,
+     sublista(Q,0,F1,Q1).
+     
+sublista([_|Q],I,F,[C1|Q1]):-
+     I > 0,
+     I1 is I - 1,
+     F1 is F -1,
+     sublista(Q,I1,F1,[C1|Q1]).
+```
+
+### Inserción ordenada de un número a una lista de números ya ordenada
+
+```
+ins_ordenada([],E,[E]).
+ins_ordenada([C|Q],E,R):-
+    E<C,
+    R = [E,C|Q],
+    !.
+ins_ordenada([E|Q],E,R):-
+    R = [E , E|Q].
+ins_ordenada([C|Q],E,R):-
+    ins_ordenada(Q,E,R1),
+    R = [C|R1].
+```
+
+### Obtener el enésimo elemento de una lista
+
+```
+enesimo([C|_],1,C).
+enesimo([_|Q],N,R):-
+       N1 is N - 1,
+       enesimo(Q,N1,R).
+```
+
+### Intento de flatten
+
+```
+flat([], []).
+flat([C|Q], R) :-
+    is_list(C),
+    flat(C, R1),
+    flat(Q, R2),
+    append(R1, R2, R).
+flat([C|Q], [C|R]) :-
+    \+ is_list(C),
+    flat(Q, R).
+```
+
+### Verificar si una lista es subconjunto de otra
+
+```
+sub3(L1,[C|Q]):-
+     %Obtenemos la interseccion entre las dos listas( Los elementos en comun )
+     interseccion(L1,[C|Q], I),
+     tam(L1,A),tam(I,B),
+     %Si la interseccion tiene el mismo tamano que L1, entonces L1 es subconjunto de la otra lista
+     A =:= B.
+%Si el elemento de la cabeza existe en la lista L, la agregamos a la lista de elementos en comun y seguimos
+interseccion(L, [C|Q],R):-
+    existe(C,L),
+    interseccion(L,Q,R1),
+    R = [ C | R1].
+%De lo contrario, se ignora
+interseccion(L, [_|Q],R):-
+    interseccion(L,Q,R).
+%Si ya recorrimos toda la lista grande, terminar
+interseccion(_,[],[]).
+
+tam([_|Q],R):-
+    tam(Q,R1),
+    R is 1 + R1.
+tam([],0).
+
+```
+
+### EJERCICIO DE EXÁMEN FINAL
+
+Lee el siguiente código, explica como funciona y que realiza
+
+```
+y([],Y,[]):-!.
+y([Y],Y,[]):-!.
+
+y([Y|M],Y,S):-
+    y(M,Y,S),!.
+    
+y([R|M],Y,S):-
+     lista(R),
+     y(R,Y,T),
+     y(M,Y,P),
+     concatenar([T],P,S).
+y([R|M],Y,S):-
+     y(M,Y,T),
+     concatenar([R],T,S).
+     
+lista([]):-!.
+lista([Y|Z]):-
+      lista(Z).
+concatenar([],L,L).
+concatenar([X|M],L,[X|Z]):-
+      concatenar(M,L,Z).
+
+```

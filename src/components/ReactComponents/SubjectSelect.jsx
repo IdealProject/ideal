@@ -7,6 +7,7 @@ import { materiasIndu } from '../../utils/data/dataIndu';
 import { materiaCPA } from '../../utils/data/dataCpa';
 import { materiasCBI } from '../../utils/data/dataCBI';
 import ButtonSubject from './ButtonSubject';
+
 const SubjectSelect = ({ majorData }) => {
     const [semester, setSemester] = useState(1);
 
@@ -38,16 +39,15 @@ const SubjectSelect = ({ majorData }) => {
     };
 
     return (
-        <div className="flex flex-col justify-around m-5  lg:mx-56 lg:my-10 ">
-
+        <div className="mx-5 xl:mx-52 2xl:mx-52 lg:my-10 flex flex-col gap-y-4 mt-2">
             {/* titulo */}
-            <h2 className="mb-8 text-4xl tracking-tight font-extrabold text-gray-900">
+            <h2 className="text-2xl tracking-tight font-bold">
                 {majorData[0].label}
             </h2>
-            <div className='lg:flex lg:flex-col-reverse '>
+            <div className='flex flex-col md:flex-col-reverse'>
 
                 {/* materias */}
-                <div className='grow-0 lg:grid lg:grid-flow-col lg:gap-4 lg:grid-rows-2 lg'>
+                <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-3'>
                     {majorData[0].value === 'cpa' ? (
                         getMajores(majorData[0].value).map((e, index) => (
                             <ul key={`ul - ${index}`}>
@@ -63,7 +63,7 @@ const SubjectSelect = ({ majorData }) => {
                     )}
                 </div>
                 {/* Selección de Semestres */}
-                <div >
+                <div className='fixed bottom-10 left-0 right-0 md:static lg:static xl:static 2xl:static mt-2'>
                     <SemesterSelect
                         major={majorData[0].value}
                         setSemester={setSemester}

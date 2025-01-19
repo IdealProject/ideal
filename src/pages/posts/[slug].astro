@@ -3,6 +3,7 @@ import { getCollection, getEntry } from "astro:content";
 import BlogLayout from "@layouts/BlogLayout.astro";
 import TableOfContents from "@components/TableOfContents.astro";
 import { Icon } from "astro-icon/components";
+import TableOfContentsMobile from "@components/TableOfContentsMobile.astro";
 
 const { slug } = Astro.params;
 if (!slug) throw new Error("Slug not found");
@@ -26,96 +27,60 @@ export async function getStaticPaths() {
 
 <BlogLayout title={post.data.title}>
   <main
-    class="flex-col print mt-5 max-w-7xl mx-auto lg:items-center lg:justify-between print:break-inside-avoid print:relative print:pt-14 print:mt-0"
+    class="flex flex-col xl:flex-row 2xl:flex-row gap-x-4  print mt-5 mx-auto print:break-inside-avoid print:relative print:pt-14 print:mt-0"
   >
-    <Icon
-      name="ideal"
-      class:list="hidden print:inline print:opacity-30 print:absolute print:top-0 print:right-0"
-    />
-    <header
-      class="flex flex-col gap-y-3 justify-between items-start content-start print:absolute print:top-0 print:left-0 mb-2 md:flex-row lg:flex-row xl:flex-row"
-    >
-      <div class="flex flex-col">
-        <h1 id="main-title">{post.data.title}</h1>
-        <div>
-          <p class="text-gray-400 inline">Redactado por</p>
-          {
-            authorsOfPost.map((e) => (
-              <p class="inline">
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="hover:underline text-gray-400 cursor-pointer"
-                  href={e.data.links ? e.data.links : "/"}
-                >
-                  {e.data.name}
-                </a>
-              </p>
-            ))
-          }
-        </div>
-      </div>
-      <button
-        class="text-white font-semibold bg-black py-2 px-3 rounded-md print:hidden min-w-full md:min-w-fit lg:min-w-fit xl:min-w-fit"
-        onclick="window.print()">Descargar</button
+    <div class="hidden 2xl:block 2xl:w-1/5"></div>
+    <section class="2xl:w-3/5">
+      <Icon
+        name="ideal"
+        class:list="hidden print:inline print:opacity-30 print:absolute print:top-0 print:right-0"
+      />
+      <header
+        class="flex flex-col gap-y-3 justify-between items-start content-start print:absolute print:top-0 print:left-0 mb-2 md:flex-row lg:flex-row xl:flex-row"
       >
-    </header>
-    <article
-      class="flex flex-col-reverse md:flex-row lg:flex-row gap-x-5 print:flex-col"
-    >
-      <Content
-        class="flex-5 list order-2 md:order-first lg:order-first print:order-last"
-      />
-      <TableOfContents
-        class="flex-1 list order-1 md:order-last lg:order-last"
-        headings={headings}
-      />
-    </article>
+        <div class="flex flex-col">
+          <h1 id="main-title">{post.data.title}</h1>
+          <div>
+            <p class="text-gray-400 inline">Redactado por</p>
+            {
+              authorsOfPost.map((e) => (
+                <p class="inline">
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="hover:underline text-gray-400 cursor-pointer"
+                    href={e.data.links ? e.data.links : "/"}
+                  >
+                    {e.data.name}
+                  </a>
+                </p>
+              ))
+            }
+          </div>
+        </div>
+        <button
+          class="text-white font-semibold bg-black py-2 px-3 rounded-md print:hidden min-w-full md:min-w-fit lg:min-w-fit xl:min-w-fit"
+          onclick="window.print()">Descargar</button
+        >
+        <TableOfContentsMobile headings={headings} />
+      </header>
+      <article
+        class="flex flex-col-reverse md:flex-row lg:flex-row gap-x-5 print:flex-col"
+      >
+        <Content
+          class="flex-5 list order-2 md:order-first lg:order-first print:order-last"
+        />
+      </article>
+    </section>
+    <TableOfContents headings={headings} />
   </main>
 </BlogLayout>
 
 <style is:global>
-  body {
-    font-family: "Satoshi", sans-serif;
-  }
-
   #main-title {
-    font-family: "Bricolage Grotesque", sans-serif;
     font-weight: bold;
-    font-size: 2.8rem;
-    text-decoration: underline;
-    color: #31363f;
-  }
-
-  h1 {
-    font-family: "Bricolage Grotesque", sans-serif;
-    font-weight: bold;
-    font-size: 2.5rem;
-  }
-  h2 {
-    font-family: "Bricolage Grotesque", sans-serif;
-    font-weight: 900;
     font-size: 2rem;
-  }
-  h3 {
-    font-family: "Bricolage Grotesque", sans-serif;
-    font-weight: 700;
-    font-size: 1.5rem;
-  }
-  h4 {
-    font-family: "Bricolage Grotesque", sans-serif;
-    font-weight: 500;
-    font-size: 1.25rem;
-  }
-  h5 {
-    font-family: "Bricolage Grotesque", sans-serif;
-    font-weight: 300;
-    font-size: 1rem;
-  }
-  h6 {
-    font-family: "Bricolage Grotesque", sans-serif;
-    font-weight: 100;
-    font-size: 0.875rem;
+    color: #31363f;
   }
 
   p {
@@ -134,15 +99,15 @@ export async function getStaticPaths() {
   }
 
   code {
-  font-family: monospace;
-  background-color: #efefef;
-  padding: 5px;
-  border-radius: 5px;
-  word-wrap: break-word;
-  word-break: break-all;
-  overflow-wrap: break-word;
-  color: #dd4a68;
-}
+    font-family: monospace;
+    background-color: #efefef;
+    padding: 5px;
+    border-radius: 5px;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    color: #dd4a68;
+  }
 
   th,
   td {

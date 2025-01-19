@@ -11,6 +11,9 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
+  devToolbar: {
+    enabled: false
+  },
   site: "https://ideal.fiuni.edu.py",
   build: {
     formats: ["file"],

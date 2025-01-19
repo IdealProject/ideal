@@ -6,33 +6,31 @@ import HeaderNavigationLink from "./HeaderNavigationLink.astro";
 import UneteAIdealButton from "./UneteAIdealButton.astro";
 ---
 
-<nav
-  class="bg-white border-b py-4 px-4 md:px-6 lg:px-2 xl:px-0 md:py-4 lg:py-4 print:hidden"
->
-  <div class="max-w-7xl mx-auto flex justify-between items-center">
-    <div class="flex items-center">
-      <a href="/" aria-label="Ir a la pagina de inicio"><Icon name="ideal" /></a
-      >
-      <div class="hidden md:flex space-x-8 ml-10">
-        <HeaderNavigationLink
-          ariaLabel="Ir a página de Comunidad"
-          name="Comunidad"
-          url="/comunidad"
-        />
-        <HeaderNavigationLink
-          ariaLabel="Ir a página de Preguntas Frecuentes"
-          name="Preguntas Frecuentes"
-          url="/faq"
-        />
-        <!-- <HeaderNavigationLink
+<header
+  class="bg-white border-b py-4 px-4 print:hidden flex justify-between items-center">
+  <div class="flex items-center">
+    <a href="/" aria-label="Ir a la pagina de inicio"><Icon name="ideal" class="text-black"/></a>
+    <div class="hidden md:flex space-x-8 ml-10">
+      <HeaderNavigationLink
+        ariaLabel="Ir a página de Comunidad"
+        name="Comunidad"
+        url="/comunidad"
+      />
+      <HeaderNavigationLink
+        ariaLabel="Ir a página de Preguntas Frecuentes"
+        name="Preguntas Frecuentes"
+        url="/faq"
+      />
+      <!-- <HeaderNavigationLink
           ariaLabel="Ir a página de Acerca de Ideal"
           name="Acerca de"
           url="/acerca-de"
         /> -->
-      </div>
     </div>
-    <SearchBar />
-    <UneteAIdealButton/>
+  </div>
+  <SearchBar />
+  <div class="flex items-center gap-x-4">
+    <UneteAIdealButton />
     <GithubButton />
   </div>
-</nav>
+</header>
