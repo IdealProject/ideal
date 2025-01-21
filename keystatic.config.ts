@@ -1,8 +1,5 @@
-import { options } from "@astrojs/check/dist/options";
-import markdocIntegration from "@astrojs/markdoc";
 import { config, fields, collection } from "@keystatic/core";
 import { inline, block } from "@keystatic/core/content-components";
-import { imageConfig } from "astro:assets";
 import { tagSelection } from "src/utils/tagSelection";
 
 export default config({
