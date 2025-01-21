@@ -5,9 +5,10 @@ const { headings = [] } = Astro.props;
 
 <button
   id="toc-button"
-  class="lg:hidden text-black border-2 font-medium bg-white py-2 px-3 rounded-md print:hidden min-w-full cursor-pointer"
+  class="flex items-center justify-center gap-x-2 lg:hidden text-black border-2 font-medium bg-white py-2 px-3 rounded-md print:hidden min-w-full cursor-pointer"
 >
   En esta página
+  <Icon name="list-tree" />
 </button>
 
 <!-- Table of Contents Modal -->

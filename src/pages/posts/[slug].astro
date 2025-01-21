@@ -59,8 +59,10 @@ export async function getStaticPaths() {
           </div>
         </div>
         <button
-          class="text-white font-semibold bg-black py-2 px-3 rounded-md print:hidden min-w-full md:min-w-fit lg:min-w-fit xl:min-w-fit"
-          onclick="window.print()">Descargar</button
+          class="flex justify-center items-center gap-x-2 text-white font-semibold bg-black py-2 px-3 rounded-md print:hidden min-w-full md:min-w-fit lg:min-w-fit xl:min-w-fit"
+          onclick="window.print()">Descargar
+          <Icon name="pdf"/>
+          </button
         >
         <TableOfContentsMobile headings={headings} />
       </header>
