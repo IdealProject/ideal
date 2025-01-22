@@ -1,11 +1,13 @@
 ---
 import "../styles.css";
+import { Icon } from "astro-icon/components";
 
 export interface Props {
   title: string;
+  description: string;
 }
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 import Header from "@components/Header.astro";
 import { ViewTransitions } from "astro:transitions";
 ---
@@ -14,7 +16,7 @@ import { ViewTransitions } from "astro:transitions";
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="La descripción de este Contenido" />
+    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link href="/prism.css" rel="stylesheet" />
@@ -38,8 +40,10 @@ import { ViewTransitions } from "astro:transitions";
       <slot />
     </div>
     <a
-      class="print:hidden m-5 rounded-xl ml-3 bg-black p-3 font-light text-sm text-white sticky bottom-5 place-self-end mt-[calc(100vh+10rem)]"
-      href="#main-title">Ir Arriba↑</a
+      class="print:hidden m-5 rounded-full ml-3 bg-black p-5  font-light text-sm text-white sticky bottom-5 float-right place-self-end mt-[calc(100vh+10rem)] active:scale-150 transition-all duration-75 ease-in-out"
+      href="#main-title">
+      <Icon name="arrow-up" class="size-5 aspect-square" />
+      </a
     >
     <style is:global>
       html {
