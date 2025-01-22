@@ -5,7 +5,7 @@ const { headings = [] } = Astro.props;
 
 <button
   id="toc-button"
-  class="flex items-center justify-center gap-x-2 lg:hidden text-black border-2 font-medium bg-white py-2 px-3 rounded-md print:hidden min-w-full cursor-pointer"
+  class="flex items-center justify-center gap-x-2 lg:hidden text-black border rounded-md font-normal bg-white py-2 px-3 print:hidden min-w-full cursor-pointer"
 >
   En esta página
   <Icon name="list-tree" />
@@ -20,7 +20,7 @@ const { headings = [] } = Astro.props;
     class="bg-white p-4 rounded-lg w-11/12 h-3/4 flex flex-col relative overflow-y-auto gap-y-5"
   >
     <header class="flex justify-between items-center">
-      <h2 class="text-xl font-semibold">En esta página</h2>
+      <span class="text-xl font-semibold">En esta página</span>
       <button id="close-toc-modal" class="text-gray-500 hover:text-gray-900">
         <Icon name="close" />
       </button>
