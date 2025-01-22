@@ -4,7 +4,8 @@ import BlogLayout from "@layouts/BlogLayout.astro";
 import TableOfContents from "@components/TableOfContents.astro";
 import { Icon } from "astro-icon/components";
 import TableOfContentsMobile from "@components/TableOfContentsMobile.astro";
-
+// import "@styles/docs.css";
+import '@styles/post.css';
 const { slug } = Astro.params;
 if (!slug) throw new Error("Slug not found");
 const post = await getEntry("posts", slug);
@@ -25,12 +26,12 @@ export async function getStaticPaths() {
 }
 ---
 
-<BlogLayout title={post.data.title}>
+<BlogLayout title={post.data.title} description={post.data.description}>
   <main
-    class="flex flex-col xl:flex-row 2xl:flex-row gap-x-4  print mt-5 mx-auto print:break-inside-avoid print:relative print:pt-14 print:mt-0"
+    class="flex flex-col xl:flex-row 2xl:flex-row gap-x-4  print mx-auto print:break-inside-avoid print:relative print:pt-14 print:mt-0"
   >
     <div class="hidden 2xl:block 2xl:w-1/5"></div>
-    <section class="2xl:w-3/5">
+    <section class="2xl:w-3/5 pt-5">
       <Icon
         name="ideal"
         class:list="hidden print:inline print:opacity-30 print:absolute print:top-0 print:right-0"
@@ -67,7 +68,7 @@ export async function getStaticPaths() {
         <TableOfContentsMobile headings={headings} />
       </header>
       <article
-        class="flex flex-col-reverse md:flex-row lg:flex-row gap-x-5 print:flex-col"
+        class="flex flex-col-reverse md:flex-row lg:flex-row gap-x-5 print:flex-col markdown-body"
       >
         <Content
           class="flex-5 list order-2 md:order-first lg:order-first print:order-last"
