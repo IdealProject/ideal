@@ -1,0 +1,90 @@
+---
+import { Icon } from "astro-icon/components";
+const { docs = [] } = Astro.props;
+---
+
+<button
+  id="sidebar-button"
+  class="flex items-center justify-center gap-x-2 lg:hidden rounded-md text-white mt-1 mx-4 font-medium bg-black py-2 px-3 print:hidden cursor-pointer min-w-full">
+  Documentos
+  <Icon name="file-search" />
+</button>
+
+<!-- Sidebar Modal -->
+<div
+  id="sidebar-modal"
+  class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50"
+>
+  <div
+    class="bg-white p-4 rounded-lg w-11/12 h-3/4 flex flex-col relative overflow-y-auto gap-y-5"
+  >
+    <header class="flex justify-between items-center">
+      <h2 class="text-xl font-semibold">Lista de Documentación</h2>
+      <button id="close-sidebar-modal" class="text-gray-500 hover:text-gray-900">
+        <Icon name="close" />
+      </button>
+    </header>
+    <ul class="text-gray-500 text-lg font-medium list-decimal px-10">
+      {
+        docs
+          .sort((a, b) => b.data.title.localeCompare(a.data.title))
+          .map((doc) => (
+            <li>
+              <a class="hover:underline hover:text-gray-900 transition-all ease-in-out duration-75" href={`/docs/${doc.slug}`}>{doc.data.title}</a>
+            </li>
+          ))
+      }
+    </ul>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("astro:after-swap", () => {
+    initSidebarModal();
+  });
+
+  function initSidebarModal() {
+    const sidebarButton = document.getElementById("sidebar-button");
+    const sidebarModal = document.getElementById("sidebar-modal");
+    const closeSidebarModal = document.getElementById("close-sidebar-modal");
+    const sidebarLinks = sidebarModal.querySelectorAll("a");
+
+    function openSidebarModal() {
+      if (sidebarModal) {
+        sidebarModal.classList.remove("hidden");
+      }
+    }
+
+    function closeSidebarModalFunc() {
+      if (sidebarModal) {
+        sidebarModal.classList.add("hidden");
+      }
+    }
+
+    if (sidebarButton) {
+      sidebarButton.addEventListener("click", openSidebarModal);
+    }
+
+    if (closeSidebarModal) {
+      closeSidebarModal.addEventListener("click", closeSidebarModalFunc);
+    }
+
+    sidebarLinks.forEach((link) => {
+      link.addEventListener("click", closeSidebarModalFunc);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && sidebarModal) {
+        closeSidebarModalFunc();
+      }
+    });
+
+    sidebarModal.addEventListener("click", (event) => {
+      if (event.target === sidebarModal) {
+        closeSidebarModalFunc();
+      }
+    });
+  }
+
+  initSidebarModal();
+</script>

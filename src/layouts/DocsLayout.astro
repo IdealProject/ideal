@@ -1,0 +1,39 @@
+---
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+import DocsSidebar from "@components/DocsSidebar.astro";
+import Header from "@components/Header.astro";
+
+import { getCollection } from "astro:content";
+
+import Layout from "./Layout.astro";
+import { Icon } from "astro-icon/components";
+import DocsSidebarButton from "@components/DocsSidebarButton.astro";
+
+const docs = await getCollection("docs");
+---
+
+<Layout title={title}>
+  <div class="flex flex-col gap-y-2 items-center justify-between mx-4">
+    <DocsSidebarButton docs={docs} />
+  </div>
+  <main class="flex gap-4 overflow-hidden">
+    <DocsSidebar docs={docs} />
+    <slot />
+  </main>
+</Layout>
+<a
+  class="print:hidden rounded-full m-5 bg-black p-5 text-white sticky bottom-5 float-right place-self-end  active:scale-150 transition-all duration-75 ease-in-out"
+  href="#main-title"
+>
+  <Icon name="arrow-up" class="size-5 aspect-square" />
+</a>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

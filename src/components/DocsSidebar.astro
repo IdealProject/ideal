@@ -1,0 +1,21 @@
+---
+const { docs } = Astro.props;
+---
+
+<aside class="border-r min-h-[100dvh] w-1/4 px-10 py-10 sticky leading-4 hidden lg:block xl:block 2xl:block">
+  <h2 class="text-gray-900 text-xl font-bold">Documentos</h2>
+  <ul class="text-gray-500 text-lg font-medium list-decimal">
+    {
+      docs
+        .sort((a, b) => b.data.title.localeCompare(a.data.title))
+        .map((doc) => (
+          <li>
+            {" "}
+            <a class="hover:underline hover:text-gray-900 transition-all ease-in-out duration-75" href={`/docs/${doc.slug}`}>{doc.data.title}</a>{" "}
+          </li>
+        ))
+    }
+  </ul>
+</aside>
+
+<style></style>
