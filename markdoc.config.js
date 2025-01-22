@@ -30,6 +30,13 @@ export default defineMarkdocConfig({
         formula: { type: String, required: true },
       },
     },
+    youtube: {
+      render: component('@components/Youtube.astro'),
+      attributes: {
+        v: { type: String, required: true },
+        alt: { type: String, required: true },
+      },
+    },
   },
   extends: [
     prism(),
