@@ -26,6 +26,9 @@ importers:
       '@astrojs/tailwind':
         specifier: ^5.1.4
         version: 5.1.4(astro@4.16.18(@types/node@22.10.7)(rollup@4.30.1)(typescript@5.7.3))(tailwindcss@3.4.17)
+      '@justinribeiro/lite-youtube':
+        specifier: ^1.6.0
+        version: 1.6.0
       '@keystatic/astro':
         specifier: ^5.0.4
         version: 5.0.4(@keystatic/core@0.5.43(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(astro@4.16.18(@types/node@22.10.7)(rollup@4.30.1)(typescript@5.7.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -849,6 +852,9 @@ packages:
 
   '@juggle/resize-observer@3.4.0':
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==}
+
+  '@justinribeiro/lite-youtube@1.6.0':
+    resolution: {integrity: sha512-gq+um2I/Q2rZYhvP9X7NVX36zFE7Lkz8V7ZNU4cPgDuN9a+2dA95PQhF4dCqIag8XspLN9lwrObIW6U0Y5moqA==}
 
   '@keystar/ui@0.7.15':
     resolution: {integrity: sha512-yNJo8oEG/9guN648C/7ru7dApYFhb8T/wbrHVsGvDVygAqumKF43NgM70eaF4UoSSQWjh3LUxIw0rO/W6+BZqg==}
@@ -4744,6 +4750,8 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.5.0
 
   '@juggle/resize-observer@3.4.0': {}
+
+  '@justinribeiro/lite-youtube@1.6.0': {}
 
   '@keystar/ui@0.7.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
