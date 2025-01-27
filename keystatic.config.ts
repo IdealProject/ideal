@@ -55,9 +55,12 @@ export default config({
         major: tagSelection,
         content: fields.markdoc({
           label: "Content",
+          options: {
+            image: false,
+          },
           components: {
-
             imageLink: block({
+              image: true,
               label: "Image Link",
               schema: {
                 link: fields.url({
