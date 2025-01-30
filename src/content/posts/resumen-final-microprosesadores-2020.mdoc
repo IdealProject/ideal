@@ -1,0 +1,377 @@
+---
+title: Resumen Final Microprosesadores 2020
+draft: false
+description: Resumen Microprosesadores 2020
+authors:
+  - dvelazquez
+major:
+  discriminant: infor
+  value:
+    discriminant: '8'
+    value: ma
+---
+## Cuando se dice que un computador es más rápido que otro?
+
+Cuando ejecuta un programa en menos tiempo: cuando completa más tareas en una hora. En el primer caso se quiere reducir el tiempo de respuesta y en el segundo incrementar la productividad.
+
+**Tiempo de respuesta:** tiempo transcurrido entre el comienzo y el final de un evento. (tiempo de ejecución o latencia).
+
+**Productividad:** cantidad total de trabajo realizado en un tiempo determinado (ancho de banda).
+
+La disminución del tiempo de respuesta, habitualmente mejora la productividad.
+
+“X es mas rapida que Y”. El tiempo de respuesta o el tiempo de ejecución es inferior en X que Y.
+
+{% imageLink
+  link="https://i.imgur.com/mIWggXe.png"
+  alt="Diagrama de flujo"
+  width="237"
+  height="463" /%}
+
+### Acelerar el caso común
+
+Mejorar el evento frecuente en lugar del raro, ayudará a aumentar el rendimiento. El caso frecuente es, a menudo, más simple y puede realizarse de forma más rápida que el infrecuente.
+
+## Ley de amdahl
+
+Establece que la mejora detenida en el rendimiento al utilizar algun modo de ejecución más rápido está limitada por la fracción de tiempo que se pueda utilizar ese modo más rápido.
+
+El aumento de rendimiento que puede obtenerse al mejorar alguna parte de un computador puede calcularse utilizando la ley de Amdahl.
+
+**Aceleración:** rapidez con que se realizará una tarea utilizando una máquina con la mejora con respecto a la máquina original.&nbsp;
+
+{% imageLink
+  link="https://i.imgur.com/WgKLSFq.png"
+  alt="Formula de Amdahl"
+  width="237"
+  height="463" /%}
+
+## Localidad de referencia
+
+Almacena datos e instrucciones utilizados recientemente.
+
+### Tipos&nbsp;
+
+**Localidad Temporal:** los elementos accedidos recientemente, probablemente, seran accedidos en un futuro proximo.&nbsp;
+
+**Localidad espacial:** los elementos cuyas direcciones son próximas tienden a ser referenciados juntos en el tiempo.
+
+### El trabajo de un diseñador de computadores
+
+1. Diseño de repertorio de instrucciones
+1. Organizacion funcional
+1. Diseño lógico
+1. Implementacion&nbsp;
+   1. Diseño de circuitos integrados (IC)
+   1. Encapsulamiento
+   1. Potencia
+   1. Disipación térmica
+
+## Componentes de la implementación de una máquina
+
+Organización: incluye los aspectos de alto nivel del diseño de un computador, tal como sistema de memoria, estructura de bus y diseño interno de la CPU.
+
+Hardware: se utiliza para referenciar las cosas específicas de la máquina. Esto incluye el diseño lógico detallado y la tecnología de encapsulamiento de la máquina.
+
+### Requerimientos funcionales
+
+1. Área de aplicación: objetivo de computador
+1. Nivel de compatibilidad software: determina la cantidad de software existente para la máquina.
+1. Requerimientos del SO: características necesarias para soportar el SO escogido.&nbsp;
+1. Estándares: ciertos estándares pueden ser requeridos por el mercado.
+
+### Niveles de jerarquía típica de memoria
+
+Debido a que las memorias más pequeñas son más rápidas, queremos utilizar memorias más pequeñas para que los elementos más recientemente accedidos estén próximos a la CPU y memoria sucesivamente mayores y más lentos cuando nos alejamos de la CPU.
+
+## Rendimiento y coste
+
+### Medidas estándares del rendimiento
+
+- Proporciona una base para la comparación, conduciendo a mejoras del objeto medido.
+- Permiten a los diseñadores seleccionar cuantitativamente entre alternativas, con lo que se logra un progreso ordenado en un campo.
+
+### Rendimiento
+
+Se mide como una frecuencia de eventos por segundo, tiempo más bajo es mayor rendimiento.
+
+### Tiempo de CPU
+
+**Del Usuario:** tiempo empleado por la CPU en el programa.
+
+**Del Sistema:** tiempo empleado por el SO realizando tareas requeridas por el programa.
+
+**Rendimiento del sistema:** tiempo transcurrido en un sistema no cargado.
+
+**Rendimiento de la CPU:** tiempo del CPU del usuario.
+
+## Rendimiento del CPU
+
+Los computadores se construyen utilizando un reloj que funciona a una frecuencia constante.
+
+Tiempo de CPU: ciclos de reloj de cpu para un programa / frecuencia de reloj
+
+Tiempo de CPU: ciclos de CPU para un programa. Duración del ciclo del reloj.
+
+## Ciclos de reloj por instrucción (CPI)
+
+CPI: ciclos de reloj de CPU para un programa / recuento de instrucciones
+
+El rendimiento de la CPU depende de 3 características
+
+1. Ciclo de reloj o frecuencia
+1. Ciclos de reloj por instrucción
+1. Recuento de instrucciones
+
+No se puede cambiar ninguna de ellas sin tener en cuenta a los demás.
+
+## MIPS (millones de instrucciones por segundo)
+
+Son una frecuencia de operaciones por unidad de tiempo
+
+{% imageLink
+   link="https://i.imgur.com/nCAprsy.png"
+   alt="Tabla del ejercicio "
+   width="237"
+   height="463" /%}
+
+## MFLOPS (millones de operaciones en punto flotante por segundo)
+
+{% imageLink
+   link="https://i.imgur.com/I5WD9sk.png"
+    alt="Tabla del ejercicio "
+    width="237"
+    height="463" /%}
+
+## Elección de programas para evaluar rendimiento
+
+1. Programas (redes): tienen entradas, salidas y opciones que un usuario puede seleccionar cuando está ejecutando el programa.&nbsp;
+1. Núcleos (kernel): pequeñas piezas claves de programas reales utilizados para evaluar el rendimiento.
+1. Benchmarks reducidos (toys): pequeños programas que producen un resultado que el usuario conoce antes de ejecutarlos.
+1. Benchmarks sintéticos: se crea artificialmente para determinar un perfil medio de ejecución.
+
+## Coste del circuito integrado
+
+{% imageLink
+   link="https://i.imgur.com/1qFyE5a.png"
+    alt="Tabla del ejercicio "
+    width="237"
+    height="463" /%}
+
+
+## Coste de los dados
+
+{% imageLink
+   link="https://i.imgur.com/543BwZt.png"
+    alt="Tabla del ejercicio "
+    width="237"
+    height="463" /%}
+
+## Ejercicios en hoja (lab 3, 4, 5)
+
+## Esquema del computador
+
+{% imageLink
+   link="https://i.imgur.com/RzvkSC2.png"
+    alt="Tabla del ejercicio "
+    width="237"
+    height="463" /%}
+
+Buses
+
+- Bus frontal&nbsp;
+- Bus del sistema
+- Bus de entrada y salida
+
+## ALU
+
+Es un circuito que realiza operaciones aritméticas (suma, resta, multiplicación, división) y lógicas (and, or, not) entre los valores de entrada y genera una salida y/o resultado. También contiene un selector de operaciones.
+
+## Mapas de karnaugh
+
+Mapas para simplificacion de funciones booleanas.
+
+## Estructura de computadores (Von Neumann)
+
+- Cpu o procesador (computación, control)
+- Memoria&nbsp;
+- Entrada y salida
+
+### Estructura básica de un procesador
+
+- Unidad de control
+- Unidad aritmética lógica
+- Banco de registros
+- Otros registros internos (contador de programas PC, registro de instrucciones IR)
+
+### Elementos de un computador&nbsp;
+
+{% imageLink
+   link="https://i.imgur.com/mDIcnqy.png"
+    alt="Tabla del ejercicio "
+    width="237"
+    height="463" /%}
+
+### Unidad central de procesamiento (CPU)
+
+Controla el funcionamiento del computador mediante la Unidad de Control. Lleva a cabo el procesamiento de datos a través del camino de datos.
+
+### Unidad de control
+
+- Dirige las operaciones de otras unidades.&nbsp;
+- Interpreta las instrucciones y envía señales para la ejecución de las mismas.&nbsp;
+- Obtiene una instrucción de la memoria y lo decodifica.
+
+### Camino de datos
+
+- ALU&nbsp;
+- Registros
+- Interconexiones CPU, CU, ALU y registros
+
+### Memoria principal
+
+- Serie de celdas de igual tamaño donde se almacenan datos y/o instrucciones en formato binario.
+- Cada instrucción/dato tiene asociado una dirección que es la posición donde está almacenado en la memoria principal.
+
+### Sistema de entrada y salida
+
+- Transfiere datos entre el computador y el entorno externo
+
+### Sistema de interconexión
+
+Mecanismo que proporciona la comunicación entre CPU, memoria principal y la E/S - bus.
+
+Buses&nbsp;
+
+- Control
+- Direccion&nbsp;
+- Datos
+
+### Ruta de datos (data path)
+
+- Conjunto de hardware necesario para ejecutar instrucciones
+- Manipula y transforma los datos procedentes de la memoria o los registros internos
+- Debe soportar el conjunto de operaciones del repertorio de instrucciones
+
+#### Funciones
+
+- Captar instrucciones
+- Interpretar instrucciones
+- Capturar datos
+- Procesar datos
+- Escribir datos
+
+### Elementos de hardware
+
+- Almacenamiento: memoria y registros
+- Operaciones: ALU
+- Unidad de control: multiplexores
+- Interconexiones: buses
+
+### Metodología de reloj
+
+Define cuando las señales pueden ser leídas y cuando pueden ser escritas, para no leer datos incorrectos.
+
+## Ciclo básico de instrucción
+
+{% imageLink
+   link="https://i.imgur.com/lA5873w.png"
+    alt="Tabla del ejercicio "
+    width="237"
+    height="463" /%}
+
+### Componentes principales para cada instrucción
+
+- Memoria de instrucciones
+- Contador de programa (PC)
+- Sumador
+
+### Instrucciones de tipo R (add, sub, and, or)
+
+- Lee dos registros
+- Realiza operacion
+- Escribe resultado
+
+### Pasos básicos de ejecución
+
+1. Búsqueda de instrucción
+1. Búsqueda del registro/codificación de la instrucción
+1. Dirección efectiva/ejecución
+1. Paso de completar salto/acceso a memoria
+1. Paso de postescritura
+
+### Etapas de ejecución de instrucciones
+
+1. Acceso a memoria de instrucciones (F)
+1. Acceso a registros (D)
+1. Ejecución en la ALU (X)
+1. Acceso a memoria de datos (M)
+1. Acceso a registros (W)
+
+### Etapas para diferentes instrucciones
+
+- Carga de datos: F + D +X + M + W
+- Almacenamiento de datos en memoria: F + D + X + M
+- Aritmetica logica: F + D + X + W
+- Control de flujo: F + D + X
+
+## Segmentacion (pipeline)
+
+- Pretende aliviar el desaprovechamiento del hardware
+- La idea se basa en una cadena de montaje
+- Divide la ejecución de una instrucción en etapas
+- Casi todas las instrucciones pasan por el mismo número de etapas
+
+Con el pipeline lo que se obtiene es paralelismo, mientras más instrucciones, mayor nivel de paralelismo.
+
+### Memoria no alineada
+
+Todas las instrucciones tienen en común que usan las mismas etapas pero difieren en el tiempo empleado para su ejecución.
+
+### Ventajas de la segmentación
+
+- Realizar varias tareas en simultáneo
+- Varias tareas operan simultáneamente usando diferentes recursos
+- Cuantos más segmentos o etapas se tenga sera mas rapido
+- La segmentación está limitada por la etapa más lenta
+- Una longitud desequilibrada de las etapas reduce la velocidad
+
+### Registros temporales
+
+Guarda información en un registro para que esté disponible para el resto de las etapas.
+
+### Riesgos o dependencias
+
+- Dependencias estructurales
+
+Intenta usar el mismo recurso al mismo tiempo y se produce una colisión
+
+Solución: permitir el acceso en simultáneo a los registros (mitad del ciclo se lee y la otra mitad escribe), separar memoria de datos de las instrucciones.
+
+- Dependencia de datos
+
+Se intenta usar un dato antes de que esté preparado. La ejecución de una instrucción depende del resultado de otra.
+
+Distintas instrucciones modifican los datos en distintas etapas.
+
+Tipos
+
+- Lectura después de escritura - RAW
+- Escritura después de lectura - WAR
+- Escritura después de escritura - WAW
+- Dependencia de control
+
+Dependencia lógica entre el execute previa, depende de si se tiene un salto condicional o no.
+
+### Las dependencias siempre pueden resolverse con una detención&nbsp;
+
+La unidad de control debe detectar y realizar una acción para resolver la dependencia.
+
+### Soluciones de las dependencias de control
+
+- Esperar hasta que la decisión sea clara
+- Anticipacion de una etapa a otra: la unidad de control puede ser capaz de tomar ciertas medidas para no esperar a la siguiente etapa para detener un resultado. Lee directamente de la salida del ALU.
+
+### Modos de direccionamiento
+
+Forma en que las arquitecturas especifican la dirección de un objeto al que accederán
