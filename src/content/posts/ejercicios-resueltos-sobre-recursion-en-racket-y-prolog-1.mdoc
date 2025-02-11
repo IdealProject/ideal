@@ -1,0 +1,67 @@
+---
+title: '# Ejercicios Resueltos sobre recursion en Racket y Prolog'
+draft: false
+description: Variedad de ejercicios resueltos de examenes finales, deberes, etc.
+authors:
+  - matias-mareco
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: Rc1
+---
+# Redes - Apuntes
+
+## Clase 1
+
+### Direcciones IP
+
+Si una computadora A quiere enviar información a una computadora B, necesitamos la dirección IP para poder localizar la computadora destino.
+
+Si hay 2 computadoras con IP igual en un sistema, este colapsa. Las direcciones IP deberían ser únicas.
+
+La IP son dos números en uno, se divide en 2, un identificador de red(único para la red) y un indicador de host(puede estar repetido pero en redes diferentes).
+
+**Ejemplo de IP:**
+
+Se conforma por 4 números separados por puntos, cada número puede estar comprendido en el rango [0,255] porque se usan 8 bits para cada uno, por ejemplo: **192.168.1.1**
+
+Las direcciones IP vienen acompañadas por máscaras de red, ejemplo : **255.255.0.0**
+
+**192.168.1.1 = 11000000.10101000.00000001.00000001 en binario**
+
+Bajo cada uno de estos números en binario de la IP, ponemos el numero en binario de la mascara de red.
+
+**11000000.10101000.00000001   .00000001**
+
+**11111111      .11111111     .00000000 .00000000 =**  **255.255.0.0**
+
+Donde la máscara de red esté seteada a 1 (como en los primeros 2 números) quiere decir que esa sección de la IP corresponde al identificador de red y donde hay ceros quiere decir que esa sección es el identificador de host
+
+Otra forma de hacer esto es pasar la IP/N donde N es el numero de unos de la mascara de red, la cual nos indica hasta donde tenemos unos y así podemos deducir cual es el identificador de red, por ejemplo: **192.168.1.1/16** correspondería al ejemplo anterior, porque **11111111      .11111111     .00000000 .00000000 =**  **255.255.0.0** tiene 16 unos.
+
+**Para que dos computadoras puedan comunicarse, el identificador de red debe ser el mismo**.
+
+Si haces la operación AND cifra por cifra entre la IP y la Mascara de subred o mascara de red, tendremos el identificador de la red.
+
+**11000000.10101000.00000001.00000001**
+
+**11111111.11111111 .00000000.00000000  AND**
+
+---
+
+**11000000.10101000.00000000.00000000 -->**  Esta seria la primera IP de la red, esta IP no se puede asignar a ninguna computadora, porque se usa para identificar a la propia red.
+
+### Primera y ultima dirección IP de la red
+
+Primera dirección IP : 192.168.0.0
+
+La ultima IP de la red: 192.168.255.255 también llamado broadcast, tampoco se asigna a ninguna computadora, es utilizado para mandar un paquete a todos los miembros de la red.
+
+La cantidad de IP-s disponibles para una red viene dada por la combinatoria de 16bits, o sea, {% inlineLatex formula="2^16" /%} pero, ya que la ultima y la primera IP no se pueden usar, será {% inlineLatex formula="2^{16} - 2" /%}.
+
+---
+
+La diferencia entre IPv4 e IPv6 es la cantidad de bits que usan, IPv4 usa 32 bits e IPv6 usa 128 bits.
+
+**La puerta de enlace o Gateway** es una maquina (generalmente un router) la cual se conecta a tu red y por medio de una IP publica, accede a otras redes privadas como las de Facebook, para poder traer el contenido hasta tu computadora.
