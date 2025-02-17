@@ -1,0 +1,170 @@
+---
+title: '# Analisis de Grandes conjuntos de Datos'
+draft: false
+description: Clase de Estadistica sobre tablas de flujo de frecuencia
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: PyE
+---
+# Analisis de Grandes conjuntos de Datos
+
+- Los métodos principales para organizar datos estadísticos comprenden el ordenamiento de elementos en subconjuntos que presenten cualidades semejantes
+
+- Los datos agrupados se pueden resumir gráficamente, o en tablas, y
+  mediante el uso de medidas numéricas, como la media, la amplitud, la
+  desviación estándar, y otras más.
+
+## Distribución de frecuencia.
+
+Es una agrupación de datos, que nos muestra la cantidad de veces observadas de ese dato.
+
+## Tablas Estadisticas
+
+### La Matriz:
+
+Las Variables con sus ejes y valores
+
+### El Cuerpo:
+
+Los casilleros en donde se produce el cruce de los ejes y se inscriben los valores.
+
+### El titulo:
+
+Describe de forma clara y concisa la tabla.
+
+## Caracteristicas de las tablas Estadísticas
+
+- La Simplicidad debe reinar.
+- Se deben explicar los simbolos o referencias
+- Incluye unidades de medida
+- Establecer los totales
+- Fuentes de los datos.
+- Puede incluir Frecuencia acumuladas y frecuencias relativas.
+
+### Frecuencias Relativas {% inlineLatex formula="f_r" /%}
+
+Es el cociente entre la frecuencia absoluta y el número total de datos.
+
+### Frecuencias Relativas porcentual {% inlineLatex formula="f_r %" /%}
+
+{% blockLatex formula="f_{r}% =\\frac{1}{N} \\times 100  " /%}
+
+### Frecuencia acumulada {% inlineLatex formula="f_a < y f_a >" /%}
+
+Sumar la frecuencia absoluta de una variable con la correspondiente menor o mayor segun el signo.
+
+sumas con el anterior nomas en el caso siguiente.
+
+### Ejemplo:
+
+{% table %}
+- Oficinas
+- {% inlineLatex formula="f" /%}
+- {% inlineLatex formula="f_r" /%}
+- {% inlineLatex formula="f_r %" /%}
+- {% inlineLatex formula="f_{a} <" /%}
+---
+- 1
+- 3
+- 0,20
+- 20
+- 3
+---
+- 2
+- 4
+- 0,27
+- 27
+- 7
+---
+- 3
+- 2
+- 0,13
+- 13
+- 9
+---
+- 4
+- 1
+- 0,07
+- 7
+- 10
+---
+- 5
+- 5
+- 0,33
+- 33
+- 15
+---
+- Total {% inlineLatex formula="(N)" /%}
+- 15
+- 
+- 
+- 
+{% /table %}
+
+### *Ejemplo*: Ingresos de ejecutivos de la corporación Sumer.
+
+{% table %}
+- Ingreso anual ($)
+- f
+- fa<
+---
+- De menos de 30,000
+- 5
+- 5
+---
+- De menos de 40,000
+- 17
+- 22
+---
+- De menos de 50,000
+- 22
+- 44
+---
+- De menos de 60,000
+- 28
+- 72
+---
+- De menos de 70,000
+- 14
+- 86
+---
+- **Totales**
+- **86**
+- 
+{% /table %}
+
+En este caso tenemos intervalos, no valores enteros.
+
+## Pasos Principales para realizar una tabla
+
+- Establecer las clases en las que vamos a agrupar los datos, existen varios metodos para determinar la cantidad de clases, pero en este curso estaremos utilizando de manera {% inlineLatex formula="2^k=..." /%}
+- Ordenarlos en clases mediante conteo por marcas
+- Contar el numero de cada clase
+- Presentar los resultados en una tabla o grafica
+
+### Ejemplo
+
+Tenemos valores que tendremos que utilizar para crear una tabla.
+
+1. (Determinar la amplitud) Buscamos el minimo y el máximo entre los datos.
+1. Decidir cuantas clases queremos
+
+Ahora aplicaremos la formula,  {% inlineLatex formula="2^k=..." /%}, {% inlineLatex formula="k " /%}es cualquier numero, pero el resultado debera ser igual o mayor a la cantidad de Datos {% inlineLatex formula="N" /%} que tenemos.
+
+Utilizaremos {% inlineLatex formula="k = 6" /%}
+
+3. Hallar nuestro rango
+
+Intervalo o amplitud de clase, se hace calculando
+
+{% blockLatex
+   formula="\\text{Intervalo} = \\frac{\\text{valor mayor en los datos no agrup.} - \\text{valor menor en los datos no agrup.}}{k}" /%}
+
+(En este calculo siempre se redondea al siguiente numero aunque el decimal sea menor a 0,5)
+
+{% blockLatex
+   formula="\\text{Intervalo} = \\frac{32,8-3,2}{6} = 4,93 \\approx 5" /%}
