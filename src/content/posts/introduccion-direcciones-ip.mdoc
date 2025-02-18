@@ -1,7 +1,7 @@
 ---
 title: Introducción - Direcciones IP
 draft: false
-description: Variedad de ejercicios resueltos de examenes finales, deberes, etc.
+description: Notas tomadas durante las clases de redes
 authors:
   - matias-mareco
 major:
@@ -70,10 +70,59 @@ La diferencia entre IPv4 e IPv6 es la cantidad de bits que usan, IPv4 usa 32 bit
 
 ### Espacio de direcciones privadas
 
-**Desde                    Hasta                                  Máscara por defecto**
+{% table %}
+---
+- **Clase**
+- **Desde**
+- **Hasta**
+- **Mascara por defecto**
+- 
+---
+- Clase A
+- 10.0.0.0
+- 10.255.255.255
+- 255.0.0.0
+- Usar para cuando quieres tener muchísimas maquinas en la red.
+---
+- Clase B
+- 172.16.0.0
+- 172.31.255.255
+- 255.255.0.0
+- Se reduce la cantidad de maquinas pero aumenta la cantidad de redes que puedes tener.
+---
+- Clase C
+- 192.168.0.0
+- 192.168.255.255
+- 255.255.255.0
+- Tienes muchas menos computadoras pero aumentas mas la cantidad de redes, es ideal para redes con menos computadoras como el hogar, laboratorios, etc.
+{% /table %}
 
-**Clase A  :**  10.0.0.0        -->  10.255.255.255       |       255.0.0.0
+*Existen clases D y E, pero son reservadas para investigaciones, etc.*
 
-**Clase B :**   172.16.0.0     -->  172.31.255.255        |       255.255.0.0
+Lo de la tabla anterior son solo estándares, no es obligatorio que los sigas, puedes usar un IP de la clase C con una mascara de la clase A, seguirá funcionando. Cuando asignas una IP a un equipo, se coloca una mascara por defecto a la IP según la tabla anterior, pero puedes cambiarlo si deseas.
 
-**Clase C :**   192.168.0.0  -->  192.168.255.255      |       255.255.255.0
+**En clase C,** tenemos que podemos tener diferentes combinaciones de identificadores de red con la mascara de red 255.255.255.0, la clase C es solo un subconjunto de este conjunto de redes, de 192.168.0 a 192.168.255, teniendo 256 posibles redes o identificadores de red.
+
+**Ejercicio**
+
+**IP : 192.168.10.5**
+
+Mascara por defecto = ?
+
+Identificador de red = ?
+
+Broadcast = ?
+
+Cantidad de IPs asignables = ?
+
+---
+
+**Respuestas**
+
+Mascara por defecto =  Clase C ( 255.255.255.0 )
+
+Identificador de red = 192.168.10.0
+
+Broadcast = 192.168.10.255
+
+Cantidad de IPs asignables = {% inlineLatex formula="2^{8} - 2 = 254" /%}
