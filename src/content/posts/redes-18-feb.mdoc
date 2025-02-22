@@ -1,0 +1,38 @@
+---
+title: Redes 18-FEB
+draft: false
+description: Clase de laboratorio de "Redes y computadoras" del 18 de febrero del 2025
+authors: []
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: Rc1
+---
+### Espacio de direcciones privadas
+
+- **Clase A:** De 10.0.0.0 a 10.255.255.255, **Mascara por defecto:** 255.0.0.0
+- **Clase B:** De 172.16.0.0 a 17, **Mascara por defecto:** 255.255.0.0
+- **Clase C:** De 192.168.0.0 a 192.168.255.255, **Mascara por defecto:** 255.255.255.0
+
+#### Ejemplo 1
+
+**IP:** 10.10.1.1 ➡️     00001010 . 00001010 . 00000001 . 00000001 (BIN) **Mascara:** 255.0.0.0 ➡️ 11111111 . 00000000 . 00000000 . 00000000 (BIN)
+
+IP(BIN) AND MASCARA(BIN) => **El nro IP mas pequeño sin cambiar el identificador de la red** =>00001010 . 00001010 . 00000001 . 00000001 AND 11111111 . 00000000 . 00000000 . 00000000 => **00001010 . 00000000 . 00000000.  00000000** => ==10.0.0.0==
+
+$RED: 10.0.0.0$ $Broadcast: 10.255.255.255$
+
+#### Ejemplo 2
+
+**IP:** 192.168.10.4 ➡️     11000000 . 10101000 . 00001010 . 00000100 (BIN) **Mascara:** 255.255.0.0 ➡️ 11111111 . 11111111 . 00000000 . 00000000 (BIN)
+
+11000000 . 10101000 . 00001010 . 00000100 AND 11111111 . 11111111 . 00000000 . 00000000 => **11000000 . 10101000 . 00000000 . 00000000** => ==192.168.0.0==
+
+$RED: 11000000 . 10101000 . 00000000 . 00000000 => 192.168.0.0$ $Broadcast: 11000000 . 10101000 . 11111111 . 11111111 => 192.168.255.255$
+
+### Ejercicios
+
+#### Teniendo la IP 192.168.10.5 encontrar, Mascara por defecto, Red, Broadcast, Nro de IPs asignables
+
+**IP:** 192.168.10.5 => 11000000 . 10101000 . 00001010 . 00000101 (BIN) **Mascara por defecto:** ==255.255.255.0== => 11111111 . 11111111 . 11111111 . 0000000 (BIN) **Red:** 11000000 . 10101000 . 00001010 . 00000101 AND 11111111 . 11111111 . 11111111 . 0000000 => ==192.168.10.0== **Broadcast:** ==192.168.10.255== **Nro de IPs asignables:** 255 - 2 = ==254==
