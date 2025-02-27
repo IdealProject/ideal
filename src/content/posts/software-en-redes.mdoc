@@ -1,6 +1,6 @@
 ---
 title: Software en Redes
-draft: true
+draft: false
 description: Clase sobre redes y en especial la softwarización
 authors:
   - christopher-mendoza
@@ -31,3 +31,9 @@ Hay interfaces entre capas, ahi podemos encontrar las cosas que la capa **a** le
 No importa como esta hecho, lo que importa es conocer el nombre, que pasarle y que le va a devolver.
 
 Cada capa tienen limitaciones, y funciones propias, hablamos de jerarquia.
+
+Existen protocolos por capa, pero aunque esten en la misma capa, ellos no pueden comunicarse mas alla de su comunicación virtual (esta comunicación virtual son los header) y asi establecer un acuerdo comun.
+
+Cada capa puede incluir información adicional, por ejemplo caracteristicas del origen del paquete (Header), sirve para que el proximo que este a ese mismo nivel lo pueda entender.
+
+Se puede decir que la capa fisica o 1, es la encarga de transmitir el mensaje,fluyen 0 y 1.\
