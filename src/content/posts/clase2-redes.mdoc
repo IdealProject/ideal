@@ -1,0 +1,69 @@
+---
+title: clase2-redes
+draft: false
+description: Clase 2 del 27-02-2025
+authors:
+  - heber-aranda
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: Rc1
+---
+# Clase 2 Teoría. 27-02-25
+
+## **Software en Redes:**
+
+- Jerarquía de Protocolos: Orden, sentido en que sucede la comunicación. Es bidireccional entre capas. Hay capas, protocolos, interfaces y medio físico (cable, onda, infrarrojo). Entre capas existe una comunicación virtual, no física. Una interfaz: nombre, parámetro, retorno, no especifica exactamente su funcionamiento. Alumno a Docente, Docente a Dirección Académica, etc. Fig 1-13 Tanenbaum
+
+- Diseño de factores en las capas.
+
+- Servicios Orientados a la Conexión y sin Conexión: primer ejemplo, cuando un bit se pierde, ya no es útil; segundo ejemplo, si algunos bits se pierde, se entiende lo que quiere llegar.
+
+- Servicios Primitivos: funciones, métodos comunes entre mismas capas para que los protocolos puedan comunicarse
+
+- Relación entre servicios y protocolos:
+  -¿Por qué la comunicación entre capas es virtual? Porque la comunicación no es directa, debe pasar por otras capas.
+  -El medio físico lleva BINARIO
+  -Protocolo: acuerdo entre capas
+  -Los headers son los que se encargan de que los pares de capas se comuniquen entre sí.
+  Como aumentar la capacidad: hacer el "panal" más chico, achicar el radio de cobertura pero en mayor cantidad.
+  -**Trama** es una secuencia de bits estructurada.
+  -El tail del paquete (cola)...próximamente.
+  -El origen y el destino aparece en la RED.
+  -El mensaje (0, 1) va hasta la capa de red sí o sí para saber a quién va y de quién va.
+  -Un switch es un repetidor. Un dispositivo Alice manda un 1 al puerto 1 para BOB del SWITCH, analiza el orden estructurado de los bits y le manda SOLO a BOB. NO FUNCIONA A CAPA DE RED, FUNCIONA A CAPA DE ENLACE DE DATOS MEDIANTE SU **MAC ADDRESS**.
+  -Un hub es un repetidor. Un dispositivo Alice manda un 1 al puerto 1 para BOB del HUB, luego este manda a TODOS los puertos.
+  -Si un nuevo dispositivo se conecta a una red desconocida, no va a tener red asignada, por lo que va a repetir a TODOS que le manden un número para IP a MAC ADDRESS, todo esto en capa de ENLACE DE DATOS. El MAC ADDRESS es único para cada placa de red.
+  -IP = Internet Protocol.
+  -El servidor DHCP asigna un IP a un dispositivo nuevo.
+
+  ## **Diseño de factores en las capas:**
+
+- Control de errores: corregir los errores, verificarlos.
+
+- Direccionamiento: a quién va.
+
+- Enrutamiento: cómo va, cómo conocerá el camino.
+
+- Control de flujo: que un emisor funcione con la misma capacidad que el receptor.
+
+- Multiplexación (Recursos compartidos. Ej.: Ancho de banda: tasa máxima de transmisión del canal, depende del canal que tenga menor capacidad de transmisión cuando varios se interconectan).
+  **Relación entre Protocolos y Servicios**
+  **Modelos de Referencia:**
+
+- Modelo de Referencia OSI (Open System Interconection): nunca pasó de un laboratorio.
+  -Es una organización desarrollada por la Organización Internacional de normas. ISO.
+  -Formado de 7 capas
+  -Figura 1-20
+
+1. Física: Se encarga de la transmisión de bits no estructurados sobre el medio físico, relacionado con características mecánicas (fibra óptica), eléctricas, funcionales y de procedimientos para acceder al medio físico. Ej. Cables coaxiales, Cables de par tenzados UTP. Si se quiere estructurar, se coloca al comienzo de la fila y al final una secuencia binaria que puede identificar estas partes (esto es lo que lleva el header).
+1. Enlace de datos: Proporciona un servicio de transferencia de datos fiable a través del enlace físico, envía bloques de dato llamados tramas y lleva a cabo de la sincronización, el control de errores y flujos. Ej. Ethernet, Token Ring.
+1. Red: Proporciona independencia a los niveles superiores respecto a las técnicas de conmutación (intercambiar algo, cambiar, el siguiente salto) y de transmisión utilizadas para conectar sistemas; es responsable del establecimiento, mantenimiento y cierre de las conexiones, evitar la congestión de paquetes. Ej. ARP, Router, {Switch, no es un ejemplo válido}.
+1. Transporte:
+1. Sesión
+1. Presentación
+1. Aplicación
+
+- Modelo de Referencia TCP/IP:
+- Comparación entre los Modelos OSI y TCP/IP:
