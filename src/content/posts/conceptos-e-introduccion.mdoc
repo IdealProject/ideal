@@ -1,0 +1,50 @@
+---
+title: Retroalimentación y Nodos
+draft: false
+description: 'Incluimos retroalimentación de clases anteriores incluyendo nuevos temas. '
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: Al1
+---
+# clase 3
+
+### TDA
+
+\
+un tipo de dato abstracto es un concepto o idea, modelo, operaciones básicas, cuando hablamos de arreglos por ejemplo, estamos hablando ya de la representación o implementación.
+
+Habiamos hablado primeramente de las listas como ejemplo de TDA
+
+Decimos que puede tener operaciones, buscar elementos en lista, borrar en lista, entre otros, eso es parte del concepto, luego empezamos a implementar con el arreglo y ahi ya es la parte de representar el concepto que moldeamos originalmente para nuestra lista y lo que queriamos lograr para con este tipo de TDA, en esta parte vemos todas las implicaciones técnicas de esa representación.
+
+Tambien se puede implementar utilizando listas ligadas, que tienen su valor y un puntero al siguiente valor, una vez mas esto es una forma de representar el concepto original de lista que ideamos originalmente.
+
+Según el concepto original y el objetivo que tengamos para con nuestro TDA, decidimos un tipo de implementación valorando las caracteristicas de cada tipo de implementación.
+
+Ejemplo: si usamos con arreglo, podemos obtener los valores de forma rapida y eficiente gracias a sus indices, pero si lo que buscamos es poder insertar en la lista, las listas ligadas son mucho mas eficientes y rapidas, ya que en los arrays tendriamos que mover todos los elementos, para expresar el tiempo que nos tomaria decimos que la operación es de tipo O(N) que aumenta conforme a la cantidad de elementos N que existen en la lista
+
+### Nodo Cabecera
+
+Es un nodo que nos indica la dirección del primer elemento de la lista.
+
+Teniendo eso en cuenta
+
+Agregaremos el valor 5, al principio de la lista
+
+```c
+Nodo* siguiente = primero;
+primero = crearNodo(5,siguiente);
+```
+
+Estamos cambiando el valor del nodo cabecera para establecer como el primero el nodo con el valor de 5
+
+```mermaid
+graph TD;
+    A[Inicio] --> B[Proceso 1];
+    B --> C[Proceso 2];
+    C --> D[Fin];
+```
