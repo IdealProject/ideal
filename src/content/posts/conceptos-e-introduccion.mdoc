@@ -42,9 +42,23 @@ primero = crearNodo(5,siguiente);
 
 Estamos cambiando el valor del nodo cabecera para establecer como el primero el nodo con el valor de 5
 
-```mermaid
-graph TD;
-    A[Inicio] --> B[Proceso 1];
-    B --> C[Proceso 2];
-    C --> D[Fin];
+### Listas doblemente ligadas
+
+Analizamos implementación de Listas con Listas doblemente ligadas
+
+Los Struct tiene nombre y sus miembros, para hacer un nodo doblemente ligado necesitariamos
+
+un struct con, puntero anterior, puntero siguiente, valor.
+
+Este tipo de implementación es mucho mas costosa en cuestión de espacio, pero su ventaja es la de poder buscar bidireccionalmente.
+
+```c
+typedef struct nodo
+{
+int dato;
+struct nodo *siguiente;
+struct nodo *anterior; 
+}NODO;
 ```
+
+### 
