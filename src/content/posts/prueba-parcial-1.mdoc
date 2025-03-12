@@ -1,0 +1,108 @@
+---
+title: 'Prueba Parcial #1'
+draft: false
+description: Desarrollo de parcial de algoritmo y estructura de datos 1
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: Al1
+---
+## 
+
+# Parcial #1
+
+### Ejercicio 1:
+
+Dada la siguiente definición de una estructura de datos  ¿como se declara un vector de 10 elementos de tipo "canción" y se asignan valores al primer elemento?
+
+```c
+struct cancion{
+char interprete[20];
+float duracion;
+}
+```
+
+### Ejercicio 2:
+
+¿Por que un macro es mas eficiente que una función en C?
+
+### Ejercicio 3:
+
+Menciona 3 recomendaciones de buenas practicas para escribir codigo de calidad.
+
+### Ejercicio 4:
+
+¿Que imprime el siguiente codigo?
+
+```c
+int main(void){
+
+int lista[5] = {1,3,5,7,9};
+int *p1,*p2;
+int x;
+x=*(lista);
+p2=lista;
+printf("%d,%d","%d",x,*p1,*p2);
+return 0;
+}
+```
+
+### Ejercicio 5:
+
+Si ptr contiene la dirección de x ¿Como le asigno el valor 0 a x empleando el puntero ptr?
+
+### Ejercicio 6:
+
+¿Cuales deben ser el tipo de var1,var2 y var3?
+
+```c
+var1 = 5,5;
+var2 = &var1;
+var3 = var2;
+```
+
+---
+
+## Revisión de prueba parcial
+
+### Ejercicio 1
+
+Principal error, modo de copiar string en el valor del struct.
+
+Debio haber sido utilizando la función strcpy debido a que los strings en realidad son arrays de char
+
+strcpy(canciones[0].interprete,"nombre");
+
+### Ejercicio 2
+
+Lo principal sobre macros es, NO chequea los tipos, por ende es mucho mas eficiente
+
+### Ejercicio 3
+
+Recordar buenas practicas,
+
+- mantener nombres simples y descriptivos (explicitos)
+- Validar nuestros inputs, mantener la programación defensiva, prevenir, no curar.
+
+### Ejercicio 4:
+
+La clave es en recordar que * es el operador de Referencia y el & es el operador de des-referencia.
+
+### Ejercicio 5:
+
+Continuando con la idea de los operadores de referencia, simplemente se realizaba
+
+```c
+*ptr = 0;
+```
+
+### Ejercicio 6:
+
+Cuando creamos un puntero que apunta a una variable, ese puntero TIENE que ser del mismo tipo de la variable.
+
+Si tenemos el & (operador de referencia, devolvemos la dirección) entonces siempre se almacena en un *puntero
+
+Para guardar la dirección de un puntero necesitamos por ende otro puntero, que se convertiria en un doble puntero para el valor original.
