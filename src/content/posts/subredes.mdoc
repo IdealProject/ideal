@@ -1,0 +1,69 @@
+---
+title: Subredes
+draft: false
+description: Notas en clases de redes
+authors:
+  - matias-mareco
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: Rc1
+---
+# Subredes
+
+En la mascara de red, usamos unos cuantos unos en la parte del identificador de host para señalar que ahí se definirá una subred, con una máscara especial que creamos nosotros.
+
+## **Pasos para configurar una subred para tener una cantidad X de IPs disponibles( o acercarnos a la cantidad de IPs que necesitamos para nuestra red)**
+
+- Pasar nuestra IP original a binario.
+- Decidir cuantos bits usamos para el identificador de host, si necesitamos 20 IPs, contamos los bits hasta que superemos o igualemos el número, los bits sobrantes serán para la subred.
+- Creamos nuestra mascara customizada: en la mascara original, seteamos a 1 los bits que corresponden a la subred, nos quedará un nuevo número binario en el identificador de host y lo pasamos a decimal(este numero dependerá del valor que elijamos para la subred y del resto del identificador de host).
+- Hallamos el primer IP no asignable(identificador de subred) y el broadcast.
+- Tratamos a la parte de la subred como un identificador de red, no lo modificamos, simplemente modificamos lo que quedó en la parte del identificador de host
+
+---
+
+### **Ejemplo**
+
+Una máscara de red ordinaria: 255.255.255.0
+
+11111111.11111111.11111111.00000000
+
+Si queremos crear una subred, robamos 3 bits del identificador de host para hacerlos el identificador de subred.
+
+11111111.11111111.11111111.**111**00000 - - > Lo resaltado en negrita refiere a la subred
+
+Entonces, pasando a decimal, la mascara de red quedaría como:
+
+255.255.255.254
+
+Siendo nuestra IP = 192.168.1.4
+
+**Primera IP asignable de la red:** 11000000.10101000.00000001.**000** 00000
+
+192.168.1.0                                    ^ subred
+
+**Broadcast de la red:**                  11000000.10101000.00000001.**000** 11111
+
+192.168.1.31                                  ^ subred
+
+---
+
+### **Ejercicio**
+
+**Configurar una subred para:**
+
+IP: 172.168.10.52
+
+Número de host necesarios por cada subred: 17
+
+IP(2 = 10101100.10101000.00001010.00110100
+
+*Al necesitar 17 equipos, necesitamos una potencia de 2 que sea mayor que 17, sería {% inlineLatex formula="2^{5} = 32" /%}, entonces usaremos 5 bits para el identificador de host, por lo tanto, nuestra subred debería ser* 001
+
+Mascara de red : 11111111.11111111.11111111.11100000 --> 255.255.255.224
+
+Primer IP no asignable:  10101100.10101000.00100000 = 172.168.10.32
+
+Broadcast: 10101100.10101000.00111111 =  172.168.10.63

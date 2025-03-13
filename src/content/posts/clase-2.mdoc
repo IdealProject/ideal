@@ -1,0 +1,34 @@
+---
+title: TDA
+draft: false
+description: Clase Teorica de Algoritmos y estructuras de datos
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: Al1
+---
+# Aritmetica de Punteros
+
+### Arrays
+
+Los Arreglos son secciones de la memoria que se reservan para guardar una cantidad de memoria, son estaticos entonces luego de declararse ya no se podra aumentar los espacios de memoria.
+
+```c
+int arr[5] = {1,2,3,4,5} // un array ya es un puntero
+int *ptr = arr; //Apuntamos al indice 0 del array, cosa que podemos usar
+// que sea un ptr significa que podemos usarlo como tal 
+printf("%d",*(arr + 1)); // equivalente a decir arr[1]
+printf("%d",*(ptr + 1)) // equivalente a decir arr[1]
+```
+
+## TDA
+
+Tipos de datos Abstractos, es la definición matemática de una estructura con operaciones asociadas, en otras palabras es una "extensión" del lenguaje, en donde generamos un nuevo tipo y asociamos operaciones a ese tipo. \
+En el caso de los booleans, que no forman parte originalmente del lenguaje C, se puede implementar como un dato abstracto.
+
+### Cuando nos enfrentamos a un problema
+
+Lo ideal siempre es describirlo de una forma generica, es decir abstracta, sin exceso de detalles de su solución, lo que nos permite definir un modelo abstracto,

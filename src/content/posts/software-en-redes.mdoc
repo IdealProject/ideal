@@ -1,0 +1,104 @@
+---
+title: Software en Redes
+draft: false
+description: Clase sobre redes y en especial la softwarización
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: Rc1
+---
+# Software en Redes
+
+- Jerarquía de Protocolos
+- Diseño de factores en las capas
+- Servicios orientados a la conexión y sin conexión
+- servicios primitivos
+- Relación entre servicios y protocolos
+
+> Acces Point, es el nombre adecuado para los dispositivos de uso domestico a los que llamamos "routers"
+
+## Jerarquía de los protocolos
+
+Sistema basado en capas, donde cada capa tiene un sentido de comunicación
+
+Interfaz, tiene nombres, parametros que entran y los que se retornan.
+
+Hay interfaces entre capas, ahi podemos encontrar las cosas que la capa **a** le puede pedir a la capa **b**, y viceversa.
+
+No importa como esta hecho, lo que importa es conocer el nombre, que pasarle y que le va a devolver.
+
+Cada capa tienen limitaciones, y funciones propias, hablamos de jerarquia.
+
+Existen protocolos por capa, pero aunque esten en la misma capa, ellos no pueden comunicarse mas alla de su comunicación virtual (esta comunicación virtual son los header) y asi establecer un acuerdo comun.
+
+Cada capa puede incluir información adicional, por ejemplo caracteristicas del origen del paquete (Header), sirve para que el proximo que este a ese mismo nivel lo pueda entender.
+
+Se puede decir que la capa fisica o 1, es la encarga de transmitir el mensaje,fluyen 0 y 1.
+
+## Diseño de Facotres en las capas
+
+- Control de errores
+- Fireccionamiento
+- Enrutamiento
+- Control de flujo
+
+Imaginate un gran ancho de banda, con un emisor lento que no aprovecha todo el flujo, tambien se puede dar el caso contrario, para esto las capas de control de flujo existen.
+
+- Multiplexación (Recursos compartidos Ej: Ancho de bannda)
+
+Tengo un recurso, la señal, y tenemos que compartir (multiplexar) con todos los usuario.
+
+##### Ancho de banda: es la capacidad de transmisión, depende del canal con menor capacidad de transimisión.
+
+## Relación entre los protocolos y servicios
+
+Capa k+1 se conecta a través de un servicio proporcionado por la capa k, entre procesos que se encuentran en la misma capa, se comunican con protocolos.
+
+## Modelos de Referencia
+
+- Modelo de referencia OSI (Open system Interconection)
+- Modelo de Referencia TCP/IP
+- Comparación entre los modelos OSI y TCP/IP
+
+### OSI
+
+Es una propuesta desarrollada por la organización internacional de normas, **ISO.**
+
+Se compone de 7 capas.
+
+1. Fisica
+
+Se encarga de la transmisión de cadenas bits no estructurados sobre el medio físico, tiene que ver con las conexiones mecanicas, electricas,etc.
+
+(Para el no estan estructurados, porque eso no le compete, para otra capa si podria ser entendible)
+
+Como cualquier capa, puede meter información adicional.
+
+2. Enlace de datos
+
+Proporciona un servicio de transferencia de datos fiable a través del enlace físico,envía bloques de datos llamados tramas y lleva a cabo la sincronización. wel control de errores y flujos.
+
+**Trama:** Es una secuencia de bits estructurada.
+
+1. Capa de Red
+
+Proporciona independencia a los niveles superiores respecto a las técnicas de conmutación y de transmisión utilizadas para conectar sistemas; es responsable del establecimiento, mantenimiento y cierre de las conexiones, evitar congestión de paquetes.
+
+Desglosamos:
+
+- todos los que estan por encima de el son independientes, pero debajo de el dependen de esta capa, los de abajo tienen que mostrar origen y destino.
+
+- Conmutación, cambiar una cosa por otra, va eligiendo con quien "conectarte"
+
+- Esta capa es la "Chica del cable" de la red.
+
+- Cuando se esta pasando por diferentes puntos de capa fisica, tienen que "desempaquetar" y arma para llegar hasta esta capa y asi saber a donde tiene que mandar.
+
+*Repetidores: Hub es un chismoso que no razona, termina contando todo a todos, el switch cuenta solo a quien debe contar, el arma hasta la capa de red y sabe para quien va.*
+
+Aca aparece el protocolo, IP (Internet Protocol), dice el ip de origen y el ip de destino, hablemos de como funciona que las pc se puedan conectar a cualquier red, cuando llegamos a una red nueva, nuestro dispositivo tira una llamada a todos los dispositivos en la red que tenga a mano, pidiendo que se le asigne una dirección ip, mandando su propia mac address (siendo este único por dispositivo a nivel mundial) para que asi le pueden identificar, el servicio de DHCP es el que va a asignarle este ip para que pueda interactuar dentro de la red.
+
+1. Transporte
