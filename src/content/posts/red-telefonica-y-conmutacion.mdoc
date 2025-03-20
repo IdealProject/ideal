@@ -112,11 +112,11 @@ Se sigue usando:
 
 ### ¿Qué es la Conmutación?
 
-Esto habla mucho del enrutamiento, pero tienen diferencias de como se rutean, en el primer caso tenemos la necesidad de que vayan uno atras de otro, respetando el orden, en el 2ndo eso no es lo importante, siempre que lleguen.
+Esto habla mucho del enrutamiento, pero tienen diferencias de cómo se rutean. En el primer caso, tenemos la necesidad de que vayan uno atrás de otro, respetando el orden; en el segundo, eso no es lo importante, siempre que lleguen.
 
 Este mismo funcionamiento veremos en la capa de enlace.
 
-También se relacionado con la capa de transporte y la capa de aplicación.
+También se relaciona con la capa de transporte y la capa de aplicación.
 
 ---
 
@@ -133,7 +133,7 @@ También se relacionado con la capa de transporte y la capa de aplicación.
 #### Conmutación de Paquetes
 
 - Los paquetes pueden ir a distintas redes y distintas trayectorias.
-- Este tambien tiene cables, pero cada paquete puede decir por donde ir.
+- Este también tiene cables, pero cada paquete puede decidir por dónde ir.
 - Usa de forma más eficiente el ancho de banda.
 - Los paquetes pueden llegar desordenados.
 - Envían antes de que llegue el que se fue primero, eso usa mejor el ancho de banda.
@@ -141,88 +141,112 @@ También se relacionado con la capa de transporte y la capa de aplicación.
 
 ---
 
-## Sistema de telefonia móvil
+## Sistema de Telefonía Móvil
 
-1g:
+---
 
-Las celdas se pueden subdividir para poder cubrir mayores demandas, hay celdas con el mismo nombre, tienen frecuencias compartidas, pero con celdas intermedios para separarles y asi no tener problemas al reutilizar las frecuencias.
+### 1G
 
-1G,Voz analogica, el IMTS mejoro la primera versión utilizando dos frecuencias separadas, pero solo usando 24 canales, que tenias que esperar mucho para usar y luego se implementa el AMPS, que utiliza celdas, cada una con una frecuencia distintas, cada celda tiene una estación base, que se encarga de manejar a los usuarios y sus peticiones.
+- Las celdas se pueden subdividir para poder cubrir mayores demandas. Hay celdas con el mismo nombre, tienen frecuencias compartidas, pero con celdas intermedios para separarles y así no tener problemas al reutilizar las frecuencias.
+- **Voz analógica**.
+- El **IMTS** mejoró la primera versión utilizando dos frecuencias separadas, pero solo usando 24 canales, que tenías que esperar mucho para usar.
+- Luego se implementa el **AMPS**, que utiliza celdas, cada una con una frecuencia distinta. Cada celda tiene una estación base, que se encarga de manejar a los usuarios y sus peticiones.
+- **Handoff**: Se da cuando un usuario está saliendo o entrando de una celda. Entonces se comunican con otra estación base para ver con quién está teniendo una mejor conexión y así derivarle a esta nueva celda.
+- **AMPS utiliza FDM** para separar los canales. Emplea un total de 832 canales, que se dividen en: canales... (falta completar con los canales y sus tipos).
 
-handoff se da cuando un user esta saliendo o entrando de una celda, entonces se comunican con otra estación base para ver con quien esta teniendo una mejor conexión y asi derivarle a esta nueva celda.
+---
 
-AMPS UTILIZA FDM
+### Administración de Llamadas
 
-para separar los canales. emplea un total de 832 de canales, que se dividien en: canlaes … falta completar con los canales y sus tipos
+- Cada teléfono tiene un número de serie de 32 bits y un número telefónico de 10 dígitos almacenado en su memoria de solo lectura.
+- Para hacer la llamada, el usuario marca el número y llama. Aquí miramos si al que queremos llamar está en la misma celda que nosotros.
+- Para recibir, los teléfonos inactivos escuchan el canal de localización. Si está activo, se le asigna un canal para empezar a llamar.
+- **¿Cómo funciona una llamada?**
+  - Damos clic a llamar y nos comunicamos con la estación base.
+  - Utilizamos uno de los canales para ver si está en la misma celda que el que llama.
+  - Si está, se conectan con la misma estación base por conmutación.
+  - Si no está, pregunta al centro de conmutación, que se encarga de comunicarse con todas las estaciones base. Desde ahí localizamos el número al que queremos llamar. Esta estación base que nos encuentra (o no) le vuelve a informar al centro de conmutación, que se comunica con la estación base original.
 
-ADminsitración de llamadas,
+---
 
-cada telefono tien un numero de siere de 32 bits y un numero telefonico de 10 digitos almacendaso en su memoria de solo lectura
+### 2G
 
-para hace rla llamada el usuario marca el numero y llama , aca miramos si al que queremos llamar esta en la misma celda que nosotros.
+- Permite un aumento en la capacidad.
+- Permite mensajería de texto.
+- Mejora la seguridad.
+- No tiene estándar global.
+- Se implementaron:
+  - **D-AMPS** (Estadounidense).
+  - **GSM** (Intento de estándar iniciado en Europa, llegó hasta Australia, fue un éxito en 1991).
 
-para recibir los telefonos inactivos escuchan el cana de localizacion, si esta activo se le asigna un canal para empezar a llamar.
+---
 
-¿Como funciona una llamada?\
-damos click a llamar, y nos comunicamos con la estación base.
+### 3G
 
-Utilizamos uno de los canales para ver si esta en la misma que el que llama.
+- Voz y datos digitales.
+- Hay un estándar en especificaciones **IMT-2000**.
+- Mejoró todas las capacidades de las redes móviles.
+- Para el correcto funcionamiento del **CDMA** en redes móviles, es necesario sincronizar las transmisiones y controlar la potencia de los móviles para reducir interferencias.
 
-si esta, tuki se conectan con la misma estación base por comuntación.
+---
 
-si no esta, pregunta al centro de conmutación, es la que se encarga de comunicarse con todas las estaciones bases, desde ahi localizamos el numero al que queremos llamar, esta estación base que nos encuentra o no, le vuelve a informar al centro de conmutación que se comunica con la estacion base original.
+### 4G
 
-2g:
+- Conmutación de circuitos ahora pasamos a usar conmutación de paquetes.
+- **EPC** transporta tanto voz como datos en forma de paquete.
+- O sea, que es **VoIP** (voz como datos en forma de paquete).
+- Multiplexación estadística.
+- La tecnología que cumplió el estándar 4G fue **LTE** (Long Term Evolution).
+  - **Serving Gateway (S-GW)**.
+  - **MME** (Mobility Management Entity).
+  - **Packet Data Network Gateway (P-GW)**.
+  - **HSS** (Home Subscriber Server).
 
-Permite un aumento en la capacidad
+---
 
-permite mensajeria de texto
+### 5G
 
-mejora la seguridad
+- Se necesita mejorar la capacidad de área de la red en 3 órdenes:
+  - **Ultra-densificación y descarga de tráfico**: Aumentamos la cantidad de celdas por unidad de área.
+  - **Uso de ondas milimétricas** (20 GHz - 300 GHz): Son ondas que no traspasan las cosas con facilidad.
+  - **Mayor eficiencia con el MIMO (Multiple Input/Output) masivo**.
+- Otros temas innovadores:
+  - **Segmentación de la red (Network Slicing)**: Capacidad de crear redes virtuales independientes sobre una misma infraestructura de red.
+  - **Beamforming**: Pueden dirigir en un solo sentido las ondas, así es más eficiente para la antena. Hasta ahora veníamos usando omnidireccional.
 
-no tiene estandar global
+---
 
-se implementaron:
+## Televisión por Antena Comunal
 
-- D-AMPS (Estadounidense)
-- GSM (Intento de estandar iniciado en Europa, llego hasta australia, fue un exito en 1991)
+- En los 40, se recibía en una antena para captar señales que luego se distribuía por las casas con un cable coaxial.
+- En el 74, las grandes compañías empezaron a extender la cobertura y conectar cables a un sistema.
+- Eso se solucionó con el **HFC** (Red Híbrida de Fibra Óptica y Cable Coaxial).
 
-3g:
+---
 
-Voz y datos digitales
+### Internet por Cable
 
-Hay un estador en especificaciones IMT-2000
+- Se necesitaban 2 vías: una ascendente y otra descendente.
+- Al comienzo se utilizó la infraestructura de las televisiones por cable para descarga y la red telefónica para la vía de subida.
+- Esto dio problemas porque al compartir el cable coaxial para descargar del TV, el ancho de banda se distribuía según el uso, cosa que puede ser muy injusta.
+- **Asignación de espectro, multiplexación por división de frecuencia**.
+- En las puntas del espectro se asigna respectivamente el de subida y luego de bajada, siendo mucho mayor.
+- Los módems de cable convierten señales analógicas a digitales.
+- **DOCSIS**: Este es el estándar de los módems para coaxial.
+  - 108 ~ 1002 MHz para bajada.
+  - En el medio: radio, televisión y demás.
+  - 5 ~ 42 MHz para subida.
+- El ancho de banda se divide cada 6 MHz, lo que permite regular el ancho de banda de cada usuario.
 
-mejoro todas las capacidades, de las redes moviles
+---
 
-para el correct ofuncionamiento del CDMA en redes móviles, es necesario sincronizar las transmisiones y controlar la potencia de los móviles para reducir interferencias.
+### Versiones Comunes
 
-4g:
-
-Conmutación de circuitos ahora pasamos a usar conmutación de paquetes
-
-EPC transporta tanto voz como datos en forma de paquete
-
-osea que es VoIP, voz como datos en forma de paquete
-
-Multiplexación estadistica
-
-la tecnologia que cumplio el estandar 4g fue LTE (Long Term Evolution)
-
-Serving Gateway (S-GW)
-
-MME (Mobility Management Entity)
-
-Packet Data network Gateway (P-GW)
-
-HSS (Home Suscriber Server
-
-5g:
-
-Se necesita mejorar la capacidad de area de la red en 3 ordenes:
-
-ultra-densificación y descarga de tráfico (Aumentamos la cantidad de celda por unidad de area)
-
-Uso de ondas milimétricas (20Ghz - 300Ghz, son ondas que no transpasan las cosas con facildiad.)
-
-Mayor Eficiencia con el MIMO (Multiple Input/Outpu) masivo.
+- **3.0**: 1 Gbps de descarga, 100 Mbps de subida. (Este es normal usar en Paraguay).
+- **3.1**: 10 Gbps de descarga, 1~2 Gbps de subida.
+- **GPON** para fibra óptica.
+  - Multiplexación por división de onda.
+  - División óptica pasiva (1:32 o 1:64).
+  - Longitud de onda y velocidad:
+    - Descarga: 1490 nm - 2.5 Gbps.
+    - Subida: 1310 nm - 1.25 Gbps.
