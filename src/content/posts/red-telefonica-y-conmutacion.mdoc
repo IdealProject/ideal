@@ -1,0 +1,135 @@
+---
+title: Red Telefónica y Conmutación
+draft: false
+description: 'Presentación de clase sobre capitulo 2.6.1 Tanenbaum '
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: Rc1
+---
+# La Red Telefónica Pública Conmutada (PSTN)
+
+> Cap. 2.6.1 Tanenbaum 6ta
+
+Sistema telefónico con 3 componentes principales (esto se diseñó en 1886...)
+
+---
+
+### Componentes
+
+- **Teléfono**
+  - Lazo Local
+- **Oficina Final**
+  - Troncal de Conexión Interurbana
+- **Oficina Interurbana**
+
+(… Mirar Tanenbaum para completar)
+
+---
+
+### AT&T
+
+Se le demandó por monopolio, entonces se dividió en más de 23 compañías.
+
+- **LATA** (Áreas de Acceso Local y de Transporte): Así se dividió USA.
+- **LEC** (Portadora de Intercambio Local): Cada compañía por LATA.
+- **IXC** (Portadora entre Centrales): Conexión entre compañías.
+- **POP** (Punto de Presencia).
+
+---
+
+### Módems Telefónicos, ADSL y Fibra Óptica
+
+Señal bidireccional.
+
+- **Módem**: Del lado del cliente.
+- **Codec**: Del lado del proveedor.
+
+---
+
+#### Descendente (Descarga) y Ascendente (Carga)
+
+- El ascendente suele ser menor que el descendente.
+
+---
+
+#### DSL (Líneas de Suscriptor Digital)
+
+- Paquetes de servicios: TV + Internet, entre otros.
+- 256 canales de 4 kHz.
+  - 0 a 25: Para voz.
+  - 248 canales: Para los datos del usuario.
+    - Se dividen para carga y descarga (descarga ~80%).
+
+---
+
+#### ADSL (Asimétrico)
+
+- La mayoría utilizamos este tipo.
+
+---
+
+#### FTTH (Fibra para el Hogar)
+
+- **PON** (Red Óptica Pasiva).
+
+---
+
+### Digitalización de las Señales de Voz
+
+- **FDM** (Multiplexación por División de Frecuencia).
+- **TDM** (Multiplexación por División de Tiempo).
+
+---
+
+### SONET/SDH
+
+- En los primeros días de la fibra, cada compañía tenía su propio TDM óptico.
+- Entonces nació el estándar **SONET**.
+  - Se trabaja por tramas, envía 810 bytes cada 125 microsegundos.
+- **SDH** (Jerarquía Digital Síncrona).
+
+---
+
+### WDM (Multiplexación por División de Longitud de Onda)
+
+- 4 fibras se conectan a un combinador óptico, suma los haces de luz.
+- Del otro lado, vuelven a separar con un filtro para cada haz.
+
+---
+
+## Conmutación
+
+Se sigue usando:
+
+- **Planta Externa**: Troncales físicamente fuera de las oficinas de computación.
+- **Planta Interna**: Dentro de las oficinas.
+
+---
+
+### ¿Qué es la Conmutación?
+
+---
+
+#### Conmutación de Circuitos
+
+- **Este es un cable físico**.
+- Se establece de izquierda a derecha, aunque sea una conexión continua y ordenada, también puede tener retrasos significativos hasta que se encuentra un canal disponible.
+- Mal uso del ancho de banda.
+- Es fija y no cambia.
+- Si falla, se pierde todo.
+
+---
+
+#### Conmutación de Paquetes
+
+- Los paquetes pueden ir a distintas redes y distintas trayectorias.
+- Usa de forma más eficiente el ancho de banda.
+- Los paquetes pueden llegar desordenados.
+- Envían antes de que llegue el que se fue primero, eso usa mejor el ancho de banda.
+- Si falla, puede encontrar otra ruta para enviar los datos.
+
+---
