@@ -1,0 +1,193 @@
+---
+title: Tipologia de Redes
+draft: false
+description: Topologia de redes para Redes 1 Ingenieria Informática
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: Rc1
+---
+# Topología de Red
+
+La manera en que se conectan de manera física o digital las redes.
+
+---
+
+## Características
+
+1. Disposición de los nodos
+1. Redundancia
+1. Flujo de datos
+1. Eficiencia
+1. Facilidad de mantenimiento
+
+---
+
+## Tipos
+
+### Física
+
+Se refiere a la disposición tangible de los componentes de la red.
+
+#### Bus
+
+Todos se conectan a un cable principal que es el Bus, por ahí pasan todos los datos. Todos los nodos se conectan ahí. Es de los que menos se usan hoy en día.
+
+##### Ventajas
+
+- Simple de manejar.
+- Los dispositivos solo dependen del BUS.
+
+##### Desventajas
+
+- Si el bus falla, todo cae.
+- Para pocos dispositivos (afecta la velocidad la cantidad).
+
+##### Aplicaciones
+
+- Colegios.
+- Redes pequeñas de bajo presupuesto.
+
+#### Estrella
+
+Todos los dispositivos se conectan a un switch o hub.
+
+##### Ventajas
+
+- Se mantiene desde un punto central.
+- Los nodos no afectan a la red si fallan.
+
+##### Desventajas
+
+- Si el nodo central falla, todos fallan.
+- Todo depende del nodo central.
+
+###### Tipos
+
+- Con Hub.
+- Con Switch.
+- Extendida.
+
+Hoy en día vemos esto todos los días en redes wifi domésticas.
+
+#### Anillo
+
+##### Tipos
+
+- Simple.
+- Doble.
+- Token Ring (solo uno habla a la vez).
+
+Todo pasa por un canal de comunicación.
+
+##### Ventajas
+
+- Simplicidad.
+- Bajo costo.
+- Mejor ancho de banda.
+
+##### Desventajas
+
+- Si un nodo falla, toda la red falla.
+- Información pesada hace que se vuelva muy lenta la red.
+
+#### Malla
+
+##### Tipos
+
+- Completa (todos están conectados entre sí).
+- Parcial (algunos entre sí, otros no).
+- Inalámbrica (todos se conectan entre sí pero sin cables).
+- Híbrida (combinación de las anteriores).
+
+##### Ventajas
+
+- El flujo de datos es constante.
+- No importa si un nodo falla, la red continúa.
+
+##### Desventajas
+
+- Muy complicado de instalar.
+- Más costoso.
+- Difícil de escalar.
+
+##### Aplicaciones
+
+- Redes empresariales.
+- Redes de centros de datos.
+- Redes inteligentes.
+- Redes de emergencia.
+
+#### Punto a Punto
+
+Es de lo más simple, se conectan directamente dos clientes, como Bluetooth entre tus auriculares y tu celular.
+
+##### Ventajas
+
+- Simplicidad.
+- Bajo costo.
+
+##### Desventajas
+
+- Fuga de información.
+- No escalable.
+
+#### Árbol
+
+Controla el Host y a los demás nodos.
+
+**Componentes:**
+
+- Central (se encarga de administrar).
+- Nodos secundarios.
+- Enlaces.
+
+##### Tipos
+
+- Árbol binario (máximo dos nodos hijos).
+- Árbol extendido (más de dos nodos hijos, se ramifica más, es más flexible).
+- Híbrido (combina las dos características anteriores).
+
+##### Ventajas
+
+- Se resuelven errores por errores.
+- Altamente escalable.
+
+##### Desventajas
+
+- Si el servidor principal muere, toda la red cae.
+- Es complicado de mantener desde el nodo central.
+
+##### Aplicaciones
+
+- LAN.
+- Redes de campus.
+- ISP.
+
+#### Topología Híbrida
+
+Combina algunas de las que mencionamos anteriormente.
+
+##### Tipos
+
+- Estrella-Bus.
+- Árbol-Estrella.
+
+Se combinan las ventajas y desventajas de las redes combinadas, aunque se aprovechan para hacer a la medida de lo que necesitamos, cosa que puede ser más costosa.
+
+---
+
+### Lógica
+
+Describe cómo los datos fluyen a través de la red.
+
+#### Broadcast
+
+Cada equipo envía su información a todos los demás equipos, y estos mismos responden según el orden de llegada, por ejemplo: Ethernet.
+
+#### Topología de Transmisión de Token
+
+El Token permite o deniega el acceso a la red.
