@@ -112,6 +112,12 @@ Se sigue usando:
 
 ### ¿Qué es la Conmutación?
 
+Esto habla mucho del enrutamiento, pero tienen diferencias de como se rutean, en el primer caso tenemos la necesidad de que vayan uno atras de otro, respetando el orden, en el 2ndo eso no es lo importante, siempre que lleguen.
+
+Este mismo funcionamiento veremos en la capa de enlace.
+
+También se relacionado con la capa de transporte y la capa de aplicación.
+
 ---
 
 #### Conmutación de Circuitos
@@ -127,9 +133,39 @@ Se sigue usando:
 #### Conmutación de Paquetes
 
 - Los paquetes pueden ir a distintas redes y distintas trayectorias.
+- Este tambien tiene cables, pero cada paquete puede decir por donde ir.
 - Usa de forma más eficiente el ancho de banda.
 - Los paquetes pueden llegar desordenados.
 - Envían antes de que llegue el que se fue primero, eso usa mejor el ancho de banda.
 - Si falla, puede encontrar otra ruta para enviar los datos.
 
 ---
+
+## Sistema de telefonia móvil
+
+Las celdas se pueden subdividir para poder cubrir mayores demandas, hay celdas con el mismo nombre, tienen frecuencias compartidas, pero con celdas intermedios para separarles y asi no tener problemas al reutilizar las frecuencias.
+
+1G,Voz analogica, el IMTS mejoro la primera versión utilizando dos frecuencias separadas, pero solo usando 24 canales, que tenias que esperar mucho para usar y luego se implementa el AMPS, que utiliza celdas, cada una con una frecuencia distintas, cada celda tiene una estación base, que se encarga de manejar a los usuarios y sus peticiones.
+
+handoff se da cuando un user esta saliendo o entrando de una celda, entonces se comunican con otra estación base para ver con quien esta teniendo una mejor conexión y asi derivarle a esta nueva celda.
+
+AMPS UTILIZA FDM
+
+para separar los canales. emplea un total de 832 de canales, que se dividien en: canlaes … falta completar con los canales y sus tipos
+
+ADminsitración de llamadas,
+
+cada telefono tien un numero de siere de 32 bits y un numero telefonico de 10 digitos almacendaso en su memoria de solo lectura
+
+para hace rla llamada el usuario marca el numero y llama , aca miramos si al que queremos llamar esta en la misma celda que nosotros.
+
+para recibir los telefonos inactivos escuchan el cana de localizacion, si esta activo se le asigna un canal para empezar a llamar.
+
+¿Como funciona una llamada?\
+damos click a llamar, y nos comunicamos con la estación base.
+
+Utilizamos uno de los canales para ver si esta en la misma que el que llama.
+
+si esta, tuki se conectan con la misma estación base por comuntación.
+
+si no esta, pregunta al centro de conmutación, es la que se encarga de comunicarse con todas las estaciones bases, desde ahi localizamos el numero al que queremos llamar, esta estación base que nos encuentra o no, le vuelve a informar al centro de conmutación que se comunica con la estacion base original.
