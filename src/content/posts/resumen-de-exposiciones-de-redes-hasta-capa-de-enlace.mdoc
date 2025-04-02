@@ -1,0 +1,209 @@
+---
+title: Resumen de Exposiciones de Redes Hasta Capa de Enlace
+draft: false
+description: Resumen de anotaciones tomadas durante exposiciones de redes
+authors:
+  - matias-mareco
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: Rc1
+---
+# Exposiciones sobre Redes de Computadoras
+
+---
+
+## 🌐  **Modulación y Multiplexación**
+
+### 📡 **Modulación Digital**
+
+#### ¿Por qué se usa?
+
+- **Problema**: Las señales digitales (bits: 0s y 1s) no pueden viajar largas distancias por cables o aire.
+- **Solución**: Convertirlas en **ondas analógicas** (como el sonido o la luz).\
+  *Comparación*: Es como traducir un libro a otro idioma para que pueda ser leído en otro país.
+
+#### Tipos de Modulación:
+
+{% table %}
+- Tipo
+- Funcionamiento
+- Comparación
+- Detalle Técnico
+---
+- **ASK**
+- Modula la **amplitud** de la onda (0 = amplitud baja, 1 = amplitud alta).
+- Como un semáforo (rojo=0, verde=1)
+- Usado en controles remotos IR. Sensible a interferencias (ej: luz ambiental).
+---
+- **FSK**
+- Modula la **frecuencia** (0 = tono bajo, 1 = tono alto).
+- Como dos notas musicales (Do=0, Re=1)
+- Usado en módems antiguos. Más estable que ASK pero ocupa más ancho de banda.
+---
+- **PSK**
+- Modula la **fase** de la onda (ej: 0°=0, 180°=1).
+- Como girar un interruptor en dos posiciones
+- BPSK (2 fases) usado en Wi-Fi. QPSK (4 fases) en satélites.
+{% /table %}
+
+### 🔄 **Multiplexación**
+
+#### ¿Para qué sirve?
+
+- **Objetivo**: Permitir que múltiples usuarios compartan un **mismo medio físico** (cable, frecuencia) sin interferencias.\
+  *Comparación*: Como dividir una carretera en carriles para diferentes tipos de vehículos.
+
+#### Técnicas Clave:
+
+1. **FDM (División de Frecuencia)**:
+   - Cada usuario tiene una **banda de frecuencia** asignada.\
+     *Ejemplo*: Emisoras de radio (FM 88.1, 92.5, etc.).\
+     ⚠️ **Limitación**: Regulado por **CONATEL** para evitar solapamientos (como un controlador aéreo de frecuencias).
+1. **TDM (División de Tiempo)**:
+   - **Estático**: Turnos fijos (ej: 0.1 segundos por usuario).\
+     *Problema*: Desperdicio si un usuario no envía datos.\
+     *Comparación*: Como una reunión donde cada persona habla 1 minuto en orden fijo.
+   - **Dinámico**: Asigna slots según demanda.\
+     *Comparación*: Como un moderador que da la palabra solo a quienes levantan la mano.
+1. **CDMA (División de Código)**:
+   - Cada usuario tiene un **código único** (ej: GPS: satélites usan códigos diferentes).\
+     *Comparación*: Como una fiesta donde todos hablan al mismo tiempo, pero en idiomas diferentes.
+
+---
+
+## 🕸️ **Topologías de Red**
+
+### 🔌 **Topologías Físicas**
+
+#### 1. **Bus** (Obsoleta pero histórica)
+
+- **Funcionamiento**: Todos conectados a un **cable central**.\
+  *Comparación*: Como una cadena de correos donde cada persona lee el mensaje y lo pasa al siguiente.
+- **Problema**: Si el cable se corta, la red colapsa.\
+  *Ejemplo histórico*: Ethernet coaxial en los 80s.
+
+#### 2. **Estrella** (La más común hoy)
+
+- **Funcionamiento**: Todos conectados a un **switch/hub central**.\
+  *Comparación*: Como una rueda de bicicleta: los rayos son dispositivos y el centro es el switch.
+- **Ventaja**: Si un dispositivo falla, los demás siguen funcionando.
+- **Desventaja**: El switch es un **punto único de fallo**.
+
+#### 3. **Malla** (Para redes críticas)
+
+- **Funcionamiento**: Cada nodo está conectado a múltiples nodos.\
+  *Comparación*: Como una telaraña: si un hilo se rompe, hay caminos alternativos.
+- **Usos**: Militar, hospitales, centros de datos.
+- **Costo**: Requiere  𝑛(𝑛−1)/2 conexiones para 𝑛 nodos (ej: 10 nodos → 45 cables).
+
+### 🌟 **Topologías Lógicas**
+
+#### 1. **Broadcast** (Ethernet)
+
+- **Funcionamiento**: Todos reciben los datos, pero solo el destinatario los procesa.\
+  *Comparación*: Como un megáfono en una plaza: todos escuchan, pero solo uno responde.
+
+#### 2. **Token Passing** (Token Ring)
+
+- **Funcionamiento**: Un "testigo" electrónico da permiso para transmitir.\
+  *Comparación*: Como un micrófono en una reunión: solo quien lo tiene puede hablar.
+
+---
+
+## 🛰️  **Redes de Área Amplia y Telefonía**
+
+### 📞 **Evolución de la Telefonía Móvil**
+
+{% table %}
+- Generación
+- Tecnología
+- Comparación
+- Detalle Clave
+---
+- **1G**
+- Analógica (AMPS)
+- Walkie-talkie gigante
+- Sin cifrado: cualquiera podía escuchar llamadas con un escáner.
+---
+- **2G**
+- Digital (GSM)
+- SMS vs Correo postal
+- Introdujo cifrado y mensajes de texto.
+---
+- **3G**
+- Datos móviles (UMTS)
+- Autopista de 3 carriles
+- Permitió videollamadas y navegación web básica.
+---
+- **4G**
+- IP sobre paquetes (LTE)
+- Tren bala vs bicicleta
+- Velocidades de ~100 Mbps. Baja latencia para streaming.
+---
+- **5G**
+- Ondas milimétricas y MIMO masivo
+- Teleportación vs caminar
+- Latencia de ~1 ms. Usa **beamforming** para enfocar señales como un láser.
+{% /table %}
+
+### 📺 **Televisión por Cable vs Fibra Óptica**
+
+{% table %}
+- Característica
+- Cable Coaxial
+- Fibra Óptica (GPON)
+---
+- **Velocidad**
+- Hasta 100 Mbps (DOCSIS 3.1)
+- Hasta 10 Gbps
+---
+- **Interferencia**
+- Sensible a ruido eléctrico
+- Inmune a interferencias electromagnéticas
+---
+- **Comparación**
+- Tubería de agua tradicional
+- Tubería de alta presión con filtros
+{% /table %}
+
+---
+
+## 🔗**Capa de Enlace de Datos**
+
+### 🛡️ **Entramado (Framing)**
+
+#### Métodos:
+
+1. **Bytes Bandera**:
+   - Delimitadores: `0x7E` (hex) marca inicio/fin de trama.\
+     *Problema*: Si los datos contienen `0x7E`, se usa **byte stuffing** (insertar `0x7D` antes).\
+     *Comparación*: Como usar comillas en un texto: `"Hola "mundo""` → `"Hola \"mundo\""`.
+1. **Bits Bandera**:
+   - Delimitador: `01111110`.
+   - **Bit stuffing**: Tras cinco `1`s consecutivos, insertar un `0`.\
+     *Ejemplo*: `011111` → `0111110`.
+
+### 🔍 **Control de Errores**
+
+#### 1. **Detección**:
+
+- **CRC (Cyclic Redundancy Check)**:
+  - Genera un valor basado en operaciones matemáticas con los bits.\
+    *Comparación*: Como un código de verificación en un ISBN de libros.
+
+#### 2. **Corrección**:
+
+- **Código de Hamming**:
+  - Añade bits de paridad en posiciones específicas (ej: potencias de 2).\
+    *Ejemplo*: Para `1011`, se calculan bits en posiciones 1, 2, 4.
+
+### ⚙️ **Mecanismos de Confiabilidad**
+
+- **ACK/NAK**:
+  - ACK = "Recibí el paquete". NAK = "Hubo error, reenvía".\
+    *Comparación*: Como una entrega certificada con acuse de recibo.
+- **Temporizadores**:
+  - Si no hay ACK en X segundos, se reenvía el paquete.\
+    *Problema*: Paquetes duplicados si el ACK llega tarde. Solución: **Números de secuencia**.
