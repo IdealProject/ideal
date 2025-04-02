@@ -1,0 +1,52 @@
+---
+title: Clase del 06-03-2025
+draft: false
+description: Notas de la clase
+authors: []
+major:
+  discriminant: cpa
+  value: Ab
+---
+# 
+
+## Capa de transporte
+
+tiene cantidad de herramientas que pueden usar esa aplicación
+
+### Tipos de servicios
+
+PCP transmitiom data :garantiza la entrega de la informacion
+UDP user: no garantiza
+El tipo de servicio se determina al establecer la conexión (cabe mencionar que es imposible lograr un canal libre de errores; lo que se quiere decir en realidad con este término es que la tasa de errores es lo bastante baja como para ignorarla en la práctica).
+
+## Capa de secion
+
+Permite a los usuarios en distintas máquinas establecer sesiones entre ellos. Las sesio-
+nes ofrecen varios servicios, incluyendo el control del diálogo (llevar el control de quién va a transmitir), el manejo de tokens (evitar que dos partes intenten la misma operación crítica al mismo tiempo) y la sincronización (usar puntos de referencia en las transmisiones extensas para reanudar desde el último punto de referencia en caso de una interrupción).
+
+## Capa de presentacion
+
+la capa de presentación se enfoca en la sintaxis y la semántica de la información transmitida. Para
+hacer posible la comunicación entre computadoras con distintas representaciones internas de datos,
+podemos definir de una manera abstracta las estructuras de datos que se van a intercambiar, junto con
+una codificación estándar que se use “en el cable”.
+
+## Capa de aplicacion
+
+# Modelo TCP/IP
+
+## Capa de enlace
+
+## Capa de interred
+
+Su trabajo es permitir que los host inyecte paquetes en cualquier red
+
+## Capa de transporte.
+
+Permite que las entidades pares(origen destino), lleven a a cabo una comversacion
+
+IP no es comfiable
+ICMP protocolo chismoso(lleva y trae mensajes)
+
+Muestras los saltos que se hacen para llegar a otra direccion
+ttl numero de saltos que puede hacer un ip
