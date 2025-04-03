@@ -1,0 +1,342 @@
+---
+title: Protocolos y Comportamiento de las Redes- Conceptos básicos
+draft: false
+description: Notas tomadas durante explicaciones del profesor en la clase de redes
+authors:
+  - matias-mareco
+  - chat-gpt
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: Rc1
+---
+# Redes - Notas
+
+- **Jerarquía de protocolos:** protocolos aplicados por donde fluye la información.
+- **Servicio orientado a la conexión:** cualquier información que llegue incompleta se deja de entender.
+- **Interfaz:** contiene nombres, parámetros y retornos.
+- Tenemos **capas** para dividir funciones/responsabilidades delimitadas entre miembros de la red.
+- Indica que puedo saber o pedir a la alta parte.
+
+### Esquema de capas
+
+> Capa n <--> Capa n\
+|     Protocolos    |\
+v              v         v\
+Capa 2 <--> Capa 2\
+|                          |   <--Interfaces\
+v                         v\
+Capa 1 <--> Capa 1\
+|                          |\
+v                         v\
+Medio físico
+
+- **Interfaz:** conexión entre C/Cp.
+  - En redes de computadoras, una **interfaz** es el punto de conexión entre dos capas del modelo de comunicación (Capa/Capa o C/Cp).
+  - Permite la interacción entre protocolos de diferentes capas, facilitando el paso de datos desde una aplicación hasta el hardware y viceversa.
+  - **Ejemplo:** en el modelo OSI, la interfaz entre la capa de transporte y la capa de red permite que los paquetes de datos sean preparados para ser enviados por la red.
+- **Comunicación virtual:** no tangible.
+  - Se refiere a la idea de que, aunque los datos viajan físicamente por cables o señales inalámbricas, en términos de software se perciben como si existiera una conexión directa entre emisor y receptor.
+  - **Ejemplo:** en una videollamada, parece que las dos personas están conectadas directamente, pero en realidad los datos pasan por múltiples servidores y dispositivos antes de llegar a su destino.
+- **Protocolo:** acuerdo/estándar.
+  - Un **protocolo de comunicación** es un conjunto de reglas y convenciones que determinan cómo se transmiten los datos en una red.
+  - Sin protocolos, los dispositivos no podrían entenderse entre sí.
+  - **Ejemplo:** el **Protocolo de Internet (IP)** define cómo se enrutan los paquetes en una red para que lleguen a su destino.
+- **Información adicional:** para quien va, en qué idioma está, etc.
+  - Al enviar datos en una red, los paquetes incluyen información extra para asegurar su correcta entrega y entendimiento.
+  - Algunos datos que pueden incluirse:
+    - **Dirección de destino:** identifica a qué equipo o usuario va dirigido el mensaje.
+    - **Tipo de protocolo:** especifica si el mensaje es HTTP, FTP, TCP, UDP, etc.
+    - **Codificación o formato:** define en qué "idioma" están los datos (ejemplo: UTF-8, JSON, XML).
+    - **Tamaño y orden de los paquetes:** para asegurar que los datos lleguen completos y en el orden correcto.
+  - **Ejemplo:** en un correo electrónico, los encabezados contienen información sobre el remitente, destinatario, asunto y formato del mensaje.
+
+---
+
+### Headers y ancho de banda
+
+- Los **headers** permiten la comunicación virtual entre capas.
+- **Ancho de banda:** cantidad máxima de información transmisible por un canal.
+- El canal con menor capacidad define el flujo máximo de información del sistema.
+- **Servicio == Interfaz.**
+- Los protocolos se envían a través de los headers.
+- **El modelo OSI nunca salió de laboratorios.**
+
+##### Cadenas estructuradas
+
+- Indican instrucciones o comienzos de secciones mediante combinaciones de `1` y `0`, como palabras clave.
+- **Trama:** secuencia de bits estructurados.
+- **Tail del paquete:**
+  - No pertenece a la capa de red.
+
+##### Switch y capa de red
+
+- **Switch NO pertenece a la capa de red.**
+- **Conmutar:** puentear - establecer conexión.
+- En la **capa de red** se encuentra el **destinatario**.
+- **Protocolo IP:**
+  - Responsable de encontrar el destinatario.
+  - Aparece en la capa de red.
+- Cuando un equipo busca una IP, repite a todos los equipos de la red hasta la capa de enlace con el **MAC Address**.
+
+---
+
+### Servidor DHCP
+
+- **Asigna IPs dinámicamente** a los equipos conectados a la red.
+- **Switch:**
+  - Funciona a nivel de **capa de enlace** porque no necesita armar hasta la capa de red.
+  - Usa solo el **MAC Address** para saber a quién va.
+
+## Capas del Modelo OSI y Protocolos Relacionados
+
+### 1. **Capa de Transporte (Capa 4)**
+
+### Funcionalidades Clave:
+
+- **Protocolos Principales**:
+  - **TCP (Protocolo de Control de Transmisión)**:
+    - **Orientado a conexión**: Establece una conexión mediante el *three-way handshake* (SYN, SYN-ACK, ACK).
+
+    - **Fiabilidad**: Garantiza la entrega mediante acuses de recibo (ACK) y retransmisiones.
+
+    - **Ejemplo de encabezado**:
+
+      ```plaintext
+      | Puerto Origen (16 bits) | Puerto Destino (16 bits) |
+      | Número de Secuencia (32 bits)                |
+      | Número de ACK (32 bits)                      |
+      | Flags (URG, ACK, PSH, RST, SYN, FIN)         |
+      ```
+
+    - **Casos de uso**: Navegación web (HTTP/HTTPS), transferencia de archivos (FTP).
+  - **UDP (Protocolo de Datagramas de Usuario)**:
+    - **Sin conexión**: No requiere handshake inicial.
+
+    - **Baja latencia**: Ideal para aplicaciones en tiempo real.
+
+    - **Ejemplo de encabezado**:
+
+      ```plaintext
+      | Puerto Origen (16 bits) | Puerto Destino (16 bits) |
+      | Longitud (16 bits)      | Checksum (16 bits)        |
+      ```
+
+    - **Casos de uso**: Streaming de video (VoIP), DNS.
+
+### Comparación TCP vs UDP:
+
+{% table %}
+- **Característica**
+- **TCP**
+- **UDP**
+---
+- Orientación
+- Conexión
+- Sin conexión
+---
+- Fiabilidad
+- Alta (ACK y retransmisiones)
+- Baja (sin confirmación)
+---
+- Overhead
+- Alto (encabezado complejo)
+- Bajo (encabezado simple)
+---
+- Velocidad
+- Más lento
+- Más rápido
+---
+- Ejemplo de uso
+- Correos electrónicos (SMTP)
+- Juegos en línea (UDP)
+{% /table %}
+
+---
+
+### 2. **Capa de Sesión (Capa 5)**
+
+#### Mecanismos Detallados:
+
+- **Gestión de Sesiones**:
+  - **Autenticación mutua**: Verifica identidades mediante certificados digitales o credenciales (ej: OAuth 2.0).
+  - **Token de sesión**:
+    - **Formato**: Cadena alfanumérica única (ej: `A1B2-C3D4-E5F6`).
+    - **Validez**: Tiempo limitado (ej: 30 minutos) para prevenir ataques de *replay*.
+  - **Renovación de token**: Generación de nuevos tokens sin interrumpir la sesión activa.
+- **Ejemplo de flujo**:
+  1. **Cliente** → Envía credenciales (usuario/contraseña).
+  1. **Servidor** → Valida credenciales y genera token: `X7Y8-Z9Q0-R1S2`.
+  1. **Cliente** → Usa el token en cabeceras (ej: `Authorization: Bearer X7Y8-Z9Q0-R1S2`).
+
+---
+
+### 3. **Capa de Presentación (Capa 6)**
+
+#### Funciones Específicas:
+
+- **Traducción de formatos**:
+  - **Codificación**: Conversión de datos entre sistemas (ej: ASCII a Unicode).
+  - **Compresión**: Reducción de tamaño mediante algoritmos como ZIP o LZ77.
+- **Cifrado**:
+  - **Algoritmos comunes**:
+
+    - **Simétrico**: AES-256 (clave única).
+    - **Asimétrico**: RSA-4096 (clave pública/privada).
+
+  - **Ejemplo de cifrado TLS**:
+
+    ```plaintext
+    Cliente → Servidor: "ClientHello" (versiones TLS soportadas).
+    Servidor → Cliente: "ServerHello" (elige TLS 1.3 + certificado).
+    Intercambio de claves Diffie-Hellman.
+    ```
+
+---
+
+## 4. **Capa de Aplicación (Capa 7)**
+
+### Protocolos y Ejemplos:
+
+- **HTTP/HTTPS**:
+  - **Métodos**: GET (obtener recursos), POST (enviar datos).
+  - **Códigos de estado**: 200 (OK), 404 (No encontrado), 503 (Servicio no disponible).
+- **DNS (Sistema de Nombres de Dominio)**:
+  - **Función**: Traduce nombres de dominio (ej: `google.com`) a direcciones IP (ej: `172.217.3.110`).
+  - **Tipos de registros**:
+    - **A**: IPv4.
+    - **AAAA**: IPv6.
+    - **MX**: Servidores de correo.
+
+---
+
+## 5. **Protocolo IP y TTL**
+
+### Detalles Técnicos:
+
+- **IP (Internet Protocol)**:
+  - **No orientado a conexión**: No garantiza entrega de paquetes.
+  - **Direccionamiento**:
+    - **IPv4**: 32 bits (ej: `192.168.1.1`).
+    - **IPv6**: 128 bits (ej: `2001:0db8:85a3::8a2e:0370:7334`).
+- **TTL (Time to Live)**:
+  - **Propósito**: Evita bucles infinitos en la red.
+  - **Funcionamiento**:
+    1. Paquete inicia con TTL=64 (valor típico en sistemas Unix).
+    1. Cada router decrementa TTL en 1.
+    1. Si TTL=0 → Paquete descartado + mensaje ICMP "Time Exceeded".
+- **ICMP (Protocolo de Mensajes de Control de Internet)**:
+  - **Mensajes clave**:
+
+    - **Echo Request/Reply**: Base del comando `ping`.
+    - **Destination Unreachable**: Indica ruta bloqueada o host inalcanzable.
+
+  - **Traceroute**:
+
+    ```plaintext
+    Paso 1: Envía paquete con TTL=1 → Router 1 responde.
+    Paso 2: Envía paquete con TTL=2 → Router 2 responde.
+    ...
+    Paso N: TTL=N → Destino final responde.
+    ```
+
+---
+
+## 6. **Ejemplo de Comunicación Multicapa**
+
+### Flujo de un Paquete HTTP:
+
+1. **Capa de Aplicación**:
+   - Usuario escribe `https://ejemplo.com`.
+   - Navegador genera solicitud HTTP GET.
+1. **Capa de Transporte**:
+   - Divide datos en segmentos TCP.
+   - Puerto destino: 443 (HTTPS).
+1. **Capa de Red**:
+   - Encapsula en paquete IP con dirección destino `93.184.216.34`.
+   - TTL=64.
+1. **Capa de Enlace**:
+   - Añade dirección MAC del router (ej: `00:1A:2B:3C:4D:5E`).
+1. **Capa Física**:
+   - Transmite por cable Ethernet como señales eléctricas.
+
+### Tabla Comparativa: Modelo TCP/IP vs Modelo OSI
+
+{% table %}
+- **Característica**
+- **Modelo TCP/IP**
+- **Modelo OSI**
+---
+- **Número de Capas**
+- 4 Capas
+- 7 Capas
+---
+- **Origen**
+- Desarrollado por el Departamento de Defensa de EE.UU. (ARPANET)
+- Propuesto por la ISO (Organización Internacional de Normalización)
+---
+- **Enfoque**
+- Práctico, orientado a la implementación real
+- Teórico, marco de referencia para diseño de redes
+---
+- **Ventajas**
+- - Ampliamente adoptado en Internet.<br>- Menos complejo por menos capas.<br>- Integra funciones de capas superiores (OSI 5-7 en capa de Aplicación).
+- - Separación clara de funciones por capas.<br>- Detallado para estandarización.<br>- Flexible para diferentes tecnologías.
+---
+- **Desventajas**
+- - Menos detallado en la separación de funciones.<br>- No diferencia Presentación y Sesión.
+- - Demasiado complejo para implementaciones prácticas.<br>- No dominante en implementaciones reales.
+---
+- **Capas y Correspondencia**
+- 1. **Aplicación**: HTTP, FTP, DNS, SMTP<br>2. **Transporte**: TCP, UDP<br>3. **Internet**: IP, ICMP<br>4. **Acceso a la Red**: Ethernet, Wi-Fi
+- 1. **Aplicación**: HTTP, FTP<br>2. **Presentación**: JPEG, SSL/TLS<br>3. **Sesión**: NetBIOS, APIs de sesión<br>4. **Transporte**: TCP, UDP<br>5. **Red**: IP, ICMP<br>6. **Enlace de Datos**: Ethernet, PPP<br>7. **Física**: Cableado, señales
+---
+- **Protocolos Clave**
+- - **Aplicación**: HTTP/HTTPS, DNS, SMTP<br>- **Transporte**: TCP (fiabilidad), UDP (baja latencia)<br>- **Internet**: IPv4/IPv6, ICMP (diagnóstico)<br>- **Acceso a Red**: MAC, ARP
+- - **Aplicación**: Telnet, SNMP<br>- **Presentación**: ASCII, MPEG<br>- **Sesión**: RPC, SQL<br>- **Transporte**: SPX (Novell)<br>- **Red**: OSPF, BGP<br>- **Enlace**: HDLC, VLAN<br>- **Física**: RS-232, DSL
+---
+- **Uso en la Práctica**
+- Base de Internet moderna.
+- Principalmente educativo y para diseño de redes.
+{% /table %}
+
+---
+
+## **Explicación de Capas y Protocolos**
+
+### 1. **Capa de Aplicación (TCP/IP) vs Capas 5-7 (OSI)**
+
+- **TCP/IP**: Agrupa Presentación, Sesión y Aplicación OSI en una sola capa.
+  - Ejemplo: HTTPS maneja cifrado (Presentación), cookies (Sesión) y solicitudes web (Aplicación).
+- **OSI**: Separa funciones:
+  - **Capa 7 (Aplicación)**: Interfaz usuario-red (ej: navegador).
+  - **Capa 6 (Presentación)**: Cifrado/compresión (ej: SSL).
+  - **Capa 5 (Sesión)**: Control de diálogos (ej: autenticación persistente).
+
+### 2. **Capa de Transporte**
+
+- **TCP/IP y OSI**: Misma función (TCP/UDP).
+  - **TCP**: Conexión confiable con ACK (ej: descarga de archivos).
+  - **UDP**: Sin conexión (ej: streaming en vivo).
+
+### 3. **Capa de Red vs Capa de Internet**
+
+- **OSI (Capa 3)**: Enrutamiento lógico (IP).
+- **TCP/IP (Capa Internet)**: Equivalente a OSI Capa 3.
+  - **ICMP**: Usado en `ping` y `traceroute`.
+
+### 4. **Capa de Acceso a la Red (TCP/IP) vs Capas 1-2 (OSI)**
+
+- **TCP/IP**: Combina Enlace de Datos y Física.
+  - Ejemplo: Ethernet (MAC) + cableado (RJ45).
+- **OSI**:
+  - **Capa 2 (Enlace)**: Direccionamiento físico (MAC).
+  - **Capa 1 (Física)**: Medios de transmisión (fibra óptica, radiofrecuencia).
+
+---
+
+## **Conclusión**
+
+- **TCP/IP**: Ideal para implementaciones reales y escalables (ej: Internet).
+- **OSI**: Mejor para entender funciones teóricas y estandarizar tecnologías emergentes.
