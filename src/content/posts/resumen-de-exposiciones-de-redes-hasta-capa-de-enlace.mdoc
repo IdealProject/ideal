@@ -437,6 +437,37 @@ Si no hay ACK en X segundos, se reenvía el paquete.\
 
 ## Subcapa de control de acceso al medio
 
+#### Asignación de Canal y Métodos de Multiplexión
+
+La manera tradicional de asignar un solo canal es dividir su capacidad mediante un esquema de **Multiplexión**, como el **FDM (Multiplexión por División de Frecuencia)**. Si hay **N** usuarios, el ancho de banda se divide en **N** partes de igual tamaño. Sin embargo, esto presenta problemas cuando el flujo de transmisión no es constante, ya que puede haber:
+
+- Una menor cantidad de usuarios, lo que lleva a un desperdicio del espectro.
+- Más cantidad de usuarios que ancho de banda, lo que provoca que se les niegue el permiso de transmisión.
+
+Para ver los métodos de asignación del canal, es necesario conocer los cinco **supuestos clave**:
+
+#### 1. Tráfico Independiente
+
+El modelo consiste en **N estaciones independientes**, cada una con un programa o usuario que genera tramas para transmisión. Cuando una trama se genera, la estación se bloquea hasta que la trama haya sido un éxito.
+
+#### 2. Canal Único
+
+Todas las estaciones pueden transmitir y recibir de un **canal único**.
+
+#### 3. Colisiones Observables
+
+Si dos tramas se transmiten de forma simultánea, se traslapan en el tiempo y la señal resultante se altera. Todas las estaciones pueden **detectar una colisión** antes de que ocurra.
+
+#### 4. Tiempo Continuo o Ranurado
+
+- Si el tiempo es **continuo** para la transmisión, las tramas pueden comenzar en cualquier momento.
+- Si el tiempo está **ranurado** en intervalos discretos, las tramas deben empezar al inicio de una ranura.
+
+#### 5. Detección de Portadora o Sin Detección de Portadora
+
+- Con la **detección de portadora**, la estación puede saber si el canal está en uso antes de intentar usarlo.
+- Si no hay **detección de portadora**, las estaciones transmiten la información y luego determinan si la transmisión tuvo éxito o no.
+
 #### 1. **ALOHA PURO (1970)**
 
 - **Creadores**: Norman Abramson y equipo (Universidad de Hawai).
