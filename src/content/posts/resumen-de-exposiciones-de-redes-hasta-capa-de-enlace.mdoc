@@ -33,17 +33,17 @@ major:
 - Detalle Técnico
 ---
 - **ASK**
-- Modula la **amplitud** de la onda (0 = amplitud baja, 1 = amplitud alta).
+- Modula la **amplitud** de la onda (0 = amplitud baja, 1 = amplitud alta).es mas sensible al ruido
 - Como un semáforo (rojo=0, verde=1)
 - Usado en controles remotos IR. Sensible a interferencias (ej: luz ambiental).
 ---
 - **FSK**
-- Modula la **frecuencia** (0 = tono bajo, 1 = tono alto).
-- Como dos notas musicales (Do=0, Re=1)
+- Modula la **frecuencia** (0 = tono bajo, 1 = tono alto).s mas resistente al ruido pero requiere mas ancho de banda porque recibe muchas frecuencias, es mas complejo de implementar
+- Como dos notas musicales (Do=0, Re=1) (frecuencias diferentes)
 - Usado en módems antiguos. Más estable que ASK pero ocupa más ancho de banda.
 ---
 - **PSK**
-- Modula la **fase** de la onda (ej: 0°=0, 180°=1).
+- Modula la **fase** de la onda (ej: 0°=0, 180°=1).desplazamiento de fase, la informacion binaria se pasa por fases, BPSK son 2 fases y QPSK transmite 4 fases, la fase varia en funcion de una inclinación {% inlineLatex formula="/theta" /%}.
 - Como girar un interruptor en dos posiciones
 - BPSK (2 fases) usado en Wi-Fi. QPSK (4 fases) en satélites.
 {% /table %}
@@ -58,22 +58,27 @@ major:
 #### Técnicas Clave:
 
 1. **FDM (División de Frecuencia)**:
-   - Cada usuario tiene una **banda de frecuencia** asignada.\
+   - Cada usuario tiene una **banda de frecuencia** asignada.&nbsp;Debes ponerte en la misma frecuencia de un canal para poder recibir su informacion\
      *Ejemplo*: Emisoras de radio (FM 88.1, 92.5, etc.).\
      ⚠️ **Limitación**: Regulado por **CONATEL** para evitar solapamientos (como un controlador aéreo de frecuencias).
-1. **TDM (División de Tiempo)**:
+1. **Multiplexion por división de acceso múltiple:** todos los usuarios pueden usar un canal, cada canal va en su sintonía pero sin interferirse, da la impresión de que van todos juntos pero en realidad cada uno va por su propio camino
+1. **TDM (División de Tiempo)**: Cada uno tiene su momento, recibe y manda informacion en un tiempo estimado, para mejorar el aspecto del tiempo perdido se usa la multiplexion estatica por division de tiempo, si alguien necesita usar un instante de tiempo, se usa. Asigna dinamicamente el tiempo de transmision segun la necesidad de cada usuario
    - **Estático**: Turnos fijos (ej: 0.1 segundos por usuario).\
      *Problema*: Desperdicio si un usuario no envía datos.\
      *Comparación*: Como una reunión donde cada persona habla 1 minuto en orden fijo.
    - **Dinámico**: Asigna slots según demanda.\
      *Comparación*: Como un moderador que da la palabra solo a quienes levantan la mano.
 1. **CDMA (División de Código)**:
-   - Cada usuario tiene un **código único** (ej: GPS: satélites usan códigos diferentes).\
+   - Cada usuario tiene un **código único** (ej: GPS: satélites usan códigos diferentes).mezcla de division por frecuencia y tiempo, cada usuario tiene un codigo que lo enlaza con otro, se puede usar en gps, radios, etc.\
      *Comparación*: Como una fiesta donde todos hablan al mismo tiempo, pero en idiomas diferentes.
 
 ---
 
 ## 🕸️ **Topologías de Red**
+
+T. Física : Conexiones(Routers,etc)
+
+T. Lógica : Como fluyen los datos(Broadcasts,etc)
 
 ### 🔌 **Topologías Físicas**
 
@@ -81,28 +86,87 @@ major:
 
 - **Funcionamiento**: Todos conectados a un **cable central**.\
   *Comparación*: Como una cadena de correos donde cada persona lee el mensaje y lo pasa al siguiente.
+
 - **Problema**: Si el cable se corta, la red colapsa.\
   *Ejemplo histórico*: Ethernet coaxial en los 80s.
+
+  Ventaja: simple de integrar
+
+  Desventajas: si falla el bus principal, todo se desconecta, se puede usar en redes pequeñas, hogares, etc.
 
 #### 2. **Estrella** (La más común hoy)
 
 - **Funcionamiento**: Todos conectados a un **switch/hub central**.\
   *Comparación*: Como una rueda de bicicleta: los rayos son dispositivos y el centro es el switch.
 - **Ventaja**: Si un dispositivo falla, los demás siguen funcionando.
-- **Desventaja**: El switch es un **punto único de fallo**.
+- **Desventaja**: El switch es un **punto único de fallo**. Si el dispositivo central falla, muere todo y la velocidad depende del dispositivo central
 
 #### 3. **Malla** (Para redes críticas)
 
 - **Funcionamiento**: Cada nodo está conectado a múltiples nodos.\
   *Comparación*: Como una telaraña: si un hilo se rompe, hay caminos alternativos.
+
 - **Usos**: Militar, hospitales, centros de datos.
+
 - **Costo**: Requiere  𝑛(𝑛−1)/2 conexiones para 𝑛 nodos (ej: 10 nodos → 45 cables).
+
+  *Malla completa: todos estan conectados entre si*
+
+  *Malla parcial: algunos están conectados entre si*
+
+  *Malla inalámbrica: todos se conectan con algo inalámbrico*
+
+  *Malla hibrida: combina las mallas anteriores*
+
+  **Se aplica en redes empresariales, centros de datos, redes inteligentes, redes de emergencia**
+
+  **Ventajas**: El flujo de datos es constante, estable, si algún nodo falla, la información se redirecciona a otro nodo para que llegue a destino
+
+  **Desventajas**: mas complejo de instalar, muchas conexiones, mas costoso, no es escalable
+
+#### 4. Topología anillo
+
+Se conectan formando un anillo, los datos fluyen de manera unidireccional o bidireccional en un sentido
+
+**Anillo simple:** tiene un solo canal de comunicación
+
+**Anillo doble**: dos canales de comunicación
+
+**Anillo con paso de testigo(Token ring)**
+
+**Ventaja**: bajo costo, mejor ancho de banda, igualdad de accesos entre nodos
+
+**Desventajas**: Si un nodo falla, cae toda la red, con información mas pesada se hace lenta
+
+#### 5. Topología punto a punto
+
+Conectar 2 puntos con un RJ45, no necesitas intermediarios, ej: conectar celular con auricular
+
+**Ventaja**: fácil instalación y conexión, no es costoso
+
+**Desventajas**: poca seguridad, fugas o perdidas de información, no es escalable
+
+#### 6. Topologia de red en arbol
+
+Consta con un servidor principal que controla el host y a los demás nodos, los nodos secundarios se conectan al principal
+
+T.A.Binario: cada nodo con 2 hijos
+
+T.A.Exetendida: nodos secundarios con mas de dos nodos hijos
+
+T.A.Hibrida: combina binaria y extendida
+
+Aplicaciones en LAN, Redes de campus, redes de proveedores de internet(ISP)
+
+**Ventaja**: muy flexible, facil manejo de errores, es altamente escalable
+
+**Desventajas**: Si el servidor principal muere probablemente la red caiga, querer gestionar la red a partir del nodo principal es mas difícil.
 
 ### 🌟 **Topologías Lógicas**
 
 #### 1. **Broadcast** (Ethernet)
 
-- **Funcionamiento**: Todos reciben los datos, pero solo el destinatario los procesa.\
+- **Funcionamiento**: Todos reciben los datos, pero solo el destinatario los procesa. Cada equipo envía su información a todos los demás equipos, estos responden según el orden de llegada\
   *Comparación*: Como un megáfono en una plaza: todos escuchan, pero solo uno responde.
 
 #### 2. **Token Passing** (Token Ring)
@@ -113,6 +177,78 @@ major:
 ---
 
 ## 🛰️  **Redes de Área Amplia y Telefonía**
+
+Cuando las computadoras estan conectadas desde lugares remotos, se depende de otros nodos por el camino, estas se llaman PSTN.
+
+**Oficinas de conmutación**: parecida a la topología estrella para evitar muchos cableríos, pero al escalar, volvía a surgir el problema
+
+**Canal descendente** : de ISP al usuario(descarga)
+
+**Canal ascendente:** del usuario al ISP(carga)
+
+**ADSL** (A de asimétrico) usa mas para descarga que para carga
+
+**Estándares para fibra óptica: SONET y SDH (Son protocolos de la capa física en OSI)**
+
+SONET envía tramas una tras otra, cuando no hay nada que enviar se envían datos ficticios
+
+##### Conmutación en Redes
+
+La **conmutación** se refiere a la forma en que se conectan los dispositivos para transmitir información en una red. Existen dos tipos principales:
+
+##### Conmutación de Circuitos
+
+- Se establece una **ruta fija** entre el emisor y el receptor antes de la transmisión.
+- Es **ineficiente** en términos de ancho de banda si no se transmite nada.
+- Implica la existencia de muchas **interconexiones** y **puentes entre puertos** para establecer la comunicación.
+- Ejemplo: Llamadas telefónicas en redes tradicionales.
+
+###### Ventajas
+
+✅ Garantiza un **camino dedicado**, evitando interferencias.\
+✅ La latencia es **predecible**, ya que los datos siguen una ruta fija.
+
+##### Desventajas
+
+❌ **Desperdicio de ancho de banda** si no se está transmitiendo datos constantemente.\
+❌ **Poco flexible**, ya que si la conexión se interrumpe, es necesario establecer una nueva.
+
+---
+
+#### Conmutación de Paquetes
+
+- Los datos se dividen en **paquetes** y cada paquete puede tomar rutas **diferentes** hasta llegar al destino.
+- Es **más eficiente** en el uso del ancho de banda, ya que no requiere una conexión permanente.
+- Puede haber **retardo por encolamiento**, propagación o congestión de nodos.
+- Si una conexión se corta, los paquetes pueden **buscar otra ruta alternativa**.
+- Ejemplo: Internet y redes de datos modernas.
+
+##### Ventajas
+
+✅ **Optimiza el uso del ancho de banda** al enviar solo lo necesario.\
+✅ **Mayor tolerancia a fallos**, ya que los paquetes pueden tomar diferentes caminos.\
+✅ Permite el **envío simultáneo de información** entre múltiples dispositivos.
+
+##### Desventajas
+
+❌ **Mayor latencia y variabilidad**, ya que los paquetes pueden llegar desordenados.\
+❌ **Requiere procesamiento adicional** para reorganizar los paquetes en el destino.
+
+***El handoff:** Sucede cuando cambias de celda, preguntando a las celdas vecinas, quien recibe mejor la señal del dispositivo que se movió para dejarlo a su cargo*
+
+**AMPS (Advanced Mobile Phone System)** fue el primer sistema de telefonía celular analógica ampliamente utilizado en los Estados Unidos.
+
+**AMPS usa divison por multiplexion por frecuencia**
+
+Para llamar o recibir llamadas los teléfonos usan distintos canales dedicados para cada fin
+
+Cuando hay alta demanda las celdas se subdividen en micro celdas o celdas temporales
+
+***Hay celdas que comparten frecuencias, las reutiliza, pero están bien separadas para que no hayan interferencias.***
+
+#### Como funciona una llamada telefónica
+
+Consultas a través de la estación base si el destinatario esta en la celda o esta fuera, si esta dentro, se hace la conmutación entre los dos celulares, de lo contrario, pregunta al centro de conmutación, el que se encarga de hablar con las estaciones base, va a consultar si alguna de las celdas tiene al destinatario por su radio de cobertura, si logra localizar al destinatario, avisa al centro de conmutación para que realice la conmutación(conexión) entre los dos dispositivos.
 
 ### 📞 **Evolución de la Telefonía Móvil**
 
@@ -130,23 +266,31 @@ major:
 - **2G**
 - Digital (GSM)
 - SMS vs Correo postal
-- Introdujo cifrado y mensajes de texto.
+- Introdujo cifrado y mensajes de texto, aumenta la seguridad por cifrado gracias a la digitalización, no tiene un estándar globa
 ---
 - **3G**
 - Datos móviles (UMTS)
 - Autopista de 3 carriles
-- Permitió videollamadas y navegación web básica.
+- Permitió videollamadas y navegación web básica. Mejora calidad de redes móviles con su mayor velocidad, mejoro servicios multimedia
 ---
 - **4G**
 - IP sobre paquetes (LTE)
 - Tren bala vs bicicleta
-- Velocidades de ~100 Mbps. Baja latencia para streaming.
+- Velocidades de ~100 Mbps. Baja latencia para streaming. ***La diferencia entre 3G es que 4G cambio a conmutación de paquetes***
 ---
 - **5G**
 - Ondas milimétricas y MIMO masivo
-- Teleportación vs caminar
-- Latencia de ~1 ms. Usa **beamforming** para enfocar señales como un láser.
+- Tele portación vs caminar
+- Latencia de ~1 ms. Usa **beamforming** para enfocar señales como un láser. Mejora la capacidad de área de la red, usa ultra densificación y descarga de trafico(mas celdas por área), usa ondas milimétrica, las ondas milimétricas requieren mas esfuerzo para atravesar objetos, se usan mas antenas por área
 {% /table %}
+
+**Segmentacion de la red:** Los operadores crean una red virtual para cada necesidad
+
+Beamforming: Nos basamos en la dirección en la que llega la onda, los celulares sacan ondas omnidireccionales, donde solo una onda llega a la estación base
+
+***La computación de borde e***s un modelo de procesamiento de datos donde la información se analiza **cerca de la fuente de generación**, en lugar de enviarla a un centro de datos o la nube.
+
+***El fin de la computación de borde se basa en llevar la información a la menor distancia posible***
 
 ### 📺 **Televisión por Cable vs Fibra Óptica**
 
@@ -168,42 +312,285 @@ major:
 - Tubería de alta presión con filtros
 {% /table %}
 
+**Internet por cable**
+
+Usando cable coaxial, si uno de los nodos empieza a descargar algo pesado, el ancho de banda disminuye para los demás, para solucionarlo se usando la multiplexación por división de frecuencias,
+
+Para que esto funcione se usaban módems de cable, los módems transforman señales analógicas a digitales
+
+Un **módem** (**MO**dulator-**DEM**odulator) es un dispositivo que **convierte señales digitales en analógicas y viceversa**, permitiendo la comunicación entre computadoras y redes a través de líneas telefónicas, cable coaxial, fibra óptica o señales inalámbricas.
+
+***Aun no hay tecnología capaz de controlar los paquetes que circulan por una señal 5G, por lo que se pueden escapar cosas maliciosas por redes 5G.***
+
 ---
 
 ## 🔗**Capa de Enlace de Datos**
 
+La capa de enlace maneja la velocidad del sistema, encapsula en tramas con encabezados, el manejo de las tramas es el manejo más importante de la capa de enlace, propone servicios a la capa de red.
+
+### **Servicios a la capa de red**
+
+### 📡 Servicios de la capa de enlace a la capa de red
+
+#### 1. Sin conexión ni confirmación
+
+- Envía tramas sin conexión previa.
+- **No garantiza entrega ni recuperación** de tramas perdidas.
+- ⚡ Rápido pero no confiable.
+
+**Ejemplo:** Ethernet (LAN).
+
+#### 2. Sin conexión con confirmación
+
+- Envía tramas sin conexión, pero **el receptor confirma la recepción**.
+- **Las tramas pueden llegar desordenadas**.
+- 🔄 Permite retransmisión si se detecta pérdida.
+
+**Ejemplo:** Wi-Fi (802.11).
+
+#### 3. Orientado a conexión con confirmación
+
+- **Establece conexión antes de transmitir**.
+- **Garantiza orden y corrección de errores**.
+- 🔄 Retransmite datos perdidos, pero **es más lento**.
+
+**Ejemplo:** HDLC (redes WAN).
+
 ### 🛡️ **Entramado (Framing)**
 
-#### Métodos:
+Es la forma en que se organiza el flujo de bits en tramas para la transmisión.
 
-1. **Bytes Bandera**:
-   - Delimitadores: `0x7E` (hex) marca inicio/fin de trama.\
-     *Problema*: Si los datos contienen `0x7E`, se usa **byte stuffing** (insertar `0x7D` antes).\
-     *Comparación*: Como usar comillas en un texto: `"Hola "mundo""` → `"Hola \"mundo\""`.
-1. **Bits Bandera**:
-   - Delimitador: `01111110`.
-   - **Bit stuffing**: Tras cinco `1`s consecutivos, insertar un `0`.\
-     *Ejemplo*: `011111` → `0111110`.
+- **Conteo de bytes:** Especifica el número de **bytes** que contiene la trama en el encabezado.
 
-### 🔍 **Control de Errores**
+- **Bytes bandera con relleno de bytes:**
 
-#### 1. **Detección**:
+  - Cada trama comienza y termina con un byte especial llamado **byte bandera**.
+  - Marca los límites de las tramas mediante una secuencia de bits constantes en un byte, conocidos como **flags**.
+  - Si el dato es igual al flag, se inserta un **byte de escape** para evitar confusión.
 
-- **CRC (Cyclic Redundancy Check)**:
-  - Genera un valor basado en operaciones matemáticas con los bits.\
-    *Comparación*: Como un código de verificación en un ISBN de libros.
+- **Bits bandera con relleno de bits:**
 
-#### 2. **Corrección**:
+  - Similar al anterior, pero a nivel de **bits**.
+  - Si aparece un flag dentro de los datos, se inserta un **0** como relleno para diferenciarlo del flag.
 
-- **Código de Hamming**:
-  - Añade bits de paridad en posiciones específicas (ej: potencias de 2).\
-    *Ejemplo*: Para `1011`, se calculan bits en posiciones 1, 2, 4.
+  #### 📡 Entramado y Confiabilidad en la Transmisión de Datos
+
+  #### 🔹 Entramado (Framing)
+
+  Es la forma en la que **se organiza el flujo de bits en tramas**.
+
+  - **📏 Conteo de bytes:** El encabezado indica el número total de bytes en la trama.
+  - **🚩 Bytes bandera con relleno de bytes:** Se usan **flags** al inicio y final de cada trama. Si un dato es igual a un flag, se inserta un byte de escape.
+  - **⚙️ Bits bandera con relleno de bits:** Similar al anterior, pero **a nivel de bits**. Si en los datos aparece un flag, se inserta un **0** para evitar confusión.
+
+  #### 🔹 Confiabilidad y Retroalimentación
+
+  - **📥 ACK (Acknowledgment):** Confirma que la trama se recibió correctamente.
+  - **❌ NAK (Negative Acknowledgment):** Indica error, el emisor debe retransmitir.
+  - **⏳ Temporizador:** Si no hay respuesta en un tiempo determinado, se asume pérdida de datos y se retransmite.
+
+  #### 🔹 Manejo de Retransmisiones
+
+  Para evitar duplicaciones, se usan **números de secuencia** (hashes) en cada trama.
+
+  #### 🔍 Detección y Corrección de Errores
+
+  #### 🔹 Información Redundante
+
+  Es información adicional que permite **detectar o corregir errores** en la transmisión.
+
+  - **📌 Código de Hamming:**
+    - Detecta y corrige **errores de un solo bit**.
+    - Agrega bits de paridad en posiciones específicas.
+    - Permite identificar qué bit falló y corregirlo.
+  - **🔄 Códigos Convolucionales:**
+    - Se usan en **comunicaciones inalámbricas**.
+    - Aplica operaciones matemáticas para generar bits redundantes.
+    - Puede corregir múltiples errores a costa de mayor latencia.
+  - **⚖️ Paridad:**
+    - Se añade **un bit extra** que indica si hay un número **par o impar** de 1s en los datos.
+    - Detecta errores **de un solo bit**, pero no los corrige.
+  - **🧮 Suma de Verificación (Checksum):**
+    - Se calcula una suma de los datos transmitidos.
+    - El receptor compara su propia suma con la del emisor.
+    - Detecta errores simples pero **no los corrige**.
+  - **🔄 Comprobación de Redundancia Cíclica (CRC):**
+    - Usa **división polinomial** para generar un código de verificación.
+    - Es altamente confiable y usado en **redes y almacenamiento**.
+    - Puede detectar múltiples errores, pero no corregirlos.
 
 ### ⚙️ **Mecanismos de Confiabilidad**
 
 - **ACK/NAK**:
   - ACK = "Recibí el paquete". NAK = "Hubo error, reenvía".\
     *Comparación*: Como una entrega certificada con acuse de recibo.
-- **Temporizadores**:
-  - Si no hay ACK en X segundos, se reenvía el paquete.\
-    *Problema*: Paquetes duplicados si el ACK llega tarde. Solución: **Números de secuencia**.
+  -
+
+**Temporizadores**:
+
+Si no hay ACK en X segundos, se reenvía el paquete.\
+*Problema*: Paquetes duplicados si el ACK llega tarde. Solución: **Números de secuencia**.
+
+**Manejo de fallos en la transmisión**: se usa un temporizador donde si se excede el tiempo de respuesta, se asume que hubo una falla, cuando no le llega el paquete al receptor.
+
+**Manejo de retransmisiones**: para evitar procesar la misma trama debido a retransmisiones, esto se da con números de secuencia(se hace un hash), así se diferencian las tramas originales y las retransmisiones.
+
+## Subcapa de control de acceso al medio
+
+#### 1. **ALOHA PURO (1970)**
+
+- **Creadores**: Norman Abramson y equipo (Universidad de Hawai).
+- **Mecánica**:
+  - Transmisión **sin escuchar** el canal previamente.
+  - Retransmisión centralizada (hub) de tramas a todas las estaciones.
+  - **Tramas de longitud fija**: Optimiza el *throughput* al evitar variabilidad.
+  - **Colisiones**: Ocurren si dos tramas coinciden total/parcialmente en tiempo.
+  - Transmisión en **tiempos arbitrarios** (no en intervalos exactos).
+
+##### 1.1. Modelado Matemático
+
+- **Variables**:
+  - ( t ): Tiempo de trama (duración para enviar trama estándar).
+  - ( N ): Media de tramas nuevas (0 < ( N ) < 1).
+  - ( G ): Media total de tramas (nuevas + retransmitidas) por ( t ), modelado como **Poisson**.
+- **Intervalo vulnerable**: ( t_0 ) a ( t_0 + 2t ) (ventana de riesgo de colisión).
+- **Throughput (( S ))**:  {% inlineLatex formula="S = G \\cdot P_0 \\quad \\text{donde } P_0 = e^{-2G} \\quad \\Rightarrow \\quad S = G \\cdot e^{-2G}" /%}
+  - **Máximo rendimiento**: {% inlineLatex formula="S_{\\text{max}} = approx -> 18,4\\text{%}--cuando : G = 0.5 " /%}
+
+#### 1.2. Distribución de Poisson
+
+- **Fórmula**:  {% inlineLatex formula="Pr[k] = \\frac{G^k \\cdot e^{-G}}{k!}" /%}
+- **Condiciones**:
+  1. Eventos independientes.
+  1. Tasa promedio constante en intervalo.
+  1. No simultaneidad de eventos.
+- **Probabilidad de éxito (( P\_0 ))**:  {% inlineLatex formula="Pr[0] = e^{-2G} \\quad (\\text{para ALOHA puro, 2G por intervalo vulnerable})" /%}
+
+---
+
+#### 2. **ALOHA RANURADO (Slotted ALOHA, 1972)**
+
+- **Mejora de Roberts**:
+  - Tiempo dividido en **ranuras discretas** sincronizadas.
+  - Transmisión solo al inicio de cada ranura.
+- **Reducción del intervalo vulnerable**: ( t ) (vs. ( 2t ) en ALOHA puro).
+- **Throughput (( S ))**:  {% inlineLatex formula=" S = G \\cdot e^{-G}" /%}
+  - **Máximo rendimiento**:{% inlineLatex formula="S_{\\text{max}} \\approx 36.8{\\text{%}} . cuando : G = 1 " /%}
+- **Aplicación histórica**: Resolución de acceso compartido en Internet por cable.
+
+---
+
+#### 3. **PROTOCOLOS CSMA**
+
+##### 3.1. CSMA Persistente-1
+
+- **Funcionamiento**:
+  - Escucha canal → transmite **inmediatamente** si está libre.
+- **Debilidad**: Colisiones por retardos en la propagación.
+
+##### 3.2. CSMA No Persistente
+
+- **Comportamiento**:
+  - Espera **tiempo aleatorio**, si canal ocupado → reduce colisiones, pero aumenta latencia.
+
+##### 3.3. CSMA Persistente-( p )
+
+- **Reglas**:
+  - Canal libre: Transmite con probabilidad ( p ), espera con ( 1-p ).
+  - Canal ocupado: Espera y repite.
+
+##### 3.4. CSMA/CD (Ethernet Clásico)
+
+- **Detalles clave**:
+  - **Detección analógica** de colisiones durante transmisión.
+  - **Aborta transmisión** en colisión → reintento post tiempo aleatorio.
+- **Limitaciones**:
+  - Distancias largas → mayores retardos y colisiones.
+  - **Periodo de contención**: Competición por el canal post-colisión.
+
+---
+
+#### 4. **PROTOCOLOS LIBRES DE COLISIONES**
+
+##### 4.1. Mapa de Bits
+
+- **Mecanismo**:
+  - ( N ) ranuras de contención (1 por estación).
+  - Bit 1 en ranura ( i ) → estación ( i ) quiere transmitir.
+- **Desventaja**:
+  - Espera promedio: ( 1.5N ) ranuras para estaciones de baja numeración.
+
+##### 4.2. Token Ring
+
+- **Token**: Permiso de transmisión que circula en anillo.
+- **Rendimiento**:
+  - Similar a mapa de bits, pero con tramas y token intercalados.
+  - Espera promedio: ( N/2 ) ranuras para estaciones altas.
+
+##### 4.3. Conteo Descendente Binario
+
+- **Direccionamiento**:
+  - Estaciones transmiten dirección en binario (bit más significativo primero).
+  - **OR booleano** detecta colisiones implícitas.
+- **Ventaja**: Escalabilidad (sin bits de control por estación).
+
+---
+
+#### 5. **PROTOCOLOS DE CONTENCIÓN LIMITADA**
+
+- **Objetivo**: Contención (baja carga) + métodos sin colisiones (alta carga).
+- **Ejemplo**: Protocolo de árbol adaptable (inspirado en detección de sífilis en WWII).
+
+---
+
+#### 6. **PROTOCOLOS PARA REDES INALÁMBRICAS**
+
+##### 6.1. Problemas Clave
+
+- **Terminal expuesta**: Señal débil → detección de colisiones imposible.
+- **Terminal oculta**: Estaciones fuera de alcance no detectan transmisiones.
+
+##### 6.2. MACA (Acceso Múltiple con Prevención de Colisiones)
+
+- **RTS/CTS**:
+  1. **RTS (Request To Send)**: Emisor solicita canal.
+  1. **CTS (Clear To Send)**: Receptor confirma disponibilidad.
+- **Efecto**: Estaciones cercanas difieren transmisiones al detectar CTS.
+- **Limitación**: Colisiones en RTS/CTS → reintentos con retroceso aleatorio.
+
+---
+
+#### TABLA COMPARATIVA: ALOHA vs. CSMA/CD vs. TOKEN RING
+
+{% table %}
+- **Parámetro**
+- **ALOHA**
+- **CSMA/CD**
+- **Token Ring**
+---
+- **Detección de canal**
+- No
+- Sí (portadora)
+- No (token)
+---
+- **Máxima eficiencia**
+- 18.4% (puro)
+- ~90% (baja carga)
+- ~100% (alta carga)
+---
+- **Escalabilidad**
+- Baja
+- Media
+- Alta
+---
+- **Aplicación típica**
+- Redes tempranas
+- Ethernet
+- Entornos industriales
+{% /table %}
+
+#### CSMA persistente-0.1 vs persistente 0.01
+
+**CSMA persistente-0.1** tiene una **mayor probabilidad de colisiones** porque más estaciones intentan transmitir al mismo tiempo, lo que hace que el sistema sea **menos eficiente** debido a las retransmisiones y al uso del canal más desorganizado.
+
+**CSMA persistente-0.01** tiene una **menor probabilidad de colisiones**, ya que menos estaciones intentan transmitir al mismo tiempo, lo que resulta en **menor congestión** y mejor aprovechamiento del canal, aumentando así la eficiencia general.
