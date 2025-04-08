@@ -1,0 +1,173 @@
+---
+title: Notas redes antes del 1 parcial
+draft: false
+description: Notas de las clases y exposiones antes del primer parcial 2025
+authors:
+  - josue-vera
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: Rc1
+---
+# Cap 1
+
+## Hardware de Redes
+
+### Por tecnología de transmisión
+
+#### Enlaces de difusión
+
+- Utilizan un solo canal de comunicación, un paquete enviada por una máquina es recibido por todas, las cuales leen el mismo, sino va dirigido a ellas lo ignoran, si no se procesa.
+- Los sistemas de difusión permiten direccionamiento a todos los destinos utilizando un código especial en el campo dirección: broadcasting.
+- Tambien a un subconjunto de máquinas: multicasting.
+
+#### Enlaces de punto a punto
+
+- Conexiones entre pares individuales de máquinas. Un paquete para ir de origen a destino, tendría que ir por una o varias máquinas intermedias.
+
+### Por escala
+
+- PAN
+- LAN
+- MAN
+- WAN
+
+## Software de Redes
+
+### 3.1 Jerarquía de Protocolos
+
+Red organizada como una pila de capas. Cada una brinda servicio a la superior sin mostrar los detalles de implementación (encapsulamiento).
+Cada capa se comunica con la subyacente mediante un protocolo, un conjunto de reglas y convenciones. Violar el protocolo hará más difícil (o imposible) la comunicación.
+En una comunicación entre la capa n de una máquina y la capa n de otra, se pasan los datos e información hacia abajo hasta llegar al medio físico y luego hacia arriba hasta la capa n de la máquina destino.
+Entre cada par de capaz hay una interfaz. Ésta define qué operaciones y servicios primitivos pone la capa más baja a disposición de la capa superior inmediata. Las interfaces bien definidas simplifican el reemplazo de la implementación de una capa con una implementación totalmente diferente.
+
+**Un protocolo es un conjunto de reglas que rigen el formato y el significado de los paquetes (o mensajes) que se intercambiaron las entidades iguales en una capa. Las entidades utilizan protocolos para implementar sus definiciones del servicio.**
+
+## Modelos de Referencia.
+
+### OSI.
+
+1. Capa física
+   - Transmisión de bits puros a través de un canal de comunicación o medio.
+   - Define voltajes, tiempos, como establecer la conexión, cuando terminarla.
+   - Trabaja con interfaces mecánicas, eléctricas y de temporización
+   - Se encarga del medio físico.
+1. Capa de enlace de datos
+   - Transformar un medio de transmisión en una línea de comunicación.
+   - Fragmenta los datos en tramas de datos
+   - El receptor confirma devolviendo una trama de confirmación de recepción
+   - Regulación de flujo
+   - Manejo de errores
+   - En redes de difusión ¿cómo controlar el acceso al canal compartido? Lo hace la subcapa de control de acceso al medio
+1. Capa de red
+   - Controla las operaciones de la subred
+   - Determina como se enrutan los paquetes
+   - Maneja problemas de enrutamiento
+   - En redes de difusión el problema de enrutamiento es simple, por lo que la capa en ocasiones no existe
+1. Capa de transporte
+   - Aceptar los datos provenientes de las capas superiores, dividirlos en unidades más pequeñas si es necesario, pasarla a la capa de red y asegurarse de que todas las piezas lleguen correctamente al otro extremo.
+   - Determina qué tipo de servicio proporcionar a la capa de sesión y a los usuarios de red.
+   - El tipo de conexión más popular es la punto a punto que entrega mensajes en el orden en que se enviaron.
+   - Conexión extremo a extremo
+1. Capa de sesión
+   - Permite que usuarios de máquinas diferentes establezcan sesiones entre ellos
+   - Servicios:
+     i. Control de diálogo
+     ii. Administración de token
+     iii. Sincronización
+1. Capa de presentación
+   - Sintaxis y semántica de la información transmitida. -
+   - Las estructuras de datos a intercambiar se pueden definir de una manera abstracta junto con una codificación estándar para su uso “en el cable”.
+1. Capa de aplicación
+   - Contiene varios protocolos que los usuarios requieren con frecuencia.
+   - El más utilizado hoy HTTP que se utiliza para navegar en la WWW.
+
+### TCP/IP
+
+1. Capa de interred
+   - Red de conmutación de paquetes basada en una de interred no orientada a la conexión.
+   - Es la pieza clave que mantiene unida a la arquitectura.  Permite que los hosts inyecten paquetes dentro de cualquier red y que éstos viajen a su detino de manera independiente.
+   - Los paquetes pueden llegar en orden diferente al enviado, las capas más altas se encargan de reordenar
+   - Ésta capa define el protocolo IP.
+   - El enrutamiento, con el propósito de evitar congestiones, es el aspecto principal de la capa.
+1. Capa de transporte
+   - Permite que las entidades iguales en los hosts de origen y destino puedan llevar a cabo una conversación
+   - Dos protocolos de transporte de extremo a extremo:
+     - i. TCP: confiable, orientado a la conexión. Divide el flujo de bytes entrantes en mensajes discretos y pasa cada uno de ellos a la capa de interred. Maneja el control de flujo.
+     - ii. UDP: no confiable y no orientado a la conexión. Amplio uso en consultas únicas de solicitudrespuesta, tipo cliente-servidor, así como en aplicaciones en las que la entrega es más importante que la confiabilidad, ejemplo: transmisión de voz o vídeo.
+1. Capa de aplicación
+   - Contiene todos los protocolos de nivel más altos:
+     - i. TELNET: conexión a terminal virtual
+     - ii. FTP: Transferencia de archivos
+     - iii. SMTP: email
+     - iv. DNS: Sistema de nombres de dominio
+     - v. NNTP: para transportar artículos de noticias USENET
+     - vi. HTTP: para las páginas WWW
+
+## RED Telefonica
+
+El sistema telefónico tiene, entonces, 3 componentes principales:
+
+1. Circuitos locales (cables de par trenzado)
+1. Troncales (fibra óptica digital)
+1. Oficinal de conmutación
+
+## Multiplexion
+
+Es la tecnica que permite combinar multiples señales en un mismo ancho de banda
+LA MULTIPLEXACION NACE POR LA NECESIDAD DE COMPARTIR UN CANAL SIN INTERFERENCIAS O PERDIDAS DE INFORMACION
+
+### Tipos
+
+- Multiplecion de Division de frecuencia.
+  Cada usuario tiene una frecuencia para que no se mezclen las informaciones, debes ponerte en la misma frecuencia de un canal para poder recibir su informacion
+- Multiplecion de Division de Tiempo.
+  Todos los usarios toman turnos periodicamente para utilizar todo el ancho de banda
+- Multiplecion de Division de Codigo
+  Es una manera distinta a FDM Y TDM es una forma de comunicacion de esprectro despersio en la que una señal de banda se dispersa.
+
+# Capa de enlaze de datos
+
+Se ocupa de tramas completas entre maquinas
+
+## Importancia de los protocolos
+
+Son cruciales para una trasmisión de datos confiable y eficiente
+
+## Funciones
+
+1. Proporcionar una interfaz de servicio bien definida a la capa de red
+1. Manejar errores de transmisión
+1. Regular el flujo de datos
+
+## Servicios
+
+- Sin conexión ni confirmación de recepción
+- Sin conexión con confirmación de recepción
+- Orientados a conexión con confirmación de recepción
+
+## Entramado
+
+es la forma en que se organizan los bits en tramas
+Maneja errores
+
+### Conteo de bytes
+
+especifica el numero de bits que tiene la trama esto se hace en el encabezado.
+
+## Bytes Bandera con relleno de Bytes.
+
+Comienza y termina con byte especial conocido bandera esto ayuda a encontrar los limites de las tramas secuencia de bytes que delimita un inicio o fin de una trama
+
+## Bits bandera con relleno de bits
+
+Permite que las tramas de datos contengan un número arbitrario de bits y admite códigos de caracteres con un número arbitrario de bits por carácter
+
+## Violación de codificación de la capa física
+
+#### CSMA persistente-0.1 vs persistente 0.01
+
+**CSMA persistente-0.1**&nbsp;tiene una&nbsp;**mayor probabilidad de colisiones**&nbsp;porque más estaciones intentan transmitir al mismo tiempo, lo que hace que el sistema sea&nbsp;**menos eficiente**&nbsp;debido a las retransmisiones y al uso del canal más desorganizado.
+
+**CSMA persistente-0.01**&nbsp;tiene una&nbsp;**menor probabilidad de colisiones**, ya que menos estaciones intentan transmitir al mismo tiempo, lo que resulta en&nbsp;**menor congestión**&nbsp;y mejor aprovechamiento del canal, aumentando así la eficiencia general.
