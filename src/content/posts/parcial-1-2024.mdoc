@@ -1,0 +1,88 @@
+---
+title: Parcial 1 2024
+draft: false
+description: Parcial 1 de Algoritmos y Estructura de Datos FIUNI
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: Al1
+---
+# Parcial I - Algoritmos y Estructuras de Datos I
+
+## Preguntas
+
+### **1)Define puntero y mencione como se declara uno en lenguaje C (1pt)**
+
+### 2)Si ptr contiene la dirección de x ¿Cómo le asigno el valor 0 a X empleando el puntero? (1pt)
+
+- x= 0;
+- \*ptr=0;
+- ptr*=&x;
+- Otro:
+
+### 3)Dada la siguiente definición de una estructura de datos, ¿cómo se declara un vector de 10 elementos de tipo "canción" y se asignan valores al primer elemento? (1pt)
+
+```c
+struct cancion{
+char interprete[20];
+float duracion;
+};
+```
+
+### 4) Una vez que una variable ha sido declarada, podemos obtener su dirección anteponiendo a su nombre… (Complete, agregue un ejemplo y expliquelo). (1pt)
+
+### 5) Diferencias entre Listas Simples y Doblemente enlazadas (al menos 3, no solo a nivel programático) (1pt)
+
+### 6) Dado el siguiente fragmento de código indique cuál es el resultado al ejecutar la función main y mencione el por qué: (1pt)
+
+```c
+#include <stdio.h>
+#define bar()\
+int var=10;\
+printf("var in bar:%d\n",var)
+
+void foo(){
+int var=5;
+printf("var in foo:%d\n",var);
+bar();
+}
+int main(int argc,char *argv[]){
+foo();
+}
+```
+
+### 7) En el análisis de la complejidad de un algoritmo podemos explicar como un algoritmo se comportará en otra máquina con las mismas prestaciones (1pt)
+
+- Verdadero
+- Falso
+
+### 8) En la notación ) grande decimos que el algoritmo crece por tanto este (a lo más) pero que puede crecer más lentamente(1pt)
+
+- Verdadero
+- Falso
+
+### 9) Dado el siguiente algoritmo mencione a qué tiempo de ejecución corresponde y por qué (1pt)
+
+```c
+void foo(int[] array){
+int sum =0;
+int product=1;
+for(int i=0o;i<array.length;i++){
+sum +- array[i];
+}
+for(int i =0;i<array.length;i++){
+product *=array[i];
+}
+System.out.println(sum+", "+ product);
+}
+```
+
+### 10) Comprobar por inducción matemática que {% inlineLatex formula="S(N) = N(N+1)/2" /%} Considerando: (2pts)
+
+{% blockLatex
+   formula="S(N) = 1 + 2 + ... + N = \\sum_{i=1}^{N} i = \\text{?}" /%}
+
+### 11) En base las implementaciones vistas en clase del TDA Cola, mencione cuál es la mejor y por qué. (1pt)\
