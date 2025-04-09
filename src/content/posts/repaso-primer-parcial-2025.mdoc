@@ -1,0 +1,412 @@
+---
+title: Repaso Primer parcial 2025
+draft: false
+description: Notas para el primer parcial 2025
+authors:
+  - josue-vera
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: Al1
+---
+# Puntero en C
+
+Un puntero es una variable almacena una dirección de
+una variable.
+Ejemplo:
+int i= 27;
+int* b = &i;
+
+# TDA(Tipos de datos Abstractos)
+
+## Definición.
+
+Definición matemática de una estructura con operaciones asociadas.
+Esta definido por el programador que ofrece una interfaz para manipularlo de una manera similar a los tipos de datos definidos por el sistema/lenguaje.
+
+## TDA Lista.
+
+Una lista se define como una serie de N elementos $E_1, E_2, ..., E_N,$ ordenados de manera consecutiva, es decir, el elemento Ek (que se denomina elemento k-ésimo) es previo al elemento $E_(k+1)$. Si la lista contiene 0 elementos se denomina como lista vacía.
+Las operaciones que se pueden realizar en la lista son: insertar un elemento en la posición k, borrar el k-ésimo elemento, buscar un elemento dentro de la lista y preguntar si la lista esta vacía.
+
+### Operaciones Comunes.
+
+- Buscar.
+- Insertar.
+- Borrar.
+- EsVacio.
+- EsUltimo.
+- BuscarAnterior.
+- Primero.
+- KnesimoElemento.
+- Ultimo
+
+### Implementacion
+
+```
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definición del nodo
+struct Nodo {
+    int dato;
+    struct Nodo* siguiente;
+};
+
+// Insertar un nuevo nodo al inicio
+void insertarAlInicio(struct Nodo** cabeza, int valor) {
+    struct Nodo* nuevoNodo = (struct Nodo*) malloc(sizeof(struct Nodo));
+    nuevoNodo->dato = valor;
+    nuevoNodo->siguiente = *cabeza;
+    *cabeza = nuevoNodo;
+}
+
+// Imprimir la lista
+void imprimirLista(struct Nodo* cabeza) {
+    struct Nodo* actual = cabeza;
+    while (actual != NULL) {
+        printf("%d -> ", actual->dato);
+        actual = actual->siguiente;
+    }
+    printf("NULL\n");
+}
+
+// Liberar memoria
+void liberarLista(struct Nodo* cabeza) {
+    struct Nodo* temp;
+    while (cabeza != NULL) {
+        temp = cabeza;
+        cabeza = cabeza->siguiente;
+        free(temp);
+    }
+}
+
+
+```
+
+## TDA Lista doblemente ligada.
+
+### **Concepto de Lista Doblemente Ligada (TDA)**
+
+Una **lista doblemente ligada** es una estructura de datos lineal donde cada nodo tiene:
+
+- Un **dato**.
+- Un puntero al **nodo anterior**.
+- Un puntero al **nodo siguiente**.
+
+Esto permite recorrer la lista **en ambos sentidos** (adelante y atrás).
+
+---
+
+### **Operaciones básicas del TDA:**
+
+- Insertar al inicio
+- Insertar al final
+- Eliminar nodo
+- Recorrer hacia adelante y hacia atrás
+
+```
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definición del nodo doblemente ligado
+struct Nodo {
+    int dato;
+    struct Nodo* anterior;
+    struct Nodo* siguiente;
+};
+
+// Insertar al inicio
+void insertarAlInicio(struct Nodo** cabeza, int valor) {
+    struct Nodo* nuevo = (struct Nodo*)malloc(sizeof(struct Nodo));
+    nuevo->dato = valor;
+    nuevo->anterior = NULL;
+    nuevo->siguiente = *cabeza;
+
+    if (*cabeza != NULL)
+        (*cabeza)->anterior = nuevo;
+
+    *cabeza = nuevo;
+}
+
+// Insertar al final
+void insertarAlFinal(struct Nodo** cabeza, int valor) {
+    struct Nodo* nuevo = (struct Nodo*)malloc(sizeof(struct Nodo));
+    nuevo->dato = valor;
+    nuevo->siguiente = NULL;
+
+    if (*cabeza == NULL) {
+        nuevo->anterior = NULL;
+        *cabeza = nuevo;
+        return;
+    }
+
+    struct Nodo* temp = *cabeza;
+    while (temp->siguiente != NULL)
+        temp = temp->siguiente;
+
+    temp->siguiente = nuevo;
+    nuevo->anterior = temp;
+}
+
+// Recorrer hacia adelante
+void imprimirAdelante(struct Nodo* cabeza) {
+    struct Nodo* temp = cabeza;
+    printf("Lista (adelante): ");
+    while (temp != NULL) {
+        printf("%d <-> ", temp->dato);
+        temp = temp->siguiente;
+    }
+    printf("NULL\n");
+}
+
+// Recorrer hacia atrás
+void imprimirAtras(struct Nodo* cabeza) {
+    struct Nodo* temp = cabeza;
+
+    // Ir al final
+    while (temp && temp->siguiente != NULL)
+        temp = temp->siguiente;
+
+    printf("Lista (atrás): ");
+    while (temp != NULL) {
+        printf("%d <-> ", temp->dato);
+        temp = temp->anterior;
+    }
+    printf("NULL\n");
+}
+
+// Liberar memoria
+void liberarLista(struct Nodo* cabeza) {
+    struct Nodo* temp;
+    while (cabeza != NULL) {
+        temp = cabeza;
+        cabeza = cabeza->siguiente;
+        free(temp);
+    }
+}
+```
+
+## TDA Pilas.
+
+• Una pila es una estructura de datos de entrada ordenada,
+tales que solo se pueden introducir y eliminar por un
+extremo (cima o stack pointer «sp»)
+• Debido a su propiedad específica «Ultimo en Entrar,
+Primero en Salir» se conoce a las pilas como estructura
+de datos «LIFO» (Last-In, First-Out)
+
+### Operaciones Basicas.
+
+• Push
+• Pop
+• Top
+• isEmpty
+
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+// Definición del nodo
+struct Nodo {
+    int dato;
+    struct Nodo* siguiente;
+};
+
+// Insertar (push)
+void push(struct Nodo** tope, int valor) {
+    struct Nodo* nuevo = (struct Nodo*)malloc(sizeof(struct Nodo));
+    nuevo->dato = valor;
+    nuevo->siguiente = *tope;
+    *tope = nuevo;
+}
+
+// Eliminar (pop)
+int pop(struct Nodo** tope) {
+    if (*tope == NULL) {
+        printf("Pila vacía.\n");
+        return -1;
+    }
+    struct Nodo* temp = *tope;
+    int valor = temp->dato;
+    *tope = temp->siguiente;
+    free(temp);
+    return valor;
+}
+
+// Ver el tope (peek)
+int peek(struct Nodo* tope) {
+    if (tope == NULL) {
+        printf("Pila vacía.\n");
+        return -1;
+    }
+    return tope->dato;
+}
+
+// Verificar si está vacía
+bool isEmpty(struct Nodo* tope) {
+    return tope == NULL;
+}
+
+// Imprimir la pila
+void imprimirPila(struct Nodo* tope) {
+    printf("Pila: ");
+    while (tope != NULL) {
+        printf("%d -> ", tope->dato);
+        tope = tope->siguiente;
+    }
+    printf("NULL\n");
+}
+
+// Liberar memoria
+void liberarPila(struct Nodo* tope) {
+    while (tope != NULL) {
+        struct Nodo* temp = tope;
+        tope = tope->siguiente;
+        free(temp);
+    }
+}
+
+int main() {
+    struct Nodo* pila = NULL;
+
+    push(&pila, 10);
+    push(&pila, 20);
+    push(&pila, 30);
+
+    imprimirPila(pila);
+
+    printf("Tope: %d\n", peek(pila));
+    printf("Pop: %d\n", pop(&pila));
+    imprimirPila(pila);
+
+    liberarPila(pila);
+    return 0;
+}
+
+```
+
+## TDA Colas.
+
+La estructura Cola se especifica formalmente por ser una Lista ordenada en la cual las Eliminaciones se realizan en un solo extremo; llamado FRENTE o PRINCIPIO de la Cola y los nuevos elementos se Añaden por el otro extremo lamado FONDO o FINAL de la Cola .
+
+### Operaciones Basicas.
+
+- Create
+- EnQueue
+- DeQueue
+
+Colas Circulares
+▪ El medio más eficiente para almacenar una cola en un array es utilizar un tipo especial que una el extremo final de la cola con su extremo cabeza.
+▪ Se almacena de manera natural en la memoria (tal como un bloque lineal)
+▪ Se necesitan dos marcadores frente y final para indicar la posición del elemento cabeza y la posición del elemento final donde se almacenó el último elemento.
+▪ La variable frente es siempre la posición del primer elemento de la cola y se avanza en el sentido de las agujas del reloj.
+▪ La variable final es la posición de la última inserción: una nueva inserción supone mover final circularmente a la derecha y asignar el nuevo elemento.
+▪ La simulación del movimiento circular de los indices se realiza utilizando la teoría de los restos, de tal forma que se generen indices de 0 a MAXTAMQ-1.
+▪ Posición a insertar = (frente+final) %MAXTAMQ
+▪ Mover frente adelante (para eliminar) = (frente + 1) % MAXTAMQ
+
+### Implementación.
+
+```
+#include <stdlib.h>
+#include <stdio.h>
+#include "colaDinamica.h"
+
+void create(Cola *cola) {
+	cola->frente = cola->final = NULL;
+}
+
+Nodo *crearNodo(int elemento) {
+	Nodo *t = (Nodo *) malloc(sizeof(Nodo));
+	t->elemento = elemento;
+	t->siguiente = NULL;
+	return t;
+}
+
+int colaVacia(Cola *cola) {
+	return (cola->frente == NULL);
+}
+
+void enQueue(Cola *cola, int entrada) {
+	Nodo *nuevoNodo = crearNodo(entrada);
+	if (colaVacia(cola)) cola->frente = nuevoNodo;
+	else cola->final->siguiente = nuevoNodo;
+	cola->final = nuevoNodo;
+}
+
+//devuelve y elimina un elemento de la cola
+int deQueue(Cola *cola) {
+	int tmp;
+	if (!colaVacia(cola)) {
+		Nodo *a = cola->frente;
+		tmp = frente(cola);
+		cola->frente = cola->frente->siguiente;
+		free(a);
+	} else {
+		puts("Error cometido al eliminar de una cola vacia.");
+		exit(-1);
+	}
+	return tmp;
+}
+
+//devuelve un elemento de la cola
+int frente(Cola *cola) {
+	if (colaVacia(cola)) {
+		puts("Error: cola vacia");
+		exit(-1);
+	}
+	return (cola->frente->elemento);
+}
+
+//elimina y libera toda la cola
+void borrarCola(Cola *cola) {
+	while (cola->frente != NULL) {
+		Nodo *n = cola->frente;
+		cola->frente = cola->frente->siguiente;
+		free(n);
+	}
+	free(cola);
+}
+
+void imprimirCola(Cola *cola){
+	Nodo *aux = cola->frente;
+	if(colaVacia(cola)) printf("Cola vacia\n");
+	while (aux != NULL) {
+		printf("%d\n",aux->elemento);
+		aux = aux->siguiente;
+	}
+	
+}
+```
+
+## TDA Heap(Monticulo)
+
+Un **Heap** es una estructura de datos basada en un **árbol binario completo**, que cumple una de estas propiedades:
+
+- **Max-Heap**: el valor de cada nodo es **mayor o igual** que el de sus hijos.
+- **Min-Heap**: el valor de cada nodo es **menor o igual** que el de sus hijos.
+
+### Operaciones principales.
+
+insertar(valor):
+
+Inserta un nuevo valor y reorganiza el heap (heapify up).
+
+extraer_raiz() (o extractMax/extractMin):
+
+Elimina la raíz (mayor o menor valor) y reordena (heapify down).
+
+ver_raiz() (peek):
+
+Devuelve la raíz sin eliminarla.
+
+heapify():
+
+Dada una lista desordenada, la convierte en un heap válido.
+
+cambiar_prioridad(i, nuevo_valor):
+
+Modifica el valor de un nodo y reacomoda el heap.
