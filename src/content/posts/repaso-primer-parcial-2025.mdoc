@@ -1,5 +1,5 @@
 ---
-title: Repaso Primer parcial 2025
+title: Repaso TDA 2025
 draft: false
 description: Notas para el primer parcial 2025
 authors:
@@ -27,7 +27,7 @@ Esta definido por el programador que ofrece una interfaz para manipularlo de una
 
 ## TDA Lista.
 
-Una lista se define como una serie de N elementos $E_1, E_2, ..., E_N,$ ordenados de manera consecutiva, es decir, el elemento Ek (que se denomina elemento k-ésimo) es previo al elemento $E_(k+1)$. Si la lista contiene 0 elementos se denomina como lista vacía.
+Una lista se define como una serie de N elementos {% inlineLatex formula="E_1, E_2, ..., E_N," /%} ordenados de manera consecutiva, es decir, el elemento Ek (que se denomina elemento k-ésimo) es previo al elemento {% inlineLatex formula="E_(k+1)" /%} . Si la lista contiene 0 elementos se denomina como lista vacía.
 
 ### Operaciones Comunes.
 
@@ -43,7 +43,7 @@ Una lista se define como una serie de N elementos $E_1, E_2, ..., E_N,$ ordenado
 
 ### Implementacion
 
-```
+```c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -105,7 +105,7 @@ Esto permite recorrer la lista **en ambos sentidos** (adelante y atrás).
 - Eliminar nodo
 - Recorrer hacia adelante y hacia atrás
 
-```
+```c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -203,7 +203,7 @@ de datos «LIFO» (Last-In, First-Out)
 • Top
 • isEmpty
 
-```
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -309,7 +309,7 @@ Colas Circulares
 
 ### Implementación.
 
-```
+```c
 #include <stdlib.h>
 #include <stdio.h>
 #include "colaDinamica.h"
@@ -409,3 +409,46 @@ Dada una lista desordenada, la convierte en un heap válido.
 cambiar_prioridad(i, nuevo_valor):
 
 Modifica el valor de un nodo y reacomoda el heap.
+
+## TDA Arbol
+
+Un árbol es una colección de elementos, llamados nodos, uno de los cuales se distingue con el nombre de raíz. Los nodos mantienen entre ellos una relación que define una estructura jerárquica(de “paternidad”) entre ellos.
+
+### Altura de un arbol.
+
+Se define la altura de un nodo en un árbol como la longitud del camino más largo que comienza en el nodo y termina en una hoja.
+
+- La altura de un nodo hoja es 0
+- La altura de un nodo es igual a la mayor altura de sus hijos + 1
+- La altura de un árbol se define como la altura de la raiz.
+
+### Profundidad
+
+Longitud del camino único de la raíz al nodo.
+
+### Recorrido de un arbol
+
+- Pre-orden: raíz, luego hijos
+- Post-orden: hijos, después raíz
+- En-orden: hijo izq, raíz, hijo der.
+
+## TDA ABB (Arbol de busqueda binaria).
+
+Un Árbol Binario de Búsqueda (ABB) es una estructura de datos en la que:
+
+Cada nodo tiene máximo dos hijos.
+
+Para cualquier nodo con valor X:
+
+Todos los valores en su subárbol izquierdo son menores que X.
+
+Todos los valores en su subárbol derecho son mayores que X.
+
+No hay valores duplicados (en la versión clásica del ABB).
+
+### Operaciones Basicas
+
+- Busqueda
+- Insercion
+- Eliminacion
+- 
