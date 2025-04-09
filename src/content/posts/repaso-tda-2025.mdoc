@@ -297,15 +297,14 @@ La estructura Cola se especifica formalmente por ser una Lista ordenada en la cu
 - EnQueue
 - DeQueue
 
-Colas Circulares
-▪ El medio más eficiente para almacenar una cola en un array es utilizar un tipo especial que una el extremo final de la cola con su extremo cabeza.
-▪ Se almacena de manera natural en la memoria (tal como un bloque lineal)
-▪ Se necesitan dos marcadores frente y final para indicar la posición del elemento cabeza y la posición del elemento final donde se almacenó el último elemento.
-▪ La variable frente es siempre la posición del primer elemento de la cola y se avanza en el sentido de las agujas del reloj.
-▪ La variable final es la posición de la última inserción: una nueva inserción supone mover final circularmente a la derecha y asignar el nuevo elemento.
-▪ La simulación del movimiento circular de los indices se realiza utilizando la teoría de los restos, de tal forma que se generen indices de 0 a MAXTAMQ-1.
-▪ Posición a insertar = (frente+final) %MAXTAMQ
-▪ Mover frente adelante (para eliminar) = (frente + 1) % MAXTAMQ
+## Colas Circulares
+
+El medio más eficiente para almacenar una cola en un array es utilizar un tipo especial que una el extremo final de la cola con su extremo cabeza.
+
+- Se almacena de manera natural en la memoria (tal como un bloque lineal) ▪ Se necesitan dos marcadores frente y final para indicar la posición del elemento cabeza y la posición del elemento final donde se almacenó el último elemento.
+- La variable frente es siempre la posición del primer elemento de la cola y se avanza en el sentido de las agujas del reloj.
+- La variable final es la posición de la última inserción: una nueva inserción supone mover final circularmente a la derecha y asignar el nuevo elemento.
+- La simulación del movimiento circular de los indices se realiza utilizando la teoría de los restos, de tal forma que se generen indices de 0 a MAXTAMQ-1. ▪ Posición a insertar = (frente+final) %MAXTAMQ ▪ Mover frente adelante (para eliminar) = (frente + 1) % MAXTAMQ
 
 ### Implementación.
 
