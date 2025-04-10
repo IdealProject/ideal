@@ -1,0 +1,278 @@
+---
+title: Introducción a Racket-Recursion
+draft: false
+description: Recursion
+authors:
+  - facu-garay
+major:
+  discriminant: infor
+  value:
+    discriminant: '3'
+    value: Pa
+---
+# Introducción a Racket
+
+Racket es un lenguaje de programación descendiente de Scheme (un dialecto de Lisp) que se caracteriza por ser multiparadigma, aunque es especialmente reconocido por su enfoque en el paradigma funcional. Racket es ideal para la enseñanza de conceptos de programación debido a su sintaxis simple y su capacidad para implementar diversos paradigmas.
+
+Este documento explica diez ejercicios resueltos en Racket, analizando las soluciones y los conceptos fundamentales que demuestran.
+
+## Conceptos básicos de Racket
+
+- **Sintaxis**: Utiliza notación prefija con paréntesis: `(función argumento1 argumento2 ...)`
+- **Definición de funciones**: `(define (nombre-función parámetros) cuerpo)`
+- **Estructuras condicionales**: `cond` con múltiples cláusulas
+- **Recursividad**: Mecanismo fundamental para el procesamiento de datos
+- **Listas**: Estructura de datos principal manipulada con funciones como `car`, `cdr`, `cons`, etc.
+
+## Ejercicios resueltos
+
+### 1. Factorial
+
+```
+(define (factorial n)
+  (cond
+   [(not (number? n)) null]
+    [(equal? n 1) 1]
+    [else (* n (factorial (- n 1)))]))
+
+```
+
+**Explicación**:
+
+- Esta función calcula el factorial de un número `n` usando recursión.
+- Primero verifica si el argumento es un número con `(not (number? n))`. Si no es un número, retorna `null`.
+- El caso base es cuando `n` es igual a 1, retornando 1.
+- Para cualquier otro caso, multiplica `n` por el factorial de `n-1`.
+- Es un ejemplo clásico de recursión, donde cada llamada reduce el problema original a un subproblema más pequeño.
+
+### 2. Suma de cuadrados
+
+```
+(define (helper-sum lista acum)
+  (cond
+    [(empty? lista) acum]
+    [(not (number? (car lista))) (helper-sum (cdr lista) acum)]
+    [else (helper-sum (cdr lista) (+ acum (* (car lista) (car lista))))]))
+
+(define (suma-de-cuadrados lista)
+   (helper-sum lista 0))
+
+```
+
+**Explicación**:
+
+- La función `suma-de-cuadrados` calcula la suma de los cuadrados de todos los números en una lista.
+- Se implementa utilizando una función auxiliar `helper-sum` que mantiene un acumulador.
+- Si la lista está vacía, retorna el valor acumulado.
+- Si el primer elemento no es un número, lo ignora y continúa con el resto de la lista.
+- Para elementos numéricos, calcula su cuadrado y lo suma al acumulador.
+- Este patrón demuestra el uso de acumuladores para evitar la creación de estructuras intermedias y mejorar la eficiencia.
+
+### 3. Obtener el penúltimo elemento
+
+```
+(define (penultimo lista)
+  (cond
+   [(empty? lista) empty]
+   [(empty? (cdr lista)) null]
+   [(empty? (cdr (cdr lista))) (car lista)]
+   [else (penultimo (cdr lista))]))
+
+```
+
+**Explicación**:
+
+- Esta función obtiene el penúltimo elemento de una lista.
+- Si la lista está vacía, retorna `empty`.
+- Si la lista tiene un solo elemento (el `cdr` es vacío), retorna `null` porque no hay penúltimo.
+- Si la lista tiene exactamente dos elementos, el primer elemento es el penúltimo, así que retorna `(car lista)`.
+- En cualquier otro caso, avanza recursivamente en la lista descartando el primer elemento.
+- Este ejercicio muestra cómo trabajar con la estructura de las listas verificando múltiples condiciones.
+
+### 4. Agregar elemento al final de la lista
+
+```
+(define (agregar-a-lista lista elemento)
+  (cond
+    [(empty? lista) (cons elemento null)]
+    [(empty? (cdr lista))  (cons (car lista) (agregar-a-lista (cdr lista) elemento))]
+    [else (cons (car lista) (agregar-a-lista (cdr lista) elemento))]))
+
+```
+
+**Explicación**:
+
+- Esta función agrega un elemento al final de una lista.
+- Si la lista está vacía, crea una nueva lista que contiene solo el elemento.
+- Si la lista tiene un elemento (el resto de la lista está vacío), conserva ese elemento y agrega el nuevo al final.
+- Para listas con más elementos, preserva el primer elemento y llamada recursivamente a la función con el resto.
+- Demuestra cómo construir nuevas listas mediante recursión y la función `cons`.
+- Nota: La segunda condición es técnicamente redundante con la tercera, podrían combinarse.
+
+### 5. Contar apariciones de una palabra
+
+```
+(define (helper-contar-palabra palabra lista acc)
+  (cond
+    [(empty? lista) acc]
+    [(equal? palabra (car lista)) (helper-contar-palabra palabra (cdr lista) (+ acc 1))]
+    [else (helper-contar-palabra palabra (cdr lista) acc)]))
+
+(define (contar-palabra palabra lista)
+  (helper-contar-palabra palabra lista 0))
+
+```
+
+**Explicación**:
+
+- Esta función cuenta cuántas veces aparece una palabra específica en una lista.
+- Utiliza un acumulador `acc` para llevar la cuenta de las apariciones.
+- Si la lista está vacía, retorna el valor acumulado.
+- Si el primer elemento coincide con la palabra buscada, incrementa el acumulador.
+- En caso contrario, continúa con el resto de la lista sin modificar el acumulador.
+- La función principal inicializa el acumulador en 0.
+- Este patrón muestra cómo se puede usar recursión con acumulador para contar elementos.
+
+### 6. Resta de listas
+
+```
+(define (existe item lista)
+  (cond
+   [(empty? lista) #f]
+   [(equal? item (car lista)) #t]
+   [else (existe item (cdr lista))]))
+
+(define (helper-resta listA listB result)
+  (cond
+    [(empty? listA) result]
+    [(empty? listB) listA]
+    [(existe (car listA) listB) (helper-resta (cdr listA) listB result)]
+    [else (helper-resta (cdr listA) listB (agregar-a-lista result (car listA)))]))
+
+(define (resta-listas listA listB)
+  (helper-resta listA listB empty))
+
+```
+
+**Explicación**:
+
+- Este conjunto de funciones implementa la operación de "resta" entre listas, conservando los elementos de la primera que no están en la segunda.
+- La función `existe` verifica si un elemento se encuentra en una lista, retornando `#t` o `#f`.
+- La función auxiliar `helper-resta` construye el resultado recursivamente:
+  - Si la primera lista está vacía, retorna el resultado acumulado.
+  - Si la segunda lista está vacía, retorna la primera lista (todos sus elementos).
+  - Si el primer elemento de listA existe en listB, lo omite.
+  - De lo contrario, agrega el elemento al resultado.
+- Este ejercicio muestra cómo combinar funciones auxiliares para implementar operaciones más complejas sobre listas.
+
+### 7. Censurar palabras en una lista
+
+```
+(define (helper-censurar a-remplazar nueva-palabra lista result)
+  (cond
+    [(empty? lista) result]
+    [(equal? a-remplazar (car lista)) (helper-censurar a-remplazar nueva-palabra (cdr lista) (agregar-a-lista result nueva-palabra))]
+    [else (helper-censurar a-remplazar nueva-palabra (cdr lista) (agregar-a-lista result (car lista)))]))
+
+(define (censurar a-remplazar remplazo lista)
+  (helper-censurar a-remplazar remplazo lista empty))
+
+```
+
+**Explicación**:
+
+- Esta función crea una nueva lista reemplazando una palabra específica por otra.
+- La función auxiliar `helper-censurar` recorre la lista original y construye una nueva:
+  - Si la lista está vacía, retorna el resultado acumulado.
+  - Si el primer elemento coincide con la palabra a reemplazar, agrega la nueva palabra al resultado.
+  - En caso contrario, mantiene el elemento original.
+- Utiliza la función `agregar-a-lista` definida previamente para añadir elementos al final.
+- Este ejercicio ilustra cómo transformar listas elemento por elemento usando recursión.
+
+### 8. Alternar elementos de dos listas
+
+```
+(define (merge-dos-elementos listA listB result first-time)
+  (cond
+    [(and (equal? first-time #t) (not (empty? listA))) (merge-dos-elementos listA listB (agregar-a-lista result (car listA)) #f)]
+    [(and (equal? first-time #f) (not (empty? listB))) (merge-dos-elementos listA listB (agregar-a-lista result (car listB)) null)]
+    [(and (empty? first-time) (not (empty? result))) result]
+    [else result]))
+
+(define (helper-alternar listA listB result)
+  (cond
+    [(empty? listA) result]
+    [else
+     (cond
+       [(empty? listB) (helper-alternar (cdr listA) empty (agregar-a-lista result (merge-dos-elementos listA listB empty #t)))]
+       [else (helper-alternar (cdr listA) (cdr listB) (agregar-a-lista result (merge-dos-elementos listA listB empty #t)))])]))
+
+(define (alternar listA listB)
+  (helper-alternar listA listB empty))
+
+```
+
+**Explicación**:
+
+- Esta función crea una lista de pares alternando elementos de dos listas.
+- La función `merge-dos-elementos` toma un elemento de la primera lista y uno de la segunda para formar un par.
+- La función `helper-alternar` maneja la creación de la lista resultante:
+  - Si la primera lista está vacía, retorna el resultado acumulado.
+  - Si la segunda lista está vacía pero la primera no, crea un par solo con el elemento de la primera.
+  - En caso contrario, crea un par con elementos de ambas listas.
+- Este ejercicio demuestra un procesamiento más complejo que combina elementos de dos estructuras diferentes.
+
+### 9. Partir una lista según un pivote
+
+```
+(define (partir pivot lista)
+  (define (partir-helper pivot lista list1 list2 primera-parte)
+    (cond
+      [(empty? lista) (cons list1 (cons list2 null))]
+      [(equal? primera-parte #t) (partir-helper pivot (cdr lista) (agregar-a-lista list1 (car lista)) list2 (not (equal? (car lista) pivot)))]
+      [else (partir-helper pivot (cdr lista) list1 (agregar-a-lista list2 (car lista)) #f)]))
+  (partir-helper pivot lista empty empty #t))
+
+```
+
+**Explicación**:
+
+- Esta función divide una lista en dos sublistas usando un valor pivote.
+- Define una función auxiliar interna `partir-helper` con parámetros adicionales:
+  - `list1`: Primera sublista (hasta el pivote inclusive)
+  - `list2`: Segunda sublista (después del pivote)
+  - `primera-parte`: Indica si seguimos en la primera parte de la división
+- Si la lista está vacía, retorna un par de sublistas construido con `cons`.
+- Mientras estamos en la primera parte y no encontramos el pivote, agregamos elementos a `list1`.
+- Al encontrar el pivote, lo añadimos a `list1` y cambiamos el flag `primera-parte`.
+- Para elementos siguientes, los agregamos a `list2`.
+- Este ejercicio muestra el uso de definiciones locales y cómo mantener estado mediante parámetros adicionales.
+
+### 10. Invertir los elementos de una lista
+
+```
+(define (invertir lista)
+  (cond
+    [(empty? lista) lista]
+    [(empty? (cdr lista)) lista]
+    [else (agregar-a-lista (invertir (cdr lista)) (car lista))]))
+
+```
+
+**Explicación**:
+
+- Esta función invierte el orden de los elementos en una lista.
+- Los casos base son:
+  - Si la lista está vacía, retorna la lista vacía.
+  - Si la lista tiene un solo elemento, retorna la misma lista.
+- Para listas con más elementos, invierte recursivamente el resto de la lista y añade el primer elemento al final.
+- Utiliza la función `agregar-a-lista` definida anteriormente.
+- Es un ejemplo clásico de recursión donde el orden de las operaciones importa para lograr la inversión.
+
+## Patrones comunes en los ejercicios
+
+1. **Recursión**: La mayoría de las soluciones utilizan recursión, fundamental en la programación funcional.
+1. **Acumuladores**: Se utilizan para mantener resultados parciales durante la recursión.
+1. **Funciones auxiliares**: Permiten implementar algoritmos más complejos aislando la complejidad.
+1. **Pattern matching con cond**: Se estructura el código según las condiciones de los datos de entrada.
+1. **Inmutabilidad**: Las operaciones sobre listas crean nuevas estructuras en lugar de modificar las existentes.
