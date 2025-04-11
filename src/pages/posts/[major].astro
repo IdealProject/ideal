@@ -18,7 +18,7 @@ export const getStaticPaths = () => {
 };
 ---
 
-<Layout title=`${majorData[0].label}`>
+<Layout title=`${majorData[0].label}` pagefinderIgnore>
     <!-- container -->
     <SubjectSelect majorData={majorData} client:load />
 </Layout>

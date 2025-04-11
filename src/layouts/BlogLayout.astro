@@ -5,15 +5,16 @@ import { Icon } from "astro-icon/components";
 export interface Props {
   title: string;
   description: string;
+  draft?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, draft = false} = Astro.props;
 import Header from "@components/Header.astro";
 import { ViewTransitions } from "astro:transitions";
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es"  {...(draft ? { "data-pagefind-ignore": "all" } : {})}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
