@@ -29,6 +29,7 @@ export async function getStaticPaths() {
 <BlogLayout 
   title={post.data.title} 
   description={post.data.description} 
+  data-pagefind-ignore
   {...(post.data.draft ? { "data-pagefind-ignore": "all" } : {})}>
   <main
     class="flex flex-col xl:flex-row 2xl:flex-row gap-x-4  print mx-auto print:break-inside-avoid print:relative print:pt-14 print:mt-0"
