@@ -1,5 +1,8 @@
 ---
-const { name, url, ariaLabel} = Astro.props;
+const { name, url, ariaLabel } = Astro.props;
 ---
 
-<a data-pagefind-ignore class="text-gray-500 hover:text-gray-900" href={url} aria-label={ariaLabel}>{name}</a>
+<nav>
+  <a class="text-gray-500 hover:text-gray-900" href={url} aria-label={ariaLabel}
+    >{name}</a>
+</nav>
