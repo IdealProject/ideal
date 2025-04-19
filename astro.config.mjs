@@ -19,6 +19,8 @@ export default defineConfig({
   site: "https://ideal.fiuni.edu.py",
   build: {
     formats: ["file"],
+    client: './dist/client',
+    server: './dist/server',
   },
   integrations: [
     react(),
