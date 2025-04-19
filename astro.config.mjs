@@ -28,10 +28,15 @@ export default defineConfig({
     keystatic(),
     tailwind(),
     icon(),
-    // pagefind(),
+    //pagefind(),
     sitemap(),
     auth(),
   ],
   output: "server",
   adapter: cloudflare(),
+  vite: {
+    ssr: {
+      external: ['node:path']
+    }
+  }
 });
