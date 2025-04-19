@@ -4,7 +4,7 @@
   "license": "MIT",
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/cloudflare": "^11.2.0",
+    "@astrojs/cloudflare": "^12.5.0",
     "@astrojs/markdoc": "^0.8.3",
     "@astrojs/react": "^3.6.3",
     "@astrojs/sitemap": "^3.2.1",
@@ -15,7 +15,7 @@
     "@keystatic/core": "^0.5.43",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
-    "astro": "^4.8.0",
+    "astro": "^5.7.4",
     "astro-icon": "^1.1.5",
     "astro-pagefind": "^1.7.0",
     "auth-astro": "^4.2.0",
