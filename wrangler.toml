@@ -9,3 +9,6 @@ directory = "./dist"
 
 [observability]
 enabled = true
+
+[env.production]
+pages_build_output_dir = "./dist"
