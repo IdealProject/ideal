@@ -9,6 +9,8 @@ import pagefind from "astro-pagefind";
 
 import sitemap from "@astrojs/sitemap";
 
+import auth from "auth-astro";
+
 // https://astro.build/config
 export default defineConfig({
   devToolbar: {
@@ -26,7 +28,8 @@ export default defineConfig({
     icon(),
     pagefind(),
     sitemap(),
+    auth(),
   ],
-  output: "hybrid",
+  output: "server",
   adapter: cloudflare(),
 });
