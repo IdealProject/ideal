@@ -26,7 +26,7 @@ export default defineConfig({
     keystatic(),
     tailwind(),
     icon(),
-    pagefind(),
+    //pagefind(),
     sitemap(),
     auth(),
   ],
