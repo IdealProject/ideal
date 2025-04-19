@@ -31,7 +31,8 @@
     "@types/katex": "^0.16.7",
     "pagefind": "^1.3.0",
     "prettier": "^3.4.2",
-    "prettier-plugin-astro": "^0.14.1"
+    "prettier-plugin-astro": "^0.14.1",
+    "wrangler": "^4.12.0"
   },
   "scripts": {
     "dev": "astro dev",
