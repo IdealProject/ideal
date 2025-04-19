@@ -1,12 +1,7 @@
 name = "ideal"
-main = "./dist/_worker.js/index.js"
 compatibility_date = "2025-04-19"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "./dist"
-
-[assets]
-binding = "MY_ASSETS"
-directory = "./dist"
 
 [observability]
 enabled = true
