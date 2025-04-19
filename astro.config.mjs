@@ -32,4 +32,9 @@ export default defineConfig({
   ],
   output: "server",
   adapter: cloudflare(),
+  vite: {
+    ssr: {
+      external: ['node:path']
+    }
+  }
 });
