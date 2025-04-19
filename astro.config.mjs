@@ -26,10 +26,10 @@ export default defineConfig({
     keystatic(),
     tailwind(),
     icon(),
-    // pagefind(),
+    pagefind(),
     sitemap(),
     auth(),
   ],
-  output: "server",
+  output: "static",
   adapter: cloudflare(),
 });
