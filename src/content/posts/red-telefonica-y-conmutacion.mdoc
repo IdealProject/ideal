@@ -1,0 +1,252 @@
+---
+title: Red Telefónica y Conmutación
+draft: false
+description: 'Presentación de clase sobre capitulo 2.6.1 Tanenbaum '
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: Rc1
+---
+# La Red Telefónica Pública Conmutada (PSTN)
+
+> Cap. 2.6.1 Tanenbaum 6ta
+
+Sistema telefónico con 3 componentes principales (esto se diseñó en 1886...)
+
+---
+
+### Componentes
+
+- **Teléfono**
+  - Lazo Local
+- **Oficina Final**
+  - Troncal de Conexión Interurbana
+- **Oficina Interurbana**
+
+(… Mirar Tanenbaum para completar)
+
+---
+
+### AT&T
+
+Se le demandó por monopolio, entonces se dividió en más de 23 compañías.
+
+- **LATA** (Áreas de Acceso Local y de Transporte): Así se dividió USA.
+- **LEC** (Portadora de Intercambio Local): Cada compañía por LATA.
+- **IXC** (Portadora entre Centrales): Conexión entre compañías.
+- **POP** (Punto de Presencia).
+
+---
+
+### Módems Telefónicos, ADSL y Fibra Óptica
+
+Señal bidireccional.
+
+- **Módem**: Del lado del cliente.
+- **Codec**: Del lado del proveedor.
+
+---
+
+#### Descendente (Descarga) y Ascendente (Carga)
+
+- El ascendente suele ser menor que el descendente.
+
+---
+
+#### DSL (Líneas de Suscriptor Digital)
+
+- Paquetes de servicios: TV + Internet, entre otros.
+- 256 canales de 4 kHz.
+  - 0 a 25: Para voz.
+  - 248 canales: Para los datos del usuario.
+    - Se dividen para carga y descarga (descarga ~80%).
+
+---
+
+#### ADSL (Asimétrico)
+
+- La mayoría utilizamos este tipo.
+
+---
+
+#### FTTH (Fibra para el Hogar)
+
+- **PON** (Red Óptica Pasiva).
+
+---
+
+### Digitalización de las Señales de Voz
+
+- **FDM** (Multiplexación por División de Frecuencia).
+- **TDM** (Multiplexación por División de Tiempo).
+
+---
+
+### SONET/SDH
+
+- En los primeros días de la fibra, cada compañía tenía su propio TDM óptico.
+- Entonces nació el estándar **SONET**.
+  - Se trabaja por tramas, envía 810 bytes cada 125 microsegundos.
+- **SDH** (Jerarquía Digital Síncrona).
+
+---
+
+### WDM (Multiplexación por División de Longitud de Onda)
+
+- 4 fibras se conectan a un combinador óptico, suma los haces de luz.
+- Del otro lado, vuelven a separar con un filtro para cada haz.
+
+---
+
+## Conmutación
+
+Se sigue usando:
+
+- **Planta Externa**: Troncales físicamente fuera de las oficinas de computación.
+- **Planta Interna**: Dentro de las oficinas.
+
+---
+
+### ¿Qué es la Conmutación?
+
+Esto habla mucho del enrutamiento, pero tienen diferencias de cómo se rutean. En el primer caso, tenemos la necesidad de que vayan uno atrás de otro, respetando el orden; en el segundo, eso no es lo importante, siempre que lleguen.
+
+Este mismo funcionamiento veremos en la capa de enlace.
+
+También se relaciona con la capa de transporte y la capa de aplicación.
+
+---
+
+#### Conmutación de Circuitos
+
+- **Este es un cable físico**.
+- Se establece de izquierda a derecha, aunque sea una conexión continua y ordenada, también puede tener retrasos significativos hasta que se encuentra un canal disponible.
+- Mal uso del ancho de banda.
+- Es fija y no cambia.
+- Si falla, se pierde todo.
+
+---
+
+#### Conmutación de Paquetes
+
+- Los paquetes pueden ir a distintas redes y distintas trayectorias.
+- Este también tiene cables, pero cada paquete puede decidir por dónde ir.
+- Usa de forma más eficiente el ancho de banda.
+- Los paquetes pueden llegar desordenados.
+- Envían antes de que llegue el que se fue primero, eso usa mejor el ancho de banda.
+- Si falla, puede encontrar otra ruta para enviar los datos.
+
+---
+
+## Sistema de Telefonía Móvil
+
+---
+
+### 1G
+
+- Las celdas se pueden subdividir para poder cubrir mayores demandas. Hay celdas con el mismo nombre, tienen frecuencias compartidas, pero con celdas intermedios para separarles y así no tener problemas al reutilizar las frecuencias.
+- **Voz analógica**.
+- El **IMTS** mejoró la primera versión utilizando dos frecuencias separadas, pero solo usando 24 canales, que tenías que esperar mucho para usar.
+- Luego se implementa el **AMPS**, que utiliza celdas, cada una con una frecuencia distinta. Cada celda tiene una estación base, que se encarga de manejar a los usuarios y sus peticiones.
+- **Handoff**: Se da cuando un usuario está saliendo o entrando de una celda. Entonces se comunican con otra estación base para ver con quién está teniendo una mejor conexión y así derivarle a esta nueva celda.
+- **AMPS utiliza FDM** para separar los canales. Emplea un total de 832 canales, que se dividen en: canales... (falta completar con los canales y sus tipos).
+
+---
+
+### Administración de Llamadas
+
+- Cada teléfono tiene un número de serie de 32 bits y un número telefónico de 10 dígitos almacenado en su memoria de solo lectura.
+- Para hacer la llamada, el usuario marca el número y llama. Aquí miramos si al que queremos llamar está en la misma celda que nosotros.
+- Para recibir, los teléfonos inactivos escuchan el canal de localización. Si está activo, se le asigna un canal para empezar a llamar.
+- **¿Cómo funciona una llamada?**
+  - Damos clic a llamar y nos comunicamos con la estación base.
+  - Utilizamos uno de los canales para ver si está en la misma celda que el que llama.
+  - Si está, se conectan con la misma estación base por conmutación.
+  - Si no está, pregunta al centro de conmutación, que se encarga de comunicarse con todas las estaciones base. Desde ahí localizamos el número al que queremos llamar. Esta estación base que nos encuentra (o no) le vuelve a informar al centro de conmutación, que se comunica con la estación base original.
+
+---
+
+### 2G
+
+- Permite un aumento en la capacidad.
+- Permite mensajería de texto.
+- Mejora la seguridad.
+- No tiene estándar global.
+- Se implementaron:
+  - **D-AMPS** (Estadounidense).
+  - **GSM** (Intento de estándar iniciado en Europa, llegó hasta Australia, fue un éxito en 1991).
+
+---
+
+### 3G
+
+- Voz y datos digitales.
+- Hay un estándar en especificaciones **IMT-2000**.
+- Mejoró todas las capacidades de las redes móviles.
+- Para el correcto funcionamiento del **CDMA** en redes móviles, es necesario sincronizar las transmisiones y controlar la potencia de los móviles para reducir interferencias.
+
+---
+
+### 4G
+
+- Conmutación de circuitos ahora pasamos a usar conmutación de paquetes.
+- **EPC** transporta tanto voz como datos en forma de paquete.
+- O sea, que es **VoIP** (voz como datos en forma de paquete).
+- Multiplexación estadística.
+- La tecnología que cumplió el estándar 4G fue **LTE** (Long Term Evolution).
+  - **Serving Gateway (S-GW)**.
+  - **MME** (Mobility Management Entity).
+  - **Packet Data Network Gateway (P-GW)**.
+  - **HSS** (Home Subscriber Server).
+
+---
+
+### 5G
+
+- Se necesita mejorar la capacidad de área de la red en 3 órdenes:
+  - **Ultra-densificación y descarga de tráfico**: Aumentamos la cantidad de celdas por unidad de área.
+  - **Uso de ondas milimétricas** (20 GHz - 300 GHz): Son ondas que no traspasan las cosas con facilidad.
+  - **Mayor eficiencia con el MIMO (Multiple Input/Output) masivo**.
+- Otros temas innovadores:
+  - **Segmentación de la red (Network Slicing)**: Capacidad de crear redes virtuales independientes sobre una misma infraestructura de red.
+  - **Beamforming**: Pueden dirigir en un solo sentido las ondas, así es más eficiente para la antena. Hasta ahora veníamos usando omnidireccional.
+
+---
+
+## Televisión por Antena Comunal
+
+- En los 40, se recibía en una antena para captar señales que luego se distribuía por las casas con un cable coaxial.
+- En el 74, las grandes compañías empezaron a extender la cobertura y conectar cables a un sistema.
+- Eso se solucionó con el **HFC** (Red Híbrida de Fibra Óptica y Cable Coaxial).
+
+---
+
+### Internet por Cable
+
+- Se necesitaban 2 vías: una ascendente y otra descendente.
+- Al comienzo se utilizó la infraestructura de las televisiones por cable para descarga y la red telefónica para la vía de subida.
+- Esto dio problemas porque al compartir el cable coaxial para descargar del TV, el ancho de banda se distribuía según el uso, cosa que puede ser muy injusta.
+- **Asignación de espectro, multiplexación por división de frecuencia**.
+- En las puntas del espectro se asigna respectivamente el de subida y luego de bajada, siendo mucho mayor.
+- Los módems de cable convierten señales analógicas a digitales.
+- **DOCSIS**: Este es el estándar de los módems para coaxial.
+  - 108 ~ 1002 MHz para bajada.
+  - En el medio: radio, televisión y demás.
+  - 5 ~ 42 MHz para subida.
+- El ancho de banda se divide cada 6 MHz, lo que permite regular el ancho de banda de cada usuario.
+
+---
+
+### Versiones Comunes
+
+- **3.0**: 1 Gbps de descarga, 100 Mbps de subida. (Este es normal usar en Paraguay).
+- **3.1**: 10 Gbps de descarga, 1~2 Gbps de subida.
+- **GPON** para fibra óptica.
+  - Multiplexación por división de onda.
+  - División óptica pasiva (1:32 o 1:64).
+  - Longitud de onda y velocidad:
+    - Descarga: 1490 nm - 2.5 Gbps.
+    - Subida: 1310 nm - 1.25 Gbps.

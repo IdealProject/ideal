@@ -1,0 +1,93 @@
+---
+title: Vectores Análisis II
+draft: false
+description: Introducción a los vecoteres en Análisis Matemático II
+authors:
+  - adan-alvarez
+major:
+  discriminant: infor
+  value:
+    discriminant: '2'
+    value: A2
+---
+# Vectores
+
+Vector es un segmento de recta dirigido Se necesita a de un punto iniciual y un punto final para poder representarlos.
+
+## Módulo del vector
+
+La formula para hallar el módulo de un vector es:
+
+{% blockLatex
+   formula="| \\overrightarrow{AB} | =\\sqrt{(x_2-x_1)^2+(y_2 -y_1)^2}" /%}
+
+## **Ejemplo 1**
+
+Determine (a) los componentes y (b) la longitud del vector con punto inicial en P(-3, 4, 1) y punto terminal Q(-5, 2, 2).
+
+Para a:
+
+{% blockLatex
+   formula="v1 = x_2 - x_1 = - 5 - (-3) = - 2 \\\\ v2 = y_2 - y_1 = 2 - 4 = - 2 \\\\v3 = z_2 - z_1 = 2 - 1 = 1" /%}
+
+La longitud o magnitud de {% inlineLatex formula="\\overrightarrow{PQ}" /%} en componentes es:
+
+{% blockLatex formula="v= \\left\\langle -2, -2, 1 \\right\\rangle" /%}
+
+Para b:
+
+La longitud o magnitud de {% inlineLatex formula="v = \\overrightarrow{PQ}" /%} es:
+
+{% blockLatex
+   formula="\\left| v \\right| = \\sqrt{(-2)^2 + (-2)^2 + 1^2} = \\sqrt9 = 3" /%}
+
+## Operaciones Algebraicas con vectores
+
+Sean {% inlineLatex formula="\\overrightarrow{U} = (u_1, u_2, u_3)" /%} y {% inlineLatex formula="\\overrightarrow{V} = (v_1, v_2, v_3)" /%} dos vectores tres y "k" escalar
+
+Se sumple las siguientes propiedades
+
+- Suma: {% inlineLatex formula="\\overrightarrow{U} +  \\overrightarrow{V} = (u_1 + v_1 ; u_2 + v_2, u_3 + v_3)" /%}
+- Multiplicación por un escalar {% inlineLatex formula="k \\cdot \\overrightarrow{V} = (k\\cdot \\overrightarrow{v_1}; k \\cdot \\overrightarrow{v_2}; k\\cdot \\overrightarrow{v_3})" /%}
+
+### Propiedades de las operaciones
+
+1. {% inlineLatex
+      formula="\\overrightarrow{u} + \\overrightarrow{v} =  \\overrightarrow{v} + \\overrightarrow{u}" /%}
+1. {% inlineLatex formula="\\overrightarrow{u} + 0 = \\overrightarrow{u}" /%}
+1. {% inlineLatex formula="0\\cdot \\overrightarrow{u} = 0" /%}
+1. {% inlineLatex
+      formula="(a+b)\\cdot \\overrightarrow{u} = a\\cdot \\overrightarrow{u} + b\\overrightarrow{u}" /%}
+1. {% inlineLatex formula="\\overrightarrow{u} + -(\\overrightarrow{u}) = 0" /%}
+1. {% inlineLatex
+      formula="a(\\overrightarrow{u} + \\overrightarrow{v}) = a \\cdot \\overrightarrow{u} + a \\cdot \\overrightarrow{v}" /%}
+
+## Vector unitario
+
+Se tiene un vecot runitario cuando la direccion es la sma que un vecotr \overrightarrow{PQ} peroo su módulo es la unidad (de valor 1)
+
+{% blockLatex
+   formula="\\overrightarrow{PQ} = \\overrightarrow{V}= (x_2-x_1)\\hat\\imath + (y_2-y_1)\\hat k" /%}
+
+Para que el vector {% inlineLatex formula="\\overrightarrow{V}" /%} sea unitario debe dividirse por su módulo
+
+{% blockLatex
+   formula="\\hat{V} = \\frac{\\overrightarrow{V}}{| \\overrightarrow{V}|}" /%}
+
+### Velocidad de un vector
+
+La velocidad de un vecot rpuede ser representado por el prodcto entre la rapidez y producto entre la rapizdez y la direccion
+
+{% blockLatex
+   formula="\\overrightarrow{V} =| \\overrightarrow{V} | \\cdot \\frac{V}{|\\overrightarrow{V}|}" /%}
+
+## Obtenga el vector unitario u en la dirección del vector de P1(1, 0, 1) a P2(3, 2, 0)
+
+{% blockLatex
+   formula="\\overrightarrow{P_1P_2} = (3-1)\\hat\\imath + (2-0)\\hat\\jmath + (0-1)\\hat k = 2\\hat\\imath + 2\\hat\\jmath -k" /%}
+
+{% blockLatex
+   formula="|\\overrightarrow{{P_1P_2}}|= \\sqrt{2^2+2^2+(-1)^2}= 3" /%}
+
+{% blockLatex
+   formula="u=\\frac{\\overrightarrow{P_1P_2}}{| \\overrightarrow{P_1P_2}|} = \\frac{2i +2j-k}{3}= \\frac{2}{3}i + \\frac{2}{3}j - \\frac{1}{3}k" /%}

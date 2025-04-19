@@ -5,6 +5,7 @@ import Search from "astro-pagefind/components/Search";
 
 <!-- Large Search Bar -->
 <div
+  data-pagefind-ignore="all"
   onselectstart="return false"
   class="hidden lg:flex h-auto w-1/3 px-2 py-3 bg-zinc-100 border border-zinc-200 items-center justify-center gap-x-3 rounded-lg cursor-text hover:bg-zinc-300 hover:transition-colors"
   id="search-bar"
@@ -28,6 +29,7 @@ import Search from "astro-pagefind/components/Search";
 
 <!-- MODAL -->
 <div
+  data-pagefind-ignore="all"
   id="search-modal"
   class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50"
 >

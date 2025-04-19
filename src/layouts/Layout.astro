@@ -3,15 +3,16 @@ import "../styles.css";
 
 export interface Props {
   title: string;
+  pagefinderIgnore?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, pagefinderIgnore = false } = Astro.props; 
 import Header from "@components/Header.astro";
 import { ViewTransitions } from "astro:transitions";
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" {...(pagefinderIgnore ? { "data-pagefind-ignore": "all" } : {})}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
@@ -24,7 +25,23 @@ import { ViewTransitions } from "astro:transitions";
     <title>{title}</title>
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="canonical" href="https://ideal.fiuni.edu.py/"/>
+    <link as="font" rel="preload" href="/public/fonts/inter.woff2" type="font/woff2" crossorigin="" />
     <ViewTransitions />
+    <style>
+      @font-face {
+        font-family: 'Inter';
+        src: url('/fonts/InterVariable.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+        }
+
+      body {
+        font-family: 'Inter', system-ui, sans-serif;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+    </style>
   </head>
   <body>
     <Header />

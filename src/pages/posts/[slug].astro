@@ -26,9 +26,9 @@ export async function getStaticPaths() {
 }
 ---
 
-<BlogLayout title={post.data.title} description={post.data.description}>
+<BlogLayout title={post.data.title} description={post.data.description} draft={post.data.draft}>
   <main
-    class="flex flex-col xl:flex-row 2xl:flex-row gap-x-4  print mx-auto print:break-inside-avoid print:relative print:pt-14 print:mt-0"
+    class="flex flex-col xl:flex-row 2xl:flex-row gap-x-4 print mx-auto print:break-inside-avoid print:relative print:pt-14 print:mt-0"
   >
     <div class="hidden 2xl:block 2xl:w-1/5"></div>
     <section class="2xl:w-3/5 pt-5">
@@ -61,10 +61,10 @@ export async function getStaticPaths() {
         </div>
         <button
           class="flex justify-center items-center gap-x-2 text-white font-semibold bg-black py-2 px-3 rounded-md print:hidden min-w-full md:min-w-fit lg:min-w-fit xl:min-w-fit"
-          onclick="window.print()">Descargar
-          <Icon name="pdf"/>
-          </button
-        >
+          onclick="window.print()"
+          >Descargar
+          <Icon name="pdf" />
+        </button>
         <TableOfContentsMobile headings={headings} />
       </header>
       <article

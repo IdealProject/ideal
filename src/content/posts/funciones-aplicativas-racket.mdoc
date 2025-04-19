@@ -1,0 +1,300 @@
+---
+title: Funciones aplicativas Racket
+draft: false
+description: Funciones aplicativas racket
+authors:
+  - facu-garay
+major:
+  discriminant: infor
+  value:
+    discriminant: '3'
+    value: A3
+---
+## Ejercicios de programación funcional y manipulación de datos
+
+- **Funciones de orden superior**: `map`, `filter`, `fold`, `sort`
+- **Expresiones lambda**: Creación de funciones anónimas
+- **Clausuras**: Funciones que capturan variables de su entorno
+- **Programación funcional**: Uso de técnicas sin efectos secundarios
+
+## Ejercicios resueltos
+
+### 1. Obtener números primos de una lista
+
+```
+(define (es-primo numero)
+  (define (es-primo-helper numero divisor)
+    (cond
+      [(or (equal? numero 0) (equal? numero 1)) #f]
+      [(equal? divisor 1) #t]
+      [(equal? 0 (modulo numero divisor)) #f]
+      [else (es-primo-helper numero (- divisor 1))]))
+  (es-primo-helper numero (- numero 1)))
+
+(define (obtener-primos lista)
+  (filter es-primo (filter number? lista)))
+
+```
+
+**Explicación**:
+
+- La función `es-primo` determina si un número es primo verificando si tiene divisores distintos de 1 y él mismo.
+- Utiliza una función auxiliar `es-primo-helper` que prueba divisores decrecientes desde n-1 hasta 1.
+- Define casos especiales para 0 y 1, que no son primos.
+- La función `obtener-primos` usa `filter` dos veces: primero para seleccionar solo números de la lista, y luego para filtrar aquellos que son primos.
+- Este ejemplo muestra cómo pasar funciones como argumentos a otras funciones, un concepto fundamental de la programación funcional.
+
+### 2. Ordenar una lista según criterio
+
+```
+(define (ordenar opcion lista)
+  (cond
+    [(equal? opcion 'min-max) (sort lista <)]
+    [(equal? opcion 'max-min) (sort lista >)]
+    [else ("Ingrese una opcion valida (min-max|max-min)")]))
+
+```
+
+**Explicación**:
+
+- Esta función ordena una lista de números según el criterio especificado ('min-max' o 'max-min').
+- Utiliza la función de orden superior `sort`, que recibe la lista y un comparador (< o >).
+- Si se especifica 'min-max', ordena de menor a mayor usando el comparador <.
+- Si se especifica 'max-min', ordena de mayor a menor usando el comparador >.
+- Maneja el caso de criterios inválidos con un mensaje de error.
+- Muestra cómo los símbolos (indicados con comilla simple) pueden servir como identificadores de opciones.
+
+### 3. Función generadora para filtrar mayores que x
+
+```
+(define (mayor-que n)
+  (lambda (x) (> x n)))
+
+```
+
+**Explicación**:
+
+- Esta función retorna otra función (una clausura) que verifica si un número es mayor que un valor dado.
+- Es un ejemplo perfecto de clausura: la función retornada "recuerda" el valor `n` con el que fue creada.
+- Para usarla, se pasaría como argumento a `filter`: `(filter (mayor-que 5) '(1 2 3 4 5 6 7))`.
+- Este tipo de función generadora es útil cuando necesitamos crear predicados específicos dinámicamente.
+- Demuestra el concepto de "funciones como datos" fundamental en la programación funcional.
+
+### 4. Calcular factoriales con filtrado previo
+
+```
+(define (factorial-de n)
+  (cond
+    [(or (equal? n 1) (equal? n 0)) 1]
+    [else (* n (factorial-de (- n 1)))]))
+
+(define (factorial lista)
+  (map factorial-de (filter (lambda (x) (> 20 x)) lista)))
+
+```
+
+**Explicación**:
+
+- `factorial-de` calcula el factorial de un número mediante recursión.
+- `factorial` aplica dos operaciones: primero filtra los números menores que 20 con una expresión lambda, y luego mapea la función `factorial-de` a cada elemento resultante.
+- La expresión lambda `(lambda (x) (> 20 x))` es una función anónima que verifica si 20 es mayor que x.
+- Este ejercicio integra varias funciones de orden superior (`map` y `filter`) con expresiones lambda, mostrando la composición de operaciones en el paradigma funcional.
+
+### 5. Filtrar números con raíz cuadrada exacta
+
+```
+(define (raiz-exacta lista)
+  (filter (lambda (x) (integer? (sqrt x))) lista))
+
+```
+
+**Explicación**:
+
+- Esta función filtra los números de una lista que tienen raíz cuadrada exacta (entera).
+- Combina la función `sqrt` con el predicado `integer?` en una expresión lambda.
+- Para cada elemento x, calcula su raíz cuadrada y verifica si es un número entero.
+- Es un ejemplo conciso de cómo las expresiones lambda pueden crear predicados complejos.
+
+### 6. Cálculo de media, mediana y moda
+
+```
+(define (my-length lista)
+  (foldl + 0 (map (lambda (x) 1) lista)))
+
+(define (valor-en indice lista)
+  (define (valor-en-helper lista indice i)
+    (cond
+      [(empty? lista) empty]
+      [(equal? indice i) (car lista)]
+      [else (valor-en-helper (cdr lista) indice (+ i 1))]))
+  (valor-en-helper lista indice 0))
+
+(define (media lista)
+  (/ (foldl + 0 (filter number? lista)) (my-length lista)))
+
+(define (mediana-impar lista)
+  (valor-en (- (/ (+ 1 (my-length lista)) 2) 1) (sort lista <)))
+
+(define (mediana-par lista)
+  (/ (+ (valor-en (- (/ (my-length lista) 2) 1) (sort lista <)) 
+        (valor-en (/ (my-length lista) 2) (sort lista <))) 
+     2))
+
+(define (mediana lista)
+  (cond
+    [(equal? (modulo (my-length lista) 2) 0) (mediana-par lista)]
+    [else (mediana-impar lista)]))
+
+(define (ocurrencias elemento lista)
+  (foldl + 0
+        (map
+         (lambda (x)
+                   (cond
+                     [(equal? x elemento) 1]
+                     [else 0]))
+         lista)))
+
+(define (moda lista)
+  (define (moda-helper lista mas-repetido frecuencia)
+    (cond
+      [(empty? lista) mas-repetido]
+      [(> (ocurrencias (car lista) lista) frecuencia) 
+       (moda-helper (cdr lista) (car lista) (ocurrencias (car lista) lista))]
+      [else (moda-helper (cdr lista) mas-repetido frecuencia)]))
+  (moda-helper lista (car lista) (ocurrencias (car lista) lista)))
+
+```
+
+**Explicación**:
+
+- Este conjunto de funciones implementa cálculos estadísticos básicos:
+  - **Media**: Suma todos los valores y divide por la cantidad.
+  - **Mediana**: Ordena la lista y encuentra el valor central.
+  - **Moda**: Encuentra el valor que aparece con mayor frecuencia.
+- `my-length` calcula la longitud de una lista utilizando `foldl` y `map`.
+- `valor-en` recupera un elemento en un índice específico mediante recursión.
+- `media` suma los valores numéricos y divide por la cantidad.
+- `mediana` distingue entre listas de longitud par e impar y calcula la mediana adecuadamente.
+- `ocurrencias` cuenta cuántas veces aparece un elemento en la lista.
+- `moda` recorre la lista para encontrar el elemento más frecuente.
+- Estas funciones demuestran técnicas avanzadas como:
+  - Uso de acumuladores con foldl
+  - Funciones auxiliares para manejar casos especiales
+  - Combinación de múltiples funciones de orden superior
+
+### 7. Invertir una lista usando fold
+
+```
+(define (invertir lista)
+  (foldl cons empty lista))
+
+```
+
+**Explicación**:
+
+- Esta función invierte una lista utilizando `foldl` (fold left) con la función `cons`.
+- `foldl` aplica una función a cada elemento de la lista y un acumulador, de izquierda a derecha.
+- El acumulador inicial es la lista vacía (`empty`).
+- Para cada elemento, se añade al principio del acumulador con `cons`.
+- Este patrón es más eficiente que reconstruir la lista con recursión y `append`, ya que evita copiar toda la lista en cada paso.
+- Es un ejemplo elegante de cómo usar `fold` para transformar colecciones en el paradigma funcional.
+
+### 8. Convertir strings a mayúsculas
+
+```
+(define (mayusculas lista)
+  (map string-upcase lista))
+
+```
+
+**Explicación**:
+
+- Esta función convierte cada string de una lista a mayúsculas.
+- Utiliza `map` para aplicar `string-upcase` a cada elemento de la lista.
+- Es un ejemplo de cómo usar `map` para transformar datos sin cambiar la estructura original.
+
+### 9. Encontrar el máximo valor
+
+```
+(define (maximo lista)
+  (car (sort lista >)))
+
+```
+
+**Explicación**:
+
+- Esta función encuentra el valor máximo en una lista.
+- En lugar de recorrer la lista elemento por elemento, utiliza `sort` para ordenar la lista de mayor a menor.
+- Luego extrae el primer elemento (`car`) de la lista ordenada, que será el máximo.
+- Este enfoque muestra cómo resolver problemas aprovechando funciones existentes en lugar de implementar algoritmos desde cero.
+
+### 10. Calcular longitudes de strings
+
+```
+(define (length-list lista)
+  (map string-length lista))
+
+```
+
+**Explicación**:
+
+- Esta función calcula la longitud de cada string en una lista.
+- Utiliza `map` para aplicar `string-length` a cada elemento.
+- Demuestra nuevamente el uso de `map` para transformar datos.
+
+### 11. Cálculo de MCM y MCD
+
+```
+(define (get-mayor a b)
+  (cond
+    [(> a b) a]
+    [(> b a) b]
+    [else a]))
+
+(define (get-menor a b)
+  (cond
+    [(< a b) a]
+    [(< b a) b]
+    [else a]))
+
+(define (mcd a b)
+  (define (mcd-helper a b divisor)
+    (cond
+      [(equal? divisor 1) 1] 
+      [(and (equal? (modulo b divisor) 0) (equal? (modulo a divisor) 0)) divisor]
+      [else (mcd-helper a b (- divisor 1))]))
+  (mcd-helper (get-mayor a b) (get-menor a b) (get-menor a b)))
+
+(define (mcm a b)
+  (/ (* a b) (mcd a b)))
+
+```
+
+**Explicación**:
+
+- Estas funciones calculan el Máximo Común Divisor (MCD) y el Mínimo Común Múltiplo (MCM) de dos números.
+- `get-mayor` y `get-menor` son funciones auxiliares para comparar valores.
+- `mcd` implementa el algoritmo de búsqueda del MCD probando divisores decrecientes.
+- `mcm` utiliza la relación MCM(a,b) = (a*b)/MCD(a,b) para calcular el mínimo común múltiplo.
+- Demuestra el uso de funciones auxiliares para resolver problemas complejos de manera estructurada.
+
+## Patrones y técnicas comunes
+
+1. **Uso de funciones de orden superior**:
+   - `map` para transformar elementos
+   - `filter` para seleccionar elementos
+   - `fold` para acumular valores
+   - `sort` para ordenar colecciones
+1. **Expresiones lambda** para crear funciones anónimas en el momento que se necesitan.
+1. **Definición de funciones auxiliares** para:
+   - Manejar casos especiales
+   - Implementar recursión con acumuladores
+   - Abstraer operaciones complejas
+1. **Composición de funciones** para construir operaciones complejas a partir de funciones simples.
+1. **Clausuras** para crear funciones que "recuerdan" valores de su contexto.
+
+## Consideraciones de rendimiento
+
+- El uso de recursión con acumuladores evita la ineficiencia de la recursión de cola.
+- `foldl` permite procesar listas de manera eficiente sin necesidad de recorrerlas múltiples veces.
+- El uso de `sort` y luego selección (`car`) es más eficiente que implementar algoritmos de búsqueda manuales.

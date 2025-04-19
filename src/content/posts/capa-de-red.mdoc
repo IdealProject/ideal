@@ -1,0 +1,164 @@
+---
+title: Capa de Red
+draft: false
+description: Capa de red fiuni materia de redes 1
+authors:
+  - christopher-mendoza
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: Rc1
+---
+# La capa de red
+
+La capa de red se encarga de llevar los paquetes todo el camino, desde el origen hasta el destino. Para llegar al destino tal vez sea necesario realizar muchos saltos en el camino por enrutadores intermedios
+
+Aca se mueven los paquetes, son los datos contenidos, con una dirección de origen y destino, puede tener mas datos.
+
+## Aspectos de Diseño
+
+Problemas que surgen en la capa de red
+
+### Conmutación de paquetes de almacenamiento y reenvío
+
+La forma en que se tratan los paquetes, donde decidimos qu ese manden, la información se divide y toman distintas rutas, cosa que hasta causa que lleguen desordenadas.
+
+Hay dos tipos, una de almacenamiento y envio, otra de conmutación al vuelo.
+
+si es al vuelo, envia directo conforme van llegando
+
+#### Conmutación de amacenamiento y reenvio.
+
+Espera que llegue completo, lo abre, se controlan que esten bien y luego lo reenvia.
+
+### Servicios proporcionados a la capa de transporte
+
+¿Que pasa si un paquete dañado?  como debe actuar la capa de red, depende del tipo de servicio.
+
+#### Orientado a la conexión.
+
+- La red debe ser confiable.
+- la capa de red maneja la detección y corrección de errores.
+- La red retransmite los paquetes perdidos o dañados.
+
+#### Red sin conexión.
+
+- Los enrutadores deben mover paquetes de un lado a otro, nada más.
+- Delegan la responsabilidad, dejan a la capa de transporte ese trabajo para que no haya redundancia.
+- No hay Retransmisión de paqeutes, la capa de transporte debe encargarse.
+
+Este es el que usamos ahora mismo en internet, la capa de red descarta nomas, y el host, en la capa de transporte es el encargado de retransmitir y manejar errores.
+
+IP, el caso del mejor Esfuerzo.
+
+## Implementación del servicio sin conexión
+
+Los paquetes se transmiten por separado en la red y se enrutan de manera independiente. en estos casos se conocen como datagramas, la red se conoce como red de datagramas.
+
+Hay cambios en el enrutamiento durante el envio de datos, para en casos de que perdamos uno de los nodos en la red.
+
+Es inseguro porque, en casos de diferentes tamaños de paquetes, llega en ordenes diferentes.
+
+Si cae la red, solo se pierde el paquete que llego hasta el punto en donde se perdio, el resto se vuelve a encaminar por un nuevo camino que tienen que buscar.
+
+## Implementación del servicio orientado a la conexión.
+
+Se encargan de crear un canal exclusivo hasta el host, para enviar solo los datos que quiere mandar.
+
+le ponemos una etiqueta antes de lanzarlo por el paquete, ya no se necesita enrutar asi, ya sabe el camino con ese label. entonces en este caso no hace falta rearmar hasta la capa para abrir el paquete y ver como enrutarle
+
+Es mas seguro manteniendo su orden siempre.
+
+Esta ruta fija se establece antes de empezar a transmitir.
+
+Red de circuitos virtuales.
+
+Si se rompe el tubo de conexión, se pierde si estaban transitando en ese canal, el siguiente paquete que viene, va a necesitar un nuevo camino, por los nodos del nuevo camino.
+
+Si se pierde a la mitad entonces, mandamos la otra mitad con nuevo label y el host es el encargado de unir sin importarle el nuevo label
+
+## Algoritmos de Enrutamiento.
+
+### Principio de Optimización.
+
+Rige a todos los algoritmos\
+"Si el enrutador B está en la ruta óptima del enrutador A al enrutador C, entonces la ruta óptima de B a C también está en la misma ruta" Se evita calcular lo mismo dos veces."
+
+### Inundación
+
+Cada paquete recibido se reenvía por todas las líneas de salida, excepto por donde llegó.
+
+### Dijkstra
+
+1. Actualizar vecinos.
+1. Encontrar sgte nodo.
+
+Encuentra la menor distancia posible, comparando las distancias que hay hasta cada vecino.
+
+### Enrutamiento por vector de distancia.
+
+Usa una tabla de ruteo, que esta en el router.
+
+Una matriz con pesos asociados para cada nodo, que varia segun el mejor camino, se recalcula en las siguientes situaciones:
+
+- Se recibe un vecino actualizado.
+- Si el peso de un nodo es menor.
+- SI el peso de un nodo es mayor, inicia problemas.
+
+**Problemas**
+
+- Lenta de convergencia (convergencia, que tan rapido encuentra la ruta mas rapida).
+
+Si se cambia la topologia, se cambia toda la tabla de enrutamiento, esto gasta ancho de banda.
+
+- Conteo a inifinito.
+
+En el caso de 3 nodos, en donde uno sirve como intermediario, el izquierdo esta a 2 peso de distancia, del nodo derecho entonces, el intermedio esta a 1 de cada uno.\
+Para evitar el conteno infinito cuando uno de los extremos se extermina, ponemos un limite de cuantos saltos antes de cortar la conexión.
+
+### Enrutamiento por estado de enlace
+
+1. descubrir a sus vecinos, conociendo ahora sus direcciones de red, lo hace enviando un paquete.
+1. Establecer la metrica de distancia o de costo para cada uno de sus vecinos.
+1. Construir un paquete que indique todo lo que acaba de aprender. saber cuando construir este paquete puede ser complicado, se hace periodicamente como cuando hay sucesos muy alarmantes (perdida de conexión entre nodos)\
+   Esto guarda un registro de las distancias de los vecinos de cada nodo, esto tambien incluye una secuencia y una edad, esta sirve para actualizar o indicar que el camino sigue siendo el mismo. la secuencia cuantas veces estuvo recibiendo de su nodo vecino y edad sirven para contrastar información.
+1. Enviar ete paquete a todos los demás enrutadores y recibir paquetes de ellos.\
+   Se utiliza inundación, pero controlada.
+1. Calcular la ruta más corta a todos los demás enrutadores.
+
+### Enrutamiento jerárquico.
+
+Los enrutadores se dividen en "regiones", esto facilita el trabajo porque no tiene en cuenta los routers de una región que no es importante para su ruta entre regiones, solo se pasa a otra celda si primero no lo encuentra en su región.\
+Vector de enlace de regiones.
+
+Utiliza menor cantidad de almacenamiento.\
+**¿Cuantos niveles debe tener la jerarquía?**
+
+Se calcula utilizando {% inlineLatex formula="\\ln{N}" /%} N corresponde a la cantidad de nodos.
+
+### Enrutamiento por difusión.
+
+Es el envio simultaneo a todos los host que estan conectados a una red.
+
+Se utiliza una delegación si tenemos un nodo con 4 hijos, el solo envia a esos 4, para que ellos envien a otros 2 cada uno. asi evitamos que solo un nodo tenga que enviar a todos y cada uno de los nodos.
+
+### Enrutamiento por multidifusión.
+
+Define a que nodos realmente le importa la información para asi hacer la difusión solo a ellos.
+
+### Anycast
+
+Se le asigna tu viaje al uber que esta mas cercano. si ese falla, se le reasigna al nuevo mas cerca.
+
+Usos de esto, en mitigación de Denegación De Servición, cuando uno cae, los otros mas cercanos se encargan.
+
+### Enrutamiento para hosts móviles
+
+Hay uno que se mueve, y el base siempre sabe donde el esta, entonces cuando otro quiere conectarse con el que se mueve, recurre al que siempre sabe donde estan los que se mueven.
+
+### Enrutamiento ad hoc
+
+Es parecido a un ad hoc son redes inalambricas descentralizadas y auto organizables donde los actuan como routers y hosts, sin depende de infraestrcutura fija.
+
+Cada nodo tiene un alcance, busca si al que quiere enviar, esta en su alcance, le pregunta a sus vecinos si alguno es al que le quiere hablar, y si tienen información de el.
