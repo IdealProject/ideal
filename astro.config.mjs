@@ -30,6 +30,6 @@ export default defineConfig({
     sitemap(),
     auth(),
   ],
-  output: "static",
+  output: "server",
   adapter: cloudflare(),
 });
