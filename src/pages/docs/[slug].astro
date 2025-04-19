@@ -1,4 +1,5 @@
 ---
+export const prerender = true;
 import { getCollection, getEntry } from "astro:content";
 import DocsLayout from "@layouts/DocsLayout.astro";
 import TableOfContents from "@components/TableOfContents.astro";
@@ -21,8 +22,9 @@ export async function getStaticPaths() {
 
 <DocsLayout title={`${doc.data.title} | Documentación de Ideal`}>
   <article
-  class="markdown-body px-4 lg:px-0 xl:px-0 2xl:px-0 2xl:w-2/4 pt-2 2xl:pt-10">
-  <TableOfContentsMobile headings={headings} />
+    class="markdown-body px-4 lg:px-0 xl:px-0 2xl:px-0 2xl:w-2/4 pt-2 2xl:pt-10"
+  >
+    <TableOfContentsMobile headings={headings} />
     <h1 id="main-title" class="text-xl font-bold">{doc.data.title}</h1>
     <Content />
   </article>
