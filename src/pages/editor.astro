@@ -5,6 +5,7 @@ import { SignIn, SignOut } from "auth-astro/components";
 import Layout from "@layouts/Layout.astro";
 import { getSession } from "auth-astro/server";
 import Image from "astro/components/Image.astro";
+import AuthIsland from "@components/AuthIsland.astro";
 
 const data = await getSession(Astro.request);
 ---
@@ -18,8 +19,11 @@ const data = await getSession(Astro.request);
                 Editor
             </h2>
             
-            <!-- Wrap the authentication section in a component with server:defer -->
-            <div server:defer>
+            <AuthIsland server:defer>
+                <div slot="fallback" class="p-4 bg-gray-100 rounded-md">
+                    <p class="text-center text-gray-600">Cargando información de autenticación...</p>
+                </div>
+                
                 {
                     data ? (
                         <div>
@@ -63,9 +67,7 @@ const data = await getSession(Astro.request);
                         </>
                     )
                 }
-            </div>
-            
-           
+            </AuthIsland>
         </div>
     </section>
 </Layout>
