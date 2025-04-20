@@ -17,11 +17,13 @@ const data = await getSession(Astro.request);
             >
                 Editor
             </h2>
-            <h2>
+            
+            <!-- Wrap the authentication section in a component with server:defer -->
+            <div server:defer>
                 {
                     data ? (
                         <div>
-                            <div class=" flex items-center">
+                            <div class="flex items-center">
                                 <Image
                                     src={`${data.user?.image}`}
                                     alt="user profile photo"
@@ -41,7 +43,7 @@ const data = await getSession(Astro.request);
                             >
                                 Iniciar con Google
                                 <svg
-                                    class="w-6 h-6 "
+                                    class="w-6 h-6"
                                     aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="24"
@@ -61,7 +63,9 @@ const data = await getSession(Astro.request);
                         </>
                     )
                 }
-            </h2>
+            </div>
+            
+           
         </div>
     </section>
 </Layout>
