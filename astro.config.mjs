@@ -36,5 +36,4 @@ export default defineConfig({
       external: ['node:path']
     }
   },
-  
 });
