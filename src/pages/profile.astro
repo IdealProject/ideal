@@ -1,0 +1,24 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { supabase } from "@lib/supabase";
+
+const { email, name } = Astro.locals;
+---
+
+<Layout title="Perfil de Editor">
+    <section class="py-24 px-4 w-full flex flex-col items-center gap-2">
+        <p class="max-w-prose text-xl text-indigo-600 font-semibold">
+            {email}
+            {name}
+        </p>
+        <p class="max-w-prose text-lg mb-2 text-zinc-900">
+            Esta es una página protegida. Solo los usuarios autenticados pueden acceder a esta sección.
+        </p>
+        <a
+            href="/api/auth/signout"
+            class="mb-10 bg-zinc-900 text-zinc-100 px-3 py-1 rounded-md"
+        >
+            Cerrar Sesión
+        </a>
+    </section>
+</Layout>

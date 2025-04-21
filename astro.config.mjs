@@ -17,6 +17,8 @@ export default defineConfig({
   site: "https://ideal.fiuni.edu.py",
   build: {
     formats: ["file"],
+    client: './dist/client',
+    server: './dist/server',
   },
   integrations: [
     react(),
@@ -27,6 +29,12 @@ export default defineConfig({
     pagefind(),
     sitemap(),
   ],
-  output: "hybrid",
+  output: "server",
   adapter: cloudflare(),
+  vite: {
+    ssr: {
+      external: ['node:path']
+    }
+  },
+  
 });
