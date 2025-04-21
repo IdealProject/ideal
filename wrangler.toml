@@ -1,0 +1,8 @@
+name = "supabase-auth"
+compatibility_date = "2025-04-08"
+compatibility_flags = ["nodejs_compat"]
+
+# KV Binding for sessions (required by Cloudflare adapter)
+[[kv_namespaces]]
+binding = "SESSION"
+id = "ideal-kv"
