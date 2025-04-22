@@ -5,6 +5,7 @@ import markdoc from "@astrojs/markdoc";
 import cloudflare from "@astrojs/cloudflare";
 import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
+
 import pagefind from "astro-pagefind";
 
 import sitemap from "@astrojs/sitemap";
@@ -12,13 +13,7 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   devToolbar: {
-    enabled: false
-  },
-  site: "https://ideal.fiuni.edu.py",
-  build: {
-    formats: ["file"],
-    client: './dist/client',
-    server: './dist/server',
+    enabled: false,
   },
   integrations: [
     react(),
@@ -30,14 +25,16 @@ export default defineConfig({
     sitemap(),
   ],
   output: "server",
-  adapter: cloudflare(),
+  adapter: cloudflare(
+    
+  ),
   build: {
     formats: ["file"],
     client: "./dist/client",
     server: "./dist/server",
   },
   vite: {
-     ssr: {
+    ssr: {
       external: ["node:path"],
     },
   },
