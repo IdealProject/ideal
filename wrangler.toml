@@ -1,10 +1,19 @@
 name = "ideal"
+main = "./dist/_worker.js/index.js"
 compatibility_date = "2025-04-19"
-compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = "./dist"
+compatibility_flags = ["nodejs_compat"]  
+
+[assets] 
+binding = "ASSETS" 
+directory = "./dist"  
 
 [observability]
-enabled = true
+enabled = true   
 
 [env.production]
 pages_build_output_dir = "./dist"
+
+# KV Binding for sessions (required by Cloudflare adapter)
+[[kv_namespaces]]
+binding = "SESSION"
+id = "ideal-kv"

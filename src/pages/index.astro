@@ -3,11 +3,6 @@ import Layout from "../layouts/Layout.astro";
 import Image from "astro/components/Image.astro";
 import CarrerasButtons from "@components/CarrerasButtons.astro";
 
-import { SignIn, SignOut } from "auth-astro/components";
-import { getSession } from "auth-astro/server";
-
-const data = await getSession(Astro.request);
-
 const carreras = [
   {
     name: "Ingeniería Civil",
