@@ -6,28 +6,26 @@ export const GET: APIRoute = async ({ redirect }) => {
   return redirect('/signin');
 };
 
-export const POST: APIRoute = async ({ request, cookies, redirect, url }) => {
+export const POST: APIRoute = async ({ request, cookies, redirect }) => {
   const formData = await request.formData();
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
   const provider = formData.get("provider")?.toString();
 
   if (provider) {
-    // Get the current origin dynamically
-    const origin = url.origin;
-    
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: provider as Provider,
       options: {
-        redirectTo: `${origin}/api/auth/callback`,
+        redirectTo: import.meta.env.DEV
+          ? "http://localhost:4321/api/auth/callback"
+          : "https://astro-supabase-dmb.pages.dev/api/auth/callback",
+        scopes: 'email profile',
       },
     });
 
     if (error) {
-      console.error("OAuth error:", error);
       return new Response(error.message, { status: 500 });
     }
-
 
     return redirect(data.url);
   }

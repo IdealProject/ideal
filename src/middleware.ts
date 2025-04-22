@@ -6,7 +6,6 @@ const protectedRoutes = ["/profile(|/)"];
 const redirectRoutes = ["/signin(|/)"];
 const proptectedAPIRoutes = ["/api/guestbook(|/)"];
 
-
 export const onRequest = defineMiddleware(
   async ({ locals, url, cookies, redirect }, next) => {
     if (micromatch.isMatch(url.pathname, protectedRoutes)) {
@@ -33,7 +32,8 @@ export const onRequest = defineMiddleware(
       }
 
       locals.email = data.user?.email!;
-      locals.name = data.user?.aud!;
+      locals.name = data.user?.user_metadata?.full_name;
+      locals.picture = data.user?.user_metadata?.picture;
       cookies.set("sb-access-token", data?.session?.access_token!, {
         sameSite: "strict",
         path: "/",

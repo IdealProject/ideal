@@ -8,7 +8,8 @@ export interface Props {
 
 const { title, pagefinderIgnore = false } = Astro.props; 
 import Header from "@components/Header.astro";
-import { ViewTransitions } from "astro:transitions";
+// import { ViewTransitions } from "astro:transitions";
+// const canonicalURL = new URL(Astro.url).href;
 ---
 
 <!doctype html>
@@ -21,12 +22,13 @@ import { ViewTransitions } from "astro:transitions";
     <meta name="generator" content={Astro.generator} />
     <meta name="google-site-verification" content="9Y_F8JcWgx-R8tFzfjcuPmJYuhpJiuIp6QUgDcQ2FWc" />
     <meta name="google-site-verification" content="ORWWMsTqKvZ-9nbTFXatncB8OHPS32CSy6xI8_AWCdI" />
-    <script async src="https://tally.so/widgets/embed.js"></script>
+    <!-- <script async src="https://tally.so/widgets/embed.js"></script> -->
     <title>{title}</title>
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="canonical" href="https://ideal.fiuni.edu.py/"/>
-    <link as="font" rel="preload" href="/public/fonts/inter.woff2" type="font/woff2" crossorigin="" />
-    <ViewTransitions />
+    
+    <link as="font" rel="preload" href="/fonts/inter.woff2" type="font/woff2" crossorigin="" />
+    <!-- <ViewTransitions /> -->
     <style>
       @font-face {
         font-family: 'Inter';
