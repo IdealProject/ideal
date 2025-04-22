@@ -18,10 +18,7 @@ const data = await getSession(Astro.request);
             </h2>
             
             <AuthIsland server:defer>
-                <div slot="fallback" class="p-4 bg-gray-100 rounded-md">
-                    <p class="text-center text-gray-600">Cargando información de autenticación...</p>
-                </div>
-                
+                             
                 {
                     data ? (
                         <div>
