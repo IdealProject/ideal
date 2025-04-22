@@ -31,9 +31,25 @@ export default defineConfig({
   ],
   output: "server",
   adapter: cloudflare(),
+  build: {
+    formats: ["file"],
+    client: "./dist/client",
+    server: "./dist/server",
+  },
   vite: {
+    css: {
+      postcss:{
+        plugins: [],
+      },
+    },
+    resolve: {
+      // alias: {
+      //   "react-dom/server": "react-dom/server.edge",
+      // },
+    },
     ssr: {
-      external: ['node:path']
-    }
+      external: ["node:path"],
+      noExternal: [/^@milkdown\/.*/],
+    },
   },
 });
