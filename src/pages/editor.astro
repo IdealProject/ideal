@@ -17,7 +17,6 @@ const data = await getSession(Astro.request);
                 Editor
             </h2>
             
-            <AuthIsland server:defer>
                              
                 {
                     data ? (
@@ -62,7 +61,6 @@ const data = await getSession(Astro.request);
                         </>
                     )
                 }
-            </AuthIsland>
         </div>
     </section>
 </Layout>
