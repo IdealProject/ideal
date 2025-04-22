@@ -37,19 +37,8 @@ export default defineConfig({
     server: "./dist/server",
   },
   vite: {
-    css: {
-      postcss:{
-        plugins: [],
-      },
-    },
-    resolve: {
-      // alias: {
-      //   "react-dom/server": "react-dom/server.edge",
-      // },
-    },
-    ssr: {
+     ssr: {
       external: ["node:path"],
-      noExternal: [/^@milkdown\/.*/],
     },
   },
 });
