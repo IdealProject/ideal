@@ -18,7 +18,7 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
       options: {
         redirectTo: import.meta.env.DEV
           ? "http://localhost:4321/api/auth/callback"
-          : "https://astro-supabase-dmb.pages.dev/api/auth/callback",
+          : "https://supabase-ideal.ideal-7m3.pages.dev/api/auth/callback",
         scopes: 'email profile',
       },
     });
