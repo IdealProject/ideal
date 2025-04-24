@@ -4,6 +4,7 @@ import Layout from "@layouts/Layout.astro";
 import { getSession } from "auth-astro/server";
 import Image from "astro/components/Image.astro";
 import AuthIsland from "@components/AuthIsland.astro";
+import LexicalEditor from "@components/ReactComponents/LexicalEditor";
 
 const data = await getSession(Astro.request);
 ---
@@ -16,51 +17,51 @@ const data = await getSession(Astro.request);
             >
                 Editor
             </h2>
-            
-                             
-                {
-                    data ? (
-                        <div>
-                            <div class="flex items-center">
-                                <Image
-                                    src={`${data.user?.image}`}
-                                    alt="user profile photo"
-                                    width="60"
-                                    height="60"
-                                    class="rounded-full"
-                                />
-                                <p>{data.user?.name}</p>
-                            </div>
-                            <SignOut>Cerrar Sesión</SignOut>
+
+            {
+                data ? (
+                    <div>
+                        <div class="flex items-center">
+                            <Image
+                                src={`${data.user?.image}`}
+                                alt="user profile photo"
+                                width="60"
+                                height="60"
+                                class="rounded-full"
+                            />
+                            <p>{data.user?.name}</p>
                         </div>
-                    ) : (
-                        <>
-                            <SignIn
-                                provider="google"
-                                class="flex items-center gap-x-2 text-sm font-medium bg-black hover:bg-white p-4 lg:py-2 lg:px-4 md:py-2 md:px-4 xl:py-2 xl:px-4 text-white hover:text-black rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 hover:shadow-md"
+                        <LexicalEditor client:load />
+                        <SignOut>Cerrar Sesión</SignOut>
+                    </div>
+                ) : (
+                    <>
+                        <SignIn
+                            provider="google"
+                            class="flex items-center gap-x-2 text-sm font-medium bg-black hover:bg-white p-4 lg:py-2 lg:px-4 md:py-2 md:px-4 xl:py-2 xl:px-4 text-white hover:text-black rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 hover:shadow-md"
+                        >
+                            Iniciar con Google
+                            <svg
+                                class="w-6 h-6"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                fill="none"
+                                viewBox="0 0 24 24"
                             >
-                                Iniciar con Google
-                                <svg
-                                    class="w-6 h-6"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        stroke="currentColor"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                                    />
-                                </svg>
-                            </SignIn>
-                        </>
-                    )
-                }
+                                <path
+                                    stroke="currentColor"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                                />
+                            </svg>
+                        </SignIn>
+                    </>
+                )
+            }
         </div>
     </section>
 </Layout>
