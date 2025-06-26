@@ -10,4 +10,221 @@ major:
     discriminant: '4'
     value: Rc1
 ---
-# Resumen Sobre Redes para Final
+# Resumen PARA FINAL
+
+## MODULACIÓN, MULTIPLEXACIÓN
+
+Hay medios de transmisión del tipo
+
+- Guiados(inalámbrico): Fibra óptica, UTP, Coaxial
+- Inalámbricos: Radio Frecuencia(Wifi) e Infrarrojo(Controles)
+
+#### **¿Por qué se usa la modulación?**
+
+- **Problema**: Las señales digitales (bits: 0s y 1s) no pueden viajar largas distancias por cables o aire.
+- **Solución**: Convertirlas en **ondas analógicas** (como el sonido o la luz).
+
+### TIPOS DE MODULACIÓN
+
+ASK → A de Amplitud, modula la amplitud
+
+FSK→ F de Frecuencia, modula la frecuencia
+
+PSK→ P de Phase, modula la fase de la onda
+
+### **MULTIPLEXACIÓN**
+
+**Objetivo**: Permitir que múltiples usuarios compartan un **mismo medio físico** (cable, frecuencia) sin interferencias.\
+*Comparación*: Como dividir una carretera en carriles para diferentes tipos de vehículos.
+
+#### **Técnicas Clave:**
+
+1. **FDM (División de Frecuencia)**:
+   - Cada usuario tiene una **banda de frecuencia** asignada.&nbsp;Debes ponerte en la misma frecuencia de un canal para poder recibir su informacion\
+     *Ejemplo*: Emisoras de radio (FM 88.1, 92.5, etc.).\
+     ⚠️ **Limitación**: Regulado por **CONATEL** para evitar solapamientos (como un controlador aéreo de frecuencias).
+1. **Multiplexion por división de acceso múltiple:** todos los usuarios pueden usar un canal, cada canal va en su sintonía pero sin interferirse, da la impresión de que van todos juntos pero en realidad cada uno va por su propio camino
+1. **TDM (División de Tiempo)**: Cada uno tiene su momento, recibe y manda informacion en un tiempo estimado, para mejorar el aspecto del tiempo perdido se usa la multiplexion estatica por division de tiempo, si alguien necesita usar un instante de tiempo, se usa. Asigna dinamicamente el tiempo de transmision segun la necesidad de cada usuario
+   - **Estático**: Turnos fijos (ej: 0.1 segundos por usuario).\
+     *Problema*: Desperdicio si un usuario no envía datos.\
+     *Comparación*: Como una reunión donde cada persona habla 1 minuto en orden fijo.
+   - **Dinámico**: Asigna slots según demanda.\
+     *Comparación*: Como un moderador que da la palabra solo a quienes levantan la mano.
+1. **CDMA (División de Código)**:
+   - Cada usuario tiene un **código único** (ej: GPS: satélites usan códigos diferentes).mezcla de division por frecuencia y tiempo, cada usuario tiene un codigo que lo enlaza con otro, se puede usar en gps, radios, etc.\
+     *Comparación*: Como una fiesta donde todos hablan al mismo tiempo, pero en idiomas diferentes.
+
+## REDES DE ÁREA AMPLIA Y TELEFONÍA
+
+Cuando las computadoras estan conectadas desde lugares remotos, se depende de otros nodos por el camino, estas se llaman PSTN.
+
+**Oficinas de conmutación**: parecida a la topología estrella para evitar muchos cableríos, pero al escalar, volvía a surgir el problema
+
+- **Canal descendente** : de ISP al usuario(descarga)
+- **Canal ascendente:** del usuario al ISP(carga)
+- **ADSL** (A de asimétrico) usa mas para descarga que para carga: **Asymmetric Digital Subscriber Line** (Línea de Abonado Digital Asimétrica). Es una **tecnología de acceso a Internet de banda ancha** que utiliza las **líneas telefónicas tradicionales de cobre** para transmitir datos digitales.
+- **Estándares para fibra óptica: SONET y SDH (Son protocolos de la capa física en OSI)**
+
+SONET envía tramas una tras otra, cuando no hay nada que enviar se envían datos ficticios
+
+### CONMUTACIÓN
+
+La **conmutación** se refiere a la forma en que se conectan los dispositivos para transmitir información en una red. Existen dos tipos principales:
+
+##### **Conmutación de Circuitos**
+
+- Se establece una **ruta fija** entre el emisor y el receptor antes de la transmisión.
+- Es **ineficiente** en términos de ancho de banda si no se transmite nada.
+- Implica la existencia de muchas **interconexiones** y **puentes entre puertos** para establecer la comunicación.
+- Ejemplo: Llamadas telefónicas en redes tradicionales.
+
+###### **Ventajas**
+
+Garantiza un **camino dedicado**, evitando interferencias.\
+La latencia es **predecible**, ya que los datos siguen una ruta fija.
+
+##### **Desventajas**
+
+**Desperdicio de ancho de banda** si no se está transmitiendo datos constantemente.\
+**Poco flexible**, ya que si la conexión se interrumpe, es necesario establecer una nueva.
+
+---
+
+#### **Conmutación de Paquetes**
+
+- Los datos se dividen en **paquetes** y cada paquete puede tomar rutas **diferentes** hasta llegar al destino.
+- Es **más eficiente** en el uso del ancho de banda, ya que no requiere una conexión permanente.
+- Puede haber **retardo por encolamiento**, propagación o congestión de nodos.
+- Si una conexión se corta, los paquetes pueden **buscar otra ruta alternativa**.
+- Ejemplo: Internet y redes de datos modernas.
+
+##### **Ventajas**
+
+**Optimiza el uso del ancho de banda** al enviar solo lo necesario.\
+**Mayor tolerancia a fallos**, ya que los paquetes pueden tomar diferentes caminos.\
+Permite el **envío simultáneo de información** entre múltiples dispositivos.
+
+**Desventajas**
+
+**Mayor latencia y variabilidad**, ya que los paquetes pueden llegar desordenados.\
+**Requiere procesamiento adicional** para reorganizar los paquetes en el destino.
+
+### EVOLUCIÓN DE LA TELEFONÍA MÓVIL
+
+- **1G:** Analógica (AMPS), era como un walkie talkie gigante, Sin cifrado: cualquiera podía escuchar llamadas con un escáner.
+- **2G**:Digital (GSM), Introdujo cifrado y mensajes de texto, aumenta la seguridad por cifrado gracias a la digitalización, no tiene un estándar global
+- **3G**: Datos móviles, permitió Permitió videollamadas y navegación web básica. Mejora calidad de redes móviles con su mayor velocidad, mejoro servicios multimedia
+- \**4G:**IP sobre paquetes (LTE), Más velocidad, ***La diferencia entre 3G es que 4G cambio a conmutación de paquetes.***
+- **5G:** Ondas milimétricas y beamforming mucha velocidad pero poco alcance, a las ondas les cuesta más atravesar las cosas
+
+Beamforming: Nos basamos en la dirección en la que llega la onda, los celulares sacan ondas omnidireccionales, donde solo una onda llega a la estación base
+
+***La computación de borde e***s un modelo de procesamiento de datos donde la información se analiza **cerca de la fuente de generación**, en lugar de enviarla a un centro de datos o la nube. ***El fin de la computación de borde se basa en llevar la información a la menor distancia posible***
+
+## CAPA DE ENLACE DE DATOS
+
+En esta capa operan los switches, se usan las tramas como unidad de información, en esta capa operan protocolos como Ethernet, WiFi, PPP(Point to Point protocol).
+
+### **Servicios a la capa de red**
+
+#### **1. Sin conexión ni confirmación**
+
+- Envía tramas sin conexión previa.
+- **No garantiza entrega ni recuperación** de tramas perdidas.
+- Rápido pero no confiable.
+
+**Ejemplo:** Ethernet (LAN).
+
+#### **2. Sin conexión con confirmación**
+
+- Envía tramas sin conexión, pero **el receptor confirma la recepción**.
+- **Las tramas pueden llegar desordenadas**.
+- Permite retransmisión si se detecta pérdida.
+
+**Ejemplo:** Wi-Fi (802.11).
+
+#### **3. Orientado a conexión con confirmación**
+
+- **Establece conexión antes de transmitir**.
+- **Garantiza orden y corrección de errores**.
+- Retransmite datos perdidos, pero **es más lento**.
+
+**Ejemplo:** HDLC (redes WAN).
+
+### **Entramado (Framing)**
+
+**Es la forma en que se organiza el flujo de bits en tramas para la transmisión.**
+
+- **Conteo de bytes:** Especifica el número de **bytes** que contiene la trama en el encabezado.
+
+- **Bytes bandera con relleno de bytes:**
+
+  - Cada trama comienza y termina con un byte especial llamado **byte bandera**.
+  - Marca los límites de las tramas mediante una secuencia de bits constantes en un byte, conocidos como **flags**.
+  - Si el dato es igual al flag, se inserta un **byte de escape** para evitar confusión.
+
+- **Bits bandera con relleno de bits:**
+
+  - Similar al anterior, pero a nivel de **bits**.
+  - Si aparece un flag dentro de los datos, se inserta un **0** como relleno para diferenciarlo del flag.
+
+#### **Confiabilidad y Retroalimentación**
+
+- **📥 ACK (Acknowledgment):** Confirma que la trama se recibió correctamente.
+- **❌ NAK (Negative Acknowledgment):** Indica error, el emisor debe retransmitir.
+- **⏳ Temporizador:** Si no hay respuesta en un tiempo determinado, se asume pérdida de datos y se retransmite.
+
+#### Detección y corrección de errores
+
+- Código de Hamming
+- Códigos convolucionales
+- Bit de Paridad
+- Checksum
+- Comprobación de Redundancia Cíclica (CRC)
+
+#### Ethernet conmutada
+
+**Ethernet conmutada** es una tecnología de red local (LAN) donde los dispositivos están conectados a través de un **switch (conmutador)**, en lugar de un hub.
+
+#### LLC Subcapa de enlace lógico
+
+La subcapa de enlace lógico (LLC) se encarga de identificar qué protocolo de red (como IP) está utilizando el marco de datos, controlar el flujo de información y, en algunos casos, detectar errores. Forma parte de la capa de enlace de datos y actúa como intermediaria entre los protocolos de red (capa 3) y la subcapa MAC, que gestiona el acceso al medio físico. Gracias a la LLC, diferentes protocolos pueden compartir el mismo medio físico de forma organizada y eficiente.(ABSTRAE LAS PARTICULARIDADES DEL MEDIO FÍSICO)
+
+### SUBCAPA DE CONTROL DE ACCESO AL MEDIO (MAC) - PROTOCOLOS
+
+**ALOHA PURO**: Deja que todos envíen tramas en un tiempo cualquiera (continuo), si hay colisión, se retransmite luego de un tiempo aleatorio, el intervalo vulnerable de una trama a colisiones es de t0 hasta t0 + 2t
+
+**ALOHA RANURADO:** Divide el tiempo en ranuras, ahora las tramas se envían en tiempo discreto, no en cualquier instante, esto reduce a la mitad el intervalo de tiempo vulnerable a t0 hasta t0 + t , ya que 2 tramas pueden colisionar solo en el inicio de una ranura
+
+**CSMA PERSISTENTE - 1** : Funcionamiento similar a ALOHA, solo que en CSMA, hay detección de portadora, es decir, se escucha el canal antes de intentar enviar una trama, si el canal no está ocupado, envía la trama, de lo contrario, espera a que el canal se libere para transmitir\
+
+**CSMA NO PERSISTENTE :** Similar al anterior, solo que aqui, si ve que el canal está ocupado, no se mantiene escuchandolo para tomarlo ni bien se libere, sino que espera un tiempo aleatorio y vuelve a repetir el algoritmo hasta encontrar al canal libre
+
+**CSMA PERSISTENTE - p:** si hay colisiones, espera un tiempo aleatorio para retransmitir, Si el canal está **ocupado**, el nodo **espera**. Cuando el canal está **libre**, **transmite con probabilidad *p***, o espera con probabilidad *(1 - p)*. **Lanza una "moneda" virtual**.
+
+Si sale favorable (según *p*), **envía** el dato.
+
+Si no (probabilidad *1 – p*), **espera un tiempo aleatorio** y vuelve a intentarlo.
+
+**CSMA/CD :** Antes de transmitir, cada dispositivo escucha si el canal está libre (Carrier Sense). Si varios transmiten al mismo tiempo, ocurre una colisión, que es detectada (Collision Detection), y todos los involucrados detienen la transmisión, esperan un tiempo aleatorio y vuelven a intentarlo
+
+**PROTOCOLO DE MAPA DE BITS**: se recorren ranuras en tiempo de contencion donde si una estacion quiere transmitir, envia un 1 en su ranura y se le cede el permiso\
+
+**PROTOCOLO TOKEN RING:** se pasa un token para decir el turno de quien es, el token y las tramas circulan en la misma dirección
+
+**CONTEO DESCENDENTE BINARIO**: Las estaciones con intención de transmitir envien su numero al canal y con un OR se le cede la ranura a la estación con numeración más alta
+
+**RECORRIDO DE ÁRBOL ADAPTABLE**: pone a las estaciones como hojas de un árbol binario, da prioridad para transmitir a los nodos de la izquierda, luego a los de la derecha&nbsp;
+
+**MACA para redes inalámbricas:** soluciona el problema de la terminal expuesta y terminal oculta, se envian RTS y CTS (Request to send y confirm to send) para establecer conexion y que los demas se enteren cuando hay un nodo libre\
+
+El **problema de la terminal oculta** ocurre cuando dos nodos no pueden "verse" entre sí, pero ambos pueden enviar a un mismo receptor, causando **colisiones** porque creen que el canal está libre.
+
+\
+El **problema de la terminal expuesta** pasa cuando un nodo se abstiene de transmitir porque detecta que otro nodo cercano está enviando, aunque en realidad **no causarían interferencia**, desaprovechando el canal. Ambos problemas reducen la eficiencia en redes inalámbricas.
+
+## CAPA DE RED
+
+## CAPA DE TRANSPORTE
+
+## CAPA DE APLICACIÓN
