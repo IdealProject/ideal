@@ -1,0 +1,343 @@
+---
+title: Notas basadas en el Finales de Redes
+draft: false
+description: Notas basadas en la segunda y tercera mesa del 2022
+authors:
+  - josue-vera
+major:
+  discriminant: infor
+  value:
+    discriminant: '4'
+    value: Rc1
+---
+{% table %}
+- Protocolo
+- Capa (Modelo TCP/IP)
+- ¿Qué hace?
+---
+- **DHCP**
+- Aplicación
+- Asigna automáticamente direcciones IP y otros parámetros de configuración de red a los dispositivos de una red, facilitando la administración centralizada y dinámica de las direcciones IP.
+---
+- **ICMP**
+- Internet (Red)
+- Proporciona mensajes de control y error, como notificaciones de paquetes no entregados o problemas de conectividad en la red.
+---
+- **ARP**
+- Interfaz de red (Enlace de datos)
+- Traduce direcciones IP a direcciones MAC (físicas) para permitir la comunicación dentro de una red local.
+---
+- **IP**
+- Internet (Red)
+- Encapsula y enruta los paquetes de datos entre dispositivos a través de redes, utilizando direcciones IP para identificar origen y destino.
+---
+- **TCP**
+- Transporte
+- Proporciona una conexión confiable y orientada a la conexión para la transmisión de datos, asegurando la entrega ordenada y sin errores.
+---
+- **DNS**
+- Aplicación
+- Traduce nombres de dominio legibles por humanos (como [www.ejemplo.com](http://www.ejemplo.com/)) a direcciones IP, facilitando el acceso a servicios de red y páginas web.
+---
+- **SMTP**
+- Aplicación
+- Protocolo para el envío de correos electrónicos entre servidores de correo en Internet. Opera en la capa de aplicación y utiliza TCP para el transporte confiable de mensajes.
+{% /table %}
+
+**Resumen de las capas y ejemplos de protocolos:**
+
+- **Capa de Aplicación:** DHCP, DNS, SMTP
+- **Capa de Transporte:** TCP
+- **Capa de Internet (Red):** IP, ICMP
+- **Capa de Interfaz de red (Enlace de datos):** ARP
+
+## Definición de Trama en la Capa de Enlace
+
+Una **trama** es la unidad básica de transmisión en la capa de enlace de datos  Corresponde a un bloque de información estructurado que incluye:
+
+- **Cabecera**: Contiene direcciones MAC, control de flujo y sincronización.
+- **Datos útiles**: Información proveniente de capas superiores.
+- **Secuencia de verificación**: Mecanismos para detección de errores (como CRC).
+
+Su función es garantizar la transferencia confiable de datos a través de un enlace físico, mediante técnicas como delimitación de tramas, control de errores y gestión de colisiones[
+
+## Comparación de Redundancia: Bluetooth vs. Ethernet
+
+{% table %}
+- Característica
+- Bluetooth
+- Ethernet
+---
+- **Enfoque de redundancia**
+- Basado en saltos de frecuencia (FHSS) y técnicas de espectro ensanchado.
+- Implementa protocolos de redundancia activa (PRP/HSR) y topologías en anillo.
+---
+- **Mecanismos**
+- Adaptación de tasa de datos y conexiones maestro-esclavo múltiples.
+- Duplicación de tramas en redes paralelas (PRP) o anillos HSR para conmutación en 0 ms[2](https://blogespanol.se.com/telecomunicaciones/2016/06/01/protocolos-redundancia-red-comunicacion/)[4](https://www.incibe.es/incibe-cert/blog/prp-y-hsr-protocolos-redundantes).
+---
+- **Robustez**
+- Menor capacidad para manejar fallos en entornos críticos.
+- Mayor redundancia: soporta fallos de enlace sin pérdida de datos mediante rutas alternativas activas simultáneamente[4](https://www.incibe.es/incibe-cert/blog/prp-y-hsr-protocolos-redundantes)[3](https://axongroup.com.co/sin-categoria/protocolos-de-redundancia-a-nivel-de-ethernet-para-redes-de-comunicaciones-en-automatizacion-de-subestaciones-electricas/).
+{% /table %}
+
+**Conclusión**: Ethernet utiliza **mayor redundancia** que Bluetooth, especialmente en entornos industriales, gracias a protocolos como PRP/HSR que garantizan disponibilidad extrema sin tiempo de reconexión
+
+## Protocolo Libre de Colisiones: Método de Mapa de Bits
+
+Este protocolo evita colisiones mediante un sistema de asignación ordenada:
+
+1. **Periodo de contención**: División en *N* ranuras (slots), donde *N* es el número de estaciones.
+1. **Anuncio de transmisión**: Cada estación *j* transmite un bit "1" en la ranura *j* si tiene datos para enviar.
+1. **Transmisión ordenada**: Tras finalizar las *N* ranuras, las estaciones transmiten en orden numérico (0, 1, 2, ..., N-1).
+
+## Servicios que ofrece la capa de red
+
+La **capa de red** proporciona principalmente dos servicios fundamentales:
+
+- **Enrutamiento (Routing):** Determina el mejor camino para que los paquetes viajen desde el origen hasta el destino a través de una o varias redes interconectadas. Esto implica seleccionar rutas óptimas y gestionar el paso de los datos por diferentes dispositivos de red, como routers.
+- **Direccionamiento lógico y entrega de paquetes:** Asigna direcciones lógicas (como las direcciones IP) a los dispositivos y se encarga de encapsular los datos en paquetes para su envío. Garantiza que cada paquete llegue al dispositivo correcto, independientemente de la topología o tecnología de la red subyacente.
+
+Estos servicios permiten la comunicación entre dispositivos ubicados en diferentes redes y aseguran la interoperabilidad entre tecnologías diversas.
+
+## Tipos de servicios que provee la capa de red (4 pts)
+
+- **Servicio orientado a conexión:**\
+  En este servicio, antes de enviar datos, se establece una conexión lógica entre el origen y el destino, similar a una llamada telefónica. Durante esta conexión, los routers reservan recursos para garantizar la calidad del servicio y el orden en la entrega de los paquetes. Es útil cuando se requiere una comunicación confiable y ordenada.
+- **Servicio no orientado a conexión (datagramas):**\
+  Cada paquete se envía de forma independiente, sin necesidad de establecer una conexión previa. Los paquetes pueden tomar diferentes rutas y llegar en distinto orden. Este servicio es más flexible y eficiente para comunicaciones donde la velocidad es prioritaria y la pérdida ocasional de paquetes es tolerable.
+
+## b) Funcionamiento del ruteo en ambos servicios (4 pts)
+
+- **Ruteo en servicio orientado a conexión:**\
+  Se establece una ruta fija o circuito virtual entre el emisor y receptor antes de la transmisión. Todos los paquetes viajan por esta ruta reservada, asegurando orden y recursos para evitar congestión.
+- **Ruteo en servicio no orientado a conexión (datagramas):**\
+  Cada paquete se maneja de forma independiente y puede tomar diferentes rutas según la topología y condiciones de la red. Los routers deciden la mejor ruta para cada paquete dinámicamente, lo que puede causar que lleguen en distinto orden.
+
+## Explicación de ICMP
+
+**ICMP** (Internet Control Message Protocol) es un protocolo de la capa de red utilizado para enviar mensajes de control y notificación de errores relacionados con la transmisión de datos en redes IP. Su función principal es informar sobre problemas en la entrega de paquetes, como destinos inalcanzables, errores de tiempo excedido, problemas de fragmentación o rutas más eficientes.
+
+ICMP también se utiliza para diagnósticos y comprobaciones de conectividad, como ocurre con las utilidades **ping** y **traceroute**, que envían mensajes de eco (echo request) y esperan respuestas (echo reply) para verificar si un host está disponible y medir el tiempo de respuesta.
+
+## Sobre qué protocolo opera ICMP
+
+ICMP opera **sobre el protocolo IP**. Es decir, los mensajes ICMP se encapsulan dentro de paquetes IP, utilizando el número de protocolo 1 en el campo correspondiente del encabezado IP. A diferencia de TCP o UDP, ICMP no es un protocolo de transporte, sino de control y diagnóstico, y siempre viaja como parte de un paquete IP estándar.
+
+## Problema de los dos ejércitos y su importancia
+
+El **problema de los dos ejércitos** es una metáfora que representa la dificultad de lograr un acuerdo seguro y confiable en una comunicación entre dos partes a través de un canal que puede perder mensajes. En la capa de transporte, este problema ilustra la imposibilidad de garantizar una confirmación absoluta de recepción cuando las comunicaciones pueden fallar o perder paquetes.
+
+La importancia radica en que este problema fundamenta la necesidad de protocolos confiables que aseguren la entrega de datos y la confirmación de recepción, como el protocolo TCP, que implementa mecanismos de acuse de recibo y retransmisión para superar esta incertidumbre.
+
+## Qué es el direccionamiento
+
+es el mecanismo que permite identificar de manera única a los procesos o aplicaciones que se comunican en los extremos de una conexión. Esto se logra mediante el uso de **puertos**, que son números de 16 bits asignados a cada servicio o aplicación.
+
+El direccionamiento permite que múltiples aplicaciones en una misma máquina puedan comunicarse simultáneamente sin interferencias, ya que cada segmento de datos incluye la dirección IP del host y el número de puerto correspondiente.
+
+## Funcionamiento del direccionamiento (gráfico y explicación)
+
+```
+Cliente                       Red                      Servidor
+IP: 192.168.1.2              ---                      IP: 192.168.1.10
+Puerto origen: 50000  ------------------------------> Puerto destino: 80 (HTTP)
+Puerto destino: 80           <------------------------------ Puerto origen: 50000
+
+```
+
+- El cliente envía datos desde su IP y puerto origen (ej. 192.168.1.2:50000) hacia la IP y puerto destino del servidor (192.168.1.10:80).
+- El servidor recibe los datos en su puerto 80, que corresponde al servicio web HTTP.
+- La respuesta del servidor regresa al puerto origen del cliente.
+
+Este mecanismo de multiplexación y demultiplexación permite que varios procesos se comuniquen simultáneamente usando diferentes puertos.
+
+## Qué es un puerto bien conocido + ejemplo
+
+Un **puerto bien conocido** es un número de puerto asignado oficialmente por la IANA (Internet Assigned Numbers Authority) para servicios estándar y comunes, que van del 0 al 1023. Estos puertos facilitan la identificación de servicios específicos en las comunicaciones.
+
+**Ejemplo:**
+
+- Puerto 80: utilizado por el protocolo **HTTP** para servicios web.
+- Puerto 25: utilizado por **SMTP** para envío de correo electrónico.
+
+## Cuatro puertos bien conocidos, protocolo y uso
+
+{% table %}
+- Puerto
+- Protocolo
+- Uso principal
+---
+- 80
+- TCP
+- HTTP - Servicio web
+---
+- 443
+- TCP
+- HTTPS - HTTP seguro
+---
+- 25
+- TCP
+- SMTP - Envío de correo electrónico
+---
+- 53
+- UDP/TCP
+- DNS - Resolución de nombres
+{% /table %}
+
+- **Puerto 80 (TCP):**&nbsp;Usado para tráfico web no cifrado.
+- **Puerto 443 (TCP):**&nbsp;Usado para tráfico web cifrado con SSL/TLS.
+- **Puerto 25 (TCP):**&nbsp;Utilizado para enviar correos electrónicos entre servidores.
+- **Puerto 53 (UDP/TCP):**&nbsp;Utilizado para consultas y respuestas del sistema de nombres de dominio (DNS).
+
+## Árbol jerárquico del DNS y ejemplo con [www.encarnacion.gov.py](http://www.encarnacion.gov.py/)
+
+El sistema DNS tiene una estructura jerárquica en forma de árbol invertido, donde cada nivel representa una etiqueta o dominio. Se lee de derecha a izquierda, desde la raíz hacia los nodos específicos.
+
+```
+                                (Raíz)
+                                 |
+                               . (punto)
+                                 |
+                -------------------------------------
+                |                 |                 |
+              com               gov               py (TLD)
+                                 |                 |
+                            encarnacion           (dominio país)
+                                 |
+                              www (subdominio)
+
+```
+
+- El nodo raíz es el punto final (.) que generalmente no se escribe.
+- El dominio de nivel superior (TLD) aquí es **.py** (Paraguay).
+- Dentro de .py está el dominio **gov** (gubernamental).
+- Bajo gov.py está el dominio **encarnacion** (localidad o entidad).
+- Finalmente, **www** es el subdominio que normalmente identifica el servidor web.
+
+Por lo tanto, el nombre completo [**www.encarnacion.gov.py**](http://www.encarnacion.gov.py/) corresponde a un nodo hoja en este árbol jerárquico.
+
+## Tres métodos HTTP
+
+HTTP define varios métodos para indicar la acción que se desea realizar sobre un recurso. Tres de los más comunes son:
+
+- **GET:** Solicita la representación de un recurso. Es el método usado para obtener datos sin modificar el servidor.
+- **POST:** Envía datos al servidor para crear o modificar un recurso. Se usa comúnmente para enviar formularios.
+- **PUT:** Reemplaza o crea un recurso en la ubicación especificada con los datos enviados.
+
+Estos métodos permiten la interacción básica cliente-servidor en la web.
+
+## **1)**&nbsp;&nbsp;&nbsp;&nbsp; **En base a la capa física, proceda (6 pts):**
+
+**a)**&nbsp;&nbsp;&nbsp;&nbsp; **Cite dos medios de transmisión guiados. (2 pts)**
+
+b)&nbsp;&nbsp;&nbsp;&nbsp; **Cite dos medios de transmisión inalámbricos. (2pts)**
+
+**c)**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **Dos diferencias entre señal digital y señal analógica. (2 pts)**
+
+## a) Dos medios de transmisión guiados (2 pts)
+
+- **Cable de par trenzado:** Consiste en dos alambres de cobre aislados que se trenzan para reducir interferencias electromagnéticas. Es uno de los medios más comunes para redes locales.
+- **Cable coaxial:** Compuesto por un conductor central rodeado por un aislante y una malla metálica que actúa como blindaje, permite mayores anchos de banda y distancias que el par trenzado.
+
+(Otro medio guiado común es la fibra óptica, que utiliza pulsos de luz para transmitir datos).
+
+## b) Dos medios de transmisión inalámbricos (2 pts)
+
+- **Radiofrecuencia (RF):** Utiliza ondas electromagnéticas para transmitir datos a través del aire, común en Wi-Fi, Bluetooth y redes móviles.
+- **Microondas:** Transmisión de señales a través de ondas de microondas en línea de vista, usada en enlaces punto a punto y satélites.
+
+(Otros ejemplos incluyen infrarrojos y láser).
+
+## c) Dos diferencias entre señal digital y señal analógica (2 pts)
+
+{% table %}
+- Característica
+- Señal Digital
+- Señal Analógica
+---
+- **Forma de la señal**
+- Representada por valores discretos (bits), típicamente 0 y 1.
+- Representada por valores continuos y variables en amplitud y tiempo.
+---
+- **Ruido e interferencia**
+- Más resistente al ruido, permite regeneración y corrección de errores.
+- Más susceptible al ruido, lo que puede distorsionar la señal fácilmente.
+{% /table %}
+
+## **2)**&nbsp;&nbsp;&nbsp;&nbsp; **En base a la capa de enlace, proceda (8 pts):**
+
+**a)**&nbsp;&nbsp;&nbsp;&nbsp; **Explique que es entramado. (2 pts)**
+
+**b)Teniendo en cuenta dos tecnologías, Ethernet y Bluetooth, cuál de las dos tramas tendrá mayor cantidad de bits de redundancia. Justifique su respuesta. (2 pts)**
+
+## a) ¿Qué es entramado? (2 pts)
+
+El&nbsp;**entramado**&nbsp;es el proceso mediante el cual la capa de enlace de datos toma el flujo continuo de bits recibido de la capa física y lo organiza en unidades llamadas&nbsp;**tramas**. Una trama es un bloque de datos que incluye:
+
+- Un&nbsp;**encabezado**&nbsp;con información de control (como direcciones MAC y control de flujo).
+- Los&nbsp;**datos**&nbsp;propiamente dichos (la carga útil).
+- Un&nbsp;**tráiler**&nbsp;con información para detección de errores (como CRC).
+
+## b) ¿Cuál trama usa más bits de redundancia, Ethernet o Bluetooth? Justifique. (2 pts)
+
+Las tramas de **Bluetooth** tienen mayor cantidad de bits de redundancia que las de Ethernet, debido a la necesidad de manejar un medio más propenso a errores y pérdidas, mientras que Ethernet, en un medio guiado y más estable, requiere menos redundancia
+
+## c) **Cite y explique brevemente el funcionamiento de un protocolo de acceso múltiple con detección de portadora. (2 pts**
+
+CSMA/CD permite que múltiples dispositivos compartan un medio de transmisión, escuchando antes de enviar para evitar colisiones y reaccionando rápidamente si estas ocurren para minimizar pérdidas y retrasos.
+
+## d) **Cite y explique brevemente el funcionamiento de un protocolo libre de colisiones. )**
+
+Un protocolo libre de colisiones es aquel que evita que dos o más estaciones transmitan simultáneamente, eliminando así la posibilidad de colisiones en el medio.
+
+## Ejemplo: Protocolo de paso de testigo (Token Passing)
+
+- **Funcionamiento:**\
+  En este protocolo, un "token" (una señal o paquete especial) circula de manera ordenada entre todas las estaciones de la red. Solo la estación que posee el token tiene permiso para transmitir datos.
+
+## **1)**&nbsp;&nbsp;&nbsp;&nbsp; **En base a la capa de transporte, proceda (10 pts):**
+
+**a)**&nbsp;&nbsp;&nbsp;&nbsp; **Indique y resalte principales características del protocolo no orientado a la conexión de la capa (3 pts).**
+
+**b)**&nbsp;&nbsp;&nbsp;&nbsp; **Indique y resalte las principales características del protocolo orientado a la conexión de la capa (3 pts).**
+
+\**Cite 4 mecanismos de confiabilidad que implementa el protocolo TCP (4 pts
+\**
+
+## a) Características principales del protocolo no orientado a conexión (UDP) (3 pts)
+
+- **Transmisión sin conexión:** No requiere establecer una conexión previa entre emisor y receptor; los datos se envían directamente en forma de datagramas.
+- **Sin garantía de entrega ni orden:** No asegura que los paquetes lleguen ni que lo hagan en orden, ya que no hay confirmaciones ni retransmisiones automáticas.
+- **Baja sobrecarga y rapidez:** Debido a su estructura simple, es rápido y eficiente, ideal para aplicaciones en tiempo real como streaming, videojuegos o VoIP.
+- **Verificación básica de errores:** Incluye una suma de comprobación (checksum) para detectar errores simples, pero no corrige errores ni controla congestión o flujo.
+
+## b) Características principales del protocolo orientado a conexión (TCP) (3 pts)
+
+- **Establecimiento de conexión (handshake):** Antes de transmitir datos, TCP realiza un proceso de establecimiento de conexión confiable entre emisor y receptor (3-way handshake).
+- **Entrega confiable y ordenada:** Garantiza que los datos lleguen completos y en el orden correcto mediante acuses de recibo (ACK) y números de secuencia.
+- **Control de flujo y congestión:** Regula la velocidad de transmisión para evitar saturar al receptor o la red, mejorando la eficiencia y estabilidad.
+- **Control de errores:** Detecta y corrige errores retransmitiendo segmentos perdidos o dañados.
+
+## c) Cuatro mecanismos de confiabilidad que implementa TCP (4 pts)
+
+1. **Control de flujo:** Usa ventanas deslizantes para evitar que el emisor envíe más datos de los que el receptor puede manejar.
+1. **Control de congestión:** Ajusta la tasa de envío de datos según el estado de la red para evitar saturación (algoritmos como slow start, congestion avoidance).
+1. **Acuse de recibo (ACK):** El receptor envía confirmaciones para informar que ha recibido correctamente los segmentos.
+1. **Retransmisión de segmentos:** Si no se recibe un ACK en un tiempo determinado, el emisor retransmite el segmento perdido o dañado.
+
+## Algunas definiciones
+
+·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **HTTP:**&nbsp; es un protocolo simple de solicitud-respuesta que por lo general opera sobre TCP.
+
+·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **Sistema de cifrado:** Un sistema de cifrado es una transformación carácter por carácter o bit por bit.
+
+·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **Sistema de Código:** Uno de código reemplaza una palabra con otra palabra o símbolo.
+
+·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **Principio de Kerckhoff:** Todos los algoritmos deben ser públicos; sólo las claves deben ser secretas
+
+·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **Sistema de cifrado por sustitución:** cada letra o grupo de letras se reemplazan por otra letra o grupo de letras para disfrazar
+
+·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **Sistemas de cifrado por trasposición:** conservan el orden de los símbolos de texto plano, pero los disfrazan.
+
+·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **Relleno de una sola vez:** Primero se escoge una cadena de bits al azar como clave. Luego se convierte el texto plano en una cadena de bits. Por último, se calcula el XOR (OR exclusivo) de estas dos cadenas, bit por bit.
