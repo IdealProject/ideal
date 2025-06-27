@@ -1,5 +1,5 @@
 ---
-title: Resumen Sobre Redes para Final
+title: Resumen PARA FINAL - Todas las capas TCP/IP
 draft: false
 description: Resumen para final
 authors:
@@ -10,7 +10,49 @@ major:
     discriminant: '4'
     value: Rc1
 ---
-# Resumen PARA FINAL
+# Resumen PARA FINAL - Todas las capas TCP/IP
+
+## TCP/IP VS OSI
+
+**Diferencias entre TCP/IP y OSI**
+
+- **TCP/IP** tiene 4 capas mientras que OSI tiene 7
+- **TCP/IP** es utilizado en la vida real mientras que OSI no salió de laboratorios y es usado más para educación
+- OSI tiene como ventaja que las funciones están mejor distribuidas al tener más capas
+- OSI fue desarrollado por ISO(nternational Organization for Standardization) y TCP/IP por el departamento de defensa de EEUU
+
+## LA MAYORIA DE PROTOCOLOS POR CADA CAPA
+
+**CAPA FISICA Y DE ENLACE DE DATOS**
+
+- ETHERNET- internet por cable
+- WIFI- internet inalambrico
+- BLUETHOOT
+- DSL y ADSL (Para definir carga y descarga)
+
+**CAPA DE RED**
+
+- IP - dirige los paquetes, gestiona el direccionamiento lógico,fragmenta los paquetes grandes para adaptarlos a las capacidades del medio físico y luego los reensambla en el destino.
+- ICMP- El chismoso de la capa, sirve para control y diagnóstico
+- IGMP
+- ARP(Address resolution protocol)
+- NAT(Network Address Translation. Traducción de direcciones de red (para compartir una IP pública).
+
+**CAPA DE TRANSPORTE**
+
+- TCP (Orientado a la conexion)
+- UDP(Orientado a la no conexión)
+
+**CAPA DE APLICACIÓN**
+
+- DNS en puerto 53
+- DHCP en puerto 67(UDP servidor) y 68(UDP cliente)
+- HTTP y HTTPS puerto 80 y 443 TCP
+- SMTP y ESMTP puerto 25 TCP solo sirve para enviar
+- POP3 puerto 110 TCP sirve para recibir
+- IMAP puerto 143 TCP sirve para recibir
+- FTP puerto 21 (TCP)
+- SSH puerto 22 (TCP) Acceso remoto seguro
 
 ## MODULACIÓN, MULTIPLEXACIÓN
 
@@ -125,6 +167,8 @@ Beamforming: Nos basamos en la dirección en la que llega la onda, los celulares
 
 En esta capa operan los switches, se usan las tramas como unidad de información, en esta capa operan protocolos como Ethernet, WiFi, PPP(Point to Point protocol).
 
+**ETHERNET:** El **protocolo Ethernet** es un conjunto de reglas que define cómo se transmiten los datos a través de una **red local (LAN)** mediante cables (como UTP). Es uno de los protocolos más utilizados en redes de área local y funciona en la **capa de enlace de datos**
+
 ### **Servicios a la capa de red**
 
 #### **1. Sin conexión ni confirmación**
@@ -156,15 +200,11 @@ En esta capa operan los switches, se usan las tramas como unidad de información
 **Es la forma en que se organiza el flujo de bits en tramas para la transmisión.**
 
 - **Conteo de bytes:** Especifica el número de **bytes** que contiene la trama en el encabezado.
-
 - **Bytes bandera con relleno de bytes:**
-
   - Cada trama comienza y termina con un byte especial llamado **byte bandera**.
   - Marca los límites de las tramas mediante una secuencia de bits constantes en un byte, conocidos como **flags**.
   - Si el dato es igual al flag, se inserta un **byte de escape** para evitar confusión.
-
 - **Bits bandera con relleno de bits:**
-
   - Similar al anterior, pero a nivel de **bits**.
   - Si aparece un flag dentro de los datos, se inserta un **0** como relleno para diferenciarlo del flag.
 
@@ -224,6 +264,112 @@ El **problema de la terminal oculta** ocurre cuando dos nodos no pueden "verse" 
 El **problema de la terminal expuesta** pasa cuando un nodo se abstiene de transmitir porque detecta que otro nodo cercano está enviando, aunque en realidad **no causarían interferencia**, desaprovechando el canal. Ambos problemas reducen la eficiencia en redes inalámbricas.
 
 ## CAPA DE RED
+
+La capa de red Opera con el protocolo IP (no orientado a la conexion) es el protocolo del mejor esfuerzo, porque IP **hará lo posible por entregar los datos**, pero **no asegura nada**. Si algo falla en la transmisión (por ejemplo, si un paquete se pierde o se daña), **IP no lo reenvía ni lo corrige**.
+
+### DIRECCIONAMIENTO
+
+El **direccionamiento en redes** es el proceso mediante el cual se asignan **identificadores únicos**, como las **direcciones IP**, a los dispositivos dentro de una red para que puedan reconocerse y comunicarse correctamente entre sí
+
+### CAMPOS DEL PROTOCOLO IP
+
+Versión: versión del protocolo IPv4 (0100) o IPv6 (0110),
+
+IHL: longitud del encabezado, mínimo de 5 es decir 5*32, máximo de 60 bytes.
+
+Servicios diferenciados: tipo de servicio. Ej. (000) De rutina, (111) Control de red, (001) Prioritario.
+
+Longitud total: encabezado + datos, máximo 65535 bytes.
+
+Protocolo: Indica con qué protocolo va a la capa superior, si TCP, UDP, ICMP, etc.
+
+Identificación: identificación del paquete en el fragmento.
+
+DF/MF: DF (Don’t fragment) orden para no fragmentar el paquete, hoy se utiliza para descubrir el MTU de la ruta.
+
+MF: (more fragments) todos los fragmentos, menos el último, lleva encendido el bit.
+
+Desplazamiento del fragmento: número de fragmento del paquete.\
+
+**LOS CAMPOS QUE AYUDAN AL MEJOR ESFUERZO EN LA CABECERA DE IP**
+
+- *TTL: evita bucles, pero no intenta corregirlos.*
+- *Suma de verificación: detecta errores en la cabecera, pero no corrige.*
+
+#### ICMP
+
+ICMP es un protocolo de **control y diagnóstico** utilizado para:
+
+- **Reportar errores** en la comunicación de red (ej: `Destination Unreachable`, `Time Exceeded`).
+- **Enviar mensajes de consulta/respuesta** (ej: `Ping` y `Traceroute`).
+- **Gestionar el tráfico** (ej: `Source Quench`, obsoleto en IPv6).
+
+UN MENSAJE ICMP SE ENCAPSULA SOBRE IP
+
+### SERVICIOS DE LA CAPA DE RED A LA CAPA DE TRANSPORTE
+
+- ORIENTADO A LA CONEXION(CIRCUITOS VIRTUALES)
+- NO ORIENTADO A LA CONEXION(RED DE DATAGRAMAS)
+
+#### CIRCUITOS VIRTUALES ( CON CONEXION)
+
+**Características**
+
+- Detección y corrección de errores.
+
+- Retransmisión de paquetes perdidos.
+
+- Control de flujo (evita saturación del receptor).
+
+Se establece una ruta fija al inicio, los paquetes llevan un label en vez de dirección IP destino.
+
+**Fases:**
+
+- - 1. Establecimiento: Reserva de ancho de banda en routers intermedios.
+    1. Transferencia: Todos los paquetes siguen la misma ruta.
+    1. Liberación: Se cierra la conexión y liberan recursos.
+- Ventajas:
+  - Eficiente para tráfico constante (Ej: VoIP, videollamadas).
+- Desventajas:
+  - Si un enlace se cae, toda la conexión se pierde.
+
+En una red de circuito virtual, si una conexión entre nodos se pierde, se tiene que generar un nuevo circuito virtual, se van los paquetes perdidos con un label diferente al del camino original, pero no importa, la capa de transporte los ordena segun su IP.&nbsp;
+
+#### RED DE DATAGRAMAS IP( SIN CONEXION )
+
+**Características**
+
+- No hay conexión previa (cada paquete se maneja independientemente).
+
+- No garantiza entrega, orden ni integridad.
+
+- La capa de transporte (TCP) se encarga de la fiabilidad.\
+
+**Funcionamiento**
+
+- Cada paquete contiene dirección IP destino.
+
+- Los routers deciden la ruta en cada salto (tablas de enrutamiento). Entonces las rutas pueden cambiar dinámicamente si un nodo cae
+
+- Ventajas:
+
+  - Flexibilidad (si una ruta falla, se usa otra).
+  - Escalable (no requiere estado en los routers).
+
+- Desventajas:
+
+  - Paquetes pueden perderse o llegar en desorden.
+
+### QUE ES ARP
+
+**ARP** (Address Resolution Protocol) Resuelve dirección IP(lógicas) a direcciones físicas o MAC (Media Access Control).
+
+### EL PROTOCOLO NAT
+
+- Permite que múltiples dispositivos con IP privada compartan una IP pública.
+- Funcionamiento:
+  - El router reemplaza la IP origen (Ej: 192.168.1.2) por la IP pública.
+  - Guarda una tabla de traducción (IP interna + puerto → IP pública).
 
 ## CAPA DE TRANSPORTE
 
