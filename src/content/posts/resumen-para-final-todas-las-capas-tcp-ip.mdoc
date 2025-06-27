@@ -4,6 +4,7 @@ draft: false
 description: Resumen para final
 authors:
   - matias-mareco
+  - chat-gpt
 major:
   discriminant: infor
   value:
@@ -21,6 +22,14 @@ major:
 - OSI tiene como ventaja que las funciones están mejor distribuidas al tener más capas
 - OSI fue desarrollado por ISO(nternational Organization for Standardization) y TCP/IP por el departamento de defensa de EEUU
 
+## UNIDADES DE MEDIDA POR CADA CAPA
+
+- Fisica : bits
+- Enlace : tramas
+- Red : paquetes
+- Transporte: segmento/datagrama
+- Aplicacion : mensaje/datos
+
 ## LA MAYORIA DE PROTOCOLOS POR CADA CAPA
 
 **CAPA FISICA Y DE ENLACE DE DATOS**
@@ -29,6 +38,7 @@ major:
 - WIFI- internet inalambrico
 - BLUETHOOT
 - DSL y ADSL (Para definir carga y descarga)
+- Token Ring
 
 **CAPA DE RED**
 
@@ -316,9 +326,7 @@ UN MENSAJE ICMP SE ENCAPSULA SOBRE IP
 **Características**
 
 - Detección y corrección de errores.
-
 - Retransmisión de paquetes perdidos.
-
 - Control de flujo (evita saturación del receptor).
 
 Se establece una ruta fija al inicio, los paquetes llevan un label en vez de dirección IP destino.
@@ -340,24 +348,17 @@ En una red de circuito virtual, si una conexión entre nodos se pierde, se tiene
 **Características**
 
 - No hay conexión previa (cada paquete se maneja independientemente).
-
 - No garantiza entrega, orden ni integridad.
-
 - La capa de transporte (TCP) se encarga de la fiabilidad.\
 
 **Funcionamiento**
 
 - Cada paquete contiene dirección IP destino.
-
 - Los routers deciden la ruta en cada salto (tablas de enrutamiento). Entonces las rutas pueden cambiar dinámicamente si un nodo cae
-
 - Ventajas:
-
   - Flexibilidad (si una ruta falla, se usa otra).
   - Escalable (no requiere estado en los routers).
-
 - Desventajas:
-
   - Paquetes pueden perderse o llegar en desorden.
 
 ### QUE ES ARP
@@ -370,7 +371,243 @@ En una red de circuito virtual, si una conexión entre nodos se pierde, se tiene
 - Funcionamiento:
   - El router reemplaza la IP origen (Ej: 192.168.1.2) por la IP pública.
   - Guarda una tabla de traducción (IP interna + puerto → IP pública).
+  - Socket = IP : Puerto
 
 ## CAPA DE TRANSPORTE
 
+Su función es garantizar la comunicación confiable y eficiente entre dispositivos. Su **fin** es proporcionar servicios como la entrega ordenada de paquetes (TCP) o la transmisión rápida pero no confiable (UDP), adaptándose a las necesidades de las aplicaciones. Además, controla la congestión de la red y optimiza el uso de los recursos para mantener una comunicación estable entre origen y destino.
+
+Una **entidad de transporte** en la capa de transporte es el componente (software o hardware) responsable de **proporcionar comunicación confiable o no confiable entre procesos** que se ejecutan en dispositivos finales (hosts).
+
+**La capa de transporte permite que muchas aplicaciones pidan o reciban datos al mismo tiempo gracias a un proceso llamado multiplexación y demultiplexación, que se basa en el uso de números de puerto.**
+
+### TCP
+
+- Es un protocolo Orientado a conexión (confiable). Entonces establece conexión antes de enviar los datos
+- Three-way handshake (establecimiento de conexión):
+  - SYN → Cliente inicia conexión.
+  - SYN-ACK → Servidor acepta.
+  - ACK → Cliente confirma.
+- Four-way handshake (liberación de conexión):
+  - FIN → Un extremo quiere cerrar.
+  - ACK → Confirmación.
+  - FIN → El otro extremo también cierra.
+  - ACK → Confirmación final.
+- Control de errores:
+  - Checksum: Verifica integridad del segmento.
+  - ACK/NACK: Confirmaciones de recepción.
+  - Números de secuencia: Ordenan los segmentos.
+- Encabezado grande (20 bytes mínimo) → Mayor overhead.
+- Uso: HTTP (web), SMTP (email), FTP (transferencia de archivos).
+
+### UDP
+
+- Sin conexión (no confiable, pero rápido).
+- Sin handshake → Bajo overhead (8 bytes de encabezado).
+- No garantiza entrega, orden ni control de flujo.
+- Uso: VoIP (llamadas), DNS, videojuegos en línea.
+
+***Usualmente usamos UDP cuando no necesitamos fragmentar información, o sea, lo usamos cuando no necesitamos enviar información de tamaños grandes, por eso dns y dhcp lo usan, ya que solo deben devolver direcciones ip y datos que son ligeros.***
+
+### Primitivas de la capa de transporte
+
+- LIsten
+- Acept
+- Connect
+- Send
+- Write
+- Disconnect
+
+### Rangos de puertos
+
+- Bien Conocidos: 0 a 1023, usado por protocolos ya conocidos como HTTP
+- Registrados: 1024 - 4915, usado por **aplicaciones de usuario o servicios específicos** que **no necesitan privilegios especiales** del sistema operativo
+- Efimeros/Dinamicos/Privados: 49152 - 65535, son usados mas para conexiones P2P, Clientes
+
+***El control de congestión se da mediante AIMD (Aumento Aditivo y Decremento Multiplicativo)***
+
+### CAMPOS DE TCP Y UDP
+
+**COMPARTEN**&nbsp;
+
+- Puerto de origen
+- Puerto de destino
+- Checksum
+- Longitud
+
+TCP a parte de estos 4, tiene otros campos como Numero de secuencia, Acuse de recibo, Longitud de encabezado, Ventana, Urgente.\
+
+La **ventana** en la capa de transporte (especialmente en **TCP**) es un mecanismo que controla **cuántos datos** puede enviar un emisor **antes de recibir una confirmación (ACK)** del receptor.
+
+### POP3 vs IMAP
+
+POP3 descarga los correos al dispositivo y usualmente los **elimina del servidor**, ideal para uso en un solo dispositivo. IMAP, en cambio, **mantiene los correos en el servidor**, permitiendo acceso y sincronización desde múltiples dispositivos, además de organizar carpetas y estados de lectura.
+
+### EL PROBLEMA DE LOS EJERCITOS Y COMO SE RELACIONA CON TCP
+
+Imagina dos ejércitos (A y B) situados en montañas opuestas, y en el medio hay una ciudad enemiga. Ambos ejércitos **deben atacar al mismo tiempo**, o serán derrotados si uno lo hace solo. Para coordinar el ataque, los generales **se envían mensajeros** con planes. Pero el problema es:
+
+📦 **Los mensajeros pueden ser interceptados o no llegar.** Entonces nunca se sabe si el mensaje **fue recibido** ni si la **respuesta llegó de vuelta**.
+
+\
+Esto crea un **bucle de confirmaciones sin fin**:\
+"¿Recibiste mi mensaje?" → "Sí, ¿recibiste mi respuesta?" → "Sí, ¿recibiste mi confirmación de que recibí tu respuesta?"
+
+- Es **imposible garantizar una coordinación perfecta** en un canal inseguro.
+- **No hay forma 100% segura de saber si el otro recibió tu mensaje.**
+
+**TCP NO SOLUCIONA AL 100% ESTE PROBLEMA,** pero lo maneja bastante bien usando sus ***mecanismos de confiabilidad***
+
+### Mecanismos de confiabilidad de TCP
+
+1. **Numeración de secuencia** – Permite ordenar los datos y detectar pérdidas o duplicados.
+1. **Acuses de recibo (ACK)** – El receptor confirma la recepción de los datos.
+1. **Retransmisión de datos** – Si no llega el ACK, TCP reenvía el segmento.
+1. **Control de flujo** – Ajusta la velocidad para no saturar al receptor.
+1. **Control de congestión** – Regula el envío para evitar sobrecargar la red.
+1. **Detección de errores (checksum)** – Verifica la integridad de los datos.
+1. TCP **minimiza el problema**, pero acepta que **nunca puede garantizar al 100% que un mensaje llegó**.
+1. En lugar de buscar certeza total, TCP trabaja con **reintentos y confirmaciones** para lograr una **alta confiabilidad**.
+
 ## CAPA DE APLICACIÓN
+
+Es la que **interactúa directamente con el usuario o con el software de aplicación**. Su función principal es proporcionar servicios de red a las aplicaciones, facilitando tareas como el envío de correos electrónicos, la navegación web, la transferencia de archivos o las videollamadas. A través de protocolos como **HTTP, SMTP, FTP, DNS** y muchos otros, esta capa permite que los programas se comuniquen eficazmente sobre la red, ocultando la complejidad de las capas inferiores y asegurando que los datos lleguen al destino correcto en el formato adecuado.
+
+### QUE ES UN DOMINIO
+
+Es un **nombre único** que identifica a un sitio en Internet, como por ejemplo `google.com` o `gobierno.gov.py`. Sirve para **facilitar el acceso a servicios en línea** sin tener que recordar direcciones IP numéricas, el que se encarga de traducir dominios a IPs es el **PROTOCOLO DNS**
+
+### PROTOCOLO DNS
+
+Significa Domain Name System, es un servidor con una amplia base de datos que posee la tabla de conversión de Dominios a IP, Si el servidor DNS no tiene la IP almacenada en caché, consulta servidores raíz (root), luego servidores TLD(Top level domain) (.com, .org, etc.) y finalmente el servidor autoritativo del dominio, pero como sabe nuestra PC como llegar hasta el servidor DNS?
+
+En las computadoras podemos configurar manualmente la IP del servidor DNS que preferimos, existen muchas instancias de este repartidas por el mundo.
+
+### ARBOL DNS
+
+Es un árbol con jerarquías de Dominios, los nodos más altos son dominios más genéricos.
+
+```
+                        +---------------------+
+                        |   Root DNS Servers  | (.)  
+                        +---------------------+
+                                  |
+             +--------------------+--------------------+
+             |                    |                    |
+    +----------------+    +----------------+    +----------------+
+    | TLD Servers    |    | TLD Servers    |    | TLD Servers    |
+    | (.com, .org,   |    | (.edu, .gov,   |    | (.uk, .es,     |
+    |  .net, etc.)   |    |  .mil, etc.)   |    |  .mx, etc.)    |
+    +----------------+    +----------------+    +----------------+
+             |                    |                    |
+    +--------+--------+  +--------+--------+  +--------+--------+
+    |  Authoritative  |  |  Authoritative  |  |  Authoritative  |
+    |  DNS Servers    |  |  DNS Servers    |  |  DNS Servers    |
+    | (google.com,    |  | (mit.edu,       |  | (bbc.co.uk,     |
+    |  wikipedia.org) |  |  whitehouse.gov)|  |  elpais.es)     |
+    +-----------------+  +-----------------+  +-----------------+
+```
+
+- ROOT DNS SERVERS: Son servidores raiz, estos no almacenan las IPs pero te redirigen al TLD correcto(Como .com)
+- TLD servers, son los nodos con dominios mas genéricos y estos tienen de hijos a todos los dominios que dependan de ellos, por ejemplo, el nodo del dominio .com, tiene de hijos a google.com y todo aquel que use .com, entonces el es el encargado de ir viendo entre sus hijos, si alguien es google.com o si alguien más lo tiene de hijo
+
+### DISTRIBUCIÓN DE LOS TLD
+
+A la izquierda estan los gTLD que son dominios más genericos y a la izquierda estan los ccTLD que son de paises, los dominios gTLD son más caros ya que abarcan un tipo de dominio más usado a nivel global y con más alcance, por lo que hay más demanda
+
+```
+                        [ Root ] (.)
+                           |
+            +--------------+------------------+
+            |                               |
+      gTLD (genéricos)               ccTLD (países)
+    (.com, .org, .net)           (.py, .ar, .br, .es, .mx, etc.)
+```
+
+**Por ejemplo, para resolver el dominio www.encarnacion.gov.py**
+
+```
+                                [ Root ] (.)
+                                   |
+                            .py (TLD de Paraguay)
+                                   |
+                   +----------------+----------------+
+                .gov.py                          .com.py
+    (Gobierno de Paraguay)              (Dominios comerciales)
+                   |
+         +---------+---------+
+   encarnacion.gov.py    asuncion.gov.py
+    (Municipalidad de         (Municipalidad
+       Encarnación)            de Asunción)
+         |
+   www.encarnacion.gov.py
+         ↓
+   IP: XXX.XXX.XXX.XXX
+```
+
+### EL DOMINIO WWW
+
+Piensa que un dominio como `encarnacion.gov.py` es una **casa grande** con muchas habitaciones (servidores):
+
+- `www.encarnacion.gov.py` → la **puerta de entrada al sitio web**
+- `mail.encarnacion.gov.py` → el **servidor de correos**
+- `ftp.encarnacion.gov.py` → el **servidor de archivos**
+
+**En resumen**
+
+🔹 `www` es un **nombre de servidor**.\
+🔹 Suele apuntar al **sitio web principal**.\
+🔹 No es obligatorio, pero es **muy común**
+
+### HTTP y HTTPS
+
+**HTTP**(Hyper Text Transfer Protocol) es el protocolo básico de petición-respuesta que permite cargar páginas web, pero envía la información sin protección, como una postal abierta que cualquiera puede leer. **HTTPS** es su versión segura: cifra los datos como una carta en un sobre sellado, protegiendo contraseñas y datos personales. Hoy, casi todos los sitios usan HTTPS porque evita robos de información y los navegadores lo recomiendan, mientras que marcan los sitios con HTTP como "no seguros".
+
+### Métodos de HTTP
+
+- GET - Obtener un recurso(como un perfil de alguien)
+- POST - Subir un recurso(publicar un nuevo tweet)
+- PUT - Actualizar un campo, pero resetea los campos que no actualizas(Actualizar **toda** la información de tu perfil en LinkedIn.)
+- PATCH - Lo mismo que PUT pero este no resetea los campos que no referenciaste(Cambiar solo tu foto de perfil en Facebook.)
+
+## **TLS/SSL** (Transport Layer Security / Secure Sockets Layer)
+
+Es un **protocolo de seguridad** diseñado para cifrar y autenticar la comunicación entre dos sistemas (como un cliente y un servidor) a través de una red (ej: Internet). Es el sucesor de **SSL** (*Secure Sockets Layer*) y es fundamental para proteger datos sensibles.
+
+## SSH
+
+**SSH** (*Secure Shell*) es un **protocolo de red** que permite acceder y gestionar dispositivos remotos (como servidores, routers o sistemas IoT) de forma **segura y encriptada**. Es ampliamente usado por administradores de sistemas y desarrolladores. Es mas usado para acceso remoto seguro.
+
+## UN POCO DE IPv6
+
+### **IPv6 vs IPv4: Una Comparación Rápida**
+
+#### **Direcciones**
+
+- **IPv4**:
+  - Formato: `192.168.1.1` (32 bits → **4.300 millones** de direcciones).
+  - Agotadas desde 2011 (se usan NAT y DHCP para estirarlas).
+- **IPv6**:
+  - Formato: `2001:0db8:85a3::8a2e:0370:7334` (128 bits → **340 sextillones** de direcciones).
+  - Elimina la necesidad de NAT (cada dispositivo tiene IP pública única).
+
+#### **Encabezado (Header)**
+
+- **IPv4**:
+  - Cabecera compleja (20+ bytes) con campos como *checksum* y *fragmentación*.
+- **IPv6**:
+  - Cabecera simplificada (40 bytes fijos).
+  - Elimina checksum (lo delega a TCP/UDP) y fragmentación (ahora es *end-to-end*).
+
+#### **Seguridad**
+
+- **IPv4**:
+  - Seguridad añadida después (ej: IPsec es opcional).
+- **IPv6**:
+  - **IPsec integrado** (encriptación y autenticación nativas).
+
+#### **Rendimiento**
+
+- **IPv6**:
+  - Mejor soporte para **calidad de servicio (QoS)** y **multicast**.
+  - Routers procesan paquetes más rápido (gracias a cabecera simplificada).
