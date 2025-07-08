@@ -27,6 +27,6 @@ pnpm run dev
 Seguir los siguientes pasos para configurar y ejecutar localmente:
 [INSTALL.md](INSTALL.md)
 
-Admin UI: [https://ideal.fiuni.edu.py/keystatic](https://ideal.fiuni.edu.py/keystatic)
+👤 Admin UI: [https://ideal.fiuni.edu.py/keystatic](https://ideal.fiuni.edu.py/keystatic)
 
-Homepage: [https://ideal.fiuni.edu.py](https://ideal.fiuni.edu.py)
+🏠 Homepage: [https://ideal.fiuni.edu.py](https://ideal.fiuni.edu.py)
