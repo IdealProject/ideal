@@ -4,7 +4,9 @@ import {
   semesterOptionsCE,
 } from "../../utils/data/dataSemester";
 
-const SemesterSelect = ({ setSemester, semester, major }) => {
+import React from "react";
+const SemesterSelect = ({ major, onSemesterChange, currentSelectedSemester }) => {
+
   let cpaOpt = [{ label: "Primer Semestre", value: "1" }];
   let semesterOpt;
 
@@ -36,11 +38,10 @@ const SemesterSelect = ({ setSemester, semester, major }) => {
           <div key={index + 1} className="mr-1">
             <button
               className={`bg-blue-200 hover:bg-blue-400 transition-all ease-in-out duration-150 active:scale-90 rounded-full size-12 2xl:size-10 flex items-center justify-center ${
-                semester == e.value ? "bg-blue-700 text-white" : ""
+                currentSelectedSemester == e.value ? "bg-blue-700 text-white" : ""
               }`}
               key={index}
-              onClick={() => setSemester(e.value)}
-            >
+              onClick={() => onSemesterChange(e.value)}             >
               {e.value}
             </button>
           </div>
