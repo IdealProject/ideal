@@ -1,0 +1,610 @@
+---
+title: '# Compendio de Exámenes Finales— Algoritmos y Estructuras de Datos II'
+draft: false
+description: Exámenes Finales— Algoritmos y Estructuras de Datos II
+authors:
+  - facu-garay
+major:
+  discriminant: infor
+  value:
+    discriminant: '6'
+    value: Al2
+---
+# 
+
+> La interpretación de los temas forma parte de la evaluación.
+
+---
+
+# Parcial 1
+
+## 1. Complejidad de algoritmo — 3 puntos
+
+Determinar la función del siguiente algoritmo y demostrar a qué `O(f(n))` pertenece.
+
+```
+for (int i = 0; i < N; i++) {
+    indiceMenor = i;
+
+    for (int j = i; j < N * 4; j++) {
+        if (A[indiceMenor] > A[j]) {
+            indiceMenor = j;
+        }
+    }
+
+    swap(A[i], A[indiceMenor]);
+}
+
+```
+
+---
+
+## 2. Recurrencia — 2 puntos
+
+Resolver la siguiente recurrencia y determinar a qué `O(f(n))` pertenece:
+
+[\
+T(N) = 4T(N/2) + N\
+]
+
+---
+
+## 3. Definiciones
+
+### 3.1. Árbol 2-3 — 1 punto
+
+Definir qué es un árbol 2-3 y explicar sus características.
+
+### 3.2. Tabla Hash — 2 puntos
+
+Explicar:
+
+- Definición de tabla hash.
+- Características.
+- Formas de implementación.
+- Métodos de resolución de colisiones.
+- Tiempos de ejecución de cada operación.
+
+---
+
+## 4. Árbol Rojo-Negro Izquierdo — LLRB — 2 puntos
+
+Dado el siguiente árbol rojo-negro izquierdo, insertar primero `87` y luego `6`.
+
+Dibujar los árboles resultantes después de cada operación.
+
+### Árbol inicial
+
+```
+       64
+      /  \
+    31    90
+          /
+        89(R)
+
+```
+
+### Inserción de `87`
+
+Dibujar cada paso:
+
+1. Inserción.
+1. Cambio de color.
+1. Rotación, si corresponde.
+
+### Inserción de `6`
+
+Dibujar cada paso:
+
+1. Inserción.
+1. Cambio de color.
+1. Rotación, si corresponde.
+
+---
+
+## 5. Montículo / Heap — 1 punto
+
+Dado el siguiente montículo, insertar `22` y dibujar el arreglo resultante.
+
+Luego insertar `6` y volver a dibujar el arreglo resultante.
+
+### Arreglo inicial
+
+```
+[3, 7, 23, 44, 26, 88, 33, 98]
+
+```
+
+### Representación
+
+```
+           3
+         /   \
+        7     23
+       / \   /  \
+     44  26 88  33
+    /
+   98
+
+```
+
+---
+
+## 6. Función Hash con Quadratic Probing — 2 puntos
+
+Escribir la implementación de una función hash para una tabla hash utilizando **Quadratic Probing**.
+
+### Firma
+
+```
+long hash(char* clave, int tamanhoClave, int i) {
+}
+
+```
+
+### Función auxiliar
+
+```
+long stringToNumber(char* clave, int tamanhoClave) {
+}
+
+```
+
+---
+
+## 7. Huffman — Compresión — 3 puntos
+
+Utilizando el algoritmo de Huffman:
+
+1. Comprimir el texto.
+1. Completar la tabla de frecuencias.
+1. Completar la tabla de caracteres codificados.
+1. Dibujar el árbol generado.
+1. Generar el contenido del archivo comprimido, incluyendo el árbol.
+
+### Texto
+
+```
+manzana,naranja,banana
+
+```
+
+---
+
+## 8. Huffman — Descompresión — 2 puntos
+
+Utilizando el algoritmo de Huffman:
+
+1. Dibujar el árbol de Huffman.
+1. Descomprimir el texto codificado.
+1. Escribir el texto resultante.
+
+### Texto codificado
+
+```
+001n001z01m1b1,1a01011100100101101010100010010010111001001
+
+```
+
+---
+
+# Parcial 2
+
+## 1. Grafos — 1 punto
+
+Explicar:
+
+- Definición de grafo.
+- Características.
+- Formas de implementación.
+
+---
+
+## 2. Programación Dinámica — 1 punto
+
+Explicar:
+
+- Definición de programación dinámica.
+- Características.
+- Ejemplos de aplicación.
+
+---
+
+## 3. Dijkstra — 2 puntos
+
+Dado el siguiente grafo, aplicar el algoritmo de Dijkstra para encontrar el camino más barato partiendo del nodo `A` hacia cualquier otro nodo.
+
+Se debe:
+
+1. Graficar cada paso.
+1. Dibujar el arreglo `prev`.
+1. Dibujar el arreglo `costos`.
+
+### Nodos
+
+```
+A, B, C, D, E, F
+
+```
+
+### Aristas
+
+{% table %}
+- Origen
+- Destino
+- Peso
+---
+- A
+- B
+- 10
+---
+- A
+- F
+- 5
+---
+- B
+- C
+- 1
+---
+- B
+- E
+- 3
+---
+- F
+- C
+- 8
+---
+- F
+- E
+- 9
+---
+- C
+- D
+- 4
+---
+- E
+- D
+- 3
+{% /table %}
+
+---
+
+## 4. Kruskal — 2 puntos
+
+Dado el siguiente grafo, aplicar el algoritmo de Kruskal para encontrar el árbol de expansión mínima o **Minimum Spanning Tree — MST**.
+
+Se debe graficar cada paso y cada árbol resultante.
+
+### Nodos
+
+```
+A, B, C, D, E, F, G, H, I
+
+```
+
+### Aristas
+
+{% table %}
+- Nodo 1
+- Nodo 2
+- Peso
+---
+- E
+- D
+- 9
+---
+- E
+- F
+- 10
+---
+- D
+- F
+- 14
+---
+- D
+- C
+- 7
+---
+- F
+- C
+- 4
+---
+- F
+- G
+- 2
+---
+- C
+- I
+- 2
+---
+- C
+- B
+- 6
+---
+- G
+- I
+- 6
+---
+- G
+- H
+- 1
+---
+- I
+- H
+- 7
+---
+- B
+- H
+- 11
+---
+- B
+- A
+- 4
+---
+- H
+- A
+- 8
+{% /table %}
+
+---
+
+## 5. Prim — 2 puntos
+
+Escribir el algoritmo de Prim en pseudocódigo.
+
+---
+
+## 6. Problema de viaje por Europa — 2 puntos
+
+Juanito hizo un viaje en tren por Europa pasando por varios países y quiso visitar la mayor cantidad de ciudades importantes en su trayecto.
+
+Teniendo el mapa de conexiones ferroviarias y los costos de cada viaje, responder:
+
+1. ¿Qué algoritmo ayudaría a Juanito a recorrer todas las ciudades por el menor costo?
+1. Aplicando dicho algoritmo, ¿cuáles serían las escalas que debería tomar?
+1. ¿Cuál sería el gasto mínimo de la travesía?
+
+### Ciudades
+
+- London
+- Paris
+- Madrid
+- Barcelona
+- Rome
+- Vienna
+- Prague
+- Berlin
+
+---
+
+# Final Ordinario 2025
+
+## 1. Complejidad de algoritmo — 2 puntos
+
+Determinar la función del siguiente algoritmo y demostrar a qué `O(f(n))` pertenece.
+
+```
+c = 1;
+
+while (c < N) {
+    c = 2 * c;
+}
+
+```
+
+---
+
+## 2. Recurrencia — 2 puntos
+
+Resolver la siguiente recurrencia y determinar a qué `O(f(n))` pertenece:
+
+[\
+T(n) =\
+\begin{cases}\
+1, & n = 1 \
+8T(n/2) + n^2, & n > 1\
+\end{cases}\
+]
+
+---
+
+## 3. Definiciones
+
+### 3.1. Grafos — 1 punto
+
+Explicar:
+
+- Definición de grafo.
+- Características.
+- Formas de implementación.
+
+### 3.2. Árbol Rojo-Negro — 1 punto
+
+Definir qué es un árbol rojo-negro y explicar sus características.
+
+### 3.3. Tablas Hash — 1 punto
+
+Explicar:
+
+- Definición de tabla hash.
+- Operaciones comunes.
+- Tiempos de cada operación.
+- Métodos de resolución de colisiones.
+
+### 3.4. Dividir y Conquistar vs. Programación Dinámica — 1 punto
+
+Explicar las diferencias entre ambas técnicas.
+
+### 3.5. P vs. NP vs. NPC — 1 punto
+
+Explicar las diferencias entre las siguientes clases de complejidad:
+
+- `P`
+- `NP`
+- `NP-Complete — NPC`
+
+---
+
+## 4. Dijkstra — 1 punto
+
+Dado el siguiente grafo, aplicar el algoritmo de Dijkstra para encontrar el camino más barato partiendo del nodo `A` hacia cualquier otro nodo.
+
+Se debe:
+
+1. Graficar cada paso.
+1. Dibujar el arreglo `prev`.
+1. Dibujar el arreglo `costos`.
+
+### Nodos
+
+```
+A, B, C, D, E, F
+
+```
+
+### Aristas
+
+{% table %}
+- Origen
+- Destino
+- Peso
+---
+- A
+- B
+- 5
+---
+- B
+- C
+- 6
+---
+- A
+- F
+- 12
+---
+- F
+- C
+- 2
+---
+- A
+- D
+- 3
+---
+- D
+- F
+- 5
+---
+- F
+- E
+- 4
+---
+- E
+- D
+- 1
+{% /table %}
+
+---
+
+# Ejercicios adicionales
+
+## 1. Prim — 2 puntos
+
+Escribir el algoritmo de Prim en pseudocódigo.
+
+---
+
+## 2. Algoritmo Voraz — 2 puntos
+
+Escribir un programa en pseudocódigo o C que implemente un algoritmo voraz para resolver el problema de atención de clientes en un restaurante, minimizando el tiempo total de espera.
+
+### Ejemplo
+
+```
+int t[3] = {5, 10, 3};
+
+```
+
+### El programa debe
+
+1. Recibir un arreglo de tiempos.
+1. Imprimir el orden óptimo de atención.
+1. Imprimir el tiempo total de espera.
+
+---
+
+## 3. Hash — Quadratic Probing — 2 puntos
+
+Escribir la implementación de una función hash utilizando **Quadratic Probing**.
+
+```
+long hash(char* clave, int tamanhoClave, int i) {
+}
+
+```
+
+---
+
+## 4. Huffman — Compresión — 3 puntos
+
+Utilizando el algoritmo de Huffman:
+
+1. Comprimir el texto.
+1. Completar la tabla de frecuencias.
+1. Completar la tabla de códigos.
+1. Dibujar el árbol.
+1. Generar el contenido del archivo comprimido.
+
+### Texto
+
+```
+manzana,naranja,banana
+
+```
+
+---
+
+## 5. Diccionario usando Tabla Hash — 3 puntos
+
+Escribir la implementación de un diccionario utilizando tablas hash con direccionamiento abierto y **Quadratic Probing**.
+
+### Estructuras base
+
+```
+typedef struct _celda {
+    void* valor;
+    char* clave;
+} Celda;
+
+typedef struct _diccionario {
+    Celda** arr;
+    int tam;
+    int cap;
+} Diccionario;
+
+#define CAP 11
+
+```
+
+### Funciones a implementar
+
+```
+Diccionario* create();
+
+int stringToInt(char* clave);
+
+int hash(char* clave, int i);
+
+int put(
+    Diccionario* d,
+    char* clave,
+    void* valor
+);
+
+int get(
+    Diccionario* d,
+    char* clave,
+    void** valor
+);
+
+int destroy(Diccionario* d);
+
+```
