@@ -1,0 +1,424 @@
+---
+title: Resumen para Programacion 2
+draft: false
+description: Resumen del capitulo 3 al 17 del Dean and Dean
+authors:
+  - josue-vera
+major:
+  discriminant: infor
+  value:
+    discriminant: '2'
+    value: A2
+---
+# Cap 3
+
+### ¿Qué es el método main?
+
+El método main en Java es el punto de entrada principal para cualquier programa. Es un método fijo y obligatorio que se utiliza para ejecutar el inicio de la aplicación.
+
+### ¿Qué es una sentencia de asignación?
+
+Es una instrucción que asigna un valor a una variable.
+
+### ¿Qué es un identificador?
+
+Un identificador en Java es el nombre que se le asigna a un componente del programa, como una clase, una variable, un método, etc.
+
+### Tipos de datos Primitivos
+
+- boolean
+- byte
+- short
+- int
+- long
+- float
+- double
+- char
+
+### ¿Qué es el rastreo?
+
+El rastreo en Java es el proceso de seguir y comprender el flujo de ejecución de un programa.
+
+### ¿Qué es un operador de conversión de tipo?
+
+Un operador de conversión de tipo, también conocido como "casting", se utiliza para cambiar o convertir el tipo de un valor a otro tipo compatible.
+
+### ¿Qué es una secuencia de escape?
+
+Las secuencias de escape en Java son combinaciones de caracteres que se utilizan para representar caracteres especiales en cadenas de texto o literales de caracteres.
+
+### ¿Qué es el método charAt?
+
+El método charAt en Java se utiliza para obtener el carácter en una posición específica dentro de una cadena de caracteres
+
+# Cap 4
+
+### ¿Cuál es la diferencia entre == y el método equals( )?
+
+El operador == se utiliza para comparar los valores de variables primitivas y comprueba si dos variables o expresiones se refieren al mismo objeto en memoria.
+Por otro lado, el método equals() compara el contenido o los valores de los objetos invocando el método equals() definido en la clase del objeto.
+
+### ¿Qué hace un return?
+
+Tiene dos funciones principales, termina la ejecución de un método en un punto específico regresando el control a quien lo haya llamado y también puede o no devolver un valor.
+
+# Cap 5
+
+### Métodos de la clase MATH
+
+- Math.abs(x): Devuelve el valor absoluto de un número x. Es decir, si x es negativo, devuelve su valor positivo.
+- Math.sqrt(x): Devuelve la raíz cuadrada de un número x.
+- Math.pow(x, y): Devuelve x elevado a la potencia y. Es decir, calcula x multiplicado por sí mismo y veces.
+- Math.sin(x): Devuelve el seno de un ángulo x (en radianes).
+- Math.max(x, y): Devuelve el máximo valor entre dos números x e y.
+- Math.min(x, y): Devuelve el mínimo valor entre dos números x e y.
+- Math.random(): Genera un número aleatorio en el rango [0, 1].
+- Math.round(): Redondea un número al entero más cercano.
+
+### Clase envoltorio (wrapper) para tipos primitivos
+
+Una clase envoltorio (wrapper, en inglés) es un constructor que envuelve (contiene) un tipo de dato primitivo y lo convierte en un objeto con un nombre similar, para que pueda utilizarse en una situación en la que sólo se permiten objetos.
+
+### Auto envoltura:
+
+Es un mecanismo en Java que permite automáticamente convertir tipos primitivos en sus equivalentes clases envolventes y viceversa. Esto significa que se puede usar un tipo primitivo, como int o boolean, como si fuera un objeto de una clase envolvente, como Integer o Boolean, sin tener que realizar la conversión manualmente.
+
+### Métodos de la clase String
+
+- compareTo(String str): compara dos objetos de tipo Character y devuelve un valor entero que indica si son iguales (0), si el primer carácter es menor (-1) o si el primer carácter es mayor (1) al segundo carácter en términos de orden alfabético.
+- isEmpty(): devuelve true si la cadena que lo llama es una una cadena vacía ('). De lo contrario, devuelve false
+- replaceAll(String target, String replacement): devuelve una nueva cadena de caracteres reemplazando todas las ocurrencias de la cadena target con la cadena replacement.
+- toLowerCase(): devuelve una nueva cadena de caracteres con todos los caracteres de la cadena que lo llama en minúscula.
+- toUpperCase(): devuelve una nueva cadena de caracteres con todos los caracteres de la cadena que lo llama en mayúscula.
+- length(): devuelve la longitud de la cadena.
+- charAt(int index): devuelve el carácter en la posición especificada.
+
+# Cap 6
+
+### ¿Qué es la POO?(Programación orientada a Objetos)
+
+Es un modelo o un estilo de programación que nos da unas guías sobre cómo trabajar con él. Se basa en el concepto de clases y objetos.
+
+### Beneficios de la POO
+
+- Mejor organización
+- Reutilización de código
+- Abstracción
+- Encapsulación, herencia y polimorfismo
+- Desarrollo y mantenimiento sencillo.
+
+### ¿Qué es encapsulamiento?
+
+Es una técnica que permite ocultar y proteger los datos y funciones dentro de un objeto. Se utilizan métodos públicos para acceder a estos datos privados de manera controlada, lo que mejora la seguridad y la organización del código.
+
+### ¿Qué es polimorfismo?
+
+Es la capacidad de un objeto para presentarse y comportarse de diferentes formas o que diferentes objetos se presenten y comporten de manera similar a través de una clase base común.
+
+### ¿Qué es un objeto?
+
+Es un ente que consta de un estado o datos relacionados que identifican al objeto y de uno o más comportamientos.
+Los objetos en Java pueden tener variables para almacenar datos y métodos para realizar operaciones.
+
+### ¿Qué es una clase?
+
+Una clase es un modelo o plantilla que define las propiedades y comportamientos que tendrán los objetos creados a partir de ella.
+
+### ¿Qué es una variable de instancia?
+
+Es una variable declarada dentro de una clase pero fuera de cualquier método o bloque estático y almacena datos específicos de cada objeto
+
+### Cuál es la diferencia entre paso de argumento por valor y por referencia?
+
+En el paso de argumento por valor, se pasa una copia del valor de la variable al parámetro de la función. Cualquier modificación realizada en el parámetro dentro de la función no afectará a la variable original fuera de la función.
+En el paso de argumento por referencia, se pasa la referencia o dirección de memoria de la variable al parámetro de la función.
+
+# Cap 7
+
+### ¿Qué es un constructor?
+
+Es un tipo de método diseñado para ejecutarse siempre que se instancie un nuevo objeto y para inicializar atributos si es que las tiene
+
+### ¿Qué es la sobrecarga de constructores?
+
+Es cuando hay más de un constructor para una sola clase, variando el tipo o cantidad de parámetros que recibe
+
+# Cap 10
+
+### Define ArrayList
+
+Es una clase que permite trabajar con listas ordenadas de datos relacionados, se utiliza cuando el número de elementos es desconocido.
+
+### Cita 3 diferencias entre arreglo nativo y ArrayList
+
+- Tamaño flexible: Un arreglo nativo de Java tiene un tamaño fijo que se define al momento de su creación y no puede cambiar. En cambio, ArrayList proporciona un tamaño flexible, es decir que puede crecer dinámicamente según se agreguen o eliminen elementos
+- Soporte de tipos primitivos: Los arreglos nativos de Java admiten tanto tipos primitivos como tipos de referencia. Sin embargo, ArrayList solo admite tipos de referencia y no puede contener directamente tipos primitivos. En su lugar se utilizan las clases envolventes correspondientes
+- Funcionalidad adicional: ArrayList ofrece una variedad de métodos y funcionalidades adicionales que facilitan la manipulación de los datos, como la búsqueda, ordenación, inversión de elementos, etc. Estas operaciones requieren más código y son menos eficientes en un arreglo nativo.
+
+### Explica cómo funciona la Búsqueda Binaria
+
+Divide repetidamente el intervalo de búsqueda por la mitad; compara el valor buscado con el elemento central y descarta la mitad donde no puede estar, repitiendo el proceso hasta encontrar el valor o agotar las opciones.
+
+### ¿Qué es Lambda? (Tema de examen)
+
+Es una forma de definir y expresar funciones anónimas y bloques de código de modo que sea más concisa y flexible, lo que facilita la programación funcional y mejora la legibilidad del código
+
+# Cap12
+
+### ¿Qué es composición y cómo se diferencia con agregación?
+
+La composición es una relación fuerte donde un objeto contiene a otros objetos y depende de ellos, mientras que la agregación es una relación más débil donde un objeto puede contener a otros objetos sin depender de ellos.
+
+### Cita 3 beneficios de la herencia
+
+1. Polimorfismo: La herencia permite utilizar un objeto de una clase base para referirse a una instancia de una clase derivada.
+1. Reutilización de código: Al heredar de una clase base, se pueden aprovechar los atributos y métodos ya definidos en esa clase.
+1. Encapsulación: La herencia permite organizar las clases en una jerarquía, lo que facilita la encapsulación y el mantenimiento del código
+
+### Cuál es el uso de la palabra reservada super?
+
+Super se utiliza para referirse a la clase padre y acceder a sus miembros en una clase derivada (clase hija), permitiendo una mejor gestión de la herencia y la extensión del comportamiento de la clase base en la clase derivada.
+
+# Cap 13
+
+### ¿Qué es la clase Object/Objeto?
+
+La clase Objeto es el ancestro de todas las otras clases. Es el ancestro primordial: la raíz de la jerarquía de la herencia.
+
+### ¿Cómo funciona el método equals de la clase Object?
+
+Se utiliza para comparar si dos objetos son iguales. La implementación predeterminada del método equals() en la clase Object compara si dos referencias de objetos apuntan a la misma ubicación de memoria
+
+### ¿Por qué se debe sobreescribir el método equals?
+
+Permite realizar comparaciones personalizadas entre objetos, determinando si dos objetos son iguales según una lógica específica definida por el programador.
+
+### Definición de polimorfismo
+
+En computación, el polimorfismo es cuando diferentes tipos de objetos responden en forma distinta a la llamada de un mismo método.
+
+### ¿Para qué sirve interface y que es?
+
+Una interfaz de Java es un contrato entre el diseñador de un programa y los implementadores del programa que estandarizan la comunicación entre clases diferentes. Este uso de las interfaces es esencial para el éxito de proyectos de programación grandes.
+
+### ¿Cuáles son las tres formas en que se puede implementar el polimorfismo en un arreglo de objetos heterogéneos?
+
+- El polimorfismo puede implementarse en un arreglo de objetos heterogéneos al declarar los elementos del arreglo como instancias de un ancestro de herencia común. Para satisfacer al compilador, puede escribirse un método inválido en esa clase ancestro y sobreponerlo en todas las clases instanciadas en el arreglo.
+- Es posible declarar el método en una clase ancestro abstracta y luego definir métodos de sobreposición en todas las clases instanciadas en el arreglo
+- Es posible declarar el método en una interfaz e implementar esa interfaz en todas las clases instanciadas en el arreglo.
+
+### ¿Qué es un método abstracto?
+
+Un método abstracto es un método que no tiene una definición en la clase en la que se declara, sino que su definición se proporciona en las clases descendientes que instancian objetos. Para declarar un método abstracto, se utiliza el modificador abstract en el encabezado del método y se finaliza con un punto y coma.
+
+### ¿Qué es una clase abstracta?
+
+Una clase abstracta es una clase que contiene uno o más métodos abstractos, y por lo tanto no puede ser instanciada. Su principal función es proporcionar una interfaz común para todas las clases que la hereden, especificando qué métodos deben ser implementados en cada una de ellas.
+
+### ¿Es ilegal usar private o final con abstracto?
+
+Si
+
+# Cap 14
+
+### ¿Qué es una excepción?
+
+Es un evento que trastorna el flujo normal de instrucciones durante la ejecución de un programa, pueden ser causadas por diversas razones, como errores en el código del programa, fallas en el hardware o problemas en la entrada de datos.
+
+### Define Try
+
+El bloque "try" se utiliza para encerrar un conjunto de declaraciones que pueden generar excepciones al llamarlos. Permite capturar y manejar excepciones en el código para evitar que el programa se detenga abruptamente.
+
+### Define Catch
+
+El bloque "catch" se utiliza junto con el bloque "try" para capturar y manejar excepciones. Dentro del bloque "catch", se especifica el tipo de excepción que se desea capturar y se define el código que se ejecutará en caso de que esa excepción sea lanzada en el bloque "try"
+
+### Define finally
+
+El bloque "finally" se utiliza junto con los bloques "try" y "catch" para definir un código que siempre se ejecutará, independientemente de si se produce una excepción o no.
+
+### Define throws
+
+La palabra clave "throws" se usa en la declaración de un método para indicar que el método puede lanzar una o mas excepciones.
+
+### ¿Cuál es la diferencia entre una Excepción comprobada y no comprobada?
+
+Las excepciones no comprobadas descienden de la clase RuntimeException. Las excepciones comprobadas son aquellas que el compilador obliga a ser capturadas o declaradas en la firma del método. Por otro lado, las excepciones no comprobadas no tienen esta restricción. No es necesario que el código las capture o las declare en la firma del método
+
+### ¿Que son las excepciones no comprobadas?
+
+Las excepciones no comprobadas son aquellas que no necesitan ser declaradas en la firma del método, y su manejo es opcional. Estas excepciones suelen ser causadas por errores de programación o de lógica en el código.
+
+### ¿Que son las excepciones comprobadas?
+
+Las excepciones comprobadas son aquellas que deben ser declaradas en la firma del método en el que pueden ocurrir, ya sea mediante una cláusula throws o mediante un manejo try-catch.
+
+### ¿Cuál es la diferencia entre throws y throw?
+
+"throws" se utiliza en la declaración del método para indicar qué excepciones puede lanzar, mientras que "throw" se utiliza dentro del cuerpo del método para lanzar una excepción específica en un momento determinado.
+
+### ¿Qué es Throwable?
+
+Es una clase base para excepciones y errores. Proporciona métodos y propiedades para obtener información sobre la excepción o error.
+
+### ¿Qué es el trazado lineal?
+
+El "trazado lineal" en Java se refiere a la capacidad de registrar la secuencia de llamadas a métodos que se ejecutan en un programa, lo que se conoce como "pila de llamadas". La pila de llamadas es una estructura de datos que se utiliza para rastrear la ejecución de un programa en tiempo de ejecución.
+
+# Cap 15
+
+## Tipos de Archivos
+
+- **Archivo de texto de E/S**. Para datos primitivos. Fácil de comprender. La computadora transforma datos primitivos de formato nativo en un formato de texto legible para archivos.
+  - para salida hacia un archivo de texto:
+    - PrintWriter
+    - FileWriter.
+  - para entrada desde un archivo de texto:
+    - Scanner
+    - FileReader
+- Archivo binario de E/S. Para datos primitivos. Eficiente. Los ar chivos obtienen datos primitivos en formato nativo. No es posible crear ni ver archivos binarios con un editor de texto, aunque los archivos binarios son bastante compactos.
+  - para salida hacia un archivo binario:
+    - DataOutputStream
+    - FileOutputStream
+  - para entrada desde un archivo binario:
+    - DataInputStream
+    - FileInputStream
+- Archivo objeto de E/S. Para objetos completos. Fácil de usar. La computadora descompone objetos en datos primitivos para archivos, aunque también obtiene encabezados descriptivos. No es posible crear ni ver archivos objeto con un editor de texto, aunque la codificación se minimiza.
+  - para salida hacia un archivo objeto:
+    - ObjectOutputStream
+    - FileOutputStream
+  - para entrada desde un archivo objeto:
+    - ObjectInputStream
+    - FileInputStream
+
+## Formas de Guardar y Leer los Tipos de Archivos
+
+### Archivos Binarios
+
+- La forma más eficiente de almacenar arreglos homogéneos de datos primitivos es en archivos binarios. Para escribir datos primitivos en un archivo binario, un objeto de la clase *DataOutputStream* se instancia con un argumento que se refiere a un objeto de la clase *FileOutputStream*. (Una corriente es un flujo secuencial de datos.)
+- Para leer datos primitivos de un archivo binario, un objeto de la clase *DataInputStream* se instancia con un argumento que se refiere a un objeto de la clase *FileInputStream*.
+
+### Archivos Objeto
+
+- Para escribir objetos (y cualquier combinación de primitivos) en un archivo objeto, un objeto de la clase *ObjectOutputStream* se instancia con un argumento que se refiere a un objeto de la clase *FileOutputStream*.
+- Para leer objetos desde un archivo objeto, un objeto de la clase *ObjectInputStream* se instancia con un argumento que se refiere a un objeto de la clase *FileInputStream*.
+
+## Salida a Archivos de Texto
+
+### Apertura de un Archivo de Texto para salida
+
+- Para abrir un archivo de texto para salida, la clase PrintWriter debe instanciarse como se muestra a continuación:
+
+  ```
+  PrintWriter <reference-variable> ; 
+  . . . 
+  <reference-variable> = new PrintWriter(<filename>);
+  ```
+
+  No hay ningún comando “open” explícito. Simplemente se instancia un objeto *PrintWriter*, con lo cual se abre automáticamente el archivo especificado por el argumento del nombre del archivo del constructor *PrintWriter*. Si el nombre del archivo es inválido, la JVM lanza una *FileNotFoundException*.
+
+#### Formas de nombre invalido
+
+1. El nombre del archivo puede contener un carácter inválido en el nombre del archivo, como un asterisco
+1. El nombre del archivo puede especificar un directorio en lugar de un archivo
+1. El nombre del archivo puede especificar un directorio inexistente seguido del nombre de un archivo (por ejemplo, *javaFii-les/Mouse.java*).
+
+#### 
+
+El constructor PrintWriter provoca que la JVM abra el archivo especificado por el usuario justo como acaba de describirse. En caso de que el archivo especificado no exista, el programa crea uno nuevo. Si el archivo especificado ya existe, el programa limpia el contenido de ese archivo antes de escribir los nuevos datos.
+
+### Agregación de datos Existentes
+
+Para agregar datos nuevos a un archivo existente, se llama al constructor PrintWriter, como antes, pero esta vez es necesario obtener ayuda de un objeto FileWriter. Específicamente, es necesario pasar un objeto FileWriter al constructor PrintWriter
+
+PrintWriter permite que el argumento del nombre del archivo especifique un archivo inexistente. El constructor FileReader requiere que el argumento del nombre del archivo especifique un archivo existente.
+
+# Cap 16/17
+
+**Clase JFrame:** es la base para crear ventanas en una aplicación, proporciona todas las características necesarias para una ventana
+**JLabel y JTextField**: JLabel es un componente utilizado para mostrar texto o imágenes de&nbsp;solo lectura en una interfaz gráfica de usuario (GUI), mientras que `JTextField` es un&nbsp;componente que permite al usuario introducir texto en una ventana
+
+**. Oyentes de eventos y ActionListener: Los oyentes son clases que escuchan y responden a**&nbsp;
+**eventos específicos. El `ActionListener` es una interfaz utilizada para manejar eventos de&nbsp; acción, como hacer clic en un botón. Implementar esta interfaz requiere la implementación del&nbsp; método `actionPerformed`, que se ejecuta cuando se activa el evento.**
+
+\**1. Gestores de distribución: Son utilidades en programación de interfaces gráficas que ayudan a&nbsp;organizar y posicionar los componentes dentro de contenedores, como ventanas o paneles, de&nbsp;manera automática. Por ejemplo, BorderLayout, FlowLayout y GridLayout son algunos tipos de&nbsp;gestores de distribución en Java Swing.
+
+2. Clase FlowLayout: Es un gestor de distribución en Java Swing que organiza los componentes&nbsp;en un contenedor en una sola fila o columna, dependiendo del tamaño del contenedor. Permite que los componentes se inserten en el contenedor de manera secuencial.
+1. Gestor BorderLayout: Es otro gestor de distribución en Java Swing que divide el contenedor&nbsp;en cinco áreas: norte, sur, este, oeste y centro. Los componentes se colocan en estas áreas según&nbsp;la orientación que se les dé al agregarlos al contenedor.
+1. Interfaz SwingConstants: Es una interfaz en Java Swing que contiene un conjunto de&nbsp;constantes utilizadas comúnmente en la programación de interfaces gráficas de usuario (GUI).&nbsp;Estas constantes representan valores como alineaciones, orientaciones, etc.
+1. Gestor GridLayout: Es un gestor de distribución en Java Swing que organiza los componentes&nbsp;en un contenedor en una rejilla rectangular, donde todas las celdas tienen el mismo tamaño.&nbsp;Cada celda puede contener solo un componente.
+1. Contenedores JPanel: Son contenedores en Java Swing que se utilizan para agrupar y&nbsp;organizar componentes relacionados dentro de una interfaz gráfica más grande. Son útiles para&nbsp;organizar y estructurar interfaces complejas.
+1. Componente JTextArea: Es un componente en Java Swing que permite mostrar y editar texto&nbsp;multilínea. Es útil cuando se necesita mostrar grandes cantidades de texto o cuando se desea&nbsp;permitir que el usuario escriba texto en varias líneas.
+1. Componente JCheckBox: Es un componente en Java Swing que muestra una casilla de&nbsp;verificación que los usuarios pueden seleccionar o deseleccionar. Se utiliza para representar&nbsp;opciones binarias, como activado/desactivado o sí/no.
+1. Componente JRadioButton: Es un componente en Java Swing que muestra un botón circular&nbsp;que los usuarios pueden seleccionar. Se utiliza típicamente en grupos de botones, donde solo un&nbsp;botón puede estar seleccionado a la vez.
+1. Componente JComboBox: Es un com...ente en Java Swing que permite al usuario&nbsp;seleccionar un elemento de una lista desplegable. Combina un cuadro de texto con una lista&nbsp;desplegable, lo que permite al usuario seleccionar una opción predefinida o escribir su propia&nbsp;entrada.**
+
+# Cosas Extras
+
+### ¿Qué sucede si usamos layout manager null?
+
+Si usamos el LayoutManager "null", se desactiva el manejo automático de la colocación y dimensionamiento de los componentes en un contenedor. Esto significa que se debe establecer manualmente la posición y el tamaño de cada componente. Los componentes no se ajustarán ni se reorganizarán automáticamente cuando el contenedor cambie de tamaño.
+
+### ¿Cuándo se usa HashSet?, con un ejemplo ?
+
+HashSet se utiliza cuando se necesita almacenar una colección de elementos únicos sin ningún orden específico.
+
+### Explica cómo funciona la disposición de componentes en un BorderLayout:
+
+En BorderLayout, los componentes se disponen en cinco áreas principales: NORTH, SOUTH, EAST, WEST y CENTER. Cada área ocupa una región específica dentro del contenedor y puede contener un único componente. Si hay más de un componente en la región NORTH Y SOUTH, se superpondrán verticalmente, y en el caso de la región EAST Y WEST se supondrán horizontalmente, pero solo puede haber un componente en la región CENTER.
+
+### 5- Explique en qué consiste un Comparator. Mencione en qué situaciones se utilizan
+
+Permite definir criterios de orden específicos y se utiliza en situaciones donde se requiere un ordenamiento personalizado de objetos en lugar del orden natural proporcionado por su implementación de comparación predeterminada.
+
+- Ordenamiento de listas
+- Ordenamiento en múltiples criterios:
+- Clasificación en colecciones:
+- Ordenamiento en algoritmos personalizados:
+
+### Explica lo que es un Listener (swing):
+
+En el contexto de Swing, un Listener (escuchador) se refiere a un objeto que se utiliza para detectar y responder a eventos generados por componentes de la interfaz de usuario.
+
+### 11- Excepciones: ¿Cómo se procede para crear nuestra propia Excepción? ¿Cuándo (en qué caso) es que necesitamos crear nuestras propias excepciones?
+
+Para crear nuestra propia excepción en Java, necesitamos seguir los siguientes pasos:
+
+Crear una clase que extienda la clase Exception o una de sus subclases, como RuntimeException o IOException, dependiendo del tipo de excepción que deseamos crear. · · Definir un constructor en nuestra clase de excepción para proporcionar información adicional sobre el error. Este constructor puede aceptar parámetros para describir la causa o el contexto de la excepción. Opcionalmente, podemos agregar métodos adicionales a nuestra clase de excepción para obtener información específica sobre el error o realizar acciones relacionadas con la excepción.
+
+### ¿Qué es trazado para que es útil?
+
+El trazado es una técnica que consiste en la generación de registros de información relevante durante la ejecución de un programa. Estos registros son útiles para depurar errores, seguir eventos, analizar el rendimiento
+
+### Cita tres clases que se pueden utilizar para manipulación de archivos
+
+Estas 3 clases son parte del paquete java.io y son ampliamente utilizadas en la manipulación de archivos en Java.
+
+- **File:** La clase File se utiliza para representar y manipular información sobre archivos y directorios en el sistema de archivos. Proporciona métodos para crear, eliminar, renombrar y obtener información sobre archivos y directorios.
+- **FileInputStream y FileOutputStream:** Estas clases se utilizan para leer y escribir datos binarios (bytes) desde y hacia un archivo. FileInputStream se utiliza para leer datos de un archivo, mientras que FileOutputStream se utiliza para escribir datos en un archivo.
+- BufferedReader y BufferedWriter: Estas clases se utilizan para leer y escribir datos de texto desde y hacia un archivo.
+- **BufferedReader** se utiliza para leer datos de texto línea por línea, proporcionando métodos convenientes para leer y procesar el contenido de un archivo de texto.
+- **BufferedWrite**r se utiliza para escribir datos de texto en un archivo, proporcionando métodos para escribir líneas de texto o caracteres individuales
+
+### FuntionalInterface
+
+@FunctionalInterface es una anotación en Java que se utiliza para marcar una interfaz que debe tener exactamente un método abstracto. Estas interfaces se utilizan principalmente para representar comportamientos que pueden ser implementados por expresiones lambda o referencias a métodos.
+
+```
+// Definición de una interfaz funcional 
+@FunctionalInterface 
+interface Operacion { 
+int aplicar(int a, int b); // Método abstracto 
+// Método predeterminado (opcional) 
+default int sumar(int a, int b) 
+{ return a + b; } 
+}
+```
+
+### Try-with-resources
+
+El try-with-resources es una declaración en Java que asegura que los recursos (como archivos, conexiones de red, etc.) se cierren automáticamente después de que se complete el uso. Un recurso es cualquier objeto que implementa la interfaz AutoCloseable.
+
+### Mvc (Modelo vista control)
+
+MVC es un patrón de diseño que separa la aplicación en tres componentes principales: Modelo (gestiona los datos y la lógica de negocio), Vista (gestiona la interfaz de usuario y la presentación) y Controlador (gestiona la interacción del usuario, manipulando el modelo y actualizando la vista)
